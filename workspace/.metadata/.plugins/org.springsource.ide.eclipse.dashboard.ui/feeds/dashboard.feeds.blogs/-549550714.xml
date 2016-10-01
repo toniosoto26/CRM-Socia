@@ -5,7 +5,263 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2016-09-26T22:13:00Z</updated>
+  <updated>2016-09-29T08:43:19Z</updated>
+  <entry>
+    <title>Spring Statemachine 1.2.0.M1 Released</title>
+    <link rel="alternate" href="https://spring.io/blog/2016/09/29/spring-statemachine-1-2-0-m1-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Janne Valkealahti</name>
+    </author>
+    <id>tag:spring.io,2016-09-29:2641</id>
+    <updated>2016-09-29T08:43:19Z</updated>
+    <content type="html">&lt;p&gt;We’re pleased to announce a first milestone release of &lt;a href="http://projects.spring.io/spring-statemachine"&gt;Spring Statemachine 1.2.0.M1&lt;/a&gt;. Artifacts are available from &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/statemachine/"&gt;Spring Repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;What we got into this first milestone:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Usual bug fixes and small enhancements&lt;/li&gt;
+  &lt;li&gt;Support for UML submachines&lt;/li&gt;
+  &lt;li&gt;New Repository abstraction keeping machine configuration in an external repository&lt;/li&gt;
+  &lt;li&gt;New support for state actions.&lt;/li&gt;
+  &lt;li&gt;New transition error action concepts&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There has been a support for complex state hierarchy from a day one but trouble was that everything had to be defined in a same state configuration. New submachine support adds a feature where a state can be associated with other machine which allows some level of re-use and makes configuration more clean.&lt;/p&gt;
+&lt;p&gt;States can now have their own actions which are executed while being on a state. Execution happens after entry actions and before exit actions and can be cancelled if state exit happens before action completes.&lt;/p&gt;
+&lt;p&gt;Common topic among enhacement requests has been to add ways to keep machine state configuration externally from a static configuration defined either via JavaConfig or imported UML sources. Base support for this has been out there starting from 1.1.0 release but its use has been relatively awkward. For this we added a new abstraction via Spring Data Repositories and first implementation supports JPA and there is a &lt;a href="http://docs.spring.io/spring-statemachine/docs/1.2.0.M1/reference/htmlsingle/#statemachine-examples-datajpa"&gt;JPA sample&lt;/a&gt; using embedded H2 database. Work we got into this first milestone is very basic(i.e. substates are not supported) but plan is to make it fully compatible with rest of a framework and add more OOB repository implementations(i.e. mongo/redis) in coming milestone releases.&lt;/p&gt;
+&lt;p&gt;Full changes as usual are available from &lt;a href="https://github.com/spring-projects/spring-statemachine/blob/master/docs/src/info/changelog.txt"&gt;changelog&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Thank you for all who have contributed in any way either via Stack Overflow, GitHub Issues or other channels. Driving force for changes really has been a community and requests from it.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>This Week in Spring - September 27, 2016</title>
+    <link rel="alternate" href="https://spring.io/blog/2016/09/27/this-week-in-spring-september-27-2016" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2016-09-27:2640</id>
+    <updated>2016-09-27T19:08:07Z</updated>
+    <content type="html">&lt;p&gt;Wow! It&amp;rsquo;s already almost October! This year has sure gone by quickly! &lt;/p&gt;
+&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! This week I&amp;rsquo;m in the studio with &lt;a href="https://twitter.com/phillip_webb"&gt;Phil Webb&lt;/a&gt; recording the next installment of our &lt;a href="https://www.safaribooksonline.com/library/view/building-microservices-with/9780134192468/"&gt;Livelessons series on building Microservices with Spring Boot&lt;/a&gt;. It&amp;rsquo;s been a lot of fun so far and we&amp;rsquo;ve only just begun!&lt;/p&gt;
+&lt;p&gt;Tonight, I hope you&amp;rsquo;ll join me for &lt;a href="https://virtualjug.com/vjug24-session-cloud-native-java-by-josh-long/"&gt;Cloud Native Java&lt;/a&gt; on the vJUG&amp;rsquo;s worldwide and live event going on in timezones all around the world!&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ve got &lt;em&gt;so much&lt;/em&gt; to cover, so let&amp;rsquo;s get to it!&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Spring lead Juergen Hoeller just announced Spring Framework 5.0.M2, another major step on the journey to Spring 5! &lt;a href="https://spring.io/blog/2016/09/21/spring-framework-5-0-m2-released"&gt;This release includes the functional endpoint mechanism for Spring MVC, as well&lt;/a&gt;!&lt;/li&gt;
+  &lt;li&gt;Hurray! Reactor 3.0 is out! Get the latest bits and &lt;a href="https://spring.io/blog/2016/09/27/ready-your-java-8-reactive-apps-now-reactor-3-0-ga-is-out"&gt;see why Reactor underpins Spring Framework 5&amp;rsquo;s Reactive Runtime&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Check out Spring reactive ninja Arjen Poutsma&amp;rsquo;s new look at the &lt;a href="https://spring.io/blog/2016/09/22/new-in-spring-5-functional-web-framework"&gt;functional endpoint mechanism in Spring Framework 5&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Cloud ninja Spencer Gibb &lt;a href="https://spring.io/blog/2016/09/26/spring-cloud-camden-release-and-brixton-sr6-are-available"&gt;has just announced Spring Cloud Camden.RELEASE and Spring Cloud Brixton.SR6&lt;/a&gt;! Spring Cloud Camden is &lt;em&gt;packed&lt;/em&gt; with good stuff, including the new Spring Cloud Contract effort! Get it while it&amp;rsquo;s hot!&lt;/li&gt;
+  &lt;li&gt;Spring Integration Java DSL lead Artem Bilan just &lt;a href="https://spring.io/blog/2016/09/27/java-dsl-for-spring-integration-1-2-release-candidate-1-is-available"&gt;announced that the Spring Integration Java DSL 1.2 RC1 is now available&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;check out this SpringOne Platform replay of Rossen Stoyanchev&amp;rsquo;s &lt;a href="https://spring.io/blog/2016/09/26/springone-platform-2016-replay-spring-mvc-4-web-apps"&gt;excellent look at Spring MVC in 4.3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;check out this SpringOne Platform replay of a look &lt;a href="https://spring.io/blog/2016/09/26/springone-platform-2016-replay-cloud-native-java-with-spring-cloud-services"&gt;at Spring Cloud Services from Craig Walls and Roy Clarkson&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring and data ninja Thomas Risberg&amp;rsquo;s &lt;a href="https://spring.io/blog/2016/09/26/spring-cloud-data-flow-for-apache-mesos-1-0-ga-released"&gt;just announced Spring Cloud Data Flow for Apache Mesos 1.0.GA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Cloud Contract lead Marcin Grzejszczak announced the &lt;a href="https://spring.io/blog/2016/09/23/spring-cloud-contract-1-0-0-release-is-available"&gt;1.0.0.RELEASE of Spring Cloud Contract in the runup to Spring Cloud Camden itself&lt;/a&gt;. Spring Cloud Contract is a &lt;em&gt;must-see&lt;/em&gt; addition to the Spring Cloud portfolio that makes it easy for service providers and service consumers to stay on the same page and to build (and test!) with confidence that the implied contract between nodes is unbroken.&lt;/li&gt;
+  &lt;li&gt;Spring Security lead Rob Winch has &lt;a href="https://spring.io/blog/2016/09/23/spring-security-4-2-m1"&gt;just announced Spring Security 4.2.M1&lt;/a&gt;, which closes out 50+ issues and has a lot of other improvements&lt;/li&gt;
+  &lt;li&gt;in the run up to Spring Cloud Camden, Marius Bogoevici just &lt;a href="https://spring.io/blog/2016/09/23/spring-cloud-stream-brooklyn-release-is-available"&gt;announced Spring Cloud Stream Brooklyn, which makes it easy to build messaging-based microservcies&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data ninja Janne Valkealahti just &lt;a href="https://spring.io/blog/2016/09/22/spring-cloud-data-flow-for-apache-yarn-1-0-2-released"&gt;announced Spring Cloud Data Flow for Apache YARN 1.0.2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Platform lead Andy Wilkinson&amp;rsquo;s &lt;a href="https://spring.io/blog/2016/09/22/spring-io-platform-athens-release"&gt;just announced Spring IO Platform Athens&lt;/a&gt; and &lt;a href="https://spring.io/blog/2016/09/22/spring-io-platform-2-0-8-release"&gt;Spring IO Platform 2.0.8&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Boot ninja Stéphane Nicoll &lt;a href="https://spring.io/blog/2016/09/21/spring-boot-1-4-1-and-1-3-8-available-now"&gt;just announced Spring Boot 1.4.1. and 1.3.8&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Atomist founder and Spring founder Rod Johnson has an interesting post up on &lt;a href="https://medium.com/the-composition/software-that-writes-and-evolves-software-953578a6fc36#.1fb657dhh"&gt;how his company&amp;rsquo;s technology can be used to automate code edits&lt;/a&gt; to facilitate upgrading codebases. His example, of course, is in terms of Spring Cloud and - in particular - Hystrix.&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
+  <entry>
+    <title>Java DSL for Spring Integration 1.2 Release Candidate 1 is available</title>
+    <link rel="alternate" href="https://spring.io/blog/2016/09/27/java-dsl-for-spring-integration-1-2-release-candidate-1-is-available" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Artem Bilan</name>
+    </author>
+    <id>tag:spring.io,2016-09-27:2639</id>
+    <updated>2016-09-27T19:02:45Z</updated>
+    <content type="html">&lt;div class="paragraph"&gt;
+&lt;p&gt;Dear Spring Community,&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;I&amp;#8217;m pleased to announce that the Java DSL for Spring Integration &lt;code&gt;1.2 RC1&lt;/code&gt; is available now.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Since the previous &lt;a href="https://spring.io/blog/2016/09/15/java-dsl-for-spring-integration-1-2-milestone-2-is-available"&gt;Milestone 2&lt;/a&gt; we had a good deep feedback for our new features and some API has been broken to reflect real requirements.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;As usual, big thanks to everyone who created issues, raised Pull Requests, provided feedback or just asked questions on StackOverflow.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;The artifact &lt;code&gt;org.springframework.integration:spring-integration-java-dsl:1.2.0.RC1&lt;/code&gt; is available in the &lt;a href="http://repo.spring.io/milestone"&gt;Milestone repo&lt;/a&gt;.
+So, give it a shot for last chance to raise a &lt;a href="https://github.com/spring-projects/spring-integration-java-dsl/issues"&gt;GH issue&lt;/a&gt; for any feedback!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Now about the changes in the &lt;code&gt;1.2 RC1&lt;/code&gt;:&lt;/p&gt;
+&lt;/div&gt;
+&lt;h1 id="poller-code-errorchannel-code" class="sect0"&gt;&lt;a class="anchor" href="#poller-code-errorchannel-code"&gt;&lt;/a&gt;Poller &lt;code&gt;errorChannel&lt;/code&gt;&lt;/h1&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;We can now specify &lt;code&gt;errorChannel&lt;/code&gt; on the Poller definition.
+Previously we had to configure entire, separate &lt;code&gt;MessagePublishingErrorHandler&lt;/code&gt;:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="listingblock"&gt;
+&lt;div class="content"&gt;
+&lt;pre class="prettyprint highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;e -&amp;gt; e.poller(Pollers.fixedDelay(100)
+     .errorChannel(filePollingErrorChannel())&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Instead of:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="listingblock"&gt;
+&lt;div class="content"&gt;
+&lt;pre class="prettyprint highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;@Bean
+public ErrorHandler filePollingErrorHandler() {
+    MessagePublishingErrorHandler errorHandler =
+                               new MessagePublishingErrorHandler();
+    errorHandler.setDefaultErrorChannel(filePollingErrorChannel());
+    return errorHandler;
+}
+...
+e -&amp;gt; e.poller(Pollers.fixedDelay(100)
+    .errorHandler(filePollingErrorHandler())&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;After introduction &lt;a href="https://jira.spring.io/browse/INT-4113"&gt;late-binding&lt;/a&gt; support for the &lt;code&gt;MessagePublishingErrorHandler&lt;/code&gt; in Spring Integration Core, that will be even easier just with the bean name for the &lt;code&gt;MessageChannel&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;h1 id="filesplitter-improvements" class="sect0"&gt;&lt;a class="anchor" href="#filesplitter-improvements"&gt;&lt;/a&gt;FileSplitter improvements&lt;/h1&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;code&gt;Files.splitter()&lt;/code&gt; spec now provides more options to configure underlying &lt;code&gt;FileSplitter&lt;/code&gt;:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="listingblock"&gt;
+&lt;div class="content"&gt;
+&lt;pre class="prettyprint highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;.split(Files.splitter()
+    .markers(false)
+    .applySequence(true)
+    .charset("UTF-8"))&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h1 id="integrationflowregistration" class="sect0"&gt;&lt;a class="anchor" href="#integrationflowregistration"&gt;&lt;/a&gt;IntegrationFlowRegistration&lt;/h1&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;The manual flow registration process has undergone some improvements:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="ulist"&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;an &lt;code&gt;IntegrationFlowRegistrationBuilder&lt;/code&gt; is returned from the &lt;code&gt;IntegrationFlowContext.registration(IntegrationFlow)&lt;/code&gt; for providing more options during registration &lt;code&gt;IntegrationFlow&lt;/code&gt; bean and all dependent components;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;an &lt;code&gt;IntegrationFlowRegistration&lt;/code&gt; is a result of &lt;code&gt;IntegrationFlowRegistrationBuilder.register()&lt;/code&gt; call.
+This object provides some useful &lt;code&gt;IntegrationFlow&lt;/code&gt; properties and lets to control the lifecycle of &lt;code&gt;IntegrationFlow&lt;/code&gt; associated with it;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;you can now add additional beans to register, required by the provided &lt;code&gt;IntegrationFlow&lt;/code&gt;.
+For example &lt;code&gt;DefaultFtpSessionFactory&lt;/code&gt; is required by the &lt;code&gt;Ftp.outboundAdapter()&lt;/code&gt;.
+They are destroyed and removed from &lt;code&gt;ApplicationContext&lt;/code&gt; together with the &lt;code&gt;IntegrationFlow&lt;/code&gt; they are associated.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="listingblock"&gt;
+&lt;div class="content"&gt;
+&lt;pre class="prettyprint highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;this.integrationFlowContext.registration(myFlow)
+        .id("myFlow")
+        .autoStartup(false)
+        .addBean(new Foo())
+        .addBean("bar", new Bar())
+        .register();&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;See &lt;a href="https://spring.io/team/grussell"&gt;Gary Russell&lt;/a&gt;'s amazing &lt;a href="https://github.com/spring-projects/spring-integration-samples/tree/master/advanced/dynamic-tcp-client"&gt;Sample&lt;/a&gt; about dynamic TCP Clients for more information.&lt;/p&gt;
+&lt;/div&gt;
+&lt;h1 id="apache-kafka-support" class="sect0"&gt;&lt;a class="anchor" href="#apache-kafka-support"&gt;&lt;/a&gt;Apache Kafka support&lt;/h1&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;We decided to drop Apache Kafka &lt;code&gt;0.8.x&lt;/code&gt; support (Spring Integration for Apache Kafka &lt;code&gt;1.3.x&lt;/code&gt;) in favor of Apache Kafka &lt;code&gt;0.9.x&lt;/code&gt; and &lt;code&gt;0.10.x&lt;/code&gt;.
+The recently introduced &lt;code&gt;Kafka09&lt;/code&gt; has been deleted and its content has been moved to the &lt;code&gt;Kafka&lt;/code&gt; factory.
+And now the dependency on the matter is Spring Integration for Apache Kafka &lt;code&gt;2.1.x&lt;/code&gt;, based on the Spring for Apache Kafka &lt;code&gt;1.1.x&lt;/code&gt; to provide Apache Kafka &lt;code&gt;0.10.x&lt;/code&gt;.
+Meanwhile the same &lt;code&gt;Kafka&lt;/code&gt; DSL factory and dependent components can be used with the previous Spring Integration for Apache Kafka &lt;code&gt;2.0.x&lt;/code&gt; version on classpath.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Apache Kafka &lt;code&gt;0.8.x&lt;/code&gt; support can be achieved through the direct Spring Integration for Apache Kafka &lt;code&gt;1.3.x&lt;/code&gt; adapters usage.
+Or you can simply copy/paste &lt;code&gt;org.springframework.integration.dsl.kafka&lt;/code&gt; &lt;a href="https://github.com/spring-projects/spring-integration-java-dsl/tree/1.1.x/src/main/java/org/springframework/integration/dsl/kafka"&gt;package&lt;/a&gt; from Java DSL &lt;code&gt;1.1&lt;/code&gt; to your project and continue to get a gain from fluent builder API of &lt;code&gt;Kafka&lt;/code&gt; factory!&lt;/p&gt;
+&lt;/div&gt;
+&lt;h1 id="next-steps" class="sect0"&gt;&lt;a class="anchor" href="#next-steps"&gt;&lt;/a&gt;Next Steps&lt;/h1&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;We expect to have General Availability for version &lt;code&gt;1.2&lt;/code&gt; in about a week.
+After that &lt;code&gt;spring-integration-java-dsl&lt;/code&gt; will definitely move to the &lt;a href="http://projects.spring.io/spring-integration/"&gt;Spring Integration Core&lt;/a&gt; &lt;code&gt;5.0&lt;/code&gt; and Java 8 code base.
+The current &lt;code&gt;1.2&lt;/code&gt; version will be still supported, but just for bug fixes.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;a href="https://github.com/spring-projects/spring-integration-java-dsl"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-integration-java-dsl/wiki/Spring-Integration-Java-DSL-Reference"&gt;Documentation&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-integration-java-dsl/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-integration"&gt;Help&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;</content>
+  </entry>
+  <entry>
+    <title>Ready your Java 8 Reactive apps now, Reactor 3.0 GA is out !</title>
+    <link rel="alternate" href="https://spring.io/blog/2016/09/27/ready-your-java-8-reactive-apps-now-reactor-3-0-ga-is-out" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Stephane Maldini</name>
+    </author>
+    <id>tag:spring.io,2016-09-19:2621</id>
+    <updated>2016-09-27T08:00:00Z</updated>
+    <content type="html">&lt;p&gt;After more &lt;a href="https://spring.io/blog/2016/02/16/reactor-2-5-a-second-generation-reactive-foundation-for-the-jvm"&gt;than a year of work&lt;/a&gt;, &lt;a href="https://spring.io/blog/2016/03/11/reactor-core-3-0-becomes-a-unified-reactive-foundation-on-java-8"&gt;multiple milestones&lt;/a&gt; and fine tuning based on much feedback, I have the pleasure of announcing Reactor 3 General Availability. You will find Reactor Core 3.0.2.RELEASE on Maven Central.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://gitter.im/reactor/reactor?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"&gt;&lt;img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/reactor/reactor" /&gt;&lt;/a&gt; &lt;a href="http://mvnrepository.com/artifact/io.projectreactor/reactor-core"&gt;&lt;img src="https://maven-badges.herokuapp.com/maven-central/io.projectreactor/reactor-core/badge.svg?style=plastic" alt="Reactor Core" /&gt;&lt;/a&gt; &lt;/p&gt;&lt;h2&gt;&lt;a href="#what-is-reactor-3" class="anchor" name="what-is-reactor-3"&gt;&lt;/a&gt;What is Reactor 3 ?&lt;/h2&gt;
+&lt;p&gt;Reactor 3 provides a powerful and efficient &lt;a href="http://reactive-streams.org"&gt;reactive&lt;/a&gt; programming model for Java 8 based applications. The model builds upon the experience of both &lt;em&gt;Reactor 2&lt;/em&gt; and &lt;em&gt;RxJava 1&lt;/em&gt; and introduces a fluent way to compose asynchronous backpressure-ready event processing. &lt;a href="https://spring.io/blog/2016/07/28/reactive-programming-with-spring-5-0-m1"&gt;Spring Framework 5 uses Reactor 3&lt;/a&gt; to build and eventually expose a &lt;a href="https://spring.io/blog/2016/09/22/new-in-spring-5-functional-web-framework"&gt;complete reactive story&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;Its design relies on an extensible execution model that favors event processing colocation. Typically, Reactor will be jumping threads between event flow stages only when explicitly asked so. For instance, in-memory operations such as list access or payload transformation do not usually require a thread boundary. If the operation producer or receiver might take time, users are expected to operate their flow with &lt;code&gt;Flux#publishOn&lt;/code&gt; / &lt;code&gt;Mono#publishOn&lt;/code&gt; or &lt;code&gt;Flux#subscribeOn&lt;/code&gt; / &lt;code&gt;Mono#subscribeOn&lt;/code&gt; and choose a &lt;a href="http://projectreactor.io/core/docs/api/reactor/core/scheduler/Schedulers.html"&gt;Scheduler&lt;/a&gt; to run on. Alternatively, if a user is combining the results of many &lt;code&gt;Publisher&lt;/code&gt; as with &lt;em&gt;merge&lt;/em&gt; or &lt;em&gt;concat&lt;/em&gt;, Reactor will implicitly deal in a thread-safe way with various potential thread boundaries. In effect a flow stage hosted by a &lt;code&gt;Publisher&lt;/code&gt; might be traversed by a producing and a receiving thread at least.&lt;/p&gt;
+&lt;p&gt;All of this is implemented in compliance with the behaviors defined by the &lt;a href="https://github.com/reactive-streams/reactive-streams-jvm"&gt;Reactive Streams specification&lt;/a&gt;. Reactor works at making the spec a commodity for library writers or Spring developers with pre-made operators you would apply in a streaming and/or asynchronous scenario.&lt;/p&gt;&lt;h2&gt;&lt;a href="#mono-and-flux" class="anchor" name="mono-and-flux"&gt;&lt;/a&gt;Mono and Flux&lt;/h2&gt;
+&lt;p&gt;A flow definition is what Reactor calls a chain of &lt;a href="http://projectreactor.io/core/docs/api/reactor/core/publisher/Flux.html"&gt;Flux&lt;/a&gt; or &lt;a href="http://projectreactor.io/core/docs/api/reactor/core/publisher/Mono.html"&gt;Mono&lt;/a&gt; depending on the volume flowing into the defined stream. These types implement Reactive Streams &lt;code&gt;Publisher&lt;/code&gt; at every stage and can be passed around generically. Why &lt;em&gt;two&lt;/em&gt; reactive types then ? Because the cardinality matters to Reactor. A &lt;code&gt;Flux&lt;/code&gt; will observe 0 to N items and eventually terminate successfully or not. A &lt;code&gt;Mono&lt;/code&gt; will observe 0 or 1 item, with &lt;code&gt;Mono&amp;lt;Void&amp;gt;&lt;/code&gt; hinting at most 0 item.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s look at the following blocking API :&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;interface BlockingUserRepository {&#xD;
+     User get(String id);&#xD;
+     List&amp;lt;User&amp;gt; findAll();&#xD;
+     void save(User data) throws RepositoryException;&#xD;
+     List&amp;lt;User&amp;gt; findAllByUsernameLike(String s);&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Using plain Reactive Streams &lt;code&gt;Publisher&lt;/code&gt;, we would get the following contract :&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;interface ReactiveUserRepository {&#xD;
+     Publisher&amp;lt;User&amp;gt; get(String id);&#xD;
+     Publisher&amp;lt;User&amp;gt; findAll();&#xD;
+     Publisher&amp;lt;Void&amp;gt; save(Publisher&amp;lt;? extends User&amp;gt; source);&#xD;
+     Publisher&amp;lt;User&amp;gt; findAllByUsernameLike(String s);&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But with Reactor we can keep semantic evidence of the intended cardinality :&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;interface ReactorUserRepository {&#xD;
+     Mono&amp;lt;User&amp;gt; get(String id);&#xD;
+     Flux&amp;lt;User&amp;gt; findAll();&#xD;
+     Mono&amp;lt;Void&amp;gt; save(Publisher&amp;lt;? extends User&amp;gt; source);&#xD;
+     Flux&amp;lt;User&amp;gt; findAllByUsernameLike(String s);&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Since both &lt;code&gt;Mono&lt;/code&gt; and &lt;code&gt;Flux&lt;/code&gt; implement &lt;code&gt;Publisher&lt;/code&gt; we can easily pass any reference of them as &lt;em&gt;Reactive data source&lt;/em&gt; while returning explicit semantics with &lt;code&gt;Mono&amp;lt;Void&amp;gt;&lt;/code&gt; fluent API :&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;// ReactorUserRepository userRepository;&#xD;
+&#xD;
+userRepository.save(Mono.fromCallable(() -&amp;gt; new User(&amp;quot;thomas&amp;quot;)))&#xD;
+              .doOnSuccess(res -&amp;gt; success())&#xD;
+              .subscribe();&#xD;
+&#xD;
+userRepository.save(Flux.just(new User(&amp;quot;bob&amp;quot;), new User(&amp;quot;robert&amp;quot;)))&#xD;
+              .doOnSuccess(res -&amp;gt; success())&#xD;
+              .subscribe();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Keep in mind that &lt;code&gt;Flux&lt;/code&gt; and &lt;code&gt;Mono&lt;/code&gt; are meant for data producers that might take time. To manage reentrance and thread safety, operators must sometimes add some overhead in the executed flow. Still, efficiency is a core focus and we are getting regular reports from our engine contributor David Karnok. Reactor 3 is currenly one of the most &lt;a href="https://github.com/akarnokd/akarnokd-misc/issues/2"&gt;efficient&lt;/a&gt; reactive library on the JVM. In addition to these directly related benchmarks, we now benefit from RxJava 2 community feedback as well since it conceptually derives from the same smith and forge: &lt;a href="http://github.com/reactor/reactive-streams-commons"&gt;Reactive Streams Commons&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;&lt;a href="#what-rsquo-s-next" class="anchor" name="what-rsquo-s-next"&gt;&lt;/a&gt;What&amp;rsquo;s next ?&lt;/h2&gt;
+&lt;p&gt;We are working on 3.0.3 for the next immediate weeks and we keep in sync with the latest needs from Spring 5, CloudFoundry and latest research from Reactive Streams Commons.&lt;/p&gt;
+&lt;p&gt;In priority we will address:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+  &lt;p&gt;New Testing support: Reactor 3 was scheduled with testing support, however initial feedbacks raised a few user experience issues. We are now working on delivering that missing bit. Meanwhile, users can easily duplicate the isolated &lt;a href="https://github.com/reactor/reactor-core/blob/master/src/test/java/reactor/test/TestSubscriber.java"&gt;TestSubscriber&lt;/a&gt; from our test for their needs.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;
+  &lt;p&gt;Guidance: While Reactor 3 is becoming increasingly popular, we are still working with a lot of human interaction internally or externally, power user with Rx knowledge and the &lt;a href="https://github.com/reactor/lite-rx-api-hands-on"&gt;quick tutorial&lt;/a&gt; contributed by &lt;a href="https://twitter.com/sdeleuze"&gt;Sebastien Deleuze&lt;/a&gt;. You will find more resources at the end of this post but we have started establishing some end-to-end scenarios that we find concrete, valuable and will help shaping an official reference reactor guide.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;h2&gt;&lt;a href="#reactor-ipc" class="anchor" name="reactor-ipc"&gt;&lt;/a&gt;Reactor IPC&lt;/h2&gt;
+&lt;p&gt;IPC stands for Inter-Process Communication and Reactor IPC is an ongoing initiative to answer the question &amp;ldquo;how to get away from the JVM in a Reactive Streams fashion&amp;rdquo;. We are working on an initial set of implementations with &lt;a href="https://github.com/reactor/reactor-kafka"&gt;Reactor Kafka&lt;/a&gt;, &lt;a href="https://github.com/reactor/reactor-aeron"&gt;Reactor Aeron&lt;/a&gt; &amp;amp; &lt;a href="https://github.com/reactor/reactor-netty"&gt;Reactor Netty&lt;/a&gt;. In fact a lot of things is going on right now with contract redesign and Reactor Kafka/Netty work that support some of the new Spring reactive stories. The intent of the IPC umbrella is not to create new web or messaging frameworks but reactive drivers applications or libraries alike can build on. They transform a given runtime input/output in &lt;code&gt;Flux&lt;/code&gt; and &lt;code&gt;Mono&lt;/code&gt; or &lt;code&gt;Subscriber&lt;/code&gt;, propagating reactive backpressure up to the IO access layer. Expect a lot of news about these initiatives over the coming months.&lt;/p&gt;&lt;h2&gt;&lt;a href="#credits" class="anchor" name="credits"&gt;&lt;/a&gt;Credits&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s take some time to credit the people behind this release. &lt;a href="http://twitter.com/akarnokd"&gt;David Karnok&lt;/a&gt; is the main architect of the new Reactor engine and leads &lt;a href="http://github.com/reactor/reactive-streams-commons"&gt;Reactive Streams Commons&lt;/a&gt; research effort. Spring, Eclipse STS and CloudFoundry Client teams were instrumental in contributing design improvements and feedbacks as well. Beyond Pivotal, MuleSoft has been massively helpful and proactive about the latest development.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://reactivex.io"&gt;RxJava 1&lt;/a&gt; brought mainstream Reactive to the JVM and its complete functional Rx algebra has become an industrial-standard which we align with. It inspired the game-changing specification we implement with &lt;a href="http://reactive-streams.org"&gt;Reactive Streams&lt;/a&gt; and brought together JVM key players such as Netflix, Oracle, Pivotal, Typesafe, Red Hat and many more.&lt;/p&gt;&lt;h2&gt;&lt;a href="#resources" class="anchor" name="resources"&gt;&lt;/a&gt;Resources&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="http://www.slideshare.net/StphaneMaldini/reactor-30-a-reactive-foundation-for-java-8-and-spring"&gt;Reactor 3 overview&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://github.com/reactor/lite-rx-api-hands-on"&gt;Hands-On&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2016/04/19/understanding-reactive-types"&gt;Understanding Reactive Types&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://github.com/sdeleuze/spring-reactive-playground"&gt;Reactor + Spring 5&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://github.com/viniciusccarvalho/spring-cloud-stream-ema-processor"&gt;Reactor + Spring Cloud Stream&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/team/dsyer"&gt;Dave Syer&lt;/a&gt; reactive series &lt;a href="https://spring.io/blog/2016/06/07/notes-on-reactive-programming-part-i-the-reactive-landscape"&gt;part I&lt;/a&gt;, &lt;a href="https://spring.io/blog/2016/06/13/notes-on-reactive-programming-part-ii-writing-some-code"&gt;part II&lt;/a&gt; &amp;amp; &lt;a href="https://spring.io/blog/2016/07/20/notes-on-reactive-programming-part-iii-a-simple-http-server-application"&gt;part III&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Implementor Use Case : &lt;a href="https://github.com/cloudfoundry/cf-java-client"&gt;CloudFoundry Java Client&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://projectreactor.io"&gt;Public site&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://github.com/reactor"&gt;Github Org&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Stay tuned for more reactive stories ! The Reactor journey at Pivotal is only getting started, after much effort and research these past years we are excited to deliver a new experience. Our value proposition is directly correlated to Spring OSS, we have a unique opportunity to deliver reactive pipelines in an end-to-end fashion across all Spring portfolio. &lt;/p&gt;
+&lt;p&gt;To conclude, Spring and Reactor are praising our community, you, for the enormous support, encouragements and feedbacks. The feedback loop we have established for years is more than a nice pragmatic collaboration, it&amp;rsquo;s what we all need to transform our industry step by step.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Spring Cloud Camden.RELEASE and Brixton.SR6 are available</title>
     <link rel="alternate" href="https://spring.io/blog/2016/09/26/spring-cloud-camden-release-and-brixton-sr6-are-available" />
@@ -692,315 +948,5 @@ Looking forward for more!&lt;/p&gt;
 &lt;div class="paragraph"&gt;
 &lt;p&gt;&lt;a href="http://projects.spring.io/spring-integration/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/INT"&gt;JIRA&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-integration/blob/master/CONTRIBUTING.md"&gt;Contributions&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-integration"&gt;Help&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Framework 4.3.3 and 4.2.8 available now</title>
-    <link rel="alternate" href="https://spring.io/blog/2016/09/19/spring-framework-4-3-3-and-4-2-8-available-now" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Stéphane Nicoll</name>
-    </author>
-    <id>tag:spring.io,2016-09-19:2623</id>
-    <updated>2016-09-19T16:19:49Z</updated>
-    <content type="html">&lt;p&gt;On behalf of the team, I am happy to announce that the Spring Framework &lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10000&amp;version=15697"&gt;4.3.3&lt;/a&gt; and &lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10000&amp;version=15596"&gt;4.2.8&lt;/a&gt; maintenance releases &lt;a href="http://projects.spring.io/spring-framework"&gt;are available now&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This third maintenance release of the 4.3 line contains over 60 fixes and improvements and is the base for the upcoming Spring Boot 1.4.1 release later this week. We&amp;rsquo;ll also release another Spring Framework 5.0 milestone Wednesday so stay tuned for more release announcements!&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://projects.spring.io/spring-framework/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-framework"&gt;GitHub&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/SPR"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/htmlsingle/"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Cloud Data Flow 1.1 M1  and 1.0.1 GA released</title>
-    <link rel="alternate" href="https://spring.io/blog/2016/09/16/spring-cloud-data-flow-1-1-m1-and-1-0-1-ga-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Thomas Risberg</name>
-    </author>
-    <id>tag:spring.io,2016-09-16:2620</id>
-    <updated>2016-09-16T13:50:00Z</updated>
-    <content type="html">&lt;p&gt;On behalf of the team, I am excited to announce the release of the first milestone of Spring Cloud Data Flow 1.1 along with a 1.0.1 maintenance release for the 1.0 version. &lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; A great way to start using this new release(s) is to follow the &lt;a href="http://cloud.spring.io/spring-cloud-dataflow/#spring-cloud-data-flow-server-implementations"&gt;release matrix&lt;/a&gt; on the project page, which includes the download coordinates and the links to the reference guide.&lt;/p&gt;&lt;h2&gt;&lt;a href="#1-1-m1-release" class="anchor" name="1-1-m1-release"&gt;&lt;/a&gt;1.1 M1 release&lt;/h2&gt;
-&lt;p&gt;Over the last few weeks, we have added new features and improvements to the overall orchestration of data microservices. The following new features were included in the 1.1.0.M1 release: &lt;/p&gt;&lt;h3&gt;&lt;a href="#security" class="anchor" name="security"&gt;&lt;/a&gt;Security&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Adds &lt;a href="http://docs.spring.io/spring-cloud-dataflow/docs/1.1.0.M1/reference/html/getting-started-security.html#getting-started-security-ldap-authentication"&gt;LDAP backend-authentication&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Adds &lt;a href="http://docs.spring.io/spring-cloud-dataflow/docs/1.1.0.M1/reference/html/getting-started-security.html#getting-started-security-basic-authentication"&gt;Basic backend-authentication&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Adds &lt;a href="http://docs.spring.io/spring-cloud-dataflow/docs/1.1.0.M1/reference/html/getting-started-security.html#getting-started-security-file-based-authentication"&gt;File backend-authentication&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Improvements to &lt;a href="http://docs.spring.io/spring-cloud-dataflow/docs/1.1.0.M1/reference/html/getting-started-security.html#getting-started-security-ldap-authentication"&gt;OAUTH backed-authentication&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;h3&gt;&lt;a href="#spring-boot-1-3-x-and-1-4-x-compatibility" class="anchor" name="spring-boot-1-3-x-and-1-4-x-compatibility"&gt;&lt;/a&gt;Spring Boot 1.3.x and 1.4.x Compatibility&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Adds backward compatibility for “&lt;a href="http://docs.spring.io/spring-cloud-dataflow/docs/1.1.0.M1/reference/html/spring-cloud-dataflow-register-apps.html#spring-cloud-dataflow-stream-app-whitelisting"&gt;property whitelisting&lt;/a&gt;” to support both Spring Boot 1.3.x and 1.4.x applications&lt;/li&gt;
-&lt;/ul&gt;&lt;h3&gt;&lt;a href="#ui-improvements" class="anchor" name="ui-improvements"&gt;&lt;/a&gt;UI improvements&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Builds upon &lt;a href="https://github.com/spring-projects/spring-flo/releases/tag/v0.5.1"&gt;0.5.1&lt;/a&gt; release of Spring Flo&lt;/li&gt;
-  &lt;li&gt;Adds bulk import and registration of stream and task app-starters&lt;/li&gt;
-  &lt;li&gt;Adds Flo’s visual representation of running streams&lt;/li&gt;
-  &lt;li&gt;Adds stream deployment progress&lt;/li&gt;
-&lt;/ul&gt;&lt;h3&gt;&lt;a href="#general" class="anchor" name="general"&gt;&lt;/a&gt;General&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Adds the ability to turn-off analytics infrastructure in entirety&lt;/li&gt;
-  &lt;li&gt;Adds REST-Docs infrastructure for core REST-APIs&lt;/li&gt;
-  &lt;li&gt;Test coverage improvements&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Review the &lt;a href="https://github.com/spring-cloud/spring-cloud-dataflow/milestone/7?closed=1"&gt;1.1.0.M1 (core)&lt;/a&gt; / &lt;a href="https://github.com/spring-cloud/spring-cloud-dataflow-ui/milestone/7?closed=1"&gt;1.1.0.M1 (ui)&lt;/a&gt; release markers to learn more about the incremental improvements. &lt;/p&gt;
-&lt;p&gt;Looking ahead, we are targeting 1.1 GA release of Spring Cloud Stream and building upon this, Spring Cloud Data Flow would support Apache Kafka’s 0.9/0.10 releases, schema-evolution, and the newly improved reactive-streaming capabilities. Dynamic scaling and auto-rebalancing of stream partitions would be supported as well.&lt;/p&gt;
-&lt;p&gt;Likewise, we are targeting 1.1 GA release of Spring Cloud Task with improvements including updates to task partitions, newer database schemas, support for external execution ids, and the improved interoperability between streaming and task pipelines in Spring Cloud Data Flow. &lt;/p&gt;
-&lt;p&gt;Look out for significant improvements to UI/UX around Task workflows. Better paging, sorting, monitoring, and search capabilities, including Flo support for “composed tasks” is coming.&lt;/p&gt;&lt;h2&gt;&lt;a href="#1-0-1-ga-release" class="anchor" name="1-0-1-ga-release"&gt;&lt;/a&gt;1.0.1 GA release&lt;/h2&gt;
-&lt;p&gt;The 1.0.1 release builds upon 1.0.2.RELEASE of Spring Cloud Task, bug-fixes and documentation improvements. &lt;/p&gt;
-&lt;p&gt;Review the &lt;a href="https://github.com/spring-cloud/spring-cloud-dataflow/milestone/5?closed=1"&gt;1.0.1.RELEASE release marker&lt;/a&gt; to learn more about the incremental improvements. &lt;/p&gt;&lt;h2&gt;&lt;a href="#upcoming-webinar" class="anchor" name="upcoming-webinar"&gt;&lt;/a&gt;Upcoming webinar&lt;/h2&gt;
-&lt;p&gt;Tune-in to “&lt;a href="https://spring.io/blog/2016/09/13/webinar-data-microservices-in-the-cloud"&gt;Data Microservices in the Cloud&lt;/a&gt;” webinar scheduled on 9/29/2016 to learn more about Spring Cloud Data Flow and the incremental improvements.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Java DSL for Spring Integration 1.2 Milestone 2 is available</title>
-    <link rel="alternate" href="https://spring.io/blog/2016/09/15/java-dsl-for-spring-integration-1-2-milestone-2-is-available" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Artem Bilan</name>
-    </author>
-    <id>tag:spring.io,2016-09-15:2619</id>
-    <updated>2016-09-15T19:28:07Z</updated>
-    <content type="html">&lt;div class="paragraph"&gt;
-&lt;p&gt;I&amp;#8217;m pleased to announce that the Java DSL for Spring Integration &lt;code&gt;1.2 M2&lt;/code&gt; is available now!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;First of all I’d like to thank everyone who created issues, raised Pull Requests, provided feedback or just asked questions on StackOverflow.
-Especial thanks for early adopters since the previous &lt;a href="https://spring.io/blog/2016/07/08/java-dsl-for-spring-integration-1-2-m1-and-1-1-3-are-available"&gt;Milestone 1&lt;/a&gt;.
-With their help we have improved and fixed some issues with runtime flow registration.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;The artifact &lt;code&gt;org.springframework.integration:spring-integration-java-dsl:1.2.0.M2&lt;/code&gt; is available in the &lt;a href="http://repo.spring.io/milestone"&gt;Milestone repo&lt;/a&gt;.
-So, give it a shot and don&amp;#8217;t hesitate to raise a &lt;a href="https://github.com/spring-projects/spring-integration-java-dsl/issues"&gt;GH issue&lt;/a&gt; for any feedback!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Some highlights of the current iteration:&lt;/p&gt;
-&lt;/div&gt;
-&lt;h1 id="jpa-support" class="sect0"&gt;&lt;a class="anchor" href="#jpa-support"&gt;&lt;/a&gt;JPA support&lt;/h1&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;After many Community requests we finally introduced the &lt;code&gt;Jpa&lt;/code&gt; Factory and corresponding `IntegrationComponentSpec`s to provide a fluent API for the &lt;a href="http://docs.spring.io/spring-integration/reference/html/jpa.html"&gt;Spring Integration JPA&lt;/a&gt; components:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="listingblock"&gt;
-&lt;div class="content"&gt;
-&lt;pre class="prettyprint highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;@Autowired
-private EntityManagerFactory entityManagerFactory;
-
-@Bean
-public IntegrationFlow pollingAdapterFlow() {
-    return IntegrationFlows
-            .from(Jpa.inboundAdapter(this.entityManagerFactory)
-                    .entityClass(StudentDomain.class)
-                    .maxResults(1)
-                    .expectSingleResult(true),
-                e -&amp;gt; e.poller(p -&amp;gt; p.trigger(new OnlyOnceTrigger())))
-            .channel(c -&amp;gt; c.queue("pollingResults"))
-            .get();
-}
-
-@Bean
-public IntegrationFlow updatingGatewayFlow() {
-    return f -&amp;gt; f
-            .handle(Jpa.updatingGateway(this.entityManagerFactory),
-                    e -&amp;gt; e.transactional(true))
-            .channel(c -&amp;gt; c.queue("persistResults"));
-}
-
-@Bean
-public IntegrationFlow retrievingGatewayFlow() {
-    return f -&amp;gt; f
-            .handle(Jpa.retrievingGateway(this.entityManagerFactory)
-                    .jpaQuery("from Student s where s.id = :id")
-                    .expectSingleResult(true)
-                    .parameterExpression("id", "payload"))
-            .channel(c -&amp;gt; c.queue("retrieveResults"));
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;h1 id="mid-flow-transaction-support" class="sect0"&gt;&lt;a class="anchor" href="#mid-flow-transaction-support"&gt;&lt;/a&gt;Mid-flow transaction support&lt;/h1&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;"Inspired" by the complexity of transaction support configuration for the Spring Integration JPA components (actually programmatic &lt;code&gt;TransactionalInterceptor&lt;/code&gt;), we have introduced &lt;code&gt;TransactionInterceptorBuilder&lt;/code&gt;.
-In addition we provide the &lt;code&gt;TransactionHandleMessageAdvice&lt;/code&gt; which allows to start transaction from any endpoint for the entire sub-flow, not only the &lt;code&gt;handleRequestMessage&lt;/code&gt; as it is in case of regular &lt;code&gt;ConsumerEndpointSpec.advice()&lt;/code&gt;.
-Actually the main trick is done by the &lt;code&gt;HandleMessageAdvice&lt;/code&gt;, recently introduced in &lt;a href="http://docs.spring.io/spring-integration/reference/html/messaging-endpoints-chapter.html#handle-message-advice"&gt;Spring Integration Core&lt;/a&gt;, which is a marker interface to distinguish advice for the &lt;code&gt;handleRequestMessage&lt;/code&gt; only or for the flow starting from the current &lt;code&gt;MessageHandler&lt;/code&gt;.
-For convenience the bunch of &lt;code&gt;.transactional()&lt;/code&gt; methods have been added to the &lt;code&gt;ConsumerEndpointSpec&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;h1 id="scatter-gather-support" class="sect0"&gt;&lt;a class="anchor" href="#scatter-gather-support"&gt;&lt;/a&gt;Scatter-Gather support&lt;/h1&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;The &lt;a href="http://docs.spring.io/spring-integration/reference/html/messaging-routing-chapter.html#scatter-gather"&gt;Scatter-Gather&lt;/a&gt; EI pattern now has its own Java DSL API:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="listingblock"&gt;
-&lt;div class="content"&gt;
-&lt;pre class="prettyprint highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;@Bean
-public IntegrationFlow scatterGatherFlow() {
-    return f -&amp;gt; f
-      .scatterGather(scatterer -&amp;gt; scatterer
-         .applySequence(true)
-         .recipientFlow(m -&amp;gt; true,
-                     sf -&amp;gt; sf.handle((p, h) -&amp;gt; Math.random() * 10))
-         .recipientFlow(m -&amp;gt; true,
-                     sf -&amp;gt; sf.handle((p, h) -&amp;gt; Math.random() * 10))
-         .recipientFlow(m -&amp;gt; true,
-                     sf -&amp;gt; sf.handle((p, h) -&amp;gt; Math.random() * 10)),
-      gatherer -&amp;gt; gatherer
-         .releaseStrategy(group -&amp;gt;
-                group.size() == 3 ||
-                      group.getMessages()
-                          .stream()
-                          .anyMatch(m -&amp;gt; (Double) m.getPayload() &amp;gt; 5)),
-      scatterGather -&amp;gt; scatterGather
-        	 .gatherTimeout(10_000));
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Where the &lt;code&gt;scatterer&lt;/code&gt; is just a &lt;code&gt;RecipientListRouter&lt;/code&gt;, &lt;code&gt;gatherer&lt;/code&gt; - an &lt;code&gt;AggregatingMessageHandler&lt;/code&gt;, and the last &lt;code&gt;Consumer&lt;/code&gt; accept options for the &lt;code&gt;ScatterGatherHandler&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;h1 id="more-routers-improvements" class="sect0"&gt;&lt;a class="anchor" href="#more-routers-improvements"&gt;&lt;/a&gt;More routers improvements&lt;/h1&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;The &lt;code&gt;.routeToRecipients()&lt;/code&gt; API now provides more configuration variants for recipients:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="listingblock"&gt;
-&lt;div class="content"&gt;
-&lt;pre class="prettyprint highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;.routeToRecipients(r -&amp;gt; r
-    .recipient("foo-channel", "'foo' == payload")
-    .recipient("bar-channel", m -&amp;gt;
-        m.getHeaders().containsKey("recipient")
-            &amp;amp;&amp;amp; (boolean) m.getHeaders().get("recipient"))
-    .recipientFlow("'foo' == payload or 'bar' == payload or 'baz' == payload",
-        f -&amp;gt; f.&amp;lt;String, String&amp;gt;transform(String::toUpperCase)
-            .channel(c -&amp;gt; c.queue("recipientListSubFlow1Result")))
-    .recipientFlow((String p) -&amp;gt; p.startsWith("baz"),
-        f -&amp;gt; f.transform("Hello "::concat)
-            .channel(c -&amp;gt; c.queue("recipientListSubFlow2Result")))
-    .recipientFlow(new FunctionExpression&amp;lt;Message&amp;lt;?&amp;gt;&amp;gt;(m -&amp;gt;
-                                   "bax".equals(m.getPayload())),
-        f -&amp;gt; f.channel(c -&amp;gt; c.queue("recipientListSubFlow3Result")))
-    .defaultOutputToParentFlow())&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Previously the &lt;code&gt;.route()&lt;/code&gt; operator made the next &lt;code&gt;.channel()&lt;/code&gt; in the &lt;code&gt;IntegrationFlow&lt;/code&gt; as a &lt;code&gt;defaultOutputChannel&lt;/code&gt; of the &lt;code&gt;Router&lt;/code&gt;.
-According to the user experience that doesn&amp;#8217;t sound reasonable to make such a decision unconditional.
-We reworked &lt;code&gt;.route()&lt;/code&gt; to align it with the standard &lt;code&gt;AbstractMessageRouter&lt;/code&gt; behaviour.
-The &lt;code&gt;.defaultOutputChannel()&lt;/code&gt; and &lt;code&gt;.defaultSubFlowMapping()&lt;/code&gt; have been added to utilize the &lt;code&gt;default&lt;/code&gt; logic for the &lt;code&gt;Router&lt;/code&gt;.
-To rallback to the previous behavior the &lt;code&gt;.defaultOutputToParentFlow()&lt;/code&gt; is present, as you noticed by the &lt;code&gt;.routeToRecipients()&lt;/code&gt; sample above.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;See &lt;a href="https://github.com/spring-projects/spring-integration-java-dsl/commits/v1.2.0.M2"&gt;commit history&lt;/a&gt; for &lt;code&gt;1.2.0.M2&lt;/code&gt; version for more information.
-And always read JavaDocs to understand the API you use!&lt;/p&gt;
-&lt;/div&gt;
-&lt;h1 id="next-steps" class="sect0"&gt;&lt;a class="anchor" href="#next-steps"&gt;&lt;/a&gt;Next Steps&lt;/h1&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;We expect the first (and hope the last) Release Candidate for version &lt;code&gt;1.2&lt;/code&gt; over a couple weeks, after some adoption for Spring Integration 4.3.2 and Spring Boot 1.4.1.
-It&amp;#8217;s soon enough as &lt;code&gt;spring-integration-java-dsl&lt;/code&gt; will move to the &lt;a href="http://projects.spring.io/spring-integration/"&gt;Spring Integration Core&lt;/a&gt; &lt;code&gt;5.0&lt;/code&gt; and Java 8 code base.
-The current &lt;code&gt;1.2&lt;/code&gt; version will be still supported, but just for bug fixes.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;&lt;a href="https://github.com/spring-projects/spring-integration-java-dsl"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-integration-java-dsl/wiki/Spring-Integration-Java-DSL-Reference"&gt;Documentation&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-integration-java-dsl/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-integration"&gt;Help&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Cloud Camden RC1 is Available</title>
-    <link rel="alternate" href="https://spring.io/blog/2016/09/14/spring-cloud-camden-rc1-is-available" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Spencer Gibb</name>
-    </author>
-    <id>tag:spring.io,2016-09-14:2618</id>
-    <updated>2016-09-14T16:16:59Z</updated>
-    <content type="html">&lt;p&gt;On behalf of the team, I am pleased to announce that Release Candidate 1 (RC1) of the &lt;a href="https://cloud.spring.io"&gt;Spring Cloud Camden&lt;/a&gt; Release Train is available today. The release can be found in our &lt;a href="https://repo.spring.io/milestone/"&gt;Spring Milestone&lt;/a&gt; repository. This is mostly a bug fix release as Camden prepares for General Availability (GA). You can check out the Camden &lt;a href="https://github.com/spring-projects/spring-cloud/wiki/Spring-Cloud-Camden-Release-Notes"&gt;release notes for more information&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;&lt;a href="#notable-changes-in-the-camden-release-train" class="anchor" name="notable-changes-in-the-camden-release-train"&gt;&lt;/a&gt;Notable Changes in the Camden Release Train&lt;/h2&gt;
-&lt;p&gt;Spring Cloud Contract is a new project that provides support for Consumer Driven Contracts and service schemas in Spring applications. Spring Cloud Netflix supports customization of Ribbon component classes via properties, uses the new community maintained &lt;a href="https://github.com/OpenFeign/feign"&gt;OpenFeign&lt;/a&gt; and made various fixes and improvements to Zuul. Spring Cloud Consul adds support for Spring Cloud Bus using Consul&amp;rsquo;s event api. The CLI adds a &lt;code&gt;spring cloud&lt;/code&gt; command to start various Spring Cloud servers with a single command. Supported servers include Eureka, Config Server and Hystrix Dashboard.&lt;/p&gt;
-&lt;p&gt;The following modules were updated as part of Camden.RC1:&lt;/p&gt;
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Module &lt;/th&gt;
-      &lt;th&gt;Version &lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Build &lt;/td&gt;
-      &lt;td&gt;1.2.0.RELEASE &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Stream &lt;/td&gt;
-      &lt;td&gt;Brooklyn.RC1 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Bus &lt;/td&gt;
-      &lt;td&gt;1.2.0.RC1 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Config &lt;/td&gt;
-      &lt;td&gt;1.2.0.RC1 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Netflix &lt;/td&gt;
-      &lt;td&gt;1.2.0.RC1 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Consul &lt;/td&gt;
-      &lt;td&gt;1.1.0.RC1 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Contract &lt;/td&gt;
-      &lt;td&gt;1.0.0.RC1 &lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;NOTE: Spring Cloud CLI 1.2.0.RC1 will be released after Spring Boot 1.4.1 is released because of a regression.&lt;/p&gt;
-&lt;p&gt;The combined release train documentation is available &lt;a href="http://cloud.spring.io/spring-cloud-static/spring-cloud.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;And, as always, we welcome feedback: either on &lt;a href="https://github.com/spring-cloud/"&gt;GitHub&lt;/a&gt;, on &lt;a href="https://gitter.im/spring-cloud/spring-cloud"&gt;Gitter&lt;/a&gt;, on &lt;a href="http://stackoverflow.com/questions/tagged/spring-cloud"&gt;Stack Overflow&lt;/a&gt;, or on &lt;a href="https://twitter.com/SpringCloudOSS"&gt;Twitter&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To get started with Maven with a BOM (dependency management only)&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;&amp;lt;repositories&amp;gt;&#xD;
-    &amp;lt;repository&amp;gt;&#xD;
-        &amp;lt;id&amp;gt;spring-milestones&amp;lt;/id&amp;gt;&#xD;
-        &amp;lt;name&amp;gt;Spring Milestones&amp;lt;/name&amp;gt;&#xD;
-        &amp;lt;url&amp;gt;http://repo.spring.io/milestone&amp;lt;/url&amp;gt;&#xD;
-        &amp;lt;snapshots&amp;gt;&#xD;
-            &amp;lt;enabled&amp;gt;false&amp;lt;/enabled&amp;gt;&#xD;
-        &amp;lt;/snapshots&amp;gt;&#xD;
-    &amp;lt;/repository&amp;gt;&#xD;
-&amp;lt;/repositories&amp;gt;&#xD;
-&amp;lt;dependencyManagement&amp;gt;&#xD;
-  &amp;lt;dependencies&amp;gt;&#xD;
-    &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&#xD;
-    &amp;lt;artifactId&amp;gt;spring-cloud-dependencies&amp;lt;/artifactId&amp;gt;&#xD;
-    &amp;lt;version&amp;gt;Camden.RC1&amp;lt;/version&amp;gt;&#xD;
-    &amp;lt;type&amp;gt;pom&amp;lt;/type&amp;gt;&#xD;
-    &amp;lt;scope&amp;gt;import&amp;lt;/scope&amp;gt;&#xD;
-  &amp;lt;/dependencies&amp;gt;&#xD;
-&amp;lt;/dependencyManagement&amp;gt;&#xD;
-&amp;lt;dependencies&amp;gt;&#xD;
-  &amp;lt;dependency&amp;gt;&#xD;
-    &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&#xD;
-    &amp;lt;artifactId&amp;gt;spring-cloud-starter-config&amp;lt;/artifactId&amp;gt;&#xD;
-  &amp;lt;/dependency&amp;gt;&#xD;
-  &amp;lt;dependency&amp;gt;&#xD;
-    &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&#xD;
-    &amp;lt;artifactId&amp;gt;spring-cloud-starter-eureka&amp;lt;/artifactId&amp;gt;&#xD;
-  &amp;lt;/dependency&amp;gt;&#xD;
-  ...&#xD;
-&amp;lt;/dependencies&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;or with Gradle:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;buildscript {&#xD;
-  dependencies {&#xD;
-    classpath &amp;quot;io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE&amp;quot;&#xD;
-  }&#xD;
-}&#xD;
-repositories {&#xD;
-    maven {&#xD;
-        url &amp;#39;http://repo.spring.io/milestone&amp;#39;&#xD;
-    }&#xD;
-}&#xD;
-apply plugin: &amp;quot;io.spring.dependency-management&amp;quot;&#xD;
-&#xD;
-dependencyManagement {&#xD;
-  imports {&#xD;
-    mavenBom &amp;#39;org.springframework.cloud:spring-cloud-dependencies:Camden.RC1&amp;#39;&#xD;
-  }&#xD;
-}&#xD;
-&#xD;
-dependencies {&#xD;
-    compile &amp;#39;org.springframework.cloud:spring-cloud-starter-config&amp;#39;&#xD;
-    compile &amp;#39;org.springframework.cloud:spring-cloud-starter-eureka&amp;#39;&#xD;
-    ...&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
 </feed>

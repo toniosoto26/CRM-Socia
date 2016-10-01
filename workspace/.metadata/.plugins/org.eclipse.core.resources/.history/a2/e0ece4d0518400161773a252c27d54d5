@@ -1,0 +1,39 @@
+package com.socia.conexion;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class Conexion {
+
+	private	String	user;
+	private	String	pass;
+	private	String	db;
+	
+	public Conexion(){
+		this.user	=	"root";
+		this.pass	=	"admin";
+		this.db		=	"soto";
+	}
+
+	public Connection getConnection1()throws Exception{
+		Connection	con	=	null;
+		String		url	=	"com.mysql.jdbc:mysql://localhost:8080/soto";
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			con	=	DriverManager.getConnection(url, user, pass);
+		}catch(Exception e){
+			System.out.println("driver no encontrado");
+		}
+		return con;
+	}
+	
+	public static void main(String [] args){
+		Conexion cone	=	new Conexion();
+		try{
+			Connection	co	=	cone.getConnection1();	
+		}catch(Exception e){
+			
+		}
+	
+	}
+}

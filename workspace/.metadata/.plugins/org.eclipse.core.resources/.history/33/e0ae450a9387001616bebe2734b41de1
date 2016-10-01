@@ -1,0 +1,36 @@
+/**
+ * 
+ */
+
+function validar(){
+	var userLogin	=	$("#user").val();
+	var	passwdLogin	=	$("#passwd").val();
+	var	validar		=	validarCampos(userLogin,passwdLogin);
+	var datos		=	{
+						"user" : userLogin,
+						"passwd": passwdLogin  
+						}
+	if(validar){
+		$.Ajax({
+			type: "post",
+			url : "ControllerLogin",
+			data: datos,
+			success: function(response){
+				$("#result").html(response);
+			},
+			error: function(){
+				//$("#result").html("Datos incorrectos.");
+				alert("Error");
+			}
+		});
+	}
+}
+
+function validarCampos(user,passwd){
+	if(user == "" || passwd == ""){
+		alert("No debe de haber campos vacios.")
+		return false;
+	}else{
+		return true;
+	}
+}

@@ -1,0 +1,54 @@
+package com.socia.conexion;
+
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.DriverManager;
+
+public class Conexion {
+
+	private	String	user;
+	private	String	pass;
+	private	String	db;
+	
+	public Conexion(){
+		this.user	=	"root";
+		this.pass	=	"admin";
+		this.db		=	"soto";
+	}
+
+	public Connection getConnection1()throws Exception, ClassNotFoundException{
+		Connection	con	=	null;
+		String		url	=	"jdbc:mysql://localhost:3306/socia";
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			con	=	DriverManager.getConnection(url, user, pass);
+			System.out.println("Conexion Existosa");
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("driver no encontrado");
+		}
+		return con;
+	}
+	
+	public static void main(String [] args){
+		Conexion cone	=	new Conexion();
+		try{
+			StringBuilder	sql	=	new	StringBuilder();
+			sql.append("select * from crm_users");
+			Connection	co	=	cone.getConnection1();	
+			Statement	st	=	co.createStatement();
+			
+			ResultSet 	rs	=	st.executeQuery(sql.toString());
+			
+			while(rs.next()){
+				System.out.println("usuario: "+rs.getString("user"));
+				System.out.println("clave: "+rs.getString("password"));
+			}
+			
+		}catch(Exception e){
+			
+		}
+	
+	}
+}
