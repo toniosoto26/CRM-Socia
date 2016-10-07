@@ -40,7 +40,7 @@ public class ControllerLogin extends HttpServlet {
 		HttpSession	session	=	request.getSession();
 		String		user	=	request.getParameter("user");
 		String		pass	=	request.getParameter("passwd");
-		String		url		=	"/home.jsp";
+		String		url		=	"/saludo.jsp";
 		
 		try{
 			LoginDAO	loginDao	=	new	LoginDAO();
