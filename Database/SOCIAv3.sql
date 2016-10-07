@@ -102,7 +102,8 @@ DROP TABLE IF EXISTS `socia`.`crm_contact` ;
 
 CREATE TABLE IF NOT EXISTS `socia`.`crm_contact` (
   `crm_contact_id` INT NOT NULL,
-  `contact_name` VARCHAR(45) NULL,
+  `first_name` VARCHAR(45) NULL,
+  `last_name` VARCHAR(45) NULL,
   `phone` VARCHAR(45) NULL,
   `email` VARCHAR(45) NULL,
   `status` VARCHAR(45) NULL,
@@ -115,7 +116,7 @@ ENGINE = InnoDB;
 
 LOCK TABLES `crm_contact` WRITE;
 /*!40000 ALTER TABLE `crm_contact` DISABLE KEYS */;
-INSERT INTO `crm_contact` VALUES (1,'Ana Bobana','12345678','ana@company.com','A'),(2,'Pepe Pecas','87654321','pepe@company.com','A');
+INSERT INTO `crm_contact` VALUES (1,'Ana', 'Bobana','12345678','ana@company.com','A'),(2,'Pepe', 'Pecas','87654321','pepe@company.com','A');
 /*!40000 ALTER TABLE `crm_contact` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,7 +230,7 @@ ENGINE = InnoDB;
 
 LOCK TABLES `crm_address` WRITE;
 /*!40000 ALTER TABLE `crm_address` DISABLE KEYS */;
-INSERT INTO `crm_address` VALUES (1,'Calle 21','101','102','Benito Juarez','Ciudad de México','México',3800,'A'),(2,'Calle 23','103','104','Benito Juarez','Ciudad de México','México',3800,'A');
+INSERT INTO `crm_address` VALUES (1,'Calle 21','101','102','Benito Juarez','Ciudad de MÃ©xico','MÃ©xico',3800,'A'),(2,'Calle 23','103','104','Benito Juarez','Ciudad de MÃ©xico','MÃ©xico',3800,'A');
 /*!40000 ALTER TABLE `crm_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
