@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.socia.DAO.LoginDAO;
+import com.socia.DTO.LoginDTO;
 
 /**
  * Servlet implementation class ControllerLogin
@@ -30,7 +31,12 @@ public class ControllerLogin extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		HttpSession	sessionT	=	request.getSession();
+		String		urlT		=	"/index.jsp";
+		if(request.getParameter("cerrarSesion").equals("T")){
+			sessionT.removeAttribute("sessionLogin");
+		}
+		request.getRequestDispatcher(urlT).forward(request, response);
 	}
 
 	/**
@@ -40,20 +46,23 @@ public class ControllerLogin extends HttpServlet {
 		HttpSession	session	=	request.getSession();
 		String		user	=	request.getParameter("user");
 		String		pass	=	request.getParameter("passwd");
-		String		url		=	"/saludo.jsp";
+		String		url		=	"/vistas/validateUser.jsp";
 		
 		try{
 			LoginDAO	loginDao	=	new	LoginDAO();
-			boolean		validar		=	loginDao.validateUser(user, pass);
-			if(validar){
+			LoginDTO	loginDto	=	loginDao.validateUser(user, pass);
+
+			if(loginDto != null){
+				
 				session.removeAttribute("user");
 				session.setAttribute("user", user);
 				
-				session.removeAttribute("userExists");
-				session.setAttribute("userExists", validar);
+				session.removeAttribute("sessionLogin");
+				session.setAttribute("sessionLogin", loginDto);
 			}else{
-				session.removeAttribute("userExists");
-				session.setAttribute("userExists", validar);
+				
+				session.removeAttribute("sessionLogin");
+				session.setAttribute("sessionLogin", loginDto);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
