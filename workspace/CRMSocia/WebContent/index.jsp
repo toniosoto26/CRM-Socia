@@ -7,28 +7,32 @@
 	<title>CRM-Socia</title>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/script.js"></script>
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
 </head>
 <body>
-	<span><h1>Login de prueba</h1></span>
-	<form>
-		<table>
-			<tr>
-				<td>Usuario: </td>
-				<td><input type="text" id="user" name="user"></td>
-			</tr>
-			<tr>
-				<td>Contraseña: </td>
-				<td><input type="password" id="passwd" name="passwd" ></td>
-			</tr>
-			<tr id="mostrar">
-				<td colspan="2" id="result"></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-					<input type="button" id="btnLogin" name="btnLogin" value="Entrar" onclick="validar();">
-				</td>
-			</tr>
-		</table>
-	</form>
+	<nav class="navbar navbar-default">
+	  <div class="container">
+	        <div class="navbar-header">
+	          <a class="navbar-brand" href="#">
+	          <img src="images/icono.png" width="46" height="49" alt=""/> </a>
+	          <span class="navbar-text logo">GRUPO SOCIA CRM</span>
+	          <span class="navbar-text derecha">IT Solutions</span>
+	        </div>
+	  </div>
+	</nav>
+	<div class="login">
+		<form>
+			<div class="form-group">
+				<input type="text" class="form-control" id="user" name="user"  placeholder="Usuario">
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" id="passwd" name="passwd" placeholder="Contraseña">
+			</div>
+			<div class="text-center">
+				<button type="button" id="btnLogin" name="btnLogin" class="btn btn-primary" onclick="validar();">INGRESAR</button>
+			</div>
+		</form>
+	</div>
+	
 </body>
 </html>

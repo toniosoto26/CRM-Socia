@@ -4,6 +4,13 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+/*
+	*Modificado	:	Antonio Soto
+	*Etiqueta	:	AS01
+	*Descripcion:	Agregar estilo al texto de "Salir" para terminar sesion
+	*Fecha		:	08/10/2016	
+*/
+
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
@@ -6927,3 +6934,9 @@ button.close {
     width: 20%;
   }
 }
+/**AS01 ini**/
+#salir{
+	color:	#fff;
+	text-decoration: underline
+}
+/**AS01 fin**/

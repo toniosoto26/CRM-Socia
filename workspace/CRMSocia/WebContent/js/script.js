@@ -18,7 +18,10 @@ function validar(){
 			url : "ControllerLogin",
 			data: datos,
 			success: function(response){
-				$("#result").html(response);
+				if(trim(response) === "correcto")
+					document.location.href	=	"home.jsp";
+				else
+					alert("Acceso incorrecto.")
 				$("#mostrar").show();
 			},
 			error: function(){
@@ -36,4 +39,11 @@ function validarCampos(user,passwd){
 	}else{
 		return true;
 	}
+}
+
+
+function trim(cadena){
+	var retorno=cadena.replace(/^\s+/g,'');
+	retorno=retorno.replace(/\s+$/g,'');
+	return retorno;
 }

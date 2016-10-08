@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -8,6 +10,11 @@
 <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
 </head>
 <body>
+	<c:choose>
+	<c:when test="${sessionScope.sessionLogin == null}">
+		<c:redirect url="index.jsp"/>	
+	</c:when>
+</c:choose>
 	<div id="wrapper">
 		<div id="sidebar-wrapper">
             <nav id="spy">
@@ -37,13 +44,17 @@
           					<a class="navbar-brand" href="#">
           					<img src="images/icono.png" width="46" height="49" alt=""/> </a>
           					<span class="navbar-text logo">GRUPO SOCIA CRM</span>
-          					<span class="navbar-text derecha">IT Solutions </span>
+          					<span class="navbar-text derecha">
+          						IT Solutions 
+          						&nbsp;&nbsp; 
+          						<a href="ControllerLogin?cerrarSesion=T"><span id="salir">Salir</span></a>
+          					</span>
         				</div>
   					</div>
 				</nav>
             </div>
             <div class="page-content inset" data-spy="scroll" data-target="#spy">
-            	Aqui cargaran cada quien su seccion
+            	Bienvenido <c:out value="${sessionLogin.user}"></c:out>
             </div>
         </div>
 	</div>
