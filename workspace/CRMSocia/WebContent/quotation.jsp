@@ -12,24 +12,29 @@
 	<form>
 	  <div class="form-group">
 	    <label for="inputCompanyName">Razón social:</label>
-	    <input type="text" class="form-control" id="companyName" aria-describedby="companyNameHelp" placeholder="Razón Social">
+	    <select class="form-control" id="currency" onChange="loadContactInfo(this);">
+	      <option value='0' ></option>
+	      <option value='1' >PRUEBA SA DE CV</option>
+	    </select>
 	    <small id="companyNameHelp" class="form-text text-muted">Por favor, selecciona la razón social que necesites.</small>
 	  </div>
 	  <div class="form-group">
 	    <label for="inputCompanyAddress">Dirección:</label>
-	    <input type="text" class="form-control" id="companyAddress" placeholder="Razón Social">
+	    <input type="text" class="form-control" id="companyAddress" placeholder="Dirección">
 	  </div>
-	  <div class="form-group">
-	    <label for="inputCompanyPhone">Teléfono:</label>
-	    <input type="text" class="form-control" id="companyPhone" placeholder="Teléfono">
-	  </div>
-	  <div class="form-group">
-	    <label for="inputCompanyContact">Contacto</label>
-	    <input type="text" class="form-control" id="companyContact" placeholder="Contacto">
-	  </div>
-  	  <div class="form-group">
-	    <label for="inputCompanyEmail">Email:</label>
-	    <input type="text" class="form-control" id="companyEmail" placeholder="email">
+	  <div id="contactInfo">
+		  <div class="form-group">
+		    <label for="inputCompanyContact">Contacto</label>
+		    <input type="text" class="form-control" id="companyContact" placeholder="Contacto">
+		  </div>
+	  	  <div class="form-group">
+		    <label for="inputCompanyEmail">Email:</label>
+		    <input type="text" class="form-control" id="companyEmail" placeholder="email">
+		  </div>
+		  <div class="form-group">
+		    <label for="inputCompanyPhone">Teléfono:</label>
+		    <input type="text" class="form-control" id="companyPhone" placeholder="Teléfono">
+		  </div>
 	  </div>
 	  <div class="form-group">
 	    <label for="selectCurrency">Moneda</label>
@@ -44,7 +49,7 @@
 	  </div>
 	  <div class="form-group">
 	    <label for="products">Registro de partidas</label>
-	    <table class="table">
+	    <table class="table" id="productsTable">
 	    	<thead>
 	    		<tr>
 		    		<th>No. Parte</th>
@@ -78,6 +83,7 @@
 		    	</tr>
 	    	</tbody>
 	    </table>
+	    <button type="button" class="btn btn-primary" onClick="addProduct();">+</button>
 	  </div>
 	  
 	  <div class="text-right">
@@ -86,5 +92,8 @@
   	  </div>
 	</form>
 
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript" src="js/quotation.js"></script>
 </body>
 </html>
