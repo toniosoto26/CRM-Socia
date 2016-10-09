@@ -41,6 +41,24 @@ function validarCampos(user,passwd){
 	}
 }
 
+function loadContactInfo(selected){
+	var clientId = selected.value;
+	$.ajax({
+		type: "post",
+		url : "ControllerTemp",
+		data: {
+			option: 2, 
+			clientId: clientId
+		},
+		success: function(response){
+			$("#contactInfo").html(response);
+		},
+		error: function(){
+			alert("Error");
+		}
+	});
+}
+
 
 function trim(cadena){
 	var retorno=cadena.replace(/^\s+/g,'');
