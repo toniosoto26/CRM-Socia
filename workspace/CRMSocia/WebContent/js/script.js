@@ -45,7 +45,7 @@ function loadContactInfo(selected){
 	var clientId = selected.value;
 	$.ajax({
 		type: "post",
-		url : "ControllerTemp",
+		url : "Controller",
 		data: {
 			option: 2, 
 			clientId: clientId
@@ -58,6 +58,40 @@ function loadContactInfo(selected){
 		}
 	});
 }
+
+function selectClient(){
+	
+	$.ajax({
+		type:"post",
+		url:"Controller",
+		data: {"option":1},
+		success: function(response){
+			$("#selectClient").html(response);
+			$(".chosen-select").chosen();
+		},
+		error: function(){
+			alert("no jalo");
+			
+		}
+		
+		
+		
+		
+	})
+}
+
+function pintar(variable){
+	if(variable==0){
+		$("#form1").load("vistas/newClient.jsp");
+		
+	}
+	else{
+		$("#form1").load("vistas/searchClient.jsp");
+	}
+}
+
+
+
 
 
 function trim(cadena){
