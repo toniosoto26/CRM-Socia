@@ -19,34 +19,48 @@
 	    <small id="companyNameHelp" class="form-text text-muted">Por favor, selecciona la razón social que necesites.</small>
 	  </div>
 	  <div class="form-group" id="addressInfo">
-	    <label for="inputCompanyAddress">Dirección:</label>
-	    <input type="text" class="form-control" id="companyAddress" placeholder="Dirección">
+	  </div>
+	  <div class="form-group">
 	  	<button type="button" class="btn btn-primary" onClick="showNewAddress();">Agregar dirección</button>
 	  </div>
 	  <div id="contactInfo">
-		  <div class="form-group">
-		    <label for="inputCompanyContact">Contacto</label>
-		    <input type="text" class="form-control" id="companyContact" name="companyContact" placeholder="Contacto">
+	  	<div class="col-md-12">
+		  <div class="form-group row">
+		  	<div class="col-md-12">
+			    <label for="inputCompanyContact">Contacto</label>
+			    <input type="text" class="form-control" id="companyContact" name="companyContact" placeholder="Contacto">
+			</div>
 		  </div>
-	  	  <div class="form-group">
-		    <label for="inputCompanyEmail">Email:</label>
-		    <input type="text" class="form-control" id="companyEmail" name="companyEmail" placeholder="email">
+		</div>
+		<div class="col-md-12">
+	  	  <div class="form-group row">
+	  	  	<div class="col-md-6">
+			    <label for="inputCompanyEmail">Email:</label>
+			    <input type="text" class="form-control" id="companyEmail" name="companyEmail" placeholder="email">
+		  	</div>
+		  	<div class="col-md-6">
+			    <label for="inputCompanyPhone">Teléfono:</label>
+			    <input type="text" class="form-control" id="companyPhone" name="companyPhone" placeholder="Teléfono">
+			</div>
 		  </div>
-		  <div class="form-group">
-		    <label for="inputCompanyPhone">Teléfono:</label>
-		    <input type="text" class="form-control" id="companyPhone" name="companyPhone" placeholder="Teléfono">
-		  </div>
+	    </div>
 	  </div>
-	  <div class="form-group">
-	    <label for="selectCurrency">Moneda</label>
-	    <select class="form-control" id="currency" name="currency" onChange="displayExchangeRate(this);">
-	      <option value="MXN">MXN</option>
-	      <option value="USD">USD</option>
-	    </select>
-	  </div>
-	  <div class="form-group" id="exchangeRate" style="display:none;">
-	    <label for="inputExchangeRate">Tipo de cambio:</label>
-	    <input type="text" class="form-control" id="exchangeRate" name="exchangeRate" placeholder="Tipo de cambio">
+	  <div class="col-md-12">
+		  <div class="form-group row">
+		    <div class="col-md-6">
+			    <label for="selectCurrency">Moneda</label>
+			    <select class="form-control" id="currency" name="currency" onChange="displayExchangeRate(this);">
+			      <option value="MXN">MXN</option>
+			      <option value="USD">USD</option>
+			    </select>
+			</div>
+			<div class="col-md-6">
+			  <div class="form-group" id="exchangeRate" style="display:none;">
+			    <label for="inputExchangeRate">Tipo de cambio:</label>
+			    <input type="text" class="form-control" id="exchangeRate" name="exchangeRate" placeholder="Tipo de cambio">
+			  </div>
+			</div>
+		</div>
 	  </div>
 	  <div class="form-group">
 	    <label for="products">Registro de partidas</label>
