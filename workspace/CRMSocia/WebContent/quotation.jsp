@@ -6,46 +6,47 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Cotizaciones</title>
 	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+	<link rel="stylesheet" href="css/prism.css">
+	<link rel="stylesheet" href="css/chosen.css">
 </head>
 <body>
 	
-	<form>
+	<form id="addQuotation" onSubmit="return addQuotation();">
+				
 	  <div class="form-group">
 	    <label for="inputCompanyName">Razón social:</label>
-	    <select class="form-control" id="currency" onChange="loadContactInfo(this);">
-	      <option value='0' ></option>
-	      <option value='1' >PRUEBA SA DE CV</option>
-	    </select>
+	    <div id="selectClient"></div>
 	    <small id="companyNameHelp" class="form-text text-muted">Por favor, selecciona la razón social que necesites.</small>
 	  </div>
-	  <div class="form-group">
+	  <div class="form-group" id="addressInfo">
 	    <label for="inputCompanyAddress">Dirección:</label>
 	    <input type="text" class="form-control" id="companyAddress" placeholder="Dirección">
+	  	<button type="button" class="btn btn-primary" onClick="showNewAddress();">Agregar dirección</button>
 	  </div>
 	  <div id="contactInfo">
 		  <div class="form-group">
 		    <label for="inputCompanyContact">Contacto</label>
-		    <input type="text" class="form-control" id="companyContact" placeholder="Contacto">
+		    <input type="text" class="form-control" id="companyContact" name="companyContact" placeholder="Contacto">
 		  </div>
 	  	  <div class="form-group">
 		    <label for="inputCompanyEmail">Email:</label>
-		    <input type="text" class="form-control" id="companyEmail" placeholder="email">
+		    <input type="text" class="form-control" id="companyEmail" name="companyEmail" placeholder="email">
 		  </div>
 		  <div class="form-group">
 		    <label for="inputCompanyPhone">Teléfono:</label>
-		    <input type="text" class="form-control" id="companyPhone" placeholder="Teléfono">
+		    <input type="text" class="form-control" id="companyPhone" name="companyPhone" placeholder="Teléfono">
 		  </div>
 	  </div>
 	  <div class="form-group">
 	    <label for="selectCurrency">Moneda</label>
-	    <select class="form-control" id="currency">
-	      <option>MXN</option>
-	      <option>USD</option>
+	    <select class="form-control" id="currency" name="currency" onChange="displayExchangeRate(this);">
+	      <option value="MXN">MXN</option>
+	      <option value="USD">USD</option>
 	    </select>
 	  </div>
-	  <div class="form-group">
+	  <div class="form-group" id="exchangeRate" style="display:none;">
 	    <label for="inputExchangeRate">Tipo de cambio:</label>
-	    <input type="text" class="form-control" id="exchangeRate" placeholder="Tipo de cambio">
+	    <input type="text" class="form-control" id="exchangeRate" name="exchangeRate" placeholder="Tipo de cambio">
 	  </div>
 	  <div class="form-group">
 	    <label for="products">Registro de partidas</label>
@@ -61,38 +62,21 @@
 	    		</tr>
 	    	</thead>
 	    	<tbody>
-	    		<tr>
-		    		<td>
-		    			<input type="text" class="form-control" id="itemNum" />
-		    		</td>
-		    		<td>
-		    			<input type="text" class="form-control" id="quantity" />
-		    		</td>
-		    		<td>
-		    			<input type="text" class="form-control" id="description" />
-		    		</td>
-		    		<td>
-		    			<input type="text" class="form-control" id="warranty" />
-		    		</td>
-		    		<td>
-		    			<input type="text" class="form-control" id="estimatedShipping" />
-		    		</td>
-		    		<td>
-		    			<input type="text" class="form-control" id="unitPrice" />
-		    		</td>
-		    	</tr>
 	    	</tbody>
 	    </table>
+	    <input type="hidden" name="totalProducts" id="totalProducts" value="1" />
 	    <button type="button" class="btn btn-primary" onClick="addProduct();">+</button>
 	  </div>
 	  
 	  <div class="text-right">
-		  <button type="button" class="btn btn-primary">Previsualizar</button>
-	  	  <button type="submit" class="btn btn-primary">Enviar</button>
+		  <button type="button" class="btn btn-primary" onClick="" >Previsualizar</button>
+	  	  <button type="submit" class="btn btn-primary" >Enviar</button>
   	  </div>
 	</form>
 
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+	<script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+	<script src="js/chosen.jquery.js" type="text/javascript"></script>
+	<script src="js/prism.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="js/script.js"></script>
 	<script type="text/javascript" src="js/quotation.js"></script>
 </body>

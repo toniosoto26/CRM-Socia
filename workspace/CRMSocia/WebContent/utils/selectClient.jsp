@@ -3,13 +3,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-<select data-placeholder="Seleccion el cliente" class="chosen-select" tabindex="-1" onChange="loadContactInfo(this);">
+<select data-placeholder="Seleccion el cliente" id="chosenClient" class="chosen-select" tabindex="-1" name="clientId" onChange="loadContactInfo(this);loadAddressInfo(this);">
 	<option value="5">prueba sa de cv</option>
 	<c:forEach items="${sessionScope.arrClient}" var="varClient">
 		<option value='<c:out value="${varClient.clientId}"></c:out>'><c:out value="${varClient.companyName}"></c:out></option>
 	</c:forEach>
-	<option value="opcion 2 "> opcion 2 </option>
-	<option value="opcion 3 "> opcion 3 </option>
-	<option value="opcion 4 "> opcion 4 </option>
 </select>
     

@@ -16,6 +16,6 @@
 	    <label for="inputCompanyPhone">Teléfono:</label>
 	    <input type="text" class="form-control" id="companyPhone" disabled value='<c:out value="${varContact.phone}"></c:out>' >
 	</div>
-	<input type="hidden" id="contactId" value='<c:out value="${ varContact.contactId }"></c:out>' />
+	<input type="hidden" id="contactId" name="contactId" value='<c:out value="${ varContact.contactId }"></c:out>' />
 	
 </c:forEach>
