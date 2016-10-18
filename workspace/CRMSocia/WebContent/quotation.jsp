@@ -74,7 +74,6 @@
   	  </div>
 	</form>
 
-	<script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
 	<script src="js/chosen.jquery.js" type="text/javascript"></script>
 	<script src="js/prism.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="js/script.js"></script>

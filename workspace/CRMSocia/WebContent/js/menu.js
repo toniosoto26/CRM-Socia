@@ -1,13 +1,13 @@
-	/*Menu-toggle*/
+	/*Menu-toggle*
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("active");
     });
 
-    /*Scroll Spy*/
+    /*Scroll Spy*
     $('body').scrollspy({ target: '#spy', offset:80});
 
-    /*Smooth link animation*/
+    /*Smooth link animation*
     $('a[href*=#]:not([href=#])').click(function() {
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
 
@@ -21,3 +21,13 @@
             }
         }
     });
+    
+    /**  Loading menus */
+    function loadMenu(menuName){
+    	if(menuName === "call"){
+    		$("#pageContent").load("call.jsp");
+    	}else if(menuName === "quotation"){
+    		$("#pageContent").load("quotation.jsp");
+    	}
+    }
+    

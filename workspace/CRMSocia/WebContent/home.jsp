@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Diagnostico</title>
+<title>CRM-Socia</title>
 <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
 </head>
 <body>
@@ -23,13 +23,19 @@
                         <a href="#home"><span class="fa fa-home solo">Home</span></a>
                     </li>
                     <li>
-                        <a href="#anch1" data-scroll>
-                            <span class="fa fa-anchor solo">Anchor 1</span>
+                        <a href="#anch1" data-scroll onClick="loadMenu('call');">
+                            <span class="fa fa-anchor solo">Llamadas</span>
                         </a>
                     </li>
                     <li>
                         <a href="#anch2" data-scroll>
-                            <span class="fa fa-anchor solo">Anchor 2</span>
+                            <span class="fa fa-anchor solo">Citas</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="#anch3" data-scroll  onClick="loadMenu('quotation');">
+                            <span class="fa fa-anchor solo">Cotizaciones</span>
                         </a>
                     </li>
                 </ul>
@@ -53,10 +59,14 @@
   					</div>
 				</nav>
             </div>
-            <div class="page-content inset" data-spy="scroll" data-target="#spy">
+            <div class="page-content inset" data-spy="scroll" data-target="#spy" id="pageContent">
             	Bienvenido <c:out value="${sessionLogin.user}"></c:out>
             </div>
         </div>
 	</div>
+	
+	
+	<script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/menu.js"></script>
 </body>
 </html>
