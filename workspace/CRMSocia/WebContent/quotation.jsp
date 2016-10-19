@@ -1,15 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Cotizaciones</title>
-	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+
 	<link rel="stylesheet" href="css/prism.css">
 	<link rel="stylesheet" href="css/chosen.css">
-</head>
-<body>
+	<link rel="stylesheet" href="css/address.css">
 	
 	<form id="addQuotation" onSubmit="return addQuotation();">
 				
@@ -18,11 +12,70 @@
 	    <div id="selectClient"></div>
 	    <small id="companyNameHelp" class="form-text text-muted">Por favor, selecciona la razón social que necesites.</small>
 	  </div>
-	  <div class="form-group" id="addressInfo">
+	  <label for="selectCompanyAddress" >Dirección</label>
+	  <div class="card">
+          <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#select" aria-controls="home" role="tab" data-toggle="tab">SELECCIONAR</a></li>
+              <li role="presentation"><a href="#add" aria-controls="profile" role="tab" data-toggle="tab">AGREGAR</a></li>
+          </ul>
+          <!-- Tab panes -->
+          <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="select">
+              	<div class="row">
+              		<div class="form-group" id="addressInfo">No hay direcciones por seleccionar</div>
+              	</div>
+			  </div>
+              <div role="tabpanel" class="tab-pane fade" id="add">
+              	<div class="row">
+              	  <div class="col-md-12">
+					  <div class="form-group row">
+					    <div class="col-md-8">
+					    	<label for="inputCompanyAddress" >Calle</label>
+					    	<input type="text" class="form-control" name="street" id="street" placeholder="Calle">
+					  	</div>
+					    <div class="col-md-2">
+					    	<label for="inputExtNum">Exterior</label>
+					    	<input type="text" class="form-control" name="extNum" id="extNum" placeholder="Número exterior">
+					    </div>
+					    <div class="col-md-2">
+					    	<label for="inputIntNum">Interior</label>
+					    	<input type="text" class="form-control" name="intNum" id="intNum" placeholder="Número interior">
+					    </div>
+					  </div>
+				  </div>
+				  <div class="col-md-12">
+					  <div class="form-group row">
+						  <div class="col-md-4">
+						    <label for="inputCity">Colonia</label>
+						    <input type="text" class="form-control" name="suburb" id="suburb" placeholder="Colonia">
+						  </div>
+						  <div class="col-md-4">
+						    <label for="inputExchangeRate">Delegación/Municipio</label>
+						    <input type="text" class="form-control" name="city" id="city" placeholder="Delegación / Municipio">
+						  </div>
+						  <div class="col-md-4">
+						    <label for="inputExchangeRate">Estado</label>
+						    <input type="text" class="form-control" name="state" id="state" placeholder="Estado">
+						  </div>
+					</div>
+				  </div>
+				  <div class="col-md-12">
+					  <div class="form-group row">
+						  <div class="col-md-6">
+						    <label for="inputExchangeRate">País</label>
+						    <input type="text" class="form-control" name="country" id="country" placeholder="País">
+						  </div>
+						  <div class="col-md-6">
+						    <label for="inputExchangeRate">Código postal</label>
+						    <input type="text" class="form-control" name="zipCode" id="zipCode" placeholder="Código postal">
+						  </div>
+					  </div>
+				  </div>
+              </div>
+            </div>
+          </div>
 	  </div>
-	  <div class="form-group">
-	  	<button type="button" class="btn btn-primary" onClick="showNewAddress();">Agregar dirección</button>
-	  </div>
+	  
 	  <div id="contactInfo">
 	  	<div class="col-md-12">
 		  <div class="form-group row">
@@ -89,8 +142,7 @@
 	</form>
 
 	<script src="js/chosen.jquery.js" type="text/javascript"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="js/prism.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="js/script.js"></script>
 	<script type="text/javascript" src="js/quotation.js"></script>
-</body>
-</html>

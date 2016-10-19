@@ -18,10 +18,6 @@ function addProduct(){
 	itemNum++;
 }
 
-function showNewAddress(){
-	$("#addressInfo").load("utils/newAddress.jsp");
-}
-
 function displayExchangeRate(selected){
 	var currency = selected.value;
 	
@@ -53,10 +49,12 @@ function loadAddressInfo(selected){
 }
 
 function addQuotation(){
+	var activeTab = $('.nav-tabs .active').text();
+	
 	$.ajax({
 		type: "post",
 		url : "ControllerTemp",
-		data: $("#addQuotation").serialize()+"&option=2",
+		data: $("#addQuotation").serialize()+"&option=2&activeTab="+activeTab,
 		success: function(response){
 			console.log("success");
 			//$("#addressInfo").html(response);

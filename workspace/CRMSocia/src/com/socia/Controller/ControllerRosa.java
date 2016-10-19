@@ -16,6 +16,7 @@ import com.socia.DAO.QuotationDAO;
 import com.socia.DAO.QuotationDetailDAO;
 import com.socia.DAO.TransactionDAO;
 import com.socia.DTO.AddressDTO;
+import com.socia.DTO.LoginDTO;
 import com.socia.DTO.QuotationDTO;
 import com.socia.DTO.QuotationDetailDTO;
 
@@ -56,11 +57,21 @@ public class ControllerRosa extends HttpServlet {
 		int								quantity			=	0;
 		String							estimatedShipping	=	"";
 		int								contactId			=	0;
-		int								addressId			=	0;
 		String							currency			=	"";
 		double							exchangeRate		=	0;
 		int								totalProducts		=	0;
-		int								consecutive			= 	0;
+		int								quotationId			= 	0;
+		
+		String							activeTab			=	"";
+		int 							addressId			=	0;
+		String 							street				=	"";
+		String							extNum				=	"";
+		String 							intNum				=	"";
+		String 							suburb				=	"";
+		String							city				=	"";
+		String							state				=	"";
+		String							country				=	"";
+		String							zipCode				=	"";
 		
 		/** DAO */
 		ConsecutiveDAO					objConsecutive		=	new ConsecutiveDAO();
@@ -69,6 +80,8 @@ public class ControllerRosa extends HttpServlet {
 		QuotationDetailDAO				objQuotationDetail	=	new QuotationDetailDAO();
 		
 		/** DTO*/
+		LoginDTO						login;
+		AddressDTO						address				=	null;
 		QuotationDTO					quotation;
 		QuotationDetailDTO				quotationDetail;
 		ArrayList<QuotationDetailDTO> 	arrQuotationDetail	=	new ArrayList<QuotationDetailDTO>();
@@ -91,20 +104,40 @@ public class ControllerRosa extends HttpServlet {
 			
 			url = "utils/selectAddress.jsp";
 		}else if(option == 2){
+			/** User */
+			login = (LoginDTO)session.getAttribute("sessionLogin");
+			
+			/** Address */
+			activeTab = request.getParameter("activeTab");
+			
+			if(activeTab.equals("SELECCIONAR")){
+				addressId = Integer.parseInt(request.getParameter("addressId"));
+			}else if(activeTab.equals("AGREGAR")){
+				addressId = objConsecutive.getConsecutive("addresses");
+
+				street = request.getParameter("street");
+				extNum = request.getParameter("extNum");
+				intNum = request.getParameter("intNum");
+				suburb = request.getParameter("suburb");
+				city = request.getParameter("city");
+				state = request.getParameter("state");
+				country = request.getParameter("country");
+				zipCode = request.getParameter("zipCode");
+				
+				address = new AddressDTO(addressId, street, extNum, intNum, suburb, city, state, country, zipCode);
+			}
 			
 			/** Quotation */
 			clientId = Integer.parseInt(request.getParameter("clientId"));
-			if(request.getParameter("addressId") != null)
-				addressId = Integer.parseInt(request.getParameter("addressId"));
 			contactId = Integer.parseInt(request.getParameter("contactId"));
 			currency = request.getParameter("currency");
 			if(request.getParameter("currency") == "USD")
 				exchangeRate = Double.parseDouble(request.getParameter("exchangeRate"));
 			totalProducts = Integer.parseInt(request.getParameter("totalProducts"));
 			
-			consecutive = objConsecutive.getConsecutive("quotations");
+			quotationId = objConsecutive.getConsecutive("quotations");
 			
-			quotation = new QuotationDTO(consecutive, addressId, contactId, currency, exchangeRate, 1);
+			quotation = new QuotationDTO(quotationId, addressId, contactId, currency, exchangeRate, 1);
 			
 			/** Quotation details*/
 			for(int index = 1; index <= totalProducts; index++){
@@ -114,13 +147,15 @@ public class ControllerRosa extends HttpServlet {
 				estimatedShipping = request.getParameter("estimatedShipping"+index);
 				unitPrice = Double.parseDouble(request.getParameter("unitPrice"+index));
 				
-				quotationDetail = new QuotationDetailDTO(consecutive, itemId, warranty, unitPrice, quantity, estimatedShipping);
+				quotationDetail = new QuotationDetailDTO(quotationId, itemId, warranty, unitPrice, quantity, estimatedShipping);
 				arrQuotationDetail.add(quotationDetail);
 			}
 			
 			/** INSERTS */
 			try
 			{
+				if(activeTab.equals("AGREGAR"))
+					queries = objAddress.insertAddress(address, queries);
 				queries = objQuotation.insertQuotation(quotation, queries);
 				queries = objQuotationDetail.insertQuotationDetails(arrQuotationDetail, queries);
 				
@@ -135,7 +170,6 @@ public class ControllerRosa extends HttpServlet {
 				transaction.closeConnection();
 			}
 			
-			System.out.println("Todo salió bien");
 		}
 		
 		request.getRequestDispatcher(url).forward(request, response);

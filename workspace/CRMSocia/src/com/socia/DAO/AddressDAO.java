@@ -76,6 +76,27 @@ public class AddressDAO {
 		return addressArr;
 	}
 	
+	public ArrayList<StringBuilder> insertAddress(AddressDTO address, ArrayList<StringBuilder> queries){
+		StringBuilder		sqlQuery	=	null;
+		
+    	sqlQuery	=	new	StringBuilder();
+		sqlQuery.append(" INSERT INTO crm_address (crm_address_id, street, ext_num, int_num, suburb, ");
+									 sqlQuery.append("city, state, country, zip_code) ");
+		sqlQuery.append(" VALUES ("+address.getAddressId());
+		sqlQuery.append(",'"+address.getStreet()+"'");
+		sqlQuery.append(",'"+address.getExtNum()+"'");
+		sqlQuery.append(",'"+address.getIntNum()+"'");
+		sqlQuery.append(",'"+address.getSuburb()+"'");
+		sqlQuery.append(",'"+address.getCity()+"'");
+		sqlQuery.append(",'"+address.getState()+"'");
+		sqlQuery.append(",'"+address.getCountry()+"'");
+		sqlQuery.append(",'"+address.getZipCode()+"')");
+		
+		queries.add(sqlQuery);
+    
+        return queries;
+    }
+	
 	public static void main(String[] args){
 		AddressDAO contact = new AddressDAO();
 		System.out.println(contact.getAddressByClient(1).toString());	
