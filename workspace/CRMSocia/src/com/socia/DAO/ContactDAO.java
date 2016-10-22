@@ -68,6 +68,62 @@ public class ContactDAO {
 		return contactArr;
 	}
 	
+	public ContactDTO getContactsById(int contactId){
+		Conexion			sociaDB		=	null;
+		Connection			connection	=	null;
+		PreparedStatement	statement	=	null;
+		ResultSet			resultSet	=	null;
+		StringBuilder		sqlQuery	=	null;
+		
+		/** Contact objects*/
+		ContactDTO				contact		=	null;
+		String 					firstName	=	"";
+		String 					lastName	=	"";
+		String 					phone		=	"";
+		String 					email		=	"";
+
+		
+		try{
+			sqlQuery	=	new	StringBuilder();
+			sqlQuery.append(" select contact.* ");
+			sqlQuery.append(" from crm_contact contact ");
+			sqlQuery.append(" where contact.status = 'A' ");
+			sqlQuery.append(" and contact.crm_contact_id =?");
+			
+			sociaDB		=	new	Conexion();
+			connection	=	sociaDB.getConnection1();
+			statement	=	connection.prepareStatement(sqlQuery.toString());
+			statement.setInt(1, contactId);
+			
+			resultSet	=	statement.executeQuery();
+			
+			while(resultSet.next()){
+				contactId = resultSet.getInt(1);
+				firstName = resultSet.getString(2);
+				lastName = resultSet.getString(3);
+				phone = resultSet.getString(4);
+				email = resultSet.getString(5);
+				
+				contact = new ContactDTO(contactId, firstName, lastName, phone, email);
+				
+			}
+			
+		}catch(Exception exception){
+			exception.printStackTrace();
+		}finally{
+			try{
+				resultSet.close();
+				statement.close();
+				connection.close();
+			}catch(Exception closeException){
+				closeException.printStackTrace();
+			}
+		}
+		
+		return contact;
+	}
+	
+	
 	public static void main(String[] args){
 		ContactDAO contact = new ContactDAO();
 		System.out.println(contact.getContactsByClient(1).toString());	

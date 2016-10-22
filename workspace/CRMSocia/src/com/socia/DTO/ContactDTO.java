@@ -8,6 +8,10 @@ public class ContactDTO {
 	private String 	phone;
 	private String 	email;
 	
+	public ContactDTO(){
+		
+	}
+	
 	public ContactDTO(int contactId, String firstName, String lastName,
 			String phone, String email) {
 		super();

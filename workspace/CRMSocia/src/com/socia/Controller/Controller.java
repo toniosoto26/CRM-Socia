@@ -48,6 +48,7 @@ public class Controller extends HttpServlet {
 		int option=Integer.parseInt(request.getParameter("option"));
 		String					url			=	"";	
 		int						clientId	= 	0;
+		int						contactId	= 	0;
 		
 		
 		
@@ -70,8 +71,21 @@ public class Controller extends HttpServlet {
 			session.removeAttribute("arrContact");
 			session.setAttribute("arrContact", arrContact);
 			
+			url = "utils/selectContact.jsp";
+		}
+
+		if(option == 3){
+			contactId = Integer.parseInt(request.getParameter("contactId"));
+			
+			ContactDTO	infoContact	= new ContactDTO();
+			infoContact = objContact.getContactsById(contactId);
+			
+			session.removeAttribute("infoContact");
+			session.setAttribute("infoContact", infoContact);
+			
 			url = "utils/contactInfo.jsp";
 		}
+		
 		
 		request.getRequestDispatcher(url).forward(request, response);
 	}
