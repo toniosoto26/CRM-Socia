@@ -136,7 +136,7 @@
 	  </div>
 	  
 	  <div class="text-right">
-		  <button type="button" class="btn btn-primary" onClick="" >Previsualizar</button>
+		  <button type="button" class="btn btn-primary" data-toggle="modal" href="utils/quotationPreview.jsp" data-target="#modal">Previsualizar</button>
 	  	  <button type="submit" class="btn btn-primary" >Enviar</button>
   	  </div>
 	</form>
