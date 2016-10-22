@@ -12,5 +12,3 @@
 	    <label for="inputCompanyPhone">Teléfono:</label>
 	    <input type="text" class="form-control" id="companyPhone" disabled value='<c:out value="${sessionScope.infoContact.phone}"></c:out>' >
 	</div>
-	<input type="hidden" id="contactId" name="contactId" value='<c:out value="${ sessionScope.infoContact.contactId }"></c:out>' />
-	

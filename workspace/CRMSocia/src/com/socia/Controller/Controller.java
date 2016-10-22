@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.socia.DAO.ClientDAO;
+import com.socia.DAO.ConsecutiveDAO;
 import com.socia.DAO.ContactDAO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
@@ -45,6 +46,7 @@ public class Controller extends HttpServlet {
 		HttpSession	session	=	request.getSession();
 		ClientDAO objClient = new ClientDAO();
 		ContactDAO				objContact 	= 	new ContactDAO();
+		ConsecutiveDAO					objConsecutive		=	new ConsecutiveDAO();
 		int option=Integer.parseInt(request.getParameter("option"));
 		String					url			=	"";	
 		int						clientId	= 	0;
@@ -84,6 +86,48 @@ public class Controller extends HttpServlet {
 			session.setAttribute("infoContact", infoContact);
 			
 			url = "utils/contactInfo.jsp";
+		}
+		
+		//registro de llamadas 
+		if(option == 4){
+			int variable=1;
+			String companyName="";
+			String contact ="";
+			String emailContact="";
+			String telContact="";
+			String observations="";
+			int id_client=0;
+			int id_contact=0;
+			variable = Integer.parseInt(request.getParameter("variable"));
+			companyName=request.getParameter("selectClient");
+			contact =request.getParameter("companyContact");
+			emailContact=request.getParameter("companyEmail");
+			telContact=request.getParameter("companyPhone");
+			observations=request.getParameter("observation");
+			
+			
+			if(variable==0){
+				id_client=Integer.parseInt(request.getParameter("clientId"));
+				id_contact=Integer.parseInt(request.getParameter("contactId"));
+				System.out.println("consecutivoLLamanada "+objConsecutive.getConsecutive("calls"));
+				//no se crea nuevo cliente
+				System.out.println("existente "+id_client+id_contact+observations);
+			}
+			else{
+				//se crea un nuevo cliente
+				System.out.println("nuevo"+companyName+contact+emailContact+telContact+observations);
+				System.out.println("consecutivoLLamanada "+objConsecutive.getConsecutive("calls"));
+				System.out.println("consecutivo cliente "+objConsecutive.getConsecutive("clients"));
+				System.out.println("consecutivo contacto "+objConsecutive.getConsecutive("contacts"));
+				
+			}
+			//ContactDTO	infoContact	= new ContactDTO();
+			//infoContact = objContact.getContactsById(contactId);
+			
+			session.removeAttribute("insertCall");
+			session.setAttribute("insertCall", true);
+			
+			url = "vistas/validateInsertCall.jsp";
 		}
 		
 		

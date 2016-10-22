@@ -41,7 +41,7 @@ function validarCampos(user,passwd){
 	}
 }
 
-function loadContactInfo(selected){
+function loadClientInfo(selected){
 	var clientId = selected.value;
 	$.ajax({
 		type: "post",
@@ -49,6 +49,24 @@ function loadContactInfo(selected){
 		data: {
 			option: 2, 
 			clientId: clientId
+		},
+		success: function(response){
+			$("#clientInfo").html(response);
+		},
+		error: function(){
+			alert("Error");
+		}
+	});
+}
+
+function loadContactInfo(selected){
+	var contactId = selected.value;
+	$.ajax({
+		type: "post",
+		url : "Controller",
+		data: {
+			option: 3, 
+			contactId: contactId
 		},
 		success: function(response){
 			$("#contactInfo").html(response);
@@ -81,6 +99,7 @@ function selectClient(){
 }
 
 function pintar(variable){
+	
 	if(variable==0){
 		$("#form1").load("vistas/newClient.jsp");
 		
@@ -90,6 +109,57 @@ function pintar(variable){
 	}
 }
 
+function registreCall(variable){
+	var validacion=validateCalls();
+	if(validacion!= ""){
+		alert(validacion);
+	}
+	else{
+		
+		$.ajax({
+			type: "post",
+			url : "Controller",
+			data: $("#formCalls").serialize()+"&option=4&variable="+variable,
+			success: function(response){
+				if(trim(response)=="correcto"){
+					alert("Insertado Correctamente");
+					$("#form1").html("");
+				}
+				else{
+					alert("Incorrecto");
+				}
+			},
+			error: function(){
+				alert("Error");
+			}
+		});
+		
+		
+		
+		
+		
+	}
+	
+}
+
+function validateCalls(){
+	var mensaje="";
+	if($("#observation").val() == ""){
+		mensaje="Es necesario Capturar las observaciones ";
+	}
+	if($("#companyPhone").val() == ""){
+		mensaje="Es necesario Capturar telefono ";
+	}
+	if($("#companyEmail").val() == ""){
+		mensaje="Es necesario Capturar email ";
+	}
+	if($("#companyContact").val() == ""){
+		mensaje="Es necesario Capturar un contact ";
+	}
+	
+	
+	return mensaje;
+}
 
 
 
