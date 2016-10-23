@@ -46,7 +46,7 @@ public class ControllerLogin extends HttpServlet {
 		HttpSession	session	=	request.getSession();
 		String		user	=	request.getParameter("user");
 		String		pass	=	request.getParameter("passwd");
-		String		url		=	"/vistas/validateUser.jsp";
+		String		url		=	"/views/validateUser.jsp";
 		
 		try{
 			LoginDAO	loginDao	=	new	LoginDAO();

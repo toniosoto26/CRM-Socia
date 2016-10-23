@@ -1,7 +1,61 @@
+<%@ page import="java.util.Date" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
 <style type="text/css">
+	/* -------------------------------------
+    INVOICE
+	------------------------------------- */
+	.invoice {
+	  text-align: left;
+	  width: 100%;
+	}
+	.invoice td {
+	  padding: 5px 0;
+	}
+	.invoice .invoice-items td {
+	  border-top: #eee 1px solid;
+	}
+	.invoice .invoice-items .total {
+	  border-top: 2px solid #333;
+	  border-bottom: 2px solid #333;
+	  font-weight: 700;
+	}
+	.invoice .invoice-items .subtotal {
+	  border-top: 2px solid #333;
+	  font-weight: 700;
+	}
+	.invoice .invoice-items .iva {
+	  border-top: 2px solid #333;
+	  font-weight: 700;
+	}
+	.invoice .invoice-items .no-border{
+	  border-bottom: none;
+	  border-top: none;
+	}
+	.invoice .invoice-items .header td {
+	  border-top: 2px solid #333;
+	  border-bottom: 2px solid #333;
+	  font-weight: 700;
+	}
+	
+	/* -------------------------------------
+    OTHER STYLES THAT MIGHT BE USEFUL
+	------------------------------------- */
+	.aligncenter {
+	  text-align: center;
+	}
+	
+	.alignright {
+	  text-align: right;
+	}
+	
+	.alignleft {
+	  text-align: left;
+	}
+		
     /* CLIENT-SPECIFIC STYLES *
    	table, td, a{-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;} /* Prevent WebKit and Windows mobile changing default text sizes *
     table, td{mso-table-lspace: 0pt; mso-table-rspace: 0pt;} /* Remove spacing between tables in Outlook 2007 and up *
@@ -94,10 +148,11 @@
     div[style*="margin: 16px 0;"] { margin: 0 !important; }*/
 </style>
 
+<c:set var="today" value="<%=new Date()%>"/>
 
 <div class="modal-header">
 	<a class="close" data-dismiss="modal">&times;</a>
-	<h3>Cotización</h3>
+	<h3 style="color:#FFF; text-align:center;">Cotización</h3>
 </div>
 <div class="modal-body">
 	<!-- HEADER -->
@@ -105,16 +160,20 @@
 		    <tr>
 		        <td bgcolor="#ffffff" align="center">
 		            <!--[if (gte mso 9)|(IE)]>
-		            <table align="center" border="0" cellspacing="0" cellpadding="0" width="500">
+		            <table align="center" border="0" cellspacing="0" cellpadding="0" width="800">
 		            <tr>
-		            <td align="center" valign="top" width="500">
+		            <td align="center" valign="top" width="800">
 		            <![endif]-->
-		            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px;" class="wrapper">
+		            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 800px;" class="wrapper">
 		                <tr>
-		                    <td align="center" valign="top" style="padding: 15px 0;" class="logo">
-		                        <a href="http://litmus.com" target="_blank">
-		                            <img alt="Logo" src="logo-2.jpg" width="60" height="60" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;" border="0">
+		                    <td valign="top" style="padding: 15px 0;" class="logo">
+		                        <a href="http://gruposocia.com" target="_blank">
+		                            <img alt="Logo" src="images/logo.jpg" width="60" height="60" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;" border="0">
 		                        </a>
+		                    </td>
+		                    <td align="right">
+		                    	<p style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">Referencia: </p>
+		                    	<p style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><fmt:formatDate type="date" value="${today}" pattern="dd 'de' MMMM 'de' yyyy"/>   </p>
 		                    </td>
 		                </tr>
 		            </table>
@@ -128,373 +187,372 @@
 		    <tr>
 		        <td bgcolor="#ffffff" align="center" style="padding: 15px;">
 		            <!--[if (gte mso 9)|(IE)]>
-		            <table align="center" border="0" cellspacing="0" cellpadding="0" width="500">
+		            <table align="center" border="0" cellspacing="0" cellpadding="0" width="800">
 		            <tr>
-		            <td align="center" valign="top" width="500">
+		            <td align="center" valign="top" width="800">
 		            <![endif]-->
-		            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px;" class="responsive-table">
-		                <tr>
-		                    <td>
-		                        <!-- COPY -->
-		                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-		                            <tr>
-		                                <td align="center" style="font-size: 32px; font-family: Helvetica, Arial, sans-serif; color: #333333; padding-top: 30px;" class="padding-copy">Your order is on its way!</td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
-		            </table>
-		            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px;" class="responsive-table">
-		                <tr>
-		                    <td  style="padding: 10px 0 0px 0; border-top: 1px solid #eaeaea;">
-		                        <!-- TWO COLUMNS -->
-		                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-		                            <tr>
-		                                <td valign="top" class="mobile-wrapper">
-		                                    <!-- LEFT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="left">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;"><b>Raz&oacute;n Social</b></td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                    <!-- RIGHT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="right">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="right" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;" id="previewCompanyName">razón social</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <td>
-		                        <!-- TWO COLUMNS -->
-		                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-		                            <tr>
-		                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
-		                                    <!-- LEFT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="left">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;"><b>Direcci&oacute;n</b></td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                    <!-- RIGHT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="right">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="right" id="previewCompanyAddress">dirección</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <td>
-		                        <!-- TWO COLUMNS -->
-		                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-		                            <tr>
-		                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
-		                                    <!-- LEFT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="left">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;"><b>Tel&eacute;fono</b></td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                    <!-- RIGHT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="right">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="right" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;">teléfono</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <td>
-		                        <!-- TWO COLUMNS -->
-		                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-		                            <tr>
-		                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
-		                                    <!-- LEFT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="left">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;"><b>Contacto</b></td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                    <!-- RIGHT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="right">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="right" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;">contacto</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <td style="border-bottom: border-top: 1px solid #eaeaea;">
-		                        <!-- TWO COLUMNS -->
-		                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-		                            <tr>
-		                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
-		                                    <!-- LEFT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="left">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;"><b>e-Mail</b></td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                    <!-- RIGHT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="right">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="right" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;">email</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <td  style="padding: 10px 0 0px 0; border-top: 1px solid #eaeaea;">
-		                        <!-- TWO COLUMNS -->
-		                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-		                            <tr>
-		                                <td valign="top" class="mobile-wrapper">
-		                                    <!-- LEFT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="left">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;"><b>Proveedor</b></td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                    <!-- RIGHT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="right">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="right" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;" id="previewCompanyName">SOLUCIONES DE IMPRESIÓN ADMINISTRADA, S.A. DE C.V.</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <td>
-		                        <!-- TWO COLUMNS -->
-		                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-		                            <tr>
-		                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
-		                                    <!-- LEFT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="left">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;"><b>Direcci&oacute;n</b></td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                    <!-- RIGHT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="right">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="right" id="previewCompanyAddress"> Medellín 81, int. 302, Col. Roma Norte</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <td>
-		                        <!-- TWO COLUMNS -->
-		                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-		                            <tr>
-		                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
-		                                    <!-- LEFT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="left">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;"></td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                    <!-- RIGHT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="right">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="right" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;">Del. Cuauhtémoc, DF, C.P.06700</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <td>
-		                        <!-- TWO COLUMNS -->
-		                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-		                            <tr>
-		                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
-		                                    <!-- LEFT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="left">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;"><b>Contacto</b></td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                    <!-- RIGHT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="right">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="right" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;">EMMA CRISTINA LÓPEZ MEDINA </td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <td style="border-bottom: border-top: 1px solid #eaeaea;">
-		                        <!-- TWO COLUMNS -->
-		                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-		                            <tr>
-		                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
-		                                    <!-- LEFT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="left">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;"><b>e-Mail</b></td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                    <!-- RIGHT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="right">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="right" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;">elopez@socia.com.mx</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
+		            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 800px;" class="responsive-table">
+		            	<tr>
+		            	<td>
+				            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 100%;" class="responsive-table">
+				                <tr>
+				                    <td>
+				                        <!-- TWO COLUMNS -->
+				                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+				                            <tr>
+				                                <td valign="top" class="mobile-wrapper">
+				                                    <!-- LEFT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="37%" style="width: 37%;" align="left">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>Raz&oacute;n Social</b></td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                    <!-- RIGHT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="57%" style="width: 57%;" align="right">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;" id="previewCompanyName">razón social</td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                </td>
+				                            </tr>
+				                        </table>
+				                    </td>
+				                </tr>
+				                <tr>
+				                    <td>
+				                        <!-- TWO COLUMNS -->
+				                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+				                            <tr>
+				                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
+				                                    <!-- LEFT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="37%" style="width: 37%;" align="left">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>Direcci&oacute;n</b></td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                    <!-- RIGHT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="57%" style="width: 57%;" align="right">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;" id="previewCompanyAddress">dirección</td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                </td>
+				                            </tr>
+				                        </table>
+				                    </td>
+				                </tr>
+				                <tr>
+				                    <td>
+				                        <!-- TWO COLUMNS -->
+				                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+				                            <tr>
+				                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
+				                                    <!-- LEFT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="37%" style="width: 37%;" align="left">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>Tel&eacute;fono</b></td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                    <!-- RIGHT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="57%" style="width: 57%;" align="right">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">teléfono</td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                </td>
+				                            </tr>
+				                        </table>
+				                    </td>
+				                </tr>
+				                <tr>
+				                    <td>
+				                        <!-- TWO COLUMNS -->
+				                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+				                            <tr>
+				                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
+				                                    <!-- LEFT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="37%" style="width: 37%;" align="left">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>Contacto</b></td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                    <!-- RIGHT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="57%" style="width: 57%;" align="right">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">contacto</td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                </td>
+				                            </tr>
+				                        </table>
+				                    </td>
+				                </tr>
+				                <tr>
+				                    <td style="border-bottom: border-top: 1px solid #eaeaea;">
+				                        <!-- TWO COLUMNS -->
+				                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+				                            <tr>
+				                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
+				                                    <!-- LEFT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="37%" style="width: 37%;" align="left">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>e-Mail</b></td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                    <!-- RIGHT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="57%" style="width: 57%;" align="right">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">email</td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                </td>
+				                            </tr>
+				                        </table>
+				                    </td>
+				                </tr>
+				            </table>
+			            </td>
+			            <td width="10%" style="max-width: 10%;"></td>
+			            <td>
+				            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 100%;" class="responsive-table">
+				                <tr>
+				                    <td>
+				                        <!-- TWO COLUMNS -->
+				                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+				                            <tr>
+				                                <td valign="top" class="mobile-wrapper">
+				                                    <!-- LEFT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="27%" style="width: 27%;" align="left">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>Proveedor</b></td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                    <!-- RIGHT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="67%" style="width: 67%;" align="right">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;" id="previewCompanyName">SOLUCIONES DE IMPRESIÓN ADMINISTRADA, S.A. DE C.V.</td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                </td>
+				                            </tr>
+				                        </table>
+				                    </td>
+				                </tr>
+				                <tr>
+				                    <td>
+				                        <!-- TWO COLUMNS -->
+				                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+				                            <tr>
+				                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
+				                                    <!-- LEFT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="27%" style="width: 27%;" align="left">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>Direcci&oacute;n</b></td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                    <!-- RIGHT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="67%" style="width: 67%;" align="right">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;" id="previewCompanyAddress"> Medellín 81, int. 302, Col. Roma Norte</td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                </td>
+				                            </tr>
+				                        </table>
+				                    </td>
+				                </tr>
+				                <tr>
+				                    <td>
+				                        <!-- TWO COLUMNS -->
+				                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+				                            <tr>
+				                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
+				                                    <!-- LEFT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="27%" style="width: 27%;" align="left">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"></td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                    <!-- RIGHT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="67%" style="width: 67%;" align="right">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">Del. Cuauhtémoc, DF, C.P.06700</td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                </td>
+				                            </tr>
+				                        </table>
+				                    </td>
+				                </tr>
+				                <tr>
+				                    <td>
+				                        <!-- TWO COLUMNS -->
+				                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+				                            <tr>
+				                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
+				                                    <!-- LEFT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="27%" style="width: 27%;" align="left">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>Contacto</b></td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                    <!-- RIGHT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="67%" style="width: 67%;" align="right">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">EMMA CRISTINA LÓPEZ MEDINA </td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                </td>
+				                            </tr>
+				                        </table>
+				                    </td>
+				                </tr>
+				                <tr>
+				                    <td style="border-bottom: border-top: 1px solid #eaeaea;">
+				                        <!-- TWO COLUMNS -->
+				                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+				                            <tr>
+				                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
+				                                    <!-- LEFT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="27%" style="width: 27%;" align="left">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>e-Mail</b></td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                    <!-- RIGHT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="67%" style="width: 67%;" align="right">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">elopez@socia.com.mx</td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                </td>
+				                            </tr>
+				                        </table>
+				                    </td>
+				                </tr>
+				            </table>
+			            </td>
+			            </tr>
 		            </table>
 		            <!--[if (gte mso 9)|(IE)]>
 		            </td>
@@ -506,151 +564,96 @@
 		    <tr>
 		        <td bgcolor="#ffffff" align="center" style="padding: 15px;" class="padding">
 		            <!--[if (gte mso 9)|(IE)]>
-		            <table align="center" border="0" cellspacing="0" cellpadding="0" width="500">
+		            <table align="center" border="0" cellspacing="0" cellpadding="0" width="800">
 		            <tr>
-		            <td align="center" valign="top" width="500">
+		            <td align="center" valign="top" width="800">
 		            <![endif]-->
-		            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px;" class="responsive-table">
-		                <tr>
-		                    <td style="padding: 10px 0 0 0; border-top: 1px dashed #aaaaaa;">
-		                        <!-- TWO COLUMNS -->
-		                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-		                            <tr>
-		                                <td valign="top" class="mobile-wrapper">
-		                                    <!-- LEFT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="left">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;">Purchased Item (1)</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                    <!-- RIGHT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="right">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="right" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;">$XX.XX</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <td>
-		                        <!-- TWO COLUMNS -->
-		                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-		                            <tr>
-		                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
-		                                    <!-- LEFT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="left">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;">Shipping + Handling</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                    <!-- RIGHT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="right">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="right" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;">$X.XX</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <td>
-		                        <!-- TWO COLUMNS -->
-		                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-		                            <tr>
-		                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
-		                                    <!-- LEFT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="left">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;">Sales Tax</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                    <!-- RIGHT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="right">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="right" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;">$X.XX</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <td style="padding: 10px 0 0px 0; border-top: 1px solid #eaeaea; border-bottom: 1px dashed #aaaaaa;">
-		                        <!-- TWO COLUMNS -->
-		                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-		                            <tr>
-		                                <td valign="top" class="mobile-wrapper">
-		                                    <!-- LEFT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="left">
-		                                        <tr>
-		                                            <td style="padding: 0 0 10px 0;">
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px; font-weight: bold;">Total</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                    <!-- RIGHT COLUMN -->
-		                                    <table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="right">
-		                                        <tr>
-		                                            <td>
-		                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-		                                                    <tr>
-		                                                        <td align="right" style="font-family: Arial, sans-serif; color: #7ca230; font-size: 16px; font-weight: bold;">$XX.XX</td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
+		            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 800px;" class="responsive-table">
+		            	<tr>
+		            		<td>
+		                		<table class="invoice"  cellspacing="0" cellpadding="0" border="0" width="100%">
+									<tr>
+										<td>
+											<table class="invoice-items" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">
+												<tr  class="header aligncenter" style="font-weight:bold;">
+													<td>Cantidad</td>
+													<td>Producto</td>
+													<td>Descripción</td>
+													<td>Tiempo de entrega</td>
+													<td>Precio unitario</td>
+													<td>Subtotal</td>
+												</tr>
+												<tr>
+													<td>1</td>
+													<td>UPS SRT6KRMXLT</td>
+													<td>APC Smart-UPS SRT 6000VA RM 230V</td>
+													<td>4 - 6 SEMANAS</td>
+													<td class="alignright">$2,712.38</td>
+													<td class="alignright">$2,712.38</td>
+												</tr>
+												<tr>
+													<td>1</td>
+													<td>SWITCH CORE 3850</td>
+													<td>SNTC-8X5XNBD Catalyst 2960-X 48 GigE PoE 740W, 2 x 10</td>
+													<td>2 - 4 SEMANAS</td>
+													<td class="alignright">$471.24</td>
+													<td class="alignright">$471.24</td>
+												</tr>
+												<tr>
+													<td>1</td>
+													<td>SERVER HP PROLIANT DL560 G9</td>
+													<td>HP DL560 Gen9 E5-4620v3 64GB 2P Strd WW 3 años de garantía </td>
+													<td>2 - 4 SEMANAS</td>
+													<td class="alignright">$28,133.06</td>
+													<td class="alignright">$28,133.06</td>
+												</tr>
+												<tr>
+													<td>1</td>
+													<td>SERVER HP PROLIANT DL560 G9</td>
+													<td>HP DL560 Gen9 E5-4620v3 64GB 2P Strd WW 3 años de garantía </td>
+													<td>2 - 4 SEMANAS</td>
+													<td class="alignright">$9,298.80</td>
+													<td class="alignright">$9,298.80</td>
+												</tr>
+												<tr>
+													<td>1</td>
+													<td>SERVER HP PROLIANT DL560 G9</td>
+													<td>HP DL560 Gen9 E5-4620v3 64GB 2P Strd WW 3 años de garantía </td>
+													<td>2 - 4 SEMANAS</td>
+													<td class="alignright">$13,182.02</td>
+													<td class="alignright">$13,182.02</td>
+												</tr>
+												<tr>
+													<td class="subtotal"></td>
+													<td class="subtotal"></td>
+													<td class="subtotal"></td>
+													<td class="subtotal"></td>
+													<td class="subtotal">Subtotal</td>
+													<td class="subtotal">$33.98</td>
+												</tr>
+												<tr>
+													<td class="no-border"></td>
+													<td class="no-border"></td>
+													<td class="no-border"></td>
+													<td class="no-border"></td>
+													<td class="iva">IVA</td>
+													<td class="iva">$33.98</td>
+												</tr>
+												<tr>
+													<td class="no-border"></td>
+													<td class="no-border"></td>
+													<td class="no-border"></td>
+													<td class="no-border"></td>
+													<td class="total">Total</td>
+													<td class="total">$33.98</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+		            		</td>
+		            	</tr>
+
 		            </table>
 		            <!--[if (gte mso 9)|(IE)]>
 		            </td>
@@ -662,11 +665,11 @@
 		    <tr>
 		        <td bgcolor="#ffffff" align="center" style="padding: 15px;">
 		            <!--[if (gte mso 9)|(IE)]>
-		            <table align="center" border="0" cellspacing="0" cellpadding="0" width="500">
+		            <table align="center" border="0" cellspacing="0" cellpadding="0" width="800">
 		            <tr>
-		            <td align="center" valign="top" width="500">
+		            <td align="center" valign="top" width="800">
 		            <![endif]-->
-		            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px;" class="responsive-table">
+		            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 800px;" class="responsive-table">
 		                <tr>
 		                    <td>
 		                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -675,47 +678,7 @@
 		                                    <!-- COPY -->
 		                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
 		                                        <tr>
-		                                            <td align="left" style="padding: 0 0 0 0; font-size: 14px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #aaaaaa; font-style: italic;" class="padding-copy">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est. Aenean at mollis ipsum.</td>
-		                                        </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-		                        </table>
-		                    </td>
-		                </tr>
-		            </table>
-		            <!--[if (gte mso 9)|(IE)]>
-		            </td>
-		            </tr>
-		            </table>
-		            <![endif]-->
-		        </td>
-		    </tr>
-		    <tr>
-		        <td bgcolor="#ffffff" align="center" style="padding: 15px;">
-		            <table border="0" cellpadding="0" cellspacing="0" width="500" class="responsive-table">
-		                <tr>
-		                    <td>
-		                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-		                            <tr>
-		                                <!-- COPY -->
-		                                <td align="center" style="font-size: 32px; font-family: Helvetica, Arial, sans-serif; color: #333333; padding-top: 30px;" class="padding-copy">How did we do?</td>
-		                            </tr>
-		                            <tr>
-		                                <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est. Aenean at mollis ipsum.</td>
-		                            </tr>
-		                            <tr>
-		                                <td align="center">
-		                                    <!-- BULLETPROOF BUTTON -->
-		                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-		                                        <tr>
-		                                            <td align="center" style="padding-top: 25px;" class="padding">
-		                                                <table border="0" cellspacing="0" cellpadding="0" class="mobile-button-container">
-		                                                    <tr>
-		                                                        <td align="center" style="border-radius: 3px;" bgcolor="#256F9C"><a href="https://litmus.com" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; border-radius: 3px; padding: 15px 25px; border: 1px solid #256F9C; display: inline-block;" class="mobile-button">Let Us Know</a></td>
-		                                                    </tr>
-		                                                </table>
-		                                            </td>
+		                                            <td align="left" style="padding: 0 0 0 0; font-size: 14px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy">LOS PRECIOS SON SUJETOS A CAMBIOS SIN PREVIO AVISO.</td>
 		                                        </tr>
 		                                    </table>
 		                                </td>
@@ -734,19 +697,16 @@
 		    <tr>
 		        <td bgcolor="#ffffff" align="center" style="padding: 20px 0px;">
 		            <!--[if (gte mso 9)|(IE)]>
-		            <table align="center" border="0" cellspacing="0" cellpadding="0" width="500">
+		            <table align="center" border="0" cellspacing="0" cellpadding="0" width="800">
 		            <tr>
-		            <td align="center" valign="top" width="500">
+		            <td align="center" valign="top" width="800">
 		            <![endif]-->
 		            <!-- UNSUBSCRIBE COPY -->
-		            <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="max-width: 500px;" class="responsive-table">
+		            <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="max-width: 800px;" class="responsive-table">
 		                <tr>
 		                    <td align="center" style="font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color:#666666;">
-		                        1234 Main Street, Anywhere, MA 01234, USA
+		                        Medellín 81 302, Roma Norte, Cuauhtémoc, D.F.
 		                        <br>
-		                        <a href="http://litmus.com" target="_blank" style="color: #666666; text-decoration: none;">Unsubscribe</a>
-		                        <span style="font-family: Arial, sans-serif; font-size: 12px; color: #444444;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-		                        <a href="http://litmus.com" target="_blank" style="color: #666666; text-decoration: none;">View this email in your browser</a>
 		                    </td>
 		                </tr>
 		            </table>

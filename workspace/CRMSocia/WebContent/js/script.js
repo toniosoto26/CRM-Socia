@@ -101,11 +101,11 @@ function selectClient(){
 function pintar(variable){
 	
 	if(variable==0){
-		$("#form1").load("vistas/newClient.jsp");
+		$("#form1").load("views/newClient.jsp");
 		
 	}
 	else{
-		$("#form1").load("vistas/searchClient.jsp");
+		$("#form1").load("views/searchClient.jsp");
 	}
 }
 

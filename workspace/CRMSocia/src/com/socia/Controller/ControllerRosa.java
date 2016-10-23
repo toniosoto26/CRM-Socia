@@ -103,7 +103,7 @@ public class ControllerRosa extends HttpServlet {
 			session.setAttribute("arrAddress", arrAddress);
 			
 			url = "utils/selectAddress.jsp";
-		}else if(option == 2){
+		}else if(option == 2 || option == 3){
 			/** User */
 			login = (LoginDTO)session.getAttribute("sessionLogin");
 			
@@ -135,7 +135,8 @@ public class ControllerRosa extends HttpServlet {
 				exchangeRate = Double.parseDouble(request.getParameter("exchangeRate"));
 			totalProducts = Integer.parseInt(request.getParameter("totalProducts"));
 			
-			quotationId = objConsecutive.getConsecutive("quotations");
+			if(option == 2)
+				quotationId = objConsecutive.getConsecutive("quotations");
 			
 			quotation = new QuotationDTO(quotationId, addressId, contactId, currency, exchangeRate, 1);
 			
@@ -151,25 +152,35 @@ public class ControllerRosa extends HttpServlet {
 				arrQuotationDetail.add(quotationDetail);
 			}
 			
-			/** INSERTS */
-			try
-			{
-				if(activeTab.equals("AGREGAR"))
-					queries = objAddress.insertAddress(address, queries);
-				queries = objQuotation.insertQuotation(quotation, queries);
-				queries = objQuotationDetail.insertQuotationDetails(arrQuotationDetail, queries);
-				
-				transaction.openConnection();
-				transaction.insertAll(queries);
-				
-				transaction.commit();
-			}catch(Exception exception){
-				transaction.rollback();
-				exception.printStackTrace();
-			}finally{
-				transaction.closeConnection();
-			}
 			
+			if(option == 2){
+				/** INSERTS */
+				try
+				{
+					if(activeTab.equals("AGREGAR"))
+						queries = objAddress.insertAddress(address, queries);
+					queries = objQuotation.insertQuotation(quotation, queries);
+					queries = objQuotationDetail.insertQuotationDetails(arrQuotationDetail, queries);
+					
+					transaction.openConnection();
+					transaction.insertAll(queries);
+					
+					transaction.commit();
+				}catch(Exception exception){
+					transaction.rollback();
+					exception.printStackTrace();
+				}finally{
+					transaction.closeConnection();
+				}
+			}else if(option == 3){
+				session.removeAttribute("quotation");
+				session.setAttribute("quotation", quotation);
+				
+				session.removeAttribute("arrQuotationDetail");
+				session.setAttribute("arrQuotationDetail", arrQuotationDetail);
+				
+			}
+				
 		}
 		
 		request.getRequestDispatcher(url).forward(request, response);

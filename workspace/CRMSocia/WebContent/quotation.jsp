@@ -6,7 +6,6 @@
 	<link rel="stylesheet" href="css/address.css">
 	
 	<form id="addQuotation" onSubmit="return addQuotation();">
-				
 	  <div class="form-group">
 	    <label for="inputCompanyName">Razón social:</label>
 	    <div id="selectClient"></div>
@@ -80,20 +79,24 @@
 	  	<div class="col-md-12">
 		  <div class="form-group row">
 		  	<div class="col-md-12">
-			    <label for="inputCompanyContact">Contacto</label>
-			    <input type="text" class="form-control" id="companyContact" name="companyContact" placeholder="Contacto">
+		  		<div id="clientInfo">
+				    <label for="inputCompanyContact">Contacto</label>
+				    <input type="text" class="form-control" id="companyContact" name="companyContact" placeholder="Contacto">
+				</div>
 			</div>
 		  </div>
 		</div>
 		<div class="col-md-12">
 	  	  <div class="form-group row">
-	  	  	<div class="col-md-6">
-			    <label for="inputCompanyEmail">Email:</label>
-			    <input type="text" class="form-control" id="companyEmail" name="companyEmail" placeholder="email">
-		  	</div>
-		  	<div class="col-md-6">
-			    <label for="inputCompanyPhone">Teléfono:</label>
-			    <input type="text" class="form-control" id="companyPhone" name="companyPhone" placeholder="Teléfono">
+	  	  	<div id="contactInfo">
+		  	  	<div class="col-md-6">
+				    <label for="inputCompanyEmail">Email:</label>
+				    <input type="text" class="form-control" id="companyEmail" name="companyEmail" placeholder="email">
+			  	</div>
+			  	<div class="col-md-6">
+				    <label for="inputCompanyPhone">Teléfono:</label>
+				    <input type="text" class="form-control" id="companyPhone" name="companyPhone" placeholder="Teléfono">
+				</div>
 			</div>
 		  </div>
 	    </div>

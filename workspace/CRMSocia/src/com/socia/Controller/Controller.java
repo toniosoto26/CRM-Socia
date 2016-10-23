@@ -127,7 +127,7 @@ public class Controller extends HttpServlet {
 			session.removeAttribute("insertCall");
 			session.setAttribute("insertCall", true);
 			
-			url = "vistas/validateInsertCall.jsp";
+			url = "views/validateInsertCall.jsp";
 		}
 		
 		
