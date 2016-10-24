@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.socia.DTO.CallDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.conexion.Conexion;
 
@@ -110,6 +111,36 @@ public class ClientDAO {
 		
 		return client;
 	}
+	
+	
+	public ArrayList<StringBuilder> insertNewClient(ClientDTO clients, ArrayList<StringBuilder> queries){
+		StringBuilder		sqlQuery	=	null;
+		
+    	sqlQuery	=	new	StringBuilder();
+		sqlQuery.append(" INSERT INTO crm_client (crm_client_id, company_name, crm_bdm_id, status)");
+		sqlQuery.append(" VALUES ("+clients.getClientId());
+		sqlQuery.append(",'"+clients.getCompanyName()+"'");
+		sqlQuery.append(","+clients.getBdmId());
+		sqlQuery.append(",'A')");
+		
+		queries.add(sqlQuery);
+    
+        return queries;
+    }
+	
+	public ArrayList<StringBuilder> insertClientContact(int client_id,int contact_id, ArrayList<StringBuilder> queries){
+		StringBuilder		sqlQuery	=	null;
+		
+    	sqlQuery	=	new	StringBuilder();
+		sqlQuery.append(" INSERT INTO crm_mvs_contact (crm_client_id, crm_contact_id)");
+		sqlQuery.append(" VALUES ("+client_id);
+		sqlQuery.append(","+contact_id+")");
+		
+		queries.add(sqlQuery);
+    
+        return queries;
+    }
+
 	
 	public static void main(String[] args){
 		ClientDAO contact = new ClientDAO();

@@ -38,7 +38,7 @@
 	    <input type="checkbox" class="form-control" id="firstCall" checked>
 	  </div>
 	   <div class="form-group">
-	    <input type="button" id="btnGuardar" name="Guardar" value="Guardar" onclick="registreCall(0);">
+	    <input type="button" id="btnGuardar"  class="btn btn-primary" name="Guardar" value="Guardar" onclick="registreCall(0);">
 	  </div>
 	</form>
 </div>

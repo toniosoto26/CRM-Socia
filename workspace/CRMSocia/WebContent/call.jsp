@@ -7,8 +7,8 @@
 
 
 	<span><h1>LLAMADAS</h1></span>
-	<input type="button" id="btnConSelect" name="btnConSelect" value="Existente" onclick="pintar(1);">
-	<input type="button" id="btnSinSelect" name="btnSinSelect" value="Nuevo" onclick="pintar(0);">
+	<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="pintar(1);">
+	<input type="button" class="btn btn-primary" id="btnSinSelect" name="btnSinSelect" value="Nuevo" onclick="pintar(0);">
 	<div id="form1">
 	
 	</div>

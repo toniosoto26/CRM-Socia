@@ -124,6 +124,24 @@ public class ContactDAO {
 	}
 	
 	
+	public ArrayList<StringBuilder> insertNewContact(ContactDTO contacts, ArrayList<StringBuilder> queries){
+		StringBuilder		sqlQuery	=	null;
+		
+    	sqlQuery	=	new	StringBuilder();
+		sqlQuery.append(" INSERT INTO crm_contact (crm_contact_id, first_name,last_name,phone,email,status)");
+		sqlQuery.append(" VALUES ("+contacts.getContactId());
+		sqlQuery.append(",'"+contacts.getFirstName()+"'");
+		sqlQuery.append(",'"+contacts.getLastName()+"'");
+		sqlQuery.append(",'"+contacts.getPhone()+"'");
+		sqlQuery.append(",'"+contacts.getEmail()+"'");
+		sqlQuery.append(",'A')");
+		
+		queries.add(sqlQuery);
+    
+        return queries;
+    }
+	
+	
 	public static void main(String[] args){
 		ContactDAO contact = new ContactDAO();
 		System.out.println(contact.getContactsByClient(1).toString());	

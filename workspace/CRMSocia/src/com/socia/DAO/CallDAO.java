@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
+import com.socia.DTO.AddressDTO;
 import com.socia.DTO.CallDTO;
 import com.socia.conexion.Conexion;
 
@@ -21,6 +22,24 @@ public class CallDAO {
 			 System.out.println("error al insertar registro");
 		}
 	}
+	
+	
+	
+	public ArrayList<StringBuilder> insertNewCall(CallDTO calls, ArrayList<StringBuilder> queries){
+		StringBuilder		sqlQuery	=	null;
+		
+    	sqlQuery	=	new	StringBuilder();
+		sqlQuery.append(" INSERT INTO crm_call (crm_call_id, comments, crm_client_id, crm_user_id, crm_contact_id)");
+		sqlQuery.append(" VALUES ("+calls.getId_call());
+		sqlQuery.append(",'"+calls.getComments()+"'");
+		sqlQuery.append(","+calls.getCrm_client_id());
+		sqlQuery.append(","+calls.getCrm_user_id());
+		sqlQuery.append(","+calls.getCrm_contact_id()+")");
+		
+		queries.add(sqlQuery);
+    
+        return queries;
+    }
 
 	
 	 public boolean insertCall(String us) throws SQLException{

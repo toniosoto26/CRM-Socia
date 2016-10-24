@@ -7,7 +7,10 @@ public class ContactDTO {
 	private String 	lastName;
 	private String 	phone;
 	private String 	email;
+	private String 	status;
 	
+	
+
 	public ContactDTO(){
 		
 	}
@@ -51,11 +54,19 @@ public class ContactDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	@Override
-	public String toString() {
-		return "ContactDTO [contactId=" + contactId + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", phone=" + phone + ", email="
-				+ email + "]";
+	public String getStatus() {
+		return status;
 	}
 
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "ContactDTO [contactId=" + contactId + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", phone=" + phone
+				+ ", email=" + email + "]";
+	}
+	
 }

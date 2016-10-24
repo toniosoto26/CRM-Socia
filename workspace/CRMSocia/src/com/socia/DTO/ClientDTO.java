@@ -5,7 +5,9 @@ public class ClientDTO {
 	private int 	clientId;
 	private String	companyName;
 	private int		bdmId;
+	private String  status;
 	
+
 	public ClientDTO(int clientId, String companyName, int bdmId) {
 		super();
 		this.clientId = clientId;
@@ -30,10 +32,18 @@ public class ClientDTO {
 	public void setBdmId(int bdmId) {
 		this.bdmId = bdmId;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	@Override
 	public String toString() {
 		return "ClientDTO [clientId=" + clientId + ", companyName="
 				+ companyName + ", bdmId=" + bdmId + "]";
 	}
+	
+	
 	
 }
