@@ -11,11 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.socia.DAO.AddressDAO;
+import com.socia.DAO.ClientDAO;
 import com.socia.DAO.ConsecutiveDAO;
+import com.socia.DAO.ContactDAO;
 import com.socia.DAO.QuotationDAO;
 import com.socia.DAO.QuotationDetailDAO;
 import com.socia.DAO.TransactionDAO;
 import com.socia.DTO.AddressDTO;
+import com.socia.DTO.ClientDTO;
+import com.socia.DTO.ContactDTO;
 import com.socia.DTO.LoginDTO;
 import com.socia.DTO.QuotationDTO;
 import com.socia.DTO.QuotationDetailDTO;
@@ -74,14 +78,18 @@ public class ControllerRosa extends HttpServlet {
 		String							zipCode				=	"";
 		
 		/** DAO */
-		ConsecutiveDAO					objConsecutive		=	new ConsecutiveDAO();
+		ClientDAO						objClient			=	new ClientDAO();
+		ContactDAO						objContact			=	new ContactDAO();
 		AddressDAO						objAddress 			= 	new AddressDAO();
 		QuotationDAO					objQuotation		=	new QuotationDAO();
+		ConsecutiveDAO					objConsecutive		=	new ConsecutiveDAO();
 		QuotationDetailDAO				objQuotationDetail	=	new QuotationDetailDAO();
 		
 		/** DTO*/
 		LoginDTO						login;
+		ClientDTO						client;
 		AddressDTO						address				=	null;
+		ContactDTO						contact;
 		QuotationDTO					quotation;
 		QuotationDetailDTO				quotationDetail;
 		ArrayList<QuotationDetailDTO> 	arrQuotationDetail	=	new ArrayList<QuotationDetailDTO>();
@@ -179,6 +187,21 @@ public class ControllerRosa extends HttpServlet {
 				session.removeAttribute("arrQuotationDetail");
 				session.setAttribute("arrQuotationDetail", arrQuotationDetail);
 				
+				if(address == null)
+					address = objAddress.getAddressById(addressId);
+				
+				session.removeAttribute("addressPreview");
+				session.setAttribute("addressPreview", address);
+				
+				client = objClient.getClientById(clientId);
+
+				session.removeAttribute("clientPreview");
+				session.setAttribute("clientPreview", client);
+				
+				contact = objContact.getContactsById(contactId);
+				
+				session.removeAttribute("contactPreview");
+				session.setAttribute("contactPreview", contact);
 			}
 				
 		}

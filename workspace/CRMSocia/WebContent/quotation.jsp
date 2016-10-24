@@ -74,19 +74,17 @@
             </div>
           </div>
 	  </div>
-	  
-	  <div id="contactInfo">
-	  	<div class="col-md-12">
+	  <div class="col-md-12">
 		  <div class="form-group row">
 		  	<div class="col-md-12">
+			    <label for="inputCompanyContact">Contacto</label>
 		  		<div id="clientInfo">
-				    <label for="inputCompanyContact">Contacto</label>
-				    <input type="text" class="form-control" id="companyContact" name="companyContact" placeholder="Contacto">
+		  			<input type="text" class="form-control" id="companyContact" name="companyContact" placeholder="Contacto">
 				</div>
 			</div>
 		  </div>
-		</div>
-		<div class="col-md-12">
+	  </div>
+	  <div class="col-md-12">
 	  	  <div class="form-group row">
 	  	  	<div id="contactInfo">
 		  	  	<div class="col-md-6">
@@ -99,7 +97,6 @@
 				</div>
 			</div>
 		  </div>
-	    </div>
 	  </div>
 	  <div class="col-md-12">
 		  <div class="form-group row">

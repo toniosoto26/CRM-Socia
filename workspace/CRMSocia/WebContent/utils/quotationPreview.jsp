@@ -149,6 +149,8 @@
 </style>
 
 <c:set var="today" value="<%=new Date()%>"/>
+<c:set var="subtotal" value="${0}"/>
+<fmt:setLocale value="es_MX"/>
 
 <div class="modal-header">
 	<a class="close" data-dismiss="modal">&times;</a>
@@ -219,77 +221,7 @@
 				                                            <td style="padding: 0 0 10px 0;">
 				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
 				                                                    <tr>
-				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;" id="previewCompanyName">razón social</td>
-				                                                    </tr>
-				                                                </table>
-				                                            </td>
-				                                        </tr>
-				                                    </table>
-				                                </td>
-				                            </tr>
-				                        </table>
-				                    </td>
-				                </tr>
-				                <tr>
-				                    <td>
-				                        <!-- TWO COLUMNS -->
-				                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-				                            <tr>
-				                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
-				                                    <!-- LEFT COLUMN -->
-				                                    <table cellpadding="0" cellspacing="0" border="0" width="37%" style="width: 37%;" align="left">
-				                                        <tr>
-				                                            <td style="padding: 0 0 10px 0;">
-				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-				                                                    <tr>
-				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>Direcci&oacute;n</b></td>
-				                                                    </tr>
-				                                                </table>
-				                                            </td>
-				                                        </tr>
-				                                    </table>
-				                                    <!-- RIGHT COLUMN -->
-				                                    <table cellpadding="0" cellspacing="0" border="0" width="57%" style="width: 57%;" align="right">
-				                                        <tr>
-				                                            <td style="padding: 0 0 10px 0;">
-				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-				                                                    <tr>
-				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;" id="previewCompanyAddress">dirección</td>
-				                                                    </tr>
-				                                                </table>
-				                                            </td>
-				                                        </tr>
-				                                    </table>
-				                                </td>
-				                            </tr>
-				                        </table>
-				                    </td>
-				                </tr>
-				                <tr>
-				                    <td>
-				                        <!-- TWO COLUMNS -->
-				                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-				                            <tr>
-				                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
-				                                    <!-- LEFT COLUMN -->
-				                                    <table cellpadding="0" cellspacing="0" border="0" width="37%" style="width: 37%;" align="left">
-				                                        <tr>
-				                                            <td style="padding: 0 0 10px 0;">
-				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-				                                                    <tr>
-				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>Tel&eacute;fono</b></td>
-				                                                    </tr>
-				                                                </table>
-				                                            </td>
-				                                        </tr>
-				                                    </table>
-				                                    <!-- RIGHT COLUMN -->
-				                                    <table cellpadding="0" cellspacing="0" border="0" width="57%" style="width: 57%;" align="right">
-				                                        <tr>
-				                                            <td style="padding: 0 0 10px 0;">
-				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-				                                                    <tr>
-				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">teléfono</td>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;" id="previewCompanyName"><c:out value="${sessionScope.clientPreview.companyName }"></c:out></td>
 				                                                    </tr>
 				                                                </table>
 				                                            </td>
@@ -324,7 +256,7 @@
 				                                            <td style="padding: 0 0 10px 0;">
 				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
 				                                                    <tr>
-				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">contacto</td>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><c:out value="${sessionScope.contactPreview.firstName }"></c:out> <c:out value="${sessionScope.contactPreview.lastName }"></c:out></td>
 				                                                    </tr>
 				                                                </table>
 				                                            </td>
@@ -335,6 +267,77 @@
 				                        </table>
 				                    </td>
 				                </tr>
+				                <tr>
+				                    <td>
+				                        <!-- TWO COLUMNS -->
+				                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+				                            <tr>
+				                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
+				                                    <!-- LEFT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="37%" style="width: 37%;" align="left">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>Direcci&oacute;n</b></td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                    <!-- RIGHT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="57%" style="width: 57%;" align="right">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;" id="previewCompanyAddress"><c:out value="${addressPreview.street}"></c:out> <c:out value="${addressPreview.extNum}"></c:out> Int. <c:out value="${addressPreview.intNum}"></c:out>, <c:out value="${addressPreview.suburb}"></c:out>, <c:out value="${addressPreview.city}"></c:out>, <c:out value="${addressPreview.state}"></c:out>, <c:out value="${addressPreview.country}"></c:out></td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                </td>
+				                            </tr>
+				                        </table>
+				                    </td>
+				                </tr>
+				                <tr>
+				                    <td>
+				                        <!-- TWO COLUMNS -->
+				                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+				                            <tr>
+				                                <td valign="top" style="padding: 0;" class="mobile-wrapper">
+				                                    <!-- LEFT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="37%" style="width: 37%;" align="left">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>Tel&eacute;fono</b></td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                    <!-- RIGHT COLUMN -->
+				                                    <table cellpadding="0" cellspacing="0" border="0" width="57%" style="width: 57%;" align="right">
+				                                        <tr>
+				                                            <td style="padding: 0 0 10px 0;">
+				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				                                                    <tr>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><c:out  value="${contactPreview.phone }"></c:out></td>
+				                                                    </tr>
+				                                                </table>
+				                                            </td>
+				                                        </tr>
+				                                    </table>
+				                                </td>
+				                            </tr>
+				                        </table>
+				                    </td>
+				                </tr>
+				                
 				                <tr>
 				                    <td style="border-bottom: border-top: 1px solid #eaeaea;">
 				                        <!-- TWO COLUMNS -->
@@ -347,7 +350,7 @@
 				                                            <td style="padding: 0 0 10px 0;">
 				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
 				                                                    <tr>
-				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>e-Mail</b></td>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>email</b></td>
 				                                                    </tr>
 				                                                </table>
 				                                            </td>
@@ -359,7 +362,7 @@
 				                                            <td style="padding: 0 0 10px 0;">
 				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
 				                                                    <tr>
-				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">email</td>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><c:out value="${sessionScope.contactPreview.email }"></c:out></td>
 				                                                    </tr>
 				                                                </table>
 				                                            </td>
@@ -527,7 +530,7 @@
 				                                            <td style="padding: 0 0 10px 0;">
 				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
 				                                                    <tr>
-				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>e-Mail</b></td>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><b>email</b></td>
 				                                                    </tr>
 				                                                </table>
 				                                            </td>
@@ -583,14 +586,20 @@
 													<td>Precio unitario</td>
 													<td>Subtotal</td>
 												</tr>
-												<tr>
-													<td>1</td>
-													<td>UPS SRT6KRMXLT</td>
-													<td>APC Smart-UPS SRT 6000VA RM 230V</td>
-													<td>4 - 6 SEMANAS</td>
-													<td class="alignright">$2,712.38</td>
-													<td class="alignright">$2,712.38</td>
-												</tr>
+												<c:forEach  items="${sessionScope.arrQuotationDetail}" var="varQuotation" >
+													<c:set var="totalItem" value="${varQuotation.quantity * varQuotation.unitPrice}" />
+													<c:set var="subtotal" value="${subtotal + totalItem}" />
+													<tr>
+														<td><c:out value="${ varQuotation.quantity }"></c:out></td>
+														<td><c:out value="${ varQuotation.itemId }"></c:out></td>
+														<td></td>
+														<td><c:out value="${ varQuotation.estimatedShipping }"></c:out></td>
+														<td class="alignright"><fmt:formatNumber value="${varQuotation.unitPrice}" type="currency"/></td>
+														<td class="alignright"><fmt:formatNumber value="${totalItem}" type="currency"/></td>
+													</tr>
+												</c:forEach>
+												<c:set var="iva" value="${subtotal * 0.16}" />
+												<c:set var="total" value="${subtotal + iva }" />
 												<tr>
 													<td>1</td>
 													<td>SWITCH CORE 3850</td>
@@ -629,7 +638,7 @@
 													<td class="subtotal"></td>
 													<td class="subtotal"></td>
 													<td class="subtotal">Subtotal</td>
-													<td class="subtotal">$33.98</td>
+													<td class="subtotal alignright"><fmt:formatNumber value="${subtotal}" type="currency"/></td>
 												</tr>
 												<tr>
 													<td class="no-border"></td>
@@ -637,15 +646,15 @@
 													<td class="no-border"></td>
 													<td class="no-border"></td>
 													<td class="iva">IVA</td>
-													<td class="iva">$33.98</td>
+													<td class="iva alignright"><fmt:formatNumber value="${iva}" type="currency"/></td>
 												</tr>
 												<tr>
-													<td class="no-border"></td>
-													<td class="no-border"></td>
+													<td class="no-border"><b>Moneda:</b></td>
+													<td class="no-border"><c:out value="${ sessionScope.quotation.currency }"></c:out></td>
 													<td class="no-border"></td>
 													<td class="no-border"></td>
 													<td class="total">Total</td>
-													<td class="total">$33.98</td>
+													<td class="total alignright"><fmt:formatNumber value="${total}" type="currency"/></td>
 												</tr>
 											</table>
 										</td>

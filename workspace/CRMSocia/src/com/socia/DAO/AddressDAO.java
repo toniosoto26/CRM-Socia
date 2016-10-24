@@ -76,6 +76,67 @@ public class AddressDAO {
 		return addressArr;
 	}
 	
+	public AddressDTO getAddressById(int addressId){
+		Conexion			sociaDB		=	null;
+		Connection			connection	=	null;
+		PreparedStatement	statement	=	null;
+		ResultSet			resultSet	=	null;
+		StringBuilder		sqlQuery	=	null;
+		
+		/** Address objects*/
+		AddressDTO				address		=	null;
+		String 					street		= 	"";
+		String 					extNum		=	"";
+		String 					intNum		=	"";
+		String					suburb		=	"";
+		String 					city		=	"";
+		String 					state		=	"";
+		String 					country		=	"";
+		String 					zipCode		=	"";
+		
+		try{
+			sqlQuery	=	new	StringBuilder();
+			sqlQuery.append(" select address.* ");
+			sqlQuery.append(" from crm_address address ");
+			sqlQuery.append(" where address.status = 'A' ");
+			sqlQuery.append(" and address.crm_address_id = ? ");
+			
+			sociaDB		=	new	Conexion();
+			connection	=	sociaDB.getConnection1();
+			statement	=	connection.prepareStatement(sqlQuery.toString());
+			statement.setInt(1, addressId);
+			
+			resultSet	=	statement.executeQuery();
+			
+			while(resultSet.next()){
+				//addressId = resultSet.getInt(1);
+				street = resultSet.getString(2);
+				extNum = resultSet.getString(3);
+				intNum = resultSet.getString(4);
+				suburb = resultSet.getString(5);
+				city = resultSet.getString(6);
+				state = resultSet.getString(7);
+				country = resultSet.getString(8);
+				zipCode = resultSet.getString(9);
+				
+				address = new AddressDTO(addressId, street, extNum, intNum, suburb, city, state, country, zipCode);
+			}
+			
+		}catch(Exception exception){
+			exception.printStackTrace();
+		}finally{
+			try{
+				resultSet.close();
+				statement.close();
+				connection.close();
+			}catch(Exception closeException){
+				closeException.printStackTrace();
+			}
+		}
+		
+		return address;
+	}
+	
 	public ArrayList<StringBuilder> insertAddress(AddressDTO address, ArrayList<StringBuilder> queries){
 		StringBuilder		sqlQuery	=	null;
 		
