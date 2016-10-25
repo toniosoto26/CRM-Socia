@@ -6769,3 +6769,6 @@ button.close {
 	padding-bottom: 20%;
 	padding-top: 17%;
 }
+div.gradient{position:relative;background-image:linear-gradient(to bottom right, #002f4b, #dc4225);-moz-opacity:.4;-khtml-opacity:.4;-webkit-opacity:.4;opacity:.4;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(opacity=40);filter:alpha(opacity=40)}
+#experience{-webkit-perspective:800px;-moz-perspective:800px;-o-perspective:800px;-ms-perspective:800px;perspective:800px;min-width:100%;min-height:100%;overflow:hidden;position:absolute;top:0px;left:0px;-webkit-backface-visibility:hidden;opacity:1}@media only screen and (max-width: 529px){#experience{display:none}}
+#lines{position:absolute;top:0;left:0;min-width:100%;min-height:100%;pointer-events:none}

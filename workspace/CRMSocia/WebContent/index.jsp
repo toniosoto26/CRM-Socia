@@ -8,10 +8,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Grupo Socia CRM</title>
 	<!-- Bootstrap -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/script.js"></script>
 	<link rel="stylesheet" type="text/css" href="./css/bootstrap_new.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -22,6 +21,10 @@
 	        </div>
 	  </div>
 	</nav>
+		<div class="gradient"></div>
+		<div id="experience">
+			<canvas id="lines" width="1366" height="500" style="display: block;"></canvas>
+		</div>
 	<div class="login">
     	<form class="ingresar" method="post">
 			<div class="form-group">
@@ -35,6 +38,12 @@
 			</div>
 		</form>
 	</div>
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/script.js"></script>
+	<script src="js/login/d3.v3.min.js"></script>
+	<script src="js/login/trianglify.min.js"></script>
+	<script src="js/login/functions.min.js"></script>
 	
 </body>
 </html>
