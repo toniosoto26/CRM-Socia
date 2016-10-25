@@ -14,12 +14,15 @@ import com.socia.DAO.AddressDAO;
 import com.socia.DAO.ClientDAO;
 import com.socia.DAO.ConsecutiveDAO;
 import com.socia.DAO.ContactDAO;
+import com.socia.DAO.ItemDAO;
+import com.socia.DAO.MailDAO;
 import com.socia.DAO.QuotationDAO;
 import com.socia.DAO.QuotationDetailDAO;
 import com.socia.DAO.TransactionDAO;
 import com.socia.DTO.AddressDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
+import com.socia.DTO.ItemDTO;
 import com.socia.DTO.LoginDTO;
 import com.socia.DTO.QuotationDTO;
 import com.socia.DTO.QuotationDetailDTO;
@@ -55,7 +58,7 @@ public class ControllerRosa extends HttpServlet {
 		/** Parameters */
 		int								option				=	Integer.parseInt(request.getParameter("option"));
 		int								clientId			= 	0;
-		int								itemId				=	0;
+		String							itemId				=	"";
 		String							warranty			=	"";
 		double							unitPrice			=	0;
 		int								quantity			=	0;
@@ -77,7 +80,12 @@ public class ControllerRosa extends HttpServlet {
 		String							country				=	"";
 		String							zipCode				=	"";
 		
+		StringBuilder					body;
+		String[]						to					= {"rmmi_ros@hotmail.com", "jossoto14@gmail.com", "vidal.sistemas@hotmail.com"};
+		
 		/** DAO */
+		ItemDAO							objItem				=	new ItemDAO();
+		MailDAO							objMail				=	new MailDAO();
 		ClientDAO						objClient			=	new ClientDAO();
 		ContactDAO						objContact			=	new ContactDAO();
 		AddressDAO						objAddress 			= 	new AddressDAO();
@@ -86,6 +94,7 @@ public class ControllerRosa extends HttpServlet {
 		QuotationDetailDAO				objQuotationDetail	=	new QuotationDetailDAO();
 		
 		/** DTO*/
+		ItemDTO							item;
 		LoginDTO						login;
 		ClientDTO						client;
 		AddressDTO						address				=	null;
@@ -150,16 +159,23 @@ public class ControllerRosa extends HttpServlet {
 			
 			/** Quotation details*/
 			for(int index = 1; index <= totalProducts; index++){
-				itemId = Integer.parseInt(request.getParameter("itemNum"+index));
+				itemId = request.getParameter("itemNum"+index);
 				quantity = Integer.parseInt(request.getParameter("quantity"+index));
 				warranty = request.getParameter("warranty"+index);
 				estimatedShipping = request.getParameter("estimatedShipping"+index);
 				unitPrice = Double.parseDouble(request.getParameter("unitPrice"+index));
 				
-				quotationDetail = new QuotationDetailDTO(quotationId, itemId, warranty, unitPrice, quantity, estimatedShipping);
+				item = objItem.getItemById(itemId);
+				
+				quotationDetail = new QuotationDetailDTO(quotationId, itemId, item.getDescription(), warranty, unitPrice, quantity, estimatedShipping);
 				arrQuotationDetail.add(quotationDetail);
 			}
-			
+				
+			if(address == null)
+				address = objAddress.getAddressById(addressId);
+				
+			client = objClient.getClientById(clientId);
+			contact = objContact.getContactsById(contactId);
 			
 			if(option == 2){
 				/** INSERTS */
@@ -174,6 +190,10 @@ public class ControllerRosa extends HttpServlet {
 					transaction.insertAll(queries);
 					
 					transaction.commit();
+					
+					body = objQuotation.generateMail(client, contact, address, quotation, arrQuotationDetail);
+					objMail.sendFromGMail("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, "Cotización", body.toString());
+					
 				}catch(Exception exception){
 					transaction.rollback();
 					exception.printStackTrace();
@@ -187,18 +207,11 @@ public class ControllerRosa extends HttpServlet {
 				session.removeAttribute("arrQuotationDetail");
 				session.setAttribute("arrQuotationDetail", arrQuotationDetail);
 				
-				if(address == null)
-					address = objAddress.getAddressById(addressId);
-				
 				session.removeAttribute("addressPreview");
 				session.setAttribute("addressPreview", address);
-				
-				client = objClient.getClientById(clientId);
 
 				session.removeAttribute("clientPreview");
 				session.setAttribute("clientPreview", client);
-				
-				contact = objContact.getContactsById(contactId);
 				
 				session.removeAttribute("contactPreview");
 				session.setAttribute("contactPreview", contact);

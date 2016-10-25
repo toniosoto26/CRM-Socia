@@ -16,7 +16,7 @@ public class QuotationDetailDAO {
 										 sqlQuery.append("quantity, estimatedShipping) ");
 
 			sqlQuery.append(" VALUES ("+quotationDetail.get(index).getQuotationId());
-			sqlQuery.append(","+quotationDetail.get(index).getItemId());
+			sqlQuery.append(", '"+quotationDetail.get(index).getItemId()+"'");
 			sqlQuery.append(",'"+quotationDetail.get(index).getWarranty()+"'");
 			sqlQuery.append(","+ quotationDetail.get(index).getUnitPrice());
 			sqlQuery.append(","+quotationDetail.get(index).getQuantity());

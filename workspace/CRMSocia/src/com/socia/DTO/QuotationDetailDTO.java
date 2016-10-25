@@ -3,17 +3,20 @@ package com.socia.DTO;
 public class QuotationDetailDTO {
 	
 	private int 	quotationId;
-	private int		itemId;
+	private String	itemId;
+	private String	description;
 	private String	warranty;
 	private double	unitPrice;
 	private int		quantity;
 	private String	estimatedShipping;
 	
-	public QuotationDetailDTO(int quotationId, int itemId, String warranty,
-			double unitPrice, int quantity, String estimatedShipping) {
+	public QuotationDetailDTO(int quotationId, String itemId,
+			String description, String warranty, double unitPrice,
+			int quantity, String estimatedShipping) {
 		super();
 		this.quotationId = quotationId;
 		this.itemId = itemId;
+		this.description = description;
 		this.warranty = warranty;
 		this.unitPrice = unitPrice;
 		this.quantity = quantity;
@@ -25,11 +28,17 @@ public class QuotationDetailDTO {
 	public void setQuotationId(int quotationId) {
 		this.quotationId = quotationId;
 	}
-	public int getItemId() {
+	public String getItemId() {
 		return itemId;
 	}
-	public void setItemId(int itemId) {
+	public void setItemId(String itemId) {
 		this.itemId = itemId;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getWarranty() {
 		return warranty;
@@ -58,9 +67,9 @@ public class QuotationDetailDTO {
 	@Override
 	public String toString() {
 		return "QuotationDetailDTO [quotationId=" + quotationId + ", itemId="
-				+ itemId + ", warranty=" + warranty + ", unitPrice="
-				+ unitPrice + ", quantity=" + quantity + ", estimatedShipping="
-				+ estimatedShipping + "]";
+				+ itemId + ", description=" + description + ", warranty="
+				+ warranty + ", unitPrice=" + unitPrice + ", quantity="
+				+ quantity + ", estimatedShipping=" + estimatedShipping + "]";
 	}
 	
 }

@@ -38,6 +38,11 @@
                             <span class="fa fa-anchor solo">Cotizaciones</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="#anch3" data-scroll  onClick="loadMenu('calendar');">
+                            <span class="fa fa-anchor solo">Calendario</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -45,7 +50,6 @@
 			<div class="content-header">
 				<nav class="navbar navbar-default">
 					<div class="container">
-						<a id="menu-toggle" href="#" class="glyphicon glyphicon-menu-hamburger btn-menu toggle"></a>
 						<div class="navbar-header">
           					<a class="navbar-brand" href="#">
           					<img src="images/icono.png" width="46" height="49" alt=""/> </a>

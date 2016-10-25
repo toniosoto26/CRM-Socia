@@ -53,7 +53,7 @@ public class MailDAO {
             }
 
             message.setSubject(subject);
-            message.setText(body);
+            message.setContent(body, "text/html");
             Transport transport = session.getTransport("smtp");
             transport.connect(host, from, pass);
             transport.sendMessage(message, message.getAllRecipients());

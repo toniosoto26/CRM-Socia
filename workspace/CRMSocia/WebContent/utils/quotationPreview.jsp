@@ -56,17 +56,17 @@
 	  text-align: left;
 	}
 		
-    /* CLIENT-SPECIFIC STYLES *
+    /* CLIENT-SPECIFIC STYLES */
    	table, td, a{-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;} /* Prevent WebKit and Windows mobile changing default text sizes *
     table, td{mso-table-lspace: 0pt; mso-table-rspace: 0pt;} /* Remove spacing between tables in Outlook 2007 and up *
     img{-ms-interpolation-mode: bicubic;} /* Allow smoother rendering of resized image in Internet Explorer *
 
-    /* RESET STYLES *
+    /* RESET STYLES */
     img{border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none;}
     table{border-collapse: collapse !important;}
     body{height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important;}
 
-    /* iOS BLUE LINKS *
+    /* iOS BLUE LINKS */
     a[x-apple-data-detectors] {
         color: inherit !important;
         text-decoration: none !important;
@@ -76,21 +76,21 @@
         line-height: inherit !important;
     }
 
-    /* MOBILE STYLES *
+    /* MOBILE STYLES */
     @media screen and (max-width: 525px) {
 
-        /* ALLOWS FOR FLUID TABLES *
+        /* ALLOWS FOR FLUID TABLES */
         .wrapper {
           width: 100% !important;
             max-width: 100% !important;
         }
 
-        /* ADJUSTS LAYOUT OF LOGO IMAGE *
+        /* ADJUSTS LAYOUT OF LOGO IMAGE */
         .logo img {
           margin: 0 auto !important;
         }
 
-        /* USE THESE CLASSES TO HIDE CONTENT ON MOBILE *
+        /* USE THESE CLASSES TO HIDE CONTENT ON MOBILE */
         .mobile-hide {
           display: none !important;
         }
@@ -106,7 +106,7 @@
           width: 100% !important;
         }
 
-        /* UTILITY CLASSES FOR ADJUSTING PADDING ON MOBILE *
+        /* UTILITY CLASSES FOR ADJUSTING PADDING ON MOBILE */
         .padding {
           padding: 10px 5% 15px 5% !important;
         }
@@ -129,7 +129,7 @@
           padding: 50px 15px 50px 15px !important;
         }
 
-        /* ADJUST BUTTONS ON MOBILE *
+        /* ADJUST BUTTONS ON MOBILE */
         .mobile-button-container {
             margin: 0 auto;
             width: 100% !important;
@@ -144,7 +144,7 @@
 
     }
 
-    /* ANDROID CENTER FIX *
+    /* ANDROID CENTER FIX */
     div[style*="margin: 16px 0;"] { margin: 0 !important; }*/
 </style>
 
@@ -170,7 +170,7 @@
 		                <tr>
 		                    <td valign="top" style="padding: 15px 0;" class="logo">
 		                        <a href="http://gruposocia.com" target="_blank">
-		                            <img alt="Logo" src="images/logo.jpg" width="60" height="60" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;" border="0">
+		                            <img alt="Logo" src="http://gruposocia.com/wp-content/uploads/2016/06/grupo-socia-logo-jp-hz-01-1.png" width="250" height="60" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;" border="0">
 		                        </a>
 		                    </td>
 		                    <td align="right">

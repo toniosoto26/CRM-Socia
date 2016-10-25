@@ -1,27 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>CRM-Socia</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Grupo Socia CRM</title>
+	<!-- Bootstrap -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/script.js"></script>
-	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap_new.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 </head>
 <body>
 	<nav class="navbar navbar-default">
 	  <div class="container">
 	        <div class="navbar-header">
 	          <a class="navbar-brand" href="#">
-	          <img src="images/icono.png" width="46" height="49" alt=""/> </a>
-	          <span class="navbar-text logo">GRUPO SOCIA CRM</span>
-	          <span class="navbar-text derecha">IT Solutions</span>
+	          <img src="images/grupo-socia.png" width="200" height="33" alt=""/></a>
 	        </div>
 	  </div>
 	</nav>
 	<div class="login">
-		<form>
+    	<form class="ingresar" method="post">
 			<div class="form-group">
 				<input type="text" class="form-control" id="user" name="user"  placeholder="Usuario">
 			</div>
