@@ -28,7 +28,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#anch2" data-scroll>
+                        <a href="#anch2" data-scroll onClick="loadMenu('appointment');">
                             <span class="fa fa-anchor solo">Citas</span>
                         </a>
                     </li>

@@ -169,3 +169,20 @@ function trim(cadena){
 	retorno=retorno.replace(/\s+$/g,'');
 	return retorno;
 }
+
+
+function selectBDM(){
+	$.ajax({
+		type:"post",
+		url:"ControllerAppointment",
+		data: {"opc":1},
+		success: function(response){
+			$("#selectBDM").html(response);
+			$(".chosen-select").chosen();
+		},
+		error: function(){
+			alert("no jalo");
+			
+		}
+	})
+}
