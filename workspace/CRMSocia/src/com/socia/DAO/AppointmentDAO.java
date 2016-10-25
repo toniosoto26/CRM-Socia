@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.socia.DTO.AppointmentDTO;
+import com.socia.DTO.CallDTO;
 import com.socia.conexion.Conexion;
 
 public class AppointmentDAO {
@@ -63,4 +64,58 @@ public class AppointmentDAO {
 
 		return arrApoint;
 	}
+	
+	
+	public int	getConse(){
+		StringBuilder			sql			=	new StringBuilder();
+		int 					x			=	0;
+		Connection				con			=	null;
+		PreparedStatement		ps			=	null;
+		ResultSet				rs			=	null;
+		Conexion				conexion	=	null;
+		try{
+			sql.delete(0, sql.length());
+			sql.append("SELECT crm_appointment_id ");
+			sql.append(" FROM crm_appointment ");
+			sql.append(" ORDER BY 1 DESC LIMIT 1 ");
+			
+			conexion	=	new Conexion();
+			con			=	conexion.getConnection1();
+			ps			=	con.prepareStatement(sql.toString());
+			rs			=	ps.executeQuery();
+			
+			if(rs.next())
+				x = rs.getInt(1);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				ps.close();
+				con.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		return x;
+	}
+	
+	
+	public ArrayList<StringBuilder> insertAppointment(AppointmentDTO appoint, ArrayList<StringBuilder> queries){
+		StringBuilder		sqlQuery	=	null;
+		
+    	sqlQuery	=	new	StringBuilder();
+		sqlQuery.append(" INSERT INTO crm_appointment(crm_appointment_id,date,crm_client_id,crm_user_id,crm_contact_id,crm_bdm_id )");
+		sqlQuery.append(" VALUES ("+appoint.getCrmAppointmentId());
+		sqlQuery.append(",'"+appoint.getDate()+"'");
+		sqlQuery.append(","+appoint.getCrmClientId());
+		sqlQuery.append(","+2);
+		sqlQuery.append(","+appoint.getCrmContactId());
+		sqlQuery.append(", "+appoint.getcrmBdmId()+" )");
+		// INSERT INTO crm_appointment VALUES (2,'2016-10-11 05:25',2,2,0)
+		queries.add(sqlQuery);
+    
+        return queries;
+    }
 }

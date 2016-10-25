@@ -52,28 +52,30 @@
 </div>
 
 <div class="card">
-	<div class="col-md-12">
-	  	<div class="form-group row">
-	  		<div class="col-md-6">
-			    <label for="inputCompanyEmail">Contacto:</label>
-			    <input type="text" class="form-control" id="companyEmail" name="companyEmail" placeholder="contacto">
-			</div>	  	
+	<div id="result">
+		<div class="col-md-12">
+		  	<div class="form-group row">
+		  		<div class="col-md-6">
+				    <label for="inputCompanyEmail">Contacto:</label>
+				    <input type="text" class="form-control" id="companyEmail" name="companyEmail" placeholder="contacto">
+				</div>	  	
+			</div>
 		</div>
-	</div>
-	<div class="col-md-12">
-	  	<div class="form-group row">
-	  		<div class="col-md-6">
-			    <label for="inputCompanyEmail">Telefono:</label>
-			    <input type="text" class="form-control" id="companyEmail" name="companyEmail" placeholder="telefono">
-			</div>	  	
+		<div class="col-md-12">
+		  	<div class="form-group row">
+		  		<div class="col-md-6">
+				    <label for="inputCompanyEmail">Telefono:</label>
+				    <input type="text" class="form-control" id="companyEmail" name="companyEmail" placeholder="telefono">
+				</div>	  	
+			</div>
 		</div>
-	</div>
-	<div class="col-md-12">
-	  	<div class="form-group row">
-	  		<div class="col-md-6">
-			    <label for="inputCompanyEmail">Email:</label>
-			    <input type="text" class="form-control" id="companyEmail" name="companyEmail" placeholder="email">
-			</div>	  	
+		<div class="col-md-12">
+		  	<div class="form-group row">
+		  		<div class="col-md-6">
+				    <label for="inputCompanyEmail">Email:</label>
+				    <input type="text" class="form-control" id="companyEmail" name="companyEmail" placeholder="email">
+				</div>	  	
+			</div>
 		</div>
 	</div>
 	<div class="col-md-12">
@@ -90,5 +92,5 @@
 </div>
 
  <div class="text-left">
-	  <button type="button" class="btn btn-primary" >Agendar</button>
+	  <button type="button" class="btn btn-primary" onclick="saveInfo();">Agendar</button>
  </div>

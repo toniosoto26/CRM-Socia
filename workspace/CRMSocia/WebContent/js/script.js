@@ -186,3 +186,24 @@ function selectBDM(){
 		}
 	})
 }
+
+
+function loadContactAppointment(selected){
+	var contactId = selected.value;
+	$.ajax({
+		type: "post",
+		url : "ControllerAppointment",
+		data: {
+			"opc": 2, 
+			"contactId": contactId
+		},
+		success: function(response){
+			$("#result").html(response);
+		},
+		error: function(){
+			alert("Error");
+		}
+	});
+}
+
+
