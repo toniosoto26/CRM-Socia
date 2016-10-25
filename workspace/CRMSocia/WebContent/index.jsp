@@ -26,7 +26,7 @@
 			<canvas id="lines" width="1366" height="500" style="display: block;"></canvas>
 		</div>
 	<div class="login">
-    	<form class="ingresar" method="post">
+    	<form class="ingresar" style="position: relative;">
 			<div class="form-group">
 				<input type="text" class="form-control" id="user" name="user"  placeholder="Usuario">
 			</div>
@@ -44,6 +44,5 @@
 	<script src="js/login/d3.v3.min.js"></script>
 	<script src="js/login/trianglify.min.js"></script>
 	<script src="js/login/functions.min.js"></script>
-	
 </body>
 </html>
