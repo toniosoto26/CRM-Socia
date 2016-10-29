@@ -34,6 +34,7 @@ public class AppointmentDAO {
 			sql.append(" join crm_user_role role on mvs.crm_user_role_id = role.crm_user_role_id ");
 			sql.append(" WHERE role.crm_user_role_id = ?");
 			
+			
 			conexion	=	new Conexion();
 			con			=	conexion.getConnection1();
 			ps			=	con.prepareStatement(sql.toString());
@@ -110,7 +111,7 @@ public class AppointmentDAO {
 		sqlQuery.append(" VALUES ("+appoint.getCrmAppointmentId());
 		sqlQuery.append(",'"+appoint.getDate()+"'");
 		sqlQuery.append(","+appoint.getCrmClientId());
-		sqlQuery.append(","+2);
+		sqlQuery.append(","+appoint.getCrmUserId());
 		sqlQuery.append(","+appoint.getCrmContactId());
 		sqlQuery.append(", "+appoint.getcrmBdmId()+" )");
 		// INSERT INTO crm_appointment VALUES (2,'2016-10-11 05:25',2,2,0)
