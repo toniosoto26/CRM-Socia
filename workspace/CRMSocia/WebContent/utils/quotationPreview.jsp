@@ -601,38 +601,6 @@
 												<c:set var="iva" value="${subtotal * 0.16}" />
 												<c:set var="total" value="${subtotal + iva }" />
 												<tr>
-													<td>1</td>
-													<td>SWITCH CORE 3850</td>
-													<td>SNTC-8X5XNBD Catalyst 2960-X 48 GigE PoE 740W, 2 x 10</td>
-													<td>2 - 4 SEMANAS</td>
-													<td class="alignright">$471.24</td>
-													<td class="alignright">$471.24</td>
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>SERVER HP PROLIANT DL560 G9</td>
-													<td>HP DL560 Gen9 E5-4620v3 64GB 2P Strd WW 3 años de garantía </td>
-													<td>2 - 4 SEMANAS</td>
-													<td class="alignright">$28,133.06</td>
-													<td class="alignright">$28,133.06</td>
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>SERVER HP PROLIANT DL560 G9</td>
-													<td>HP DL560 Gen9 E5-4620v3 64GB 2P Strd WW 3 años de garantía </td>
-													<td>2 - 4 SEMANAS</td>
-													<td class="alignright">$9,298.80</td>
-													<td class="alignright">$9,298.80</td>
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>SERVER HP PROLIANT DL560 G9</td>
-													<td>HP DL560 Gen9 E5-4620v3 64GB 2P Strd WW 3 años de garantía </td>
-													<td>2 - 4 SEMANAS</td>
-													<td class="alignright">$13,182.02</td>
-													<td class="alignright">$13,182.02</td>
-												</tr>
-												<tr>
 													<td class="subtotal"></td>
 													<td class="subtotal"></td>
 													<td class="subtotal"></td>

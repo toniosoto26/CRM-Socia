@@ -81,7 +81,9 @@ public class ControllerRosa extends HttpServlet {
 		String							zipCode				=	"";
 		
 		StringBuilder					body;
-		String[]						to					= {"rmmi_ros@hotmail.com", "jossoto14@gmail.com", "vidal.sistemas@hotmail.com"};
+		String[]						to					= 	{"rmmi_ros@hotmail.com", "jossoto14@gmail.com", "vidal.sistemas@hotmail.com"};
+		
+		int 							itemIndex 			=	0; 
 		
 		/** DAO */
 		ItemDAO							objItem				=	new ItemDAO();
@@ -215,8 +217,35 @@ public class ControllerRosa extends HttpServlet {
 				
 				session.removeAttribute("contactPreview");
 				session.setAttribute("contactPreview", contact);
-			}
+			}	
+		}else if(option == 4){
+			if(session.getAttribute("arrItems") == null)
+			{
+				ArrayList<ItemDTO>	arrItems	= new ArrayList<ItemDTO>();
+				arrItems = objItem.getItems();
 				
+				session.removeAttribute("arrItems");
+				session.setAttribute("arrItems", arrItems);
+			}
+		
+			itemIndex = Integer.parseInt(request.getParameter("itemIndex"));
+			session.removeAttribute("itemIndex");
+			session.setAttribute("itemIndex", itemIndex);
+			
+			url = "views/quotations/responses/selectItem.jsp";
+		}else if(option == 5){
+			itemId = request.getParameter("itemId");
+			
+			item = objItem.getItemById(itemId);
+				
+			session.removeAttribute("item");
+			session.setAttribute("item", item);
+		
+			itemIndex = Integer.parseInt(request.getParameter("itemIndex"));
+			session.removeAttribute("itemIndex");
+			session.setAttribute("itemIndex", itemIndex);
+			
+			url = "views/quotations/responses/itemDescription.jsp";
 		}
 		
 		request.getRequestDispatcher(url).forward(request, response);

@@ -24,14 +24,12 @@
     
     /**  Loading menus */
     function loadMenu(menuName){
-    	alert('1');
     	if(menuName === "call"){
     		$("#pageContent").load("call.jsp");
     	}else if(menuName === "quotation"){
     		$("#pageContent").load("quotation.jsp");
     	}else if(menuName === "calendar"){
-    		alert('here');
-    		$("#pageContent").load("../views/calendar/calendar.jsp");
+    		$("#pageContent").load("/CRMSocia/views/calendar/calendar.jsp");
     	}else if(menuName === "appointment"){
     		$("#pageContent").load("/CRMSocia/views/appointments/generateAppointments.jsp");
     	}

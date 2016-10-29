@@ -64,13 +64,13 @@
 				</nav>
             </div>
             <div class="page-content inset" data-spy="scroll" data-target="#spy" id="pageContent">
-            	Bienvenido <c:out value="${sessionLogin.user}"></c:out>
+            	Bienvenid@ <c:out value="${sessionScope.sessionLogin.firstName}" ></c:out> <c:out value="${sessionScope.sessionLogin.lastName}" ></c:out>
             </div>
         </div>
 	</div>
 	
 	
-	<script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+	<script src="js/jquery.min.js" type="text/javascript"></script>
 	<script type="text/javascript" src="js/menu.js"></script>
 </body>
 </html>

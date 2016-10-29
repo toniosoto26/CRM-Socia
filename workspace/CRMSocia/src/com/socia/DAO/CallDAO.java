@@ -16,14 +16,7 @@ import com.socia.conexion.Conexion;
 public class CallDAO {
 	
 	public  CallDAO(){
-		try{
-			this.insertCall("");
-		}catch(Exception a ){
-			 System.out.println("error al insertar registro");
-		}
 	}
-	
-	
 	
 	public ArrayList<StringBuilder> insertNewCall(CallDTO calls, ArrayList<StringBuilder> queries){
 		StringBuilder		sqlQuery	=	null;

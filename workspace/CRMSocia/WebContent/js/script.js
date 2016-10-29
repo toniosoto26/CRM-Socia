@@ -88,7 +88,7 @@ function selectClient(){
 			$(".chosen-select").chosen();
 		},
 		error: function(){
-			alert("no jalo");
+			alert("no funciona");
 			
 		}
 		

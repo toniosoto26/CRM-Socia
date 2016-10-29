@@ -1,18 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+
  <div id="form1">
 	<form id="formCalls">
 		<div class="form-group">
 				<label for="inputCompanyName">Razón social:</label>
 				<div id="selectClient" name="selectClient"> </div>
-		<div>
+		</div>
 		<div id="clientInfo">
 		  <div class="form-group">
 		    <label for="inputCompanyContact">Contacto</label>
@@ -32,10 +26,6 @@
 	   <div class="form-group">
 	    <label for="inputObservation">Observaciones</label>
 	    <input type="textarea" class="form-control" id="observation" placeholder="Observaciones" name="observation">
-	  </div>
-	   <div class="form-group">
-	    <label for="inputFirstCall">Primera Llamada</label>
-	    <input type="checkbox" class="form-control" id="firstCall" checked>
 	  </div>
 	   <div class="form-group">
 	    <input type="button" id="btnGuardar"  class="btn btn-primary" name="Guardar" value="Guardar" onclick="registreCall(0);">

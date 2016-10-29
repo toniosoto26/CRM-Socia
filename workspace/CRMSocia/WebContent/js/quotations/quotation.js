@@ -6,14 +6,15 @@ var itemNum = 1;
 
 function addProduct(){
 	$('#productsTable > tbody:last-child').append('<tr>'+
-													'<td><input type="text" class="form-control" name="itemNum'+itemNum+'" /></td>'+
+													'<td><div id="itemNum'+itemNum+'"><div/></td>'+
 													'<td><input type="text" class="form-control" name="quantity'+itemNum+'" /></td>'+
-													'<td><input type="text" class="form-control" name="description'+itemNum+'" /></td>'+
+													'<td><div id="description'+itemNum+'"><input type="text" class="form-control" name="description'+itemNum+'" /></div></td>'+
 													'<td><input type="text" class="form-control" name="warranty'+itemNum+'" /></td>'+
 													'<td><input type="text" class="form-control" name="estimatedShipping'+itemNum+'" /></td>'+
 													'<td><input type="text" class="form-control" name="unitPrice'+itemNum+'" /></td>'+
 												  '</tr>');
 	$('#totalProducts').val(itemNum);
+	loadItemsInfo(itemNum);
 	
 	itemNum++;
 }
@@ -27,6 +28,45 @@ function displayExchangeRate(selected){
 	else{
 		$("#exchangeRate").css( "display", "none" );
 	}
+}
+
+function loadItemsInfo(number){
+	$.ajax({
+		type: "post",
+		url : "ControllerTemp",
+		data: {
+			option: 4,
+			itemIndex: number
+		},
+		async: false,
+		success: function(response){
+			console.log(response);
+			console.log(number);
+			$("#itemNum"+number).html(response);
+		},
+		error: function(){
+			alert("Error");
+		}
+	});
+}
+
+function loadDescription(selected, number){
+	var itemId = selected.value;
+	$.ajax({
+		type: "post",
+		url : "ControllerTemp",
+		data: {
+			option: 5, 
+			itemId: itemId,
+			itemIndex: number
+		},
+		success: function(response){
+			$("#description"+number).html(response);
+		},
+		error: function(){
+			alert("Error");
+		}
+	});
 }
 
 function loadAddressInfo(selected){

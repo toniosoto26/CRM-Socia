@@ -61,7 +61,7 @@ public class QuotationDAO {
 		 							sqlQuery.append("<tr>");
     		 							sqlQuery.append("<td valign='top' style='padding: 15px 0;' class='logo'>");
     		 								sqlQuery.append("<a href='http://gruposocia.com' target='_blank'>");
-    		 									sqlQuery.append("<img alt='Logo' src='images/logo.jpg' width='250' height='60' style='display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;' border='0'>");
+    		 									sqlQuery.append("<img alt='Logo' src='http://gruposocia.com/wp-content/uploads/2016/06/grupo-socia-logo-jp-hz-01-1.png' width='250' height='60' style='display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;' border='0'>");
     		 								sqlQuery.append("</a>");
     		 							sqlQuery.append("</td>");
     		 							sqlQuery.append("<td align='right'>");
@@ -485,7 +485,7 @@ public class QuotationDAO {
 																	sqlQuery.append("<tr>");
 																		sqlQuery.append("<td>"+arrQuotationDetail.get(index).getQuantity()+"</td>");
 																		sqlQuery.append("<td>"+arrQuotationDetail.get(index).getItemId()+"</td>");
-																		sqlQuery.append("<td></td>");
+																		sqlQuery.append("<td>"+arrQuotationDetail.get(index).getDescription()+"</td>");
 																		sqlQuery.append("<td>"+arrQuotationDetail.get(index).getEstimatedShipping()+"</td>");
 																		sqlQuery.append("<td class='alignright'>"+df.format(arrQuotationDetail.get(index).getUnitPrice())+"</td>");
 																		sqlQuery.append("<td class='alignright'>"+df.format(totalItem)+"</td>");
@@ -514,7 +514,7 @@ public class QuotationDAO {
 																sqlQuery.append("</tr>");
 																sqlQuery.append("<tr>");
 																	sqlQuery.append("<td class='no-border'><b>Moneda:</b></td>");
-																	sqlQuery.append("<td class='no-border'><c:out value='${ sessionScope.quotation.currency }'></c:out></td>");
+																	sqlQuery.append("<td class='no-border'>"+quotation.getCurrency()+"</td>");
 																	sqlQuery.append("<td class='no-border'></td>");
 																	sqlQuery.append("<td class='no-border'></td>");
 																	sqlQuery.append("<td class='total'>Total</td>");
