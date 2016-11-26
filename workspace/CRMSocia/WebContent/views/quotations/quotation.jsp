@@ -4,6 +4,14 @@
 <link rel="stylesheet" href="css/prism.css">
 <link rel="stylesheet" href="css/chosen.css">
 <link rel="stylesheet" href="css/address.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/adminlte.min.css">
+
+<ol class="breadcrumb">
+  <li><a href="#">Inicio</a></li>
+  <li class="active">Cotizaciones</li>
+</ol>
+<div class="titulo"><h3>Formato de generación de cotizaciones</h3></div>
 
 <form id="addQuotation" onSubmit="return addQuotation();">
   <div class="form-group">
@@ -138,7 +146,7 @@
   </div>
   
   <div class="text-right">
-	  <button type="button" class="btn btn-primary" data-toggle="modal" href="utils/quotationPreview.jsp" data-target="#modal">Previsualizar</button>
+	  <button type="button" class="btn btn-primary" data-toggle="modal" href="quotations/responses/quotationPreview.jsp" data-target="#modal">Previsualizar</button>
   	  <button type="submit" class="btn btn-primary" >Enviar</button>
  	  </div>
 </form>

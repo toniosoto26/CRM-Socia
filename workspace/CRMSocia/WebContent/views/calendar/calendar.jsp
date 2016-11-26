@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
+
+<ol class="breadcrumb">
+  <li><a href="#">Inicio</a></li>
+  <li class="active">Calendario</li>
+</ol>
+<div class="titulo"><h3>Calendario</h3></div>
+
 <link href='/CRMSocia/css/calendar/fullcalendar.css' rel='stylesheet' />
 <link href='/CRMSocia/css/calendar/fullcalendar.print.css' rel='stylesheet' media='print' />
 <script src='/CRMSocia/js/calendar/moment.min.js'></script>
