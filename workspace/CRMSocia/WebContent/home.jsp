@@ -54,8 +54,9 @@
 			</span>
 		</div-->
 		<div class="contenido"  id="pageContent">
-		    <div class="titulo"><h3>Bienvenido <c:out value="${sessionScope.sessionLogin.firstName}" ></c:out> <c:out value="${sessionScope.sessionLogin.lastName}" ></c:out></h3></div>
-		    
+			<div class="welcome">
+		    	<h3 style="color:#ff0026;">Bienvenid@ <c:out value="${sessionScope.sessionLogin.firstName}" ></c:out> <c:out value="${sessionScope.sessionLogin.lastName}" ></c:out></h3>
+		    </div>
 		</div>	
 		
 		
