@@ -6849,6 +6849,21 @@ button.close {
 	width: 100%;
 	/*z-index:1;*/
 }
+
+.welcome {
+	background-image:url(http://gruposocia.com/wp-content/uploads/2013/10/SetWidth1920-consultancy-white-gradient.jpg);
+	background-position: center;
+	background-repeat:no-repeat;
+	background-size: cover;
+	height: 100%;
+	position: absolute;
+	padding-top: 17%;
+	width: 100%;
+    margin-top: -75px;
+    text-align: center;
+	/*z-index:1;*/
+}
+
 .requisitos {
 	background-color: #f2f2f2;
 	margin-top:20px;
