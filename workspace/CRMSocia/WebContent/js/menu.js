@@ -23,11 +23,14 @@
     });
     
     /**  Loading menus */
-    function loadMenu(menuName){
+    function loadMenu(menuName, option){
+    	$("li").removeClass("active");
+    	$(option).addClass("active");
+    	
     	if(menuName === "call"){
     		$("#pageContent").load("call.jsp");
     	}else if(menuName === "quotation"){
-    		$("#pageContent").load("quotation.jsp");
+    		$("#pageContent").load("/CRMSocia/views/quotations/quotation.jsp");
     	}else if(menuName === "calendar"){
     		$("#pageContent").load("/CRMSocia/views/calendar/calendar.jsp");
     	}else if(menuName === "appointment"){

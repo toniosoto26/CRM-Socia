@@ -15,6 +15,12 @@
 <script type="text/javascript" src="/CRMSocia/js/bootstrap-datetimepicker.fr.js"></script>
 <script type="text/javascript" src="/CRMSocia/js/appointments/appointment.js"></script>
 
+<ol class="breadcrumb">
+  <li><a href="#">Inicio</a></li>
+  <li class="active">Citas</li>
+</ol>
+<div class="titulo"><h3>Formato de generación de citas</h3></div>
+
 <div class="form-group">
    <label for="inputCompanyName">Razón social:</label>
    <div id="selectClient"></div>
