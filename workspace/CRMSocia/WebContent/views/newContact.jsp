@@ -1,29 +1,34 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
-	<div class="form-group">
-		<label for="inputCompanyEmail">Apellido:</label>
-	    <input type="text" class="form-control" id="lastName" name="lastName" disabled value='<c:out value="${ sessionScope.infoContact.lastName }"></c:out>' />
-	</div>
-	<div class="form-group">
-		<label for="inputCompanyEmail">Email:</label>
-	    <input type="text" class="form-control" id="companyEmail" name="companyEmail" disabled value='<c:out value="${ sessionScope.infoContact.email }"></c:out>' />
-	</div>
-	<div class="form-group">
-	    <label for="inputCompanyPhone">Teléfono:</label>
-	    <input type="text" class="form-control" id="companyPhone" name="companyPhone" disabled value='<c:out value="${sessionScope.infoContact.phone}"></c:out>' >
-	</div>
-	<div class="form-group">
-	    <label for="inputCompanyPhone">Area:</label>
-	    <input type="text" class="form-control" id="division" name="selectDivision" disabled value='<c:out value="${sessionScope.infoContact.name_division}"></c:out>' >
-	</div>
-	<div class="form-group">
-	    <label for="inputCompanyPhone">Puesto:</label>
-	    <input type="text" class="form-control" id="position" name="selectPosition" disabled value='<c:out value="${sessionScope.infoContact.position}"></c:out>' >
-	</div>
-	<div class="form-group">
+	
+<div id="formNewContact">
+
+		<div class="form-group">
+			<label for="inputCompanyName">Nombre Contacto:</label>
+			<input type="text" class="form-control" id="nameContact"  placeholder="Nombre contacto" name="selectContact">
+			<input type="hidden" name="AddContact" value="1">
+		  <div class="form-group">
+		    <label for="inputCompanyContact">Apellido</label>
+		    <input type="text" class="form-control" id="lastName" placeholder="Apellido" name="lastName">
+		  </div>
+	  	  <div class="form-group">
+		    <label for="inputCompanyEmail">Email:</label>
+		    <input type="text" class="form-control" id="companyEmail" placeholder="email" name="companyEmail">
+		  </div>
+		  <div class="form-group">
+		    <label for="inputCompanyPhone">Teléfono:</label>
+		    <input type="text" class="form-control" id="companyPhone" placeholder="Teléfono" name="companyPhone">
+		  </div>
+		  <div class="form-group">
+		    <label for="inputCompanyPhone">Area:</label>
+		     <div id="selectDivision" name="selectDivision"> </div>
+		  </div>
+		   <div class="form-group">
+		    <label for="inputCompanyPhone">Puesto:</label>
+		    <div id="selectPosition" name="selectPosition"> </div>
+		  </div>
+	   </div>
+	   <div class="form-group">
 	    <label for="inputObservation">Observaciones de la llamada</label>
 	    <input type="textarea" class="form-control" id="observation" placeholder="Observaciones" name="observation">
 	  </div>
@@ -53,14 +58,17 @@
 	   <div class="form-group">
 	    <input type="button" id="btnGuardar" class="btn btn-primary" name="Guardar" value="Guardar" onclick="registreCall(1);">
 	  </div>
-	
+
+</div>
 	
 	<script src="js/chosen.jquery.js" type="text/javascript"></script>
 	<script src="js/prism.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="js/script.js"></script>
 	<script type="text/javascript"> 
 		$(document).ready(function(){
-			
+			selectContact();
+			selectDivision();
+			selectPosition();
 			
 			 $('#radioBtn span').on('click', function(){
 			        var sel = $(this).data('value');
@@ -82,8 +90,8 @@
 			        $('span[data-toggle="'+tog+'"][data-value="'+sel+'"]').removeClass('notActive '+classes).addClass('active '+active);
 			    });
 			
-			
 		});
 		
 	</script>
-	
+
+

@@ -6,9 +6,22 @@ public class CallDTO {
 	private int crm_client_id;
 	private int crm_user_id;
 	private int crm_contact_id;
+	private int status;
+	private int letter;
 	
 	public CallDTO(){
 		
+	}
+	public CallDTO(int id_call, String comments, int crm_client_id,
+			int crm_user_id, int crm_contact_id, int status, int letter) {
+		super();
+		this.id_call = id_call;
+		this.comments = comments;
+		this.crm_client_id = crm_client_id;
+		this.crm_user_id = crm_user_id;
+		this.crm_contact_id = crm_contact_id;
+		this.status = status;
+		this.letter = letter;
 	}
 	
 	public CallDTO(int id_call, String comments, int crm_client_id,
@@ -28,6 +41,18 @@ public class CallDTO {
 	}
 	public String getComments() {
 		return comments;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public int getLetter() {
+		return letter;
+	}
+	public void setLetter(int letter) {
+		this.letter = letter;
 	}
 	public void setComments(String comments) {
 		this.comments = comments;

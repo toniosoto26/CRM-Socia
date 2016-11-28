@@ -14,10 +14,13 @@ import com.socia.DAO.CallDAO;
 import com.socia.DAO.ClientDAO;
 import com.socia.DAO.ConsecutiveDAO;
 import com.socia.DAO.ContactDAO;
+import com.socia.DAO.DivisionPositionDAO;
 import com.socia.DAO.TransactionDAO;
 import com.socia.DTO.CallDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
+import com.socia.DTO.DivisionDTO;
+import com.socia.DTO.PositionDTO;
 
 /**
  * Servlet implementation class Controller
@@ -56,6 +59,7 @@ public class Controller extends HttpServlet {
 		
 		ClientDAO objClient = new ClientDAO();
 		ContactDAO objContact = new ContactDAO();
+		DivisionPositionDAO objDivPos =new  DivisionPositionDAO();
 		ConsecutiveDAO	objConsecutive=	new ConsecutiveDAO();
 		CallDAO objCall = new CallDAO();
 		
@@ -102,52 +106,90 @@ public class Controller extends HttpServlet {
 		
 		//registro de llamadas 
 		if(option == 4){
+			
 			int variable=1;
 			String companyName="";
 			String contact ="";
 			String emailContact="";
 			String telContact="";
+			String lastName="";
 			String observations="";
 			int id_client=0;
 			int id_contact=0;
 			int consecutiveCall=0;
+			int addClient=0;
+			int addContact=0;
+			int statusCall=0;
+			int letter=0;
+			int division=0;
+			int position=0;
 			variable = Integer.parseInt(request.getParameter("variable"));
 			companyName=request.getParameter("selectClient");
-			contact =request.getParameter("companyContact");
+			System.out.println("companyName "+companyName);
+			contact =request.getParameter("selectContact");
+			System.out.println("contact "+contact);
+			lastName =request.getParameter("lastName");
+			System.out.println("lastName "+lastName);
 			emailContact=request.getParameter("companyEmail");
+			System.out.println("emailContact "+emailContact);
 			telContact=request.getParameter("companyPhone");
+			System.out.println("telContact "+telContact);
 			observations=request.getParameter("observation");
+			System.out.println("observations "+observations);
 			consecutiveCall=objConsecutive.getConsecutive("calls");
+			System.out.println("consecuito "+consecutiveCall);
+			addClient=Integer.parseInt(request.getParameter("AddClient"));
+			System.out.println("addclient "+addClient);
+			addContact=Integer.parseInt(request.getParameter("AddContact"));
+			System.out.println("addContact "+addContact);
+			statusCall=Integer.parseInt(request.getParameter("estadoLlamada"));
+			System.out.println("statusCall "+statusCall);
+			letter=Integer.parseInt(request.getParameter("carta"));
 			
+			if(request.getParameter("idDivision")!= null)
+				division=Integer.parseInt(request.getParameter("idDivision"));
+			if(request.getParameter("idPosition")!= null)
+				position=Integer.parseInt(request.getParameter("idPosition"));
+			int consecutiveClient=0;
+			int consecutiveContact=0;
 			
-			if(variable==0){
-				id_client=Integer.parseInt(request.getParameter("clientId"));
-				id_contact=Integer.parseInt(request.getParameter("contactId"));
-				//no se crea nuevo cliente
-				//inserto llamada
-				infoCall = new CallDTO(consecutiveCall, observations, id_client, 1, id_contact);
-				queries=objCall.insertNewCall(infoCall, queries);
-				
-				//queries=objClient.insertClientContact(id_client,id_contact,queries);
-				
-			}
-			else{
-				//se crea un nuevo cliente
-				int consecutiveClient=objConsecutive.getConsecutive("clients");
-				int consecutiveContact=objConsecutive.getConsecutive("contacts");
-				//inserto cliente 
+			System.out.println("Inicia a construir Insertos");
+			if(addClient == 1){
+				consecutiveClient=objConsecutive.getConsecutive("clients");
 				infoClient = new ClientDTO(consecutiveClient, companyName, 1);
 				queries=objClient.insertNewClient(infoClient, queries);
-				//inserto contacto 
-				infoContact = new ContactDTO(consecutiveContact, contact, "lastName", telContact, emailContact);
-				queries=objContact.insertNewContact(infoContact, queries);
-				//inserto cliente-contacto
-				queries=objClient.insertClientContact(consecutiveClient, consecutiveContact, queries);
-				//inserto llamada
-				infoCall = new CallDTO(consecutiveCall, observations, consecutiveClient, 1, consecutiveContact);
-				queries=objCall.insertNewCall(infoCall, queries);
+				System.out.println("agrega cliente");
+				
 			}
+			if(addContact == 1){
+				consecutiveContact=objConsecutive.getConsecutive("contacts");
+				infoContact = new ContactDTO(consecutiveContact, contact, lastName, telContact, emailContact,division,"division",position,"position");
+				queries=objContact.insertNewContact(infoContact, queries);
+				System.out.println("agrega contacto");
+			}
+				//inserto cliente-contacto
+			if(addClient==0){
+				id_client=Integer.parseInt(request.getParameter("clientId"));
+				consecutiveClient=id_client;
+			}
+			if(addContact==0){
+				id_contact=Integer.parseInt(request.getParameter("contactId"));
+				consecutiveContact=id_contact;
+			}
+				System.out.println("va insertar Cliente contacto");
+			if(addClient==1 || addContact==1){
+				queries=objClient.insertClientContact(consecutiveClient, consecutiveContact, queries);
+				System.out.println("inserto cliente contacto");
+			}
+
 			
+			//inserto llamada
+			System.out.println("va insertar llamada");
+			infoCall = new CallDTO(consecutiveCall, observations, consecutiveClient, 1, consecutiveContact,statusCall,letter);
+			queries=objCall.insertNewCall(infoCall, queries);
+			System.out.println("inserto llamda llamada");
+			
+			System.out.println("termina a construir Insertos");
 			boolean stat=false;
 			try
 			{
@@ -167,6 +209,40 @@ public class Controller extends HttpServlet {
 			session.setAttribute("insertCall", stat);
 			
 			url = "views/validateInsertCall.jsp";
+			
+		}
+		
+		if(option == 5){
+
+			ArrayList<DivisionDTO>	arrDivision	= new ArrayList<DivisionDTO>();
+			arrDivision = objDivPos.getDivisions();
+			
+			session.removeAttribute("arrDivision");
+			session.setAttribute("arrDivision", arrDivision);
+			
+			url = "utils/selectDivision.jsp";
+		}
+		
+		if(option == 6){
+			
+			ArrayList<PositionDTO>	arrPosition	= new ArrayList<PositionDTO>();
+			arrPosition = objDivPos.getPositions();
+			
+			session.removeAttribute("arrPosition");
+			session.setAttribute("arrPosition", arrPosition);
+			
+			url = "utils/selectPosition.jsp";
+		}
+		if(option == 7){
+			clientId = Integer.parseInt(request.getParameter("clientId"));
+			
+			int countCallClient=0;
+			countCallClient = objCall.getCountCallClient(clientId);
+			
+			session.removeAttribute("countCallClient");
+			session.setAttribute("countCallClient", countCallClient);
+			
+			url = "utils/countCalls.jsp";
 		}
 		
 		

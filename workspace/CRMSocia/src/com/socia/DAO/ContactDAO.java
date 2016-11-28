@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import com.socia.DTO.ContactDTO;
+import com.socia.DTO.DivisionDTO;
+import com.socia.DTO.PositionDTO;
 import com.socia.conexion.Conexion;
 
 public class ContactDAO {
@@ -33,15 +35,15 @@ public class ContactDAO {
 			sqlQuery.append(" join crm_mvs_contact mvs on contact.crm_contact_id = mvs.crm_contact_id ");
 			sqlQuery.append(" join crm_client client on mvs.crm_client_id = client.crm_client_id ");
 			sqlQuery.append(" where contact.status = 'A' ");
-			sqlQuery.append(" and client.crm_client_id = ? ");
+			//sqlQuery.append(" and client.crm_client_id = ? ");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
 			statement	=	connection.prepareStatement(sqlQuery.toString());
-			statement.setInt(1, clientId);
+			//statement.setInt(1, clientId);
 			
 			resultSet	=	statement.executeQuery();
-			
+			System.out.println("cliente :"+clientId);
 			while(resultSet.next()){
 				contactId = resultSet.getInt(1);
 				firstName = resultSet.getString(2);
@@ -81,14 +83,20 @@ public class ContactDAO {
 		String 					lastName	=	"";
 		String 					phone		=	"";
 		String 					email		=	"";
+		int 					company_division_id;
+		String 					division		=	"";
+		int 					id_position;
+		String 					position		=	"";
+
 
 		
 		try{
 			sqlQuery	=	new	StringBuilder();
-			sqlQuery.append(" select contact.* ");
-			sqlQuery.append(" from crm_contact contact ");
-			sqlQuery.append(" where contact.status = 'A' ");
-			sqlQuery.append(" and contact.crm_contact_id =?");
+			sqlQuery.append(" select c.crm_contact_id,c.first_name,c.last_name,c.email,c.phone,d.name,p.position,  ");
+			sqlQuery.append(" d.company_division_id, p.id_position");
+			sqlQuery.append(" from crm_contact c, crm_position p, crm_company_division d  ");
+			sqlQuery.append(" where c.company_division_id=d.company_division_id ");
+			sqlQuery.append(" and c.id_position=p.id_position and c.crm_contact_id =?");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
@@ -101,10 +109,14 @@ public class ContactDAO {
 				contactId = resultSet.getInt(1);
 				firstName = resultSet.getString(2);
 				lastName = resultSet.getString(3);
-				phone = resultSet.getString(4);
-				email = resultSet.getString(5);
+				email = resultSet.getString(4);
+				phone = resultSet.getString(5);
+				division = resultSet.getString(6);
+				position = resultSet.getString(7);
+				company_division_id = resultSet.getInt(8);
+				id_position =resultSet.getInt(9);
 				
-				contact = new ContactDTO(contactId, firstName, lastName, phone, email);
+				contact = new ContactDTO(contactId, firstName, lastName, phone, email,company_division_id,division,id_position,position);
 				
 			}
 			
@@ -123,18 +135,21 @@ public class ContactDAO {
 		return contact;
 	}
 	
-	
+
 	public ArrayList<StringBuilder> insertNewContact(ContactDTO contacts, ArrayList<StringBuilder> queries){
 		StringBuilder		sqlQuery	=	null;
 		
     	sqlQuery	=	new	StringBuilder();
-		sqlQuery.append(" INSERT INTO crm_contact (crm_contact_id, first_name,last_name,phone,email,status)");
+		sqlQuery.append(" INSERT INTO crm_contact (crm_contact_id, first_name,last_name,phone,email,status,date_created,id_position,company_division_id)");
 		sqlQuery.append(" VALUES ("+contacts.getContactId());
 		sqlQuery.append(",'"+contacts.getFirstName()+"'");
 		sqlQuery.append(",'"+contacts.getLastName()+"'");
 		sqlQuery.append(",'"+contacts.getPhone()+"'");
 		sqlQuery.append(",'"+contacts.getEmail()+"'");
-		sqlQuery.append(",'A')");
+		sqlQuery.append(",'A'");
+		sqlQuery.append(", Now(),"+contacts.getId_position());
+		sqlQuery.append(","+contacts.getCompany_division_id()+")");
+		
 		
 		queries.add(sqlQuery);
     

@@ -22,12 +22,14 @@ public class CallDAO {
 		StringBuilder		sqlQuery	=	null;
 		
     	sqlQuery	=	new	StringBuilder();
-		sqlQuery.append(" INSERT INTO crm_call (crm_call_id, comments, crm_client_id, crm_user_id, crm_contact_id)");
+		sqlQuery.append(" INSERT INTO crm_call (crm_call_id, comments, crm_client_id, crm_user_id, crm_contact_id,date_call,status,letter)");
 		sqlQuery.append(" VALUES ("+calls.getId_call());
 		sqlQuery.append(",'"+calls.getComments()+"'");
 		sqlQuery.append(","+calls.getCrm_client_id());
 		sqlQuery.append(","+calls.getCrm_user_id());
-		sqlQuery.append(","+calls.getCrm_contact_id()+")");
+		sqlQuery.append(","+calls.getCrm_contact_id());
+		sqlQuery.append(",Now(),"+calls.getStatus());
+		sqlQuery.append(","+calls.getLetter()+")");
 		
 		queries.add(sqlQuery);
     
@@ -78,6 +80,48 @@ public class CallDAO {
 	    
 	        return true;
 	    }
+	 
+	 public int getCountCallClient(int clientId){
+			Conexion			sociaDB		=	null;
+			Connection			connection	=	null;
+			PreparedStatement	statement	=	null;
+			ResultSet			resultSet	=	null;
+			StringBuilder		sqlQuery	=	null;
+			
+			int countCall=0;
+
+			
+			try{
+				sqlQuery	=	new	StringBuilder();
+				sqlQuery.append(" select count(crm_client_id) from crm_call where crm_client_id=?");
+
+				sociaDB		=	new	Conexion();
+				connection	=	sociaDB.getConnection1();
+				statement	=	connection.prepareStatement(sqlQuery.toString());
+				statement.setInt(1, clientId);
+				
+				resultSet	=	statement.executeQuery();
+				
+				if(resultSet.next()){
+					countCall = resultSet.getInt(1);
+				}
+				
+			}catch(Exception exception){
+				exception.printStackTrace();
+			}finally{
+				try{
+					resultSet.close();
+					statement.close();
+					connection.close();
+				}catch(Exception closeException){
+					closeException.printStackTrace();
+				}
+			}
+			
+			return countCall;
+		}
+	 
+	 
 
 		public static void main(String args[]){
 			new CallDAO();

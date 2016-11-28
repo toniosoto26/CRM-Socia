@@ -59,6 +59,24 @@ function loadClientInfo(selected){
 	});
 }
 
+
+function LoadCountCall(selected){
+	var clientId = selected.value;
+	$.ajax({
+		type: "post",
+		url : "Controller",
+		data: {
+			option: 7, 
+			clientId: clientId
+		},
+		success: function(response){
+			$("#countCalls").html(response);
+		},
+		error: function(){
+			alert("Error");
+		}
+	});
+}
 function loadContactInfo(selected){
 	var contactId = selected.value;
 	$.ajax({
@@ -98,14 +116,90 @@ function selectClient(){
 	})
 }
 
+
+function selectContact(){
+	var clientId = 1;
+	$.ajax({
+		type:"post",
+		url:"Controller",
+		data: {
+			option:2,
+			clientId: clientId
+		},
+		success: function(response){
+			$("#selectContact").html(response);
+			$(".chosen-select").chosen();
+		},
+		error: function(){
+			alert("no funciona");
+			
+		}
+		
+		
+		
+		
+	})
+}
+
+function selectPosition(){
+	$.ajax({
+		type:"post",
+		url:"Controller",
+		data: {
+			option:6
+		},
+		success: function(response){
+			$("#selectPosition").html(response);
+			$(".chosen-select").chosen();
+		},
+		error: function(){
+			alert("no funciona");
+			
+		}
+		
+		
+		
+		
+	})
+}
+
+function selectDivision(){
+	$.ajax({
+		type:"post",
+		url:"Controller",
+		data: {
+			option:5
+			
+		},
+		success: function(response){
+			$("#selectDivision").html(response);
+			$(".chosen-select").chosen();
+		},
+		error: function(){
+			alert("no funciona");
+			
+		}
+		
+		
+		
+		
+	})
+}
+
 function pintar(variable){
 	
 	if(variable==0){
 		$("#form1").load("views/newClient.jsp");
 		
 	}
-	else{
+	else if(variable==1){
 		$("#form1").load("views/searchClient.jsp");
+	}
+	else if(variable==2){
+		$("#form2").load("views/newContact.jsp");
+	}
+	else if(variable==3){
+		$("#form2").load("views/searchContact.jsp");
 	}
 }
 
@@ -153,10 +247,7 @@ function validateCalls(){
 	if($("#companyEmail").val() == ""){
 		mensaje="Es necesario Capturar email ";
 	}
-	if($("#companyContact").val() == ""){
-		mensaje="Es necesario Capturar un contact ";
-	}
-	
+
 	
 	return mensaje;
 }
