@@ -120,7 +120,64 @@ public class ControllerAppointment extends HttpServlet {
 					session.setAttribute("stat", stat);
 					url	=	"/views/appointments/responses/confirm.jsp";
 					break;
+				case 4:
+					int		rzM		=	Integer.parseInt(request.getParameter("rz"));
+					int		contIdM	=	Integer.parseInt(request.getParameter("contact"));
+					String 	phoneM	=	request.getParameter("phone");
+					String	emailM	=	request.getParameter("email");
+					System.out.println("ENTRA A MODIFICAR CONTACTO");
 					
+					ContactDTO	contact	=	new	ContactDTO();
+					contact.setContactId(contIdM);
+					contact.setEmail(emailM);
+					contact.setPhone(phoneM);
+					
+					ArrayList<StringBuilder> arrUpd	=	new	ArrayList<StringBuilder>();
+					arrUpd	=	new	AppointmentDAO().updateContactAppointment(contact, arrUpd);
+					try
+					{
+						statIn	=	true;
+						transaction.openConnection();
+						transaction.insertAll(arrUpd);
+						transaction.commit();
+						stat=true;
+					}catch(Exception exception){
+						statIn	=	false;
+						stat= false;
+						transaction.rollback();
+						exception.printStackTrace();
+					}finally{
+						transaction.closeConnection();
+					} 
+					session.removeAttribute("stat");
+					session.setAttribute("stat", stat);
+					url	=	"/views/appointments/responses/modifiedContact.jsp";
+					break;
+					
+				case 5:
+					int		rzV		=	Integer.parseInt(request.getParameter("rz"));
+					int		contIdV	=	Integer.parseInt(request.getParameter("contact"));
+					String	daysV	=	request.getParameter("days");
+					String	hrsV	=	request.getParameter("hrs");
+					
+					AppointmentDTO	appointV	=	new AppointmentDTO();
+					appointV.setCrmClientId(rzV);
+					appointV.setCrmContactId(contIdV);
+					
+					List<String>	arrInfoContact	=	new	AppointmentDAO().reviewAppointment(appointV, daysV);
+					System.out.println(arrInfoContact.size());
+					boolean	isTrue	=	false;
+					if(arrInfoContact.size() > 0)
+						isTrue	=	true;
+					System.out.println(isTrue);
+					session.removeAttribute("exists");
+					session.setAttribute("exists", isTrue);
+					session.removeAttribute("arrInfoC");
+					session.setAttribute("arrInfoC",arrInfoContact );
+					
+					url	=	"/views/appointments/responses/validateAppointment.jsp";
+					
+					break;
 					
 			}
 		}catch(Exception e){

@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<link rel="stylesheet" href="/CRMSocia/css/prism.css">
-<link rel="stylesheet" href="/CRMSocia/css/chosen.css">
-<link rel="stylesheet" href="/CRMSocia/css/address.css">
+<link rel="stylesheet" href="css/prism.css">
+<link rel="stylesheet" href="css/chosen.css">
+<link rel="stylesheet" href="css/address.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="/CRMSocia/css/bootstrap-datetimepicker.css">
 
 <script src="js/chosen.jquery.js" type="text/javascript"></script>
@@ -21,13 +22,19 @@
 </ol>
 <div class="titulo"><h3>Formato de generación de citas</h3></div>
 
-<div class="form-group">
-   <label for="inputCompanyName">Razón social:</label>
-   <div id="selectClient"></div>
-   <small id="companyNameHelp" class="form-text text-muted">Por favor, selecciona la razón social que necesites.</small>
-</div>
+	<div class="row top">
+    	<div class="col-sm-8 col-md-8">
+			<div class="form-group">
+		 		<label class="col-sm-12 col-md-6">Razón social</label>
+		    	<div id="selectClient" style="padding: 6px 12px;"></div>
+		    	<small id="companyNameHelp" class="form-text text-muted" style="padding: 6px 12px;">Por favor, selecciona la razón social que necesites.</small>
+		  	</div>
+		</div>
+	</div>
+	
 
-<label for="selectCompanyAddress" >Seleccione fecha y hora: </label>
+
+<label for="selectCompanyAddress" class="col-sm-12 col-md-6">Seleccione fecha y hora: </label>
 <div class="card12222">
 	<div class="col-md-12">
 	  	<div class="form-group row">
@@ -57,46 +64,52 @@
 	</div>
 </div>
 
-<div class="card">
-	<div id="result">
-		<div class="col-md-12">
-		  	<div class="form-group row">
-		  		<div class="col-md-6">
-				    <label for="inputCompanyEmail">Contacto:</label>
-				    <input type="text" class="form-control" id="companyEmail" name="companyEmail" placeholder="contacto">
-				</div>	  	
-			</div>
-		</div>
-		<div class="col-md-12">
-		  	<div class="form-group row">
-		  		<div class="col-md-6">
-				    <label for="inputCompanyEmail">Telefono:</label>
-				    <input type="text" class="form-control" id="companyEmail" name="companyEmail" placeholder="telefono">
-				</div>	  	
-			</div>
-		</div>
-		<div class="col-md-12">
-		  	<div class="form-group row">
-		  		<div class="col-md-6">
-				    <label for="inputCompanyEmail">Email:</label>
-				    <input type="text" class="form-control" id="companyEmail" name="companyEmail" placeholder="email">
-				</div>	  	
-			</div>
-		</div>
-	</div>
-	<div class="col-md-12">
-	  	<div class="form-group row">
-	  		<div class="col-md-6">
-			    <div class="form-group">
-	   <label for="inputCompanyName">BDM: </label>
-	   <div id="selectBDM"></div>
-	</div>
-			</div>	  	
-		</div>
-	</div>
-	
-</div>
 
- <div class="text-left">
+	<div id="result">
+		<div class="row">
+			<div class="col-sm-6 col-md-6">
+		  		<div class="form-group">
+				    <label class="col-sm-6 col-md-6">Contacto:</label>
+				    <input type="text" class="form-control" id="contactApo" name="contactApo" placeholder="contacto">
+				</div>
+	  		</div>
+		</div>
+	
+		<div class="row">
+	    	<div class="col-sm-6 col-md-6">
+		  		<div class="form-group">
+				    <label class="col-sm-6 col-md-6">Telefono:</label>
+					<input type="text" class="form-control" id="phoneContact" name="phoneContact" placeholder="telefono" >
+				</div>
+		  	</div>
+	  	</div>
+	  	<div class="row">
+	    	<div class="col-sm-6 col-md-6">
+		  		<div class="form-group">
+				    <label class="col-sm-6 col-md-6">Email:</label>
+					<input type="text" class="form-control" id="emailContact" name="emailContact" placeholder="email" >
+				</div>
+		  	</div>
+	  	</div>
+  	</div>
+  	<div class="row top">
+    	<div class="col-sm-8 col-md-8">
+			<div class="form-group">
+		 		<label class="col-sm-12 col-md-6">BDM:</label>
+		    	<div id="selectClient" style="padding: 6px 12px;"></div>
+		    	<div id="selectBDM" style="padding: 6px 12px;"></div>
+		  	</div>
+		</div>
+	</div>
+  	
+  	
+  
+  	
+	
+	
+	
+
+ <div class="text-left"  style="padding: 6px 12px;">
 	  <button type="button" class="btn btn-primary" onclick="saveInfo();">Agendar</button>
+	  <button type="button" id="modified" class="btn btn-primary" onclick="SaveModifiedInformation();">Guardar cambios</button>
  </div>

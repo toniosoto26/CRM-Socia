@@ -5,7 +5,8 @@
 $( document ).ready(function() {
 	selectClient();
 	selectBDM();
-	
+
+	$("#modified").hide();
 	 $('.form_datetime').datetimepicker({
 	        language:  'es',
 	        weekStart: 1,
@@ -58,7 +59,9 @@ function uploadInfo(selected){
 		
 	}else{
 		$("#phoneContact").val(trim(phone));
-		$("#emailContact").val(trim(email));	
+		$("#emailContact").val(trim(email));
+		$("#phoneContactH").val(trim(phone));
+		$("#emailContactH").val(trim(email));
 		$("#phoneContact").attr("readonly",false);
 		$("#emailContact").attr("readonly",false);
 		$("#idContactI").val(contactId);
@@ -106,32 +109,149 @@ function validateCon(){
 		
 }
 
+function reviewAppo(){
+	var	rz		=	$("#chosenClient");
+	var	contact	=	$("#contactI").val();
+	var arr = contact.split(',');
+	var contactId	=	arr[0];
+	var	days	=	$("#dtp_input2").val();
+	var	hrs		=	$("#dtp_input3").val();
+	
+	var datos = {
+			"rz"		:	rz.val(),
+			"contact"	:	contactId,
+			"days"		:	days,
+			"hrs"		:	hrs,
+			"opc"		:	5
+			};
+	$.ajax({
+		type: "post",
+		url : "ControllerAppointment",
+		data: datos,
+		success: function(response){
+			
+			if(response == ""){
+				alert("vacio");
+				return true;
+			}else{
+				alert("lleno");
+				return confirm(trim(response));
+			}
+		},
+		error: function(){
+			alert("Error");
+		}
+	});
+	
+}
+
 function saveInfo(){
 	if(validateCon()){
-		var	rz		=	$("#chosenClient").val();
-		var	days	=	$("#dtp_input2").val();
-		var	hrs		=	$("#dtp_input3").val();
+		//alert("-------------> "+reviewAppo());
+		//if(reviewAppo()){
+			
+			var	rz		=	$("#chosenClient").val();
+			var	days	=	$("#dtp_input2").val();
+			var	hrs		=	$("#dtp_input3").val();
+			var	contact	=	$("#contactI").val();
+			var arr = contact.split(',');
+			var contactId	=	arr[0];
+		
+			
+			var phoneI	=	$("#phoneContact").val();
+			var	emailI	=	$("#emailContact").val();
+			var	bdmI	=	$("#bdmI").val();
+			var	nameI	=	$("#idNameI").val();
+			
+			var	datos ={
+						"rz"		:	rz,
+						"days"		:	days,
+						"hrs"		:	hrs,
+						"contact"	:	contactId,
+						"phoneI"	:	phoneI,
+						"emailI"	:	emailI,
+						"bdmI"		:	bdmI,
+						"nameI"		:	nameI,
+						"opc"		:	3
+						}
+			
+			$.ajax({
+				type: "post",
+				url : "ControllerAppointment",
+				data: datos,
+				success: function(response){
+					alert(trim(response));
+					$("#pageContent").load("/CRMSocia/views/appointments/generateAppointments.jsp");
+				},
+				error: function(){
+					alert("Error");
+				}
+			});
+		//}
+	}
+}
+
+function validateMod(){
+	var	rz		=	$("#chosenClient");
+	var phone	=	$("#phoneContact");
+	var	email	=	$("#emailContact");
+	
+	if(rz.val() == 5){
+		alert("Debe seleccionar Razón Social.");
+		return false;
+	}else if(phone.val() == ""){
+		alert("El campo de telefono no debe de ser vacio.");
+		return false;
+	}else if(email.val() == ""){
+		alert("El campo de email no debe de ser vacio.");
+		return false;
+	}else{
+		return true;
+	}
+}
+
+function modifiedInfo(){
+	
+	var phone	=	$("#phoneContact");
+	var	phoneM	=	$("#phoneContactH");
+	var	email	=	$("#emailContact");
+	var	emailM	=	$("#emailContactH");
+	
+	if(phone.val() !== phoneM.val() || email.val() !== emailM.val()){
+		$("#modified").show();
+		if(phone.val() == ""){
+			alert("El campo Telefono no debe ser vacio.");
+			return false;
+		}else if(email.val() == ""){
+			alert("El campo Email no debe ser vacio.");
+			return false;
+		}else{
+			return true;
+		}
+	}
+	else{
+		$("#modified").hide();
+		return false;
+	}
+	
+}
+
+function SaveModifiedInformation(){
+	if(modifiedInfo()){
+		var	rz		=	$("#chosenClient");
+		var phone	=	$("#phoneContact");
+		var	email	=	$("#emailContact");
 		var	contact	=	$("#contactI").val();
 		var arr = contact.split(',');
 		var contactId	=	arr[0];
-	
 		
-		var phoneI	=	$("#phoneContact").val();
-		var	emailI	=	$("#emailContact").val();
-		var	bdmI	=	$("#bdmI").val();
-		var	nameI	=	$("#idNameI").val();
-		
-		var	datos ={
-					"rz"		:	rz,
-					"days"		:	days,
-					"hrs"		:	hrs,
-					"contact"	:	contactId,
-					"phoneI"	:	phoneI,
-					"emailI"	:	emailI,
-					"bdmI"		:	bdmI,
-					"nameI"		:	nameI,
-					"opc"		:	3
-					}
+		var datos = {
+					"rz"	:	rz.val(),
+					"phone"	:	phone.val(),
+					"email"	:	email.val(),
+					"contact":	contactId,
+					"opc"	:	4
+					};
 		
 		$.ajax({
 			type: "post",
@@ -139,11 +259,12 @@ function saveInfo(){
 			data: datos,
 			success: function(response){
 				alert(trim(response));
-				$("#pageContent").load("/CRMSocia/views/appointments/generateAppointments.jsp");
 			},
 			error: function(){
 				alert("Error");
 			}
 		});
+		
 	}
 }
+

@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.socia.DTO.AppointmentDTO;
 import com.socia.DTO.CallDTO;
+import com.socia.DTO.ContactDTO;
 import com.socia.conexion.Conexion;
 
 public class AppointmentDAO {
@@ -119,4 +120,82 @@ public class AppointmentDAO {
     
         return queries;
     }
+	
+	public	ArrayList<StringBuilder> updateContactAppointment(ContactDTO contact, ArrayList<StringBuilder> queries){
+		StringBuilder	updQuery	=	null;
+		
+		updQuery	=	new	StringBuilder();
+		updQuery.append(" Update crm_contact ");
+		updQuery.append(" set phone = ");
+		updQuery.append(contact.getPhone());
+		updQuery.append(", email = '");
+		updQuery.append(contact.getEmail());
+		updQuery.append("' ");
+		updQuery.append(" where crm_contact_id = ");
+		updQuery.append(contact.getContactId() );
+		updQuery.append(" and status = 'A' ");
+		
+		queries.add(updQuery);
+		
+		return queries;
+	}
+	
+	public List<String>	reviewAppointment(AppointmentDTO appoint, String dia){
+		List<String>			contactAppo	=	new	ArrayList<String>();
+		Connection				con			=	null;
+		PreparedStatement		ps			=	null;
+		ResultSet				rs			=	null;
+		Conexion				conexion	=	null;
+		StringBuilder			query		=	null;
+		String					fName		=	"";
+		String					lName		=	"";
+		String					dAppoint	=	"";
+		
+		try{
+			query	=	new	StringBuilder();
+			query.append(" select	c.first_name ");
+			query.append(" ,c.last_name ");
+			query.append(" ,a.date	");
+			query.append(" from crm_appointment a	");
+			query.append(" join crm_contact c on c.crm_contact_id = a.crm_contact_id ");
+			query.append(" where crm_client_id = ?");
+			query.append(" and a.crm_contact_id = ?	");
+			query.append(" and date >= ? ");
+			query.append(" and date <= ? ");
+			
+			conexion	=	new	Conexion();
+			con			=	conexion.getConnection1();
+			ps			=	con.prepareStatement(query.toString());
+			ps.setInt(1, appoint.getCrmClientId());
+			ps.setInt(2,appoint.getCrmContactId());
+			ps.setString(3, dia+" 00:00");
+			ps.setString(4, dia+" 23:59");
+			
+			/*System.out.println(query.toString());
+			System.out.println("1 "+ appoint.getCrmClientId());
+			System.out.println("2 "+ appoint.getCrmContactId());
+			System.out.println("3 "+ dia+" 00:00");
+			System.out.println("4 "+ dia+" 23:59");*/
+			rs	=	ps.executeQuery();
+			
+			while(rs.next()){
+				fName		=	rs.getString(1);
+				lName		=	rs.getString(2);
+				dAppoint	=	rs.getString(3);
+				
+				contactAppo.add(fName+" "+lName+" en la fecha "+dAppoint);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				ps.close();
+				con.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		return contactAppo;
+	}
 }
