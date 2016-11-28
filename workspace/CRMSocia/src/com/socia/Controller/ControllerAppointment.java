@@ -18,6 +18,7 @@ import com.socia.DAO.TransactionDAO;
 import com.socia.DTO.AppointmentDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
+import com.socia.DTO.LoginDTO;
  
 /**
  * Servlet implementation class ControllerAppointment
@@ -74,46 +75,109 @@ public class ControllerAppointment extends HttpServlet {
 					url	=	"/views/appointments/responses/getContacts.jsp";
 					break;
 				case 3:
-					int	rz			=	Integer.parseInt(request.getParameter("rz"));
-					String	days	=	request.getParameter("days");
-					String	hrs		=	request.getParameter("hrs");
+					int		rz		=	Integer.parseInt(request.getParameter("rz"));
 					int		contId	=	Integer.parseInt(request.getParameter("contact"));
 					int		phone	=	Integer.parseInt(request.getParameter("phoneI"));
+					int		bdmI	=	Integer.parseInt(request.getParameter("bdmI"));
+					int		userId	=	((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId();
+					String	days	=	request.getParameter("days");
+					String	hrs		=	request.getParameter("hrs");
 					String	email	=	request.getParameter("emailI");
-					String	bdmI	=	request.getParameter("bdmI");
 					String	nameI	=	request.getParameter("nameI");
+					boolean	statIn	=	false;
+					
 									
 					AppointmentDTO	c	=	new AppointmentDTO();
-					int		conse	=	new AppointmentDAO().getConse()+1 ;
+					int		conse	=	new ConsecutiveDAO().getConsecutive("appointment");
 					c.setCrmAppointmentId(conse);
 					c.setDate(days+" "+hrs);
 					c.setCrmClientId(rz);
-					c.setCrmUserId(2);
-					c.setCrmClientId(rz);
-					c.setcrmBdmId(1);
-					
-					session.setAttribute("nombre", nameI);
-					url	=	"/views/appointments/responses/confirm.jsp";
+					c.setCrmUserId(userId);
+					c.setCrmContactId(contId);
+					c.setcrmBdmId(bdmI);
 
 					ArrayList<StringBuilder>	arrQuerys	=	new	ArrayList<StringBuilder>();
-				//	arrQuerys	=	new AppointmentDAO().insertAppointment(c, arrQuerys);
-					/*try
+					arrQuerys	=	new AppointmentDAO().insertAppointment(c, arrQuerys);
+					try
 					{
+						statIn	=	true;
 						transaction.openConnection();
 						transaction.insertAll(arrQuerys);
 						transaction.commit();
 						stat=true;
 					}catch(Exception exception){
+						statIn	=	false;
 						stat= false;
 						transaction.rollback();
 						exception.printStackTrace();
 					}finally{
 						transaction.closeConnection();
-					}
-					*/
+					} 
 					
+					session.removeAttribute("nombre");
+					session.setAttribute("nombre", nameI);
+					session.removeAttribute("stat");
+					session.setAttribute("stat", stat);
+					url	=	"/views/appointments/responses/confirm.jsp";
+					break;
+				case 4:
+					int		rzM		=	Integer.parseInt(request.getParameter("rz"));
+					int		contIdM	=	Integer.parseInt(request.getParameter("contact"));
+					String 	phoneM	=	request.getParameter("phone");
+					String	emailM	=	request.getParameter("email");
+					System.out.println("ENTRA A MODIFICAR CONTACTO");
+					
+					ContactDTO	contact	=	new	ContactDTO();
+					contact.setContactId(contIdM);
+					contact.setEmail(emailM);
+					contact.setPhone(phoneM);
+					
+					ArrayList<StringBuilder> arrUpd	=	new	ArrayList<StringBuilder>();
+					arrUpd	=	new	AppointmentDAO().updateContactAppointment(contact, arrUpd);
+					try
+					{
+						statIn	=	true;
+						transaction.openConnection();
+						transaction.insertAll(arrUpd);
+						transaction.commit();
+						stat=true;
+					}catch(Exception exception){
+						statIn	=	false;
+						stat= false;
+						transaction.rollback();
+						exception.printStackTrace();
+					}finally{
+						transaction.closeConnection();
+					} 
+					session.removeAttribute("stat");
+					session.setAttribute("stat", stat);
+					url	=	"/views/appointments/responses/modifiedContact.jsp";
 					break;
 					
+				case 5:
+					int		rzV		=	Integer.parseInt(request.getParameter("rz"));
+					int		contIdV	=	Integer.parseInt(request.getParameter("contact"));
+					String	daysV	=	request.getParameter("days");
+					String	hrsV	=	request.getParameter("hrs");
+					
+					AppointmentDTO	appointV	=	new AppointmentDTO();
+					appointV.setCrmClientId(rzV);
+					appointV.setCrmContactId(contIdV);
+					
+					List<String>	arrInfoContact	=	new	AppointmentDAO().reviewAppointment(appointV, daysV);
+					System.out.println(arrInfoContact.size());
+					boolean	isTrue	=	false;
+					if(arrInfoContact.size() > 0)
+						isTrue	=	true;
+					System.out.println(isTrue);
+					session.removeAttribute("exists");
+					session.setAttribute("exists", isTrue);
+					session.removeAttribute("arrInfoC");
+					session.setAttribute("arrInfoC",arrInfoContact );
+					
+					url	=	"/views/appointments/responses/validateAppointment.jsp";
+					
+					break;
 					
 			}
 		}catch(Exception e){

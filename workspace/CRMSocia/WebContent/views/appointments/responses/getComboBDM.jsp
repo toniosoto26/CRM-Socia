@@ -6,7 +6,7 @@
 <select data-placeholder="Seleccion el cliente"  id="bdmI" class="chosen-select form-control" tabindex="-1" >
 	<option value="0">Seleccionar...</option>
 	<c:forEach items="${sessionScope.arrBDM}" var="bdm">
-		<option value='<c:out value="${bdm.email}"></c:out>'><c:out value="${bdm.firstName}"></c:out> <c:out value="${bdm.lastName}"></c:out></option>
+		<option value='<c:out value="${bdm.crmUserId}"></c:out>'><c:out value="${bdm.firstName}"></c:out> <c:out value="${bdm.lastName}"></c:out></option>
 	</c:forEach>
 </select>
     

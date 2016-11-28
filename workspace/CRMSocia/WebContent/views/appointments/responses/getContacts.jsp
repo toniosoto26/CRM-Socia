@@ -6,11 +6,11 @@
     
  <c:choose>
  	<c:when test="${not empty contactos}">
- 		<div class="col-md-12">
-		  	<div class="form-group row">
-		  		<div class="col-md-6">
-				    <label for="inputCompanyEmail">Contacto:</label>
-				   <select data-placeholder="Seleccion el cliente"  id="contactI" name="contactI" class="chosen-select form-control" tabindex="-1" onchange="uploadInfo(this)" >
+ 		<div class="row">
+ 			<div class="col-sm-6 col-md-6">
+		  		<div class="form-group">
+		  			 <label class="col-sm-6 col-md-6">Contacto:</label>
+		  			 <select data-placeholder="Seleccion el cliente"  id="contactI" name="contactI" class="chosen-select form-control" tabindex="-1" onchange="uploadInfo(this)" >
 						<option value="0">Seleccionar...</option>
 						<c:forEach items="${sessionScope.contactos}" var="varCon">
 							<option value='<c:out value="${varCon.contactId}"></c:out>,
@@ -24,50 +24,71 @@
 					</select>
 					<input type="hidden" id="idContactI" name="idContactI">
 					<input type="hidden" id="idNameI" name="idNameI">
-				</div>	  	
-			</div>
-		</div>
-		<div class="col-md-12">
-		  	<div class="form-group row">
-		  		<div class="col-md-6">
-				    <label for="inputCompanyEmail">Telefono:</label>
-				     <input type="text" class="form-control" id="phoneContact" name="phoneContact" placeholder="sin telefono" readonly="readonly">
-				</div>	  	
-			</div>
-		</div>
-		<div class="col-md-12">
-		  	<div class="form-group row">
-		  		<div class="col-md-6">
-				    <label for="inputCompanyEmail">Email:</label>
-				    <input type="text" class="form-control" id="emailContact" name="emailContact" placeholder="sin email" readonly="readonly">
-				</div>	  	
-			</div>
-		</div>
+		  		</div>
+		  	</div>
+ 		</div>
+		
+		<div class="row">
+	    	<div class="col-sm-6 col-md-6">
+		  		<div class="form-group">
+				    <label class="col-sm-6 col-md-6">Telefono:</label>
+					 <input type="text" class="form-control" id="phoneContact" name="phoneContact" onkeyup="modifiedInfo()" placeholder="sin telefono" readonly="readonly">
+				     <input type="hidden" id="phoneContactH" name="phoneContactH">
+				</div>
+		  	</div>
+	  	</div>
+		
+		
+		<div class="row">
+	    	<div class="col-sm-6 col-md-6">
+		  		<div class="form-group">
+				    <label class="col-sm-6 col-md-6">Email:</label>
+					<input type="text" class="form-control" id="emailContact" name="emailContact" onkeyup="modifiedInfo()" placeholder="sin email" readonly="readonly">
+				    <input type="hidden" id="emailContactH" name="emailContactH">
+				</div>
+		  	</div>
+	  	</div>
+	  	
  	</c:when>
  	<c:otherwise>
- 		<div class="col-md-12">
-		  	<div class="form-group row">
-		  		<div class="col-md-6">
-				    <label for="inputCompanyEmail">Contacto:</label>
-				    <input type="text" class="form-control" id="contactI" name="contactI" placeholder="sin contacto">
+ 	
+ 		<div class="row">
+			<div class="col-sm-6 col-md-6">
+		  		<div class="form-group">
+				    <label class="col-sm-6 col-md-6">Contacto:</label>
+				   <input type="text" class="form-control" id="contactI" name="contactI" placeholder="sin contacto">
 				    <input type="hidden" id="idContactI" name="idContactI" >
 				    <input type="hidden" id="idNameI" name="idNameI">
-				</div>	  	
-			</div>
+				</div>
+	  		</div>
 		</div>
-		<div class="col-md-12">
-		  	<div class="form-group row">
-		  		<div class="col-md-6">
-				    <label for="inputCompanyEmail">Telefono:</label>
-				    <input type="text" class="form-control" id="phoneContact" name="phoneContact" placeholder="sin telefono">
-				</div>	  	
-			</div>
-		</div>
+		
+		<div class="row">
+	    	<div class="col-sm-6 col-md-6">
+		  		<div class="form-group">
+				    <label class="col-sm-6 col-md-6">Telefono:</label>
+					 <input type="text" class="form-control" id="phoneContact" name="phoneContact" placeholder="sin telefono">
+				    <input type="hidden" id="phoneContactH" name="phoneContactH">
+				</div>
+		  	</div>
+	  	</div>
+		
+		<div class="row">
+	    	<div class="col-sm-6 col-md-6">
+		  		<div class="form-group">
+				    <label class="col-sm-6 col-md-6">Email:</label>
+					 <input type="text" class="form-control" id="emailContact" name="emailContact" placeholder="sin email">
+				    <input type="hidden" id="emailContactH" name="emailContactH">
+				</div>
+		  	</div>
+	  	</div>
+		
 		<div class="col-md-12">
 		  	<div class="form-group row">
 		  		<div class="col-md-6">
 				    <label for="inputCompanyEmail">Email:</label>
 				    <input type="text" class="form-control" id="emailContact" name="emailContact" placeholder="sin email">
+				    <input type="hidden" id="emailContactH" name="emailContactH">
 				</div>	  	
 			</div>
 		</div>

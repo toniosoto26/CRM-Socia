@@ -8,6 +8,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Grupo Socia CRM</title>
 	<!-- Bootstrap -->
+	
+	<link rel="stylesheet" href="css/adminlte.min.css">
 	<link rel="stylesheet" type="text/css" href="./css/bootstrap_new.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 	
@@ -23,14 +25,14 @@
 	</nav>
 		<div class="gradient"></div>
 		<div id="experience">
-			<canvas id="lines" width="1366" height="500" style="display: block;"></canvas>
+			<canvas id="lines" width="1366" height="500" style="display: block;position: absolute;z-index: 2;"></canvas>
 		</div>
 	<div class="login">
-    	<form class="ingresar" style="position: relative;">
-			<div class="form-group">
+    	<form class="ingresar" style="position: relative;z-index: 3;">
+			<div class="form-group text-center">
 				<input type="text" class="form-control" id="user" name="user"  placeholder="Usuario">
 			</div>
-			<div class="form-group">
+			<div class="form-group text-center">
 				<input type="password" class="form-control" id="passwd" name="passwd" placeholder="Contraseña">
 			</div>
 			<div class="text-center">
