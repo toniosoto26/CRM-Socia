@@ -9,7 +9,7 @@
 
 <div id="form1">
 <div class="form-group">
-		<label for="lastName">Seleccione Tipo de Cliente:</label>
+		<label for="lastName">Seleccione Tipo de Cliente :</label>
 </div>
 <input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="pintar(1);">
 <input type="button" class="btn btn-primary" id="btnSinSelect" name="btnSinSelect" value="Nuevo" onclick="pintar(0);">
