@@ -1,0 +1,57 @@
+ALTER TABLE `socia`.`company_division` 
+RENAME TO  `socia`.`crm_company_division` ;
+
+
+
+CREATE TABLE `socia`.`crm_position` (
+  `id_position` INT NOT NULL,
+  `position` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_position`));
+
+
+ALTER TABLE `socia`.`crm_contact` 
+ADD COLUMN `date_created` DATE NULL AFTER `status`,
+ADD COLUMN `id_position` INT NULL AFTER `date_created`,
+ADD COLUMN `company_division_id` INT NULL AFTER `id_position`,
+ADD INDEX `fk_id_position_idx` (`id_position` ASC),
+ADD INDEX `fk_company_division_id_idx` (`company_division_id` ASC);
+ALTER TABLE `socia`.`crm_contact` 
+ADD CONSTRAINT `fk_id_position`
+  FOREIGN KEY (`id_position`)
+  REFERENCES `socia`.`crm_position` (`id_position`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_company_division_id`
+  FOREIGN KEY (`company_division_id`)
+  REFERENCES `socia`.`crm_company_division` (`company_division_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `socia`.`crm_client` 
+ADD COLUMN `date_created` DATE NULL AFTER `crm_bdm_id`;
+
+ALTER TABLE `socia`.`crm_call` 
+ADD COLUMN `date_call` DATETIME NULL AFTER `crm_contact_id`;
+
+
+UPDATE `socia`.`crm_company_division` SET `name`='Direccion' WHERE `company_division_id`='2';
+INSERT INTO `socia`.`crm_company_division` (`company_division_id`, `name`) VALUES ('4', 'Ventas');
+INSERT INTO `socia`.`crm_company_division` (`company_division_id`, `name`) VALUES ('5', 'Contabilidad');
+INSERT INTO `socia`.`crm_company_division` (`company_division_id`, `name`) VALUES ('6', 'Produccion');
+INSERT INTO `socia`.`crm_company_division` (`company_division_id`, `name`) VALUES ('7', 'Administracion');
+
+
+INSERT INTO `socia`.`crm_position` (`id_position`, `position`) VALUES ('1', 'Gerente General');
+INSERT INTO `socia`.`crm_position` (`id_position`, `position`) VALUES ('2', 'Gerente Financiero');
+INSERT INTO `socia`.`crm_position` (`id_position`, `position`) VALUES ('3', 'Supervisor');
+INSERT INTO `socia`.`crm_position` (`id_position`, `position`) VALUES ('4', 'Ejecutivo');
+INSERT INTO `socia`.`crm_position` (`id_position`, `position`) VALUES ('5', 'Analista');
+INSERT INTO `socia`.`crm_position` (`id_position`, `position`) VALUES ('6', 'Asistente');
+
+
+
+ALTER TABLE `socia`.`crm_call` 
+ADD COLUMN `status` INT NULL AFTER `date_call`,
+ADD COLUMN `letter` INT NULL AFTER `status`;
+
+
