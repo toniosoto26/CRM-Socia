@@ -577,7 +577,7 @@
 		                		<table class="invoice"  cellspacing="0" cellpadding="0" border="0" width="100%">
 									<tr>
 										<td>
-											<table class="invoice-items" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">
+											<table class="invoice-items" cellpadding="0" cellspacing="0" style="width:100%;font-family: Arial, sans-serif; color: #333333; font-size: 12px;">
 												<tr  class="header aligncenter" style="font-weight:bold;">
 													<td>Cantidad</td>
 													<td>Producto</td>
@@ -697,6 +697,5 @@
 		</table>
 </div>
 <div class="modal-footer">
-	<a class="btn btn-primary" onclick="$('.modal-body > form').submit();">Enviar</a>
 	<a class="btn btn-primary" data-dismiss="modal">Cerrar</a>
 </div>

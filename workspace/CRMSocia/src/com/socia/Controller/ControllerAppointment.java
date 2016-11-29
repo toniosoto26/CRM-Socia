@@ -178,6 +178,16 @@ public class ControllerAppointment extends HttpServlet {
 					url	=	"/views/appointments/responses/validateAppointment.jsp";
 					
 					break;
+				
+				case 6:
+					List<AppointmentDTO>	arrAppointments	=	new AppointmentDAO().getAppointments();
+					System.out.println(arrAppointments.toString());
+					
+					
+					session.removeAttribute("calendarAppointment");
+					session.setAttribute("calendarAppointment", arrAppointments);
+					url	=	"/views/appointments/responses/getAppointment.jsp";
+					break;
 					
 			}
 		}catch(Exception e){

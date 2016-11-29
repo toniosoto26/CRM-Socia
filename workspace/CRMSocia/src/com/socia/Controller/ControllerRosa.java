@@ -68,6 +68,8 @@ public class ControllerRosa extends HttpServlet {
 		double							exchangeRate		=	0;
 		int								totalProducts		=	0;
 		int								quotationId			= 	0;
+		String							addItem				=	"";
+		String							description			=	"";
 		
 		String							activeTab			=	"";
 		int 							addressId			=	0;
@@ -84,6 +86,7 @@ public class ControllerRosa extends HttpServlet {
 		String[]						to					= 	{"rmmi_ros@hotmail.com", "jossoto14@gmail.com", "vidal.sistemas@hotmail.com"};
 		
 		int 							itemIndex 			=	0; 
+		boolean							insert				= 	false;
 		
 		/** DAO */
 		ItemDAO							objItem				=	new ItemDAO();
@@ -119,13 +122,13 @@ public class ControllerRosa extends HttpServlet {
 			arrAddress = objAddress.getAddressByClient(clientId);
 			
 			session.removeAttribute("arrAddress");
-			session.setAttribute("arrAddress", arrAddress);
+			if(arrAddress.size() > 0)
+				session.setAttribute("arrAddress", arrAddress);
+			else
+				session.setAttribute("arrAddress", null);
 			
 			url = "utils/selectAddress.jsp";
-		}else if(option == 2 || option == 3){
-			/** User */
-			login = (LoginDTO)session.getAttribute("sessionLogin");
-			
+		}else if(option == 2 || option == 3 || option == 6){
 			/** Address */
 			activeTab = request.getParameter("activeTab");
 			
@@ -157,19 +160,31 @@ public class ControllerRosa extends HttpServlet {
 			if(option == 2)
 				quotationId = objConsecutive.getConsecutive("quotations");
 			
-			quotation = new QuotationDTO(quotationId, addressId, contactId, currency, exchangeRate, 1);
+			quotation = new QuotationDTO(quotationId, addressId, contactId, currency, exchangeRate,  ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 			
 			/** Quotation details*/
 			for(int index = 1; index <= totalProducts; index++){
+				addItem = "";
+				
 				itemId = request.getParameter("itemNum"+index);
 				quantity = Integer.parseInt(request.getParameter("quantity"+index));
 				warranty = request.getParameter("warranty"+index);
 				estimatedShipping = request.getParameter("estimatedShipping"+index);
 				unitPrice = Double.parseDouble(request.getParameter("unitPrice"+index));
 				
-				item = objItem.getItemById(itemId);
+				addItem = request.getParameter("addItem"+index);
 				
-				quotationDetail = new QuotationDetailDTO(quotationId, itemId, item.getDescription(), warranty, unitPrice, quantity, estimatedShipping);
+				if(addItem.equals("true")){ 
+					description = request.getParameter("description"+index);
+					item = new ItemDTO(itemId, description, "PZA", currency, 0.16, unitPrice);
+					queries = objItem.insertNewItem(item, queries);
+				}
+				else{
+					item = objItem.getItemById(itemId);
+					description = item.getDescription();
+				}
+					
+				quotationDetail = new QuotationDetailDTO(quotationId, itemId, description, warranty, unitPrice, quantity, estimatedShipping);
 				arrQuotationDetail.add(quotationDetail);
 			}
 				
@@ -179,12 +194,15 @@ public class ControllerRosa extends HttpServlet {
 			client = objClient.getClientById(clientId);
 			contact = objContact.getContactsById(contactId);
 			
-			if(option == 2){
+			if(option == 2 || option == 6){
 				/** INSERTS */
 				try
 				{
-					if(activeTab.equals("AGREGAR"))
+					if(activeTab.equals("AGREGAR")){
 						queries = objAddress.insertAddress(address, queries);
+						queries = objAddress.insertContactAddress(clientId, addressId, queries);
+						System.out.println(queries.toString());
+					}
 					queries = objQuotation.insertQuotation(quotation, queries);
 					queries = objQuotationDetail.insertQuotationDetails(arrQuotationDetail, queries);
 					
@@ -193,15 +211,30 @@ public class ControllerRosa extends HttpServlet {
 					
 					transaction.commit();
 					
+					insert = true;
 					body = objQuotation.generateMail(client, contact, address, quotation, arrQuotationDetail);
-					objMail.sendFromGMail("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, "Cotización", body.toString());
+					
+					if(option == 2){
+						objMail.sendFromGMail("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, "Cotización", body.toString());
+					}
+					else if(option == 6){
+						objQuotation.generateExcelFile(client, contact, address, quotation, arrQuotationDetail);
+						objMail.sendFromGMailAttachment("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, "Cotización", body.toString());
+					}
 					
 				}catch(Exception exception){
+					insert = false;
 					transaction.rollback();
 					exception.printStackTrace();
 				}finally{
 					transaction.closeConnection();
 				}
+				
+				session.removeAttribute("insertQuotation");
+				session.setAttribute("insertQuotation", insert);
+				
+				url = "views/quotations/responses/validateInsertQuotation.jsp";
+				
 			}else if(option == 3){
 				session.removeAttribute("quotation");
 				session.setAttribute("quotation", quotation);
@@ -217,7 +250,7 @@ public class ControllerRosa extends HttpServlet {
 				
 				session.removeAttribute("contactPreview");
 				session.setAttribute("contactPreview", contact);
-			}	
+			}
 		}else if(option == 4){
 			if(session.getAttribute("arrItems") == null)
 			{
@@ -246,6 +279,10 @@ public class ControllerRosa extends HttpServlet {
 			session.setAttribute("itemIndex", itemIndex);
 			
 			url = "views/quotations/responses/itemDescription.jsp";
+		}else if(option == 6){
+			client = objClient.getClientById(1);
+			contact = objContact.getContactsById(1);
+			address = objAddress.getAddressById(1);
 		}
 		
 		request.getRequestDispatcher(url).forward(request, response);

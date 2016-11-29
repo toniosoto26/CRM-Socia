@@ -198,4 +198,58 @@ public class AppointmentDAO {
 		}
 		return contactAppo;
 	}
+
+	public List<AppointmentDTO>	getAppointments(){
+		List<AppointmentDTO>	arrAppo		=	new	ArrayList<AppointmentDTO>();
+		AppointmentDTO			appointment	= 	new AppointmentDTO();
+		Connection				con			=	null;
+		PreparedStatement		ps			=	null;
+		ResultSet				rs			=	null;
+		Conexion				conexion	=	null;
+		StringBuilder			query		=	null;
+		String					companyName	=	"";
+		String					fName		=	"";
+		String					lName		=	"";
+		String					dAppoint	=	"";
+		
+		try{
+			query	=	new	StringBuilder();
+			query.append(" SELECT client.company_name, appointment.date, contact.first_name, contact.last_name ");
+			query.append(" FROM crm_appointment appointment, crm_client client, crm_contact contact ");
+			query.append(" where appointment.crm_client_id = client.crm_client_id ");
+			query.append(" and appointment.crm_contact_id = contact.crm_contact_id ");
+			
+			conexion	=	new	Conexion();
+			con			=	conexion.getConnection1();
+			ps			=	con.prepareStatement(query.toString());
+			
+			
+			rs	=	ps.executeQuery();
+			
+			while(rs.next()){
+				companyName	=	rs.getString(1);
+				dAppoint	=	rs.getString(2);
+				fName		=	rs.getString(3);
+				lName		=	rs.getString(4);
+				
+				appointment.setCompanyName(companyName);
+				appointment.setDate(dAppoint.replace(" ", "T"));
+				appointment.setFirstName(fName);
+				appointment.setLastName(lName);
+				
+				arrAppo.add(appointment);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				ps.close();
+				con.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		return arrAppo;
+	}
 }

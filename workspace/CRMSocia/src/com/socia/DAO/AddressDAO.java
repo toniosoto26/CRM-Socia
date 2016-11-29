@@ -142,7 +142,7 @@ public class AddressDAO {
 		
     	sqlQuery	=	new	StringBuilder();
 		sqlQuery.append(" INSERT INTO crm_address (crm_address_id, street, ext_num, int_num, suburb, ");
-									 sqlQuery.append("city, state, country, zip_code) ");
+									 sqlQuery.append("city, state, country, zip_code, status) ");
 		sqlQuery.append(" VALUES ("+address.getAddressId());
 		sqlQuery.append(",'"+address.getStreet()+"'");
 		sqlQuery.append(",'"+address.getExtNum()+"'");
@@ -151,7 +151,21 @@ public class AddressDAO {
 		sqlQuery.append(",'"+address.getCity()+"'");
 		sqlQuery.append(",'"+address.getState()+"'");
 		sqlQuery.append(",'"+address.getCountry()+"'");
-		sqlQuery.append(",'"+address.getZipCode()+"')");
+		sqlQuery.append(",'"+address.getZipCode()+"'");
+		sqlQuery.append(",'A')");
+		
+		queries.add(sqlQuery);
+    
+        return queries;
+    }
+	
+	public ArrayList<StringBuilder> insertContactAddress(int contact_id, int address_id, ArrayList<StringBuilder> queries){
+		StringBuilder		sqlQuery	=	null;
+		
+    	sqlQuery	=	new	StringBuilder();
+		sqlQuery.append(" INSERT INTO crm_mvs_address (crm_client_id, crm_address_id)");
+		sqlQuery.append(" VALUES ("+contact_id);
+		sqlQuery.append(","+address_id+")");
 		
 		queries.add(sqlQuery);
     

@@ -11,7 +11,7 @@ public class AppointmentDTO {
 	private	String	firstName;
 	private	String	lastName;
 	private	String	email;
-	
+	private	String	companyName;
 	
 	public int getCrmAppointmentId() {
 		return crmAppointmentId;
@@ -67,7 +67,17 @@ public class AppointmentDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+	public int getCrmBdmId() {
+		return crmBdmId;
+	}
+	public void setCrmBdmId(int crmBdmId) {
+		this.crmBdmId = crmBdmId;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 	
 }

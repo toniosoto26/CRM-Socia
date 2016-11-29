@@ -1,9 +1,21 @@
 package com.socia.DAO;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import com.socia.DTO.AddressDTO;
 import com.socia.DTO.ClientDTO;
@@ -18,18 +30,233 @@ public class QuotationDAO {
 		
     	sqlQuery	=	new	StringBuilder();
 		sqlQuery.append(" INSERT INTO crm_quotation (crm_quotation_id, crm_address_id, crm_contact_id, ");
-									 sqlQuery.append("currency, exchange_rate, crm_user_id) ");
+									 sqlQuery.append("currency, exchange_rate, crm_user_id, date_created) ");
 		sqlQuery.append(" VALUES ("+quotation.getQuotationId());
 		sqlQuery.append(","+quotation.getAddressId());
 		sqlQuery.append(","+quotation.getContactId());
 		sqlQuery.append(",'"+quotation.getCurrency()+"'");
 		sqlQuery.append(","+quotation.getExchangeRate());
-		sqlQuery.append(","+quotation.getUserId()+")");
+		sqlQuery.append(","+quotation.getUserId());
+		sqlQuery.append(", now())");
 		
 		queries.add(sqlQuery);
     
         return queries;
     }
+	
+	public void generateExcelFile(ClientDTO client, ContactDTO contact, AddressDTO address, QuotationDTO quotation, ArrayList<QuotationDetailDTO> arrQuotationDetail){
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		HSSFSheet sheet = workbook.createSheet("Cotización");
+		
+		SimpleDateFormat	sdf			=	new SimpleDateFormat("dd 'de' MMMM 'de' yyyy");
+		String				today		=	sdf.format(new Date());
+		DecimalFormat		df			= 	new DecimalFormat("'$' ###,###,###.##");
+		double				totalItem	= 	0;
+		double				subtotal	= 	0;
+		double				iva			= 	0;
+		double				total		= 	0;
+		
+		int rownum = 0;
+		int cellnum = 0;
+		Row row = sheet.createRow(rownum++);
+		Cell cell = row.createCell(cellnum++);
+		cell.setCellValue(today);
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Razón Social");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue(client.getCompanyName());
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Proveedor");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("SOLUCIONES DE IMPRESIÓN ADMINISTRADA, S.A. DE C.V.");
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Contacto");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue(contact.getFirstName()+" "+contact.getLastName());
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Dirección");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Medellín 81, int. 302, Col. Roma Norte");
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Dirección");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue(address.getStreet()+" "+address.getExtNum()+" Int. "+address.getIntNum()+", "+address.getSuburb()+", "+address.getCity()+", "+address.getState()+", "+address.getCountry());
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Del. Cuauhtémoc, DF, C.P.06700");
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Teléfono");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue(contact.getPhone());
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Contacto");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("EMMA CRISTINA LÓPEZ MEDINA");
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("email");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue(contact.getEmail());
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("email");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("elopez@socia.com.mx");
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Cantidad");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Producto");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Descripción");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Tiempo de entrega");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Precio Unitario");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Subtotal");
+		
+		for(int index=0; index < arrQuotationDetail.size(); index++){
+			totalItem = arrQuotationDetail.get(index).getUnitPrice() * arrQuotationDetail.get(index).getQuantity();
+			subtotal += totalItem;
+			cellnum = 0;
+			row = sheet.createRow(rownum++);
+			cell = row.createCell(cellnum++);
+			cell.setCellValue(arrQuotationDetail.get(index).getQuantity());
+			cell = row.createCell(cellnum++);
+			cell.setCellValue(arrQuotationDetail.get(index).getItemId());
+			cell = row.createCell(cellnum++);
+			cell.setCellValue(arrQuotationDetail.get(index).getDescription());
+			cell = row.createCell(cellnum++);
+			cell.setCellValue(arrQuotationDetail.get(index).getEstimatedShipping());
+			cell = row.createCell(cellnum++);
+			cell.setCellValue(df.format(arrQuotationDetail.get(index).getUnitPrice()));
+			cell = row.createCell(cellnum++);
+			cell.setCellValue(df.format(totalItem));
+		}
+		
+		iva = subtotal * 0.16;
+		total = subtotal + iva;
+
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Subtotal");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue(subtotal);
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("IVA");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue(iva);
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("Total");
+		cell = row.createCell(cellnum++);
+		cell.setCellValue(total);
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("LOS PRECIOS SON SUJETOS A CAMBIOS SIN PREVIO AVISO");
+		
+		try {
+			FileOutputStream out = 
+					new FileOutputStream(new File("cotizacion.xls"));
+			workbook.write(out);
+			out.close();
+			System.out.println("Excel written successfully..");
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public StringBuilder generateMail(ClientDTO client, ContactDTO contact, AddressDTO address, QuotationDTO quotation, ArrayList<QuotationDetailDTO> arrQuotationDetail){
 		StringBuilder		sqlQuery	=	null;
@@ -467,7 +694,7 @@ public class QuotationDAO {
 											sqlQuery.append("<table class='invoice'  cellspacing='0' cellpadding='0' border='0' width='100%'>");
 												sqlQuery.append("<tr>");
 													sqlQuery.append("<td>");
-														sqlQuery.append("<table class='invoice-items' cellpadding='0' cellspacing='0' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>");
+														sqlQuery.append("<table class='invoice-items' cellpadding='0' cellspacing='0' style='width:100%;font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>");
 															sqlQuery.append("<tr  class='header aligncenter' style='font-weight:bold;'>");
 																sqlQuery.append("<td>Cantidad</td>");
 																	sqlQuery.append("<td>Producto</td>");

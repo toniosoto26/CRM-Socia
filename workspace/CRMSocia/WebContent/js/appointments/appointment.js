@@ -83,25 +83,25 @@ function validateCon(){
 	var	nameI	=	$("#idNameI").val();
 	
 	if(rz	=== 5){
-		alert("Debe seleccionar Razón Social.");
+		alertify.alert("Debe seleccionar Razón Social.");
 		return false;
 	}else if(days == ""){
-		alert("Debe seleccionar una fecha.");
+		alertify.alert("Debe seleccionar una fecha.");
 		return false;
 	}else if(hrs == ""){
-		alert("Debe seleccionar una hora.");
+		alertify.alert("Debe seleccionar una hora.");
 		return false;
 	}else if(contact == ""){
-		alert("Debe seleccionar un contacto.");
+		alertify.alert("Debe seleccionar un contacto.");
 		return false;
 	}else if(phoneI == ""){
-		alert("Debe seleccionar un telefono.");
+		alertify.alert("Debe seleccionar un telefono.");
 		return false;
 	}else if(emailI == ""){
-		alert("Debe seleccionar un email.");
+		alertify.alert("Debe seleccionar un email.");
 		return false;
 	}else if(bdmI == ""){
-		alert("Debe seleccionar DBM.");
+		alertify.alert("Debe seleccionar DBM.");
 		return false;
 	}else{
 		return true;
@@ -131,15 +131,15 @@ function reviewAppo(){
 		success: function(response){
 			
 			if(response == ""){
-				alert("vacio");
+				alertify.alert("vacio");
 				return true;
 			}else{
-				alert("lleno");
+				alertify.alert("lleno");
 				return confirm(trim(response));
 			}
 		},
 		error: function(){
-			alert("Error");
+			alertify.alert("Error");
 		}
 	});
 	
@@ -180,11 +180,11 @@ function saveInfo(){
 				url : "ControllerAppointment",
 				data: datos,
 				success: function(response){
-					alert(trim(response));
+					alertify.alert(trim(response));
 					$("#pageContent").load("/CRMSocia/views/appointments/generateAppointments.jsp");
 				},
 				error: function(){
-					alert("Error");
+					alertify.alert("Error");
 				}
 			});
 		//}
@@ -197,13 +197,13 @@ function validateMod(){
 	var	email	=	$("#emailContact");
 	
 	if(rz.val() == 5){
-		alert("Debe seleccionar Razón Social.");
+		alertify.alert("Debe seleccionar Razón Social.");
 		return false;
 	}else if(phone.val() == ""){
-		alert("El campo de telefono no debe de ser vacio.");
+		alertify.alert("El campo de telefono no debe de ser vacio.");
 		return false;
 	}else if(email.val() == ""){
-		alert("El campo de email no debe de ser vacio.");
+		alertify.alert("El campo de email no debe de ser vacio.");
 		return false;
 	}else{
 		return true;
@@ -220,10 +220,10 @@ function modifiedInfo(){
 	if(phone.val() !== phoneM.val() || email.val() !== emailM.val()){
 		$("#modified").show();
 		if(phone.val() == ""){
-			alert("El campo Telefono no debe ser vacio.");
+			alertify.alert("El campo Telefono no debe ser vacio.");
 			return false;
 		}else if(email.val() == ""){
-			alert("El campo Email no debe ser vacio.");
+			alertify.alert("El campo Email no debe ser vacio.");
 			return false;
 		}else{
 			return true;
@@ -258,10 +258,10 @@ function SaveModifiedInformation(){
 			url : "ControllerAppointment",
 			data: datos,
 			success: function(response){
-				alert(trim(response));
+				alertify.alert(trim(response));
 			},
 			error: function(){
-				alert("Error");
+				alertify.alert("Error");
 			}
 		});
 		

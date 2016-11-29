@@ -12,7 +12,7 @@
 </ol>
 <div class="titulo"><h3>Formato de generación de cotizaciones</h3></div>
 
-<form id="addQuotation" onSubmit="return addQuotation();">
+<form id="addQuotation" onSubmit="return addQuotation();" data-toggle="validator" role="form">
 	<div class="row top">
     	<div class="col-sm-8 col-md-8">
 			<div class="form-group">
@@ -26,7 +26,7 @@
   	<label class="col-sm-12 col-md-6">Dirección</label>
   	<div class="row">
     	<div class="col-sm-12 col-md-12">
-  			<div class="card">
+  			<div class="card" id="tabs">
 		    	<ul class="nav nav-tabs" role="tablist">
 		        	<li role="presentation" class="active"><a href="#select" aria-controls="home" role="tab" data-toggle="tab">SELECCIONAR</a></li>
 		            <li role="presentation"><a href="#add" aria-controls="profile" role="tab" data-toggle="tab">AGREGAR</a></li>
@@ -35,7 +35,7 @@
 		        <div class="tab-content">
 		        	<div role="tabpanel" class="tab-pane active" id="select">
 		            	<div class="row">
-		            		<div class="col-md-8 col-sm-8">
+		            		<div class="col-md-8 col-sm-12">
 			             		<div class="form-group" id="addressInfo">
 			             			<label class="col-sm-12 col-md-6">No hay direcciones por seleccionar</label>
 			             		</div>
@@ -53,7 +53,7 @@
 									  	</div>
 									    <div class="form-group">
 									    	<label class="col-sm-6 col-md-6">Interior</label>
-									    	<input type="text" class="form-control col-md-6" name="intNum" id="intNum" placeholder="Número interior">
+									    	<input type="number" class="form-control col-md-6" name="intNum" id="intNum" placeholder="Número interior">
 									    </div>
 										<div class="form-group">
 											<label class="col-sm-6 col-md-6">Delegación/Municipio</label>
@@ -61,13 +61,13 @@
 										</div>
 										<div class="form-group">
 										    <label class="col-sm-6 col-md-6">Código postal</label>
-										    <input type="text" class="form-control col-md-6" name="zipCode" id="zipCode" placeholder="Código postal">
+										    <input type="number" class="form-control col-md-6" name="zipCode" id="zipCode" placeholder="Código postal">
 										</div>
 									</div>
 				             		<div class="col-sm-6 col-md-6">
 										<div class="form-group">
 									    	<label class="col-sm-6 col-md-6">Exterior</label>
-									    	<input type="text" class="form-control col-md-6" name="extNum" id="extNum" placeholder="Número exterior">
+									    	<input type="number" class="form-control col-md-6" name="extNum" id="extNum" placeholder="Número exterior">
 										</div>
 										<div class="form-group">
 											<label class="col-sm-6 col-md-6">Colonia</label>
@@ -92,11 +92,11 @@
 	</div>
 	
 	<div class="row">
-    	<div class="col-sm-6 col-md-6">
+    	<div class="col-sm-12 col-md-6">
 	  		<div class="form-group">
-			    <label class="col-sm-6 col-md-6">Contacto</label>
-		  		<div id="clientInfo">
-		  			<input type="text" class="form-control" id="companyContact" name="companyContact" placeholder="Contacto">
+			    <label class="col-sm-3 col-md-6">Contacto</label>
+		  		<div id="clientInfo" style="margin-bottom: 10px;">
+		  			<input required type="text" class="form-control" id="companyContact" name="companyContact" placeholder="Contacto">
 				</div>
 			</div>
 	  	</div>
@@ -106,13 +106,13 @@
     		<div class="col-sm-6 col-md-6">
   	  			<div class="form-group">
 	    			<label class="col-sm-6 col-md-6">Email:</label>
-	    			<input type="text" class="form-control" id="companyEmail" name="companyEmail" placeholder="email">
+	    			<input required type="email" class="form-control" id="companyEmail" name="companyEmail" placeholder="email">
 		    	</div>
 		    </div>
 		  	<div class="col-sm-6 col-md-6">
   	  			<div class="form-group">
 			    	<label class="col-sm-6 col-md-6">Teléfono:</label>
-			    	<input type="text" class="form-control" id="companyPhone" name="companyPhone" placeholder="Teléfono">
+			    	<input required type="text" class="form-control" id="companyPhone" name="companyPhone" placeholder="Teléfono">
 			    </div>
 			</div>
 	  	</div>
@@ -130,7 +130,7 @@
 		<div class="col-sm-6 col-md-6">
 			<div class="form-group" id="exchangeRate" style="display:none;">
 		    	<label class="col-sm-6 col-md-6">Tipo de cambio:</label>
-		    	<input type="text" class="form-control" id="exchangeRate" name="exchangeRate" placeholder="Tipo de cambio">
+		    	<input type="text" pattern="^[0-9]*[\.]?[0-9]*$" class="form-control" id="exchangeRateInp" name="exchangeRate" placeholder="Tipo de cambio">
 		  	</div>
 		</div>
 	</div>
@@ -153,18 +153,22 @@
 		    	</tbody>
 		    </table>
 		    <input type="hidden" name="totalProducts" id="totalProducts" value="1" />
-		    <button type="button" class="btn btn-primary" onClick="addProduct();">+</button>
+		    <button type="button" class="btn btn-primary" style="float:right;" onClick="addProduct();">+</button>
   		</div>
   	</div>
   
-  	<div class="text-right">
-		<button type="button" class="btn btn-primary" data-toggle="modal" href="quotations/responses/quotationPreview.jsp" data-target="#modal">Previsualizar</button>
-  	  	<button type="submit" class="btn btn-primary" >Enviar</button>
+ 	<div class="contactos">
+	  	<div class="text-center">
+			<button type="button" class="btn btn-primary" data-toggle="modal" href="views/quotations/responses/quotationPreview.jsp" data-target="#modal">Previsualizar</button>
+	  	  	<button type="submit" class="btn btn-primary" onClick="return sendMail(2);">Enviar</button>
+	  	  	<button type="submit" class="btn btn-primary" onClick="return sendMail(6);">Enviar <i class="fa fa-paperclip" aria-hidden="true"></i></button>
+		</div>
 	</div>
 </form>
 
 <script src="js/chosen.jquery.js" type="text/javascript"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/validator/validator.js"></script>
 <script src="js/prism.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/quotations/quotation.js"></script>

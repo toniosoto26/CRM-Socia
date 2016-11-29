@@ -3,15 +3,16 @@
  */
 
 var itemNum = 1;
+var option = 0;
 
 function addProduct(){
 	$('#productsTable > tbody:last-child').append('<tr>'+
 													'<td><div id="itemNum'+itemNum+'"><div/></td>'+
-													'<td><input type="text" class="form-control" name="quantity'+itemNum+'" /></td>'+
-													'<td><div id="description'+itemNum+'"><input type="text" class="form-control" name="description'+itemNum+'" /></div></td>'+
-													'<td><input type="text" class="form-control" name="warranty'+itemNum+'" /></td>'+
-													'<td><input type="text" class="form-control" name="estimatedShipping'+itemNum+'" /></td>'+
-													'<td><input type="text" class="form-control" name="unitPrice'+itemNum+'" /></td>'+
+													'<td><input required style="width:100%;" type="number" class="form-control" name="quantity'+itemNum+'" /></td>'+
+													'<td><div id="description'+itemNum+'"><input required style="width:100%;" type="text" class="form-control" name="description'+itemNum+'" /></div></td>'+
+													'<td><input required style="width:100%;" type="text" class="form-control" name="warranty'+itemNum+'" /></td>'+
+													'<td><input required style="width:100%;" type="text" class="form-control" name="estimatedShipping'+itemNum+'" /></td>'+
+													'<td><input style="width:100%;" type="text" pattern="^[0-9]*[\.]?[0-9]*$" class="form-control" name="unitPrice'+itemNum+'" required /><input type="hidden" value="false" name="addItem'+itemNum+'" id="addItem'+itemNum+'"  /></td>'+
 												  '</tr>');
 	$('#totalProducts').val(itemNum);
 	loadItemsInfo(itemNum);
@@ -23,10 +24,13 @@ function displayExchangeRate(selected){
 	var currency = selected.value;
 	
 	if(currency === "USD"){
+		$("#exchangeRateInp").prop('required',true);
 		$("#exchangeRate").css( "display", "block" );
+		
 	}
 	else{
 		$("#exchangeRate").css( "display", "none" );
+		$("#exchangeRateInp").prop('required',false);
 	}
 }
 
@@ -40,8 +44,6 @@ function loadItemsInfo(number){
 		},
 		async: false,
 		success: function(response){
-			console.log(response);
-			console.log(number);
 			$("#itemNum"+number).html(response);
 		},
 		error: function(){
@@ -88,17 +90,56 @@ function loadAddressInfo(selected){
 	});
 }
 
+function sendMail(optionSelected){
+	option = optionSelected;
+}
+
 function addQuotation(){
 	var activeTab = $('.nav-tabs .active').text();
+	
+	if($("#chosenClient").val()== "5"){ //Corregir
+		alertify.alert("Por favor, selecciona un cliente");
+		return false;
+	}
+	
+	if(activeTab == "SELECCIONAR"){
+		if($("#address-select").val() != undefined){
+			if($("#address-select").val()==""){
+				alertify.alert("Por favor, selecciona una dirección");
+				return false;
+			}
+		}
+		else{
+			alertify.alert("Por favor, agrega una dirección");
+			return false;
+		}
+	}
+	
+	if($("#chosenContact").val()== "5"){ //Corregir
+		alertify.alert("Por favor, selecciona un contacto");
+		return false;
+	}
+	
+	for(var i = 1; i < itemNum; i ++){
+		if($("#itemId"+i).val()==""){
+			alertify.alert("Por favor, selecciona artículos para todas las partidas");
+			return false;
+		}
+	}
 	
 	$.ajax({
 		type: "post",
 		url : "ControllerTemp",
-		data: $("#addQuotation").serialize()+"&option=2&activeTab="+activeTab,
+		data: $("#addQuotation").serialize()+"&option="+option+"&activeTab="+activeTab,
 		success: function(response){
+			if(trim(response)=="correcto"){
+				alertify.alert("Correo enviado correctamente");
+				$('#addQuotation').find("input[type=text], textarea, select, input[type=number]").val("");
+			}
+			else{
+				alertify.alert("Incorrecto");			
+			}
 			console.log("success");
-			//$("#addressInfo").html(response);
-			//$(".chosen-select").chosen();
 		},
 		error: function(){
 			alert("Error");
@@ -108,10 +149,10 @@ function addQuotation(){
 	return false;
 }
 
-function preview(){
-	
+function changeInput(index){
+	$("#itemNum"+index).html('<input required style="width:100%;" type="text" class="form-control" name="itemNum'+index+'" />');
+	$('#addItem'+index).val('true');
 }
-
 
 $( document ).ready(function() {
 	selectClient();
@@ -141,3 +182,27 @@ $( document ).ready(function() {
 	});
 });
 
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  var target = $(e.target).attr("href") // activated tab
+  
+  if(target == "#add"){
+	  $("#street").prop('required',true);
+	  $("#intNum").prop('required',true);
+	  $("#city").prop('required',true);
+	  $("#zipCode").prop('required',true);
+	  $("#extNum").prop('required',true);
+	  $("#suburb").prop('required',true);
+	  $("#state").prop('required',true);
+	  $("#country").prop('required',true);
+  }
+  else{
+	  $("#street").prop('required',false);
+	  $("#intNum").prop('required',false);
+	  $("#city").prop('required',false);
+	  $("#zipCode").prop('required',false);
+	  $("#extNum").prop('required',false);
+	  $("#suburb").prop('required',false);
+	  $("#state").prop('required',false);
+	  $("#country").prop('required',false);
+  }
+});

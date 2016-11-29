@@ -9,7 +9,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Grupo Socia CRM</title>
+		
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap_new.css">
+		<link rel="stylesheet" type="text/css" href="./css/alerts/alertify.core.css">
+		<link rel="stylesheet" type="text/css" href="./css/alerts/alertify.default.css">
+		<link rel="stylesheet" type="text/css" href="./css/alerts/alertify.bootstrap.css">
 		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 	</head>
 	<body>
@@ -53,14 +57,16 @@
 				<a href="ControllerLogin?cerrarSesion=T"><span id="salir">Salir</span></a>
 			</span>
 		</div-->
+		
 		<div class="contenido"  id="pageContent">
 			<div class="welcome">
-		    	<h3 style="color:#ff0026;">Bienvenid@ <c:out value="${sessionScope.sessionLogin.firstName}" ></c:out> <c:out value="${sessionScope.sessionLogin.lastName}" ></c:out></h3>
+		    	<h3 style="color:#ff0026;">Bienvenido <c:out value="${sessionScope.sessionLogin.firstName}" ></c:out> <c:out value="${sessionScope.sessionLogin.lastName}" ></c:out></h3>
+		    	<br/> 
+		    	<h2>Creemos en el trabajo bien realizado, el nuestro habla por sí mismo.</h2>
 		    </div>
-		</div>	
-		
-		
+		</div>
 		<script src="js/jquery.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
+		<script type="text/javascript" src="js/alerts/alertify.js"></script>
 	</body>
 </html>

@@ -120,4 +120,23 @@ public class ItemDAO {
 		return item;
 	}
 
+
+	public ArrayList<StringBuilder> insertNewItem(ItemDTO item, ArrayList<StringBuilder> queries){
+		StringBuilder		sqlQuery	=	null;
+		
+    	sqlQuery	=	new	StringBuilder();
+		sqlQuery.append(" INSERT INTO crm_item (crm_item_id, description_1, description_2, unit, currency, tax, last_price)");
+		sqlQuery.append(" VALUES ('"+item.getItemId()+"'");
+		sqlQuery.append(",'"+(item.getDescription().length() >= 255 ? item.getDescription().substring(0,254) : item.getDescription())+"'");
+		sqlQuery.append(",'"+(item.getDescription().length() >= 255 ? item.getDescription().substring(255,item.getDescription().length()) : "")+"'");
+		sqlQuery.append(",'"+item.getUnit()+"'");
+		sqlQuery.append(",'"+item.getCurrency()+"'");
+		sqlQuery.append(","+item.getTax());
+		sqlQuery.append(","+item.getLastPrice()+")");
+		
+		queries.add(sqlQuery);
+    
+        return queries;
+    }
+	
 }
