@@ -60,9 +60,11 @@
 		
 		<div class="contenido"  id="pageContent">
 			<div class="welcome">
-		    	<h3 style="color:#ff0026;">Bienvenido <c:out value="${sessionScope.sessionLogin.firstName}" ></c:out> <c:out value="${sessionScope.sessionLogin.lastName}" ></c:out></h3>
+		    	<h3 style="color:#ff0026;">Bienvenida <c:out value="${sessionScope.sessionLogin.firstName}" ></c:out> <c:out value="${sessionScope.sessionLogin.lastName}" ></c:out></h3>
 		    	<br/> 
 		    	<h2>Creemos en el trabajo bien realizado, el nuestro habla por sí mismo.</h2>
+		    	<br/>
+		    	<p>Si lo deseas, puedes abrir dos paneles a la vez.</p>
 		    </div>
 		</div>
 		<script src="js/jquery.min.js" type="text/javascript"></script>

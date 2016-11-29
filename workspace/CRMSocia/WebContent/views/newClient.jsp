@@ -4,7 +4,7 @@
 <div id="formNewClient">
 	<form id="formCalls">
 		<div class="row top">
-	    	<div class="col-sm-8 col-md-8">
+	    	<div class="col-sm-6 col-md-6">
 				<div class="form-group">
 			 		<label class="col-sm-12 col-md-6">Razón social:</label>
 					<input type="text" class="form-control" id="companyName" placeholder="Razon social" name="selectClient">
@@ -13,17 +13,14 @@
 			</div>
 		</div>
 		
-		<div id="form2">
+		<div id="form2" class="row">
 			<div class="col-sm-6 col-md-6">
 				<div class="form-group">
-		  			<label class="col-sm-6 col-md-6">Seleccione Tipo de contacto:</label>
+		  			<label class="col-sm-6 col-md-6">Seleccione tipo de contacto:</label>
 				</div>
 				<input type="button" class="btn btn-primary" id="btnConSelect2" name="btnConSelect2" value="Existente" onclick="pintar(3);">
 				<input type="button" class="btn btn-primary" id="btnSinSelect2" name="btnSinSelect2" value="Nuevo" onclick="pintar(2);">
 			</div>
-			
 		</div>
-		
 	</form>
 </div>
-		
