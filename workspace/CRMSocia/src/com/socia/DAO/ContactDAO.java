@@ -22,18 +22,25 @@ public class ContactDAO {
 		/** Contact objects*/
 		ContactDTO				contact		=	null;
 		int						contactId	=	0;
+		int						divisionId	=	0;
+		int						positionId	=	0;
 		String 					firstName	=	"";
 		String 					lastName	=	"";
 		String 					phone		=	"";
 		String 					email		=	"";
+		String 					division	=	"";
+		String 					position	=	"";
 		ArrayList<ContactDTO>	contactArr	= 	new ArrayList<ContactDTO>();
 		
 		try{
 			sqlQuery	=	new	StringBuilder();
-			sqlQuery.append(" select contact.* ");
-			sqlQuery.append(" from crm_contact contact ");
-			sqlQuery.append(" join crm_mvs_contact mvs on contact.crm_contact_id = mvs.crm_contact_id ");
-			sqlQuery.append(" join crm_client client on mvs.crm_client_id = client.crm_client_id ");
+			sqlQuery.append(" select contact.crm_contact_id, contact.first_name,contact.last_name,contact.phone, ");
+			sqlQuery.append(" contact.email,contact.id_position,contact.company_division_id, ");
+			sqlQuery.append(" division.name,position.position   ");
+			sqlQuery.append(" from crm_contact contact join crm_mvs_contact mvs on contact.crm_contact_id = mvs.crm_contact_id ");
+			sqlQuery.append(" join crm_client client on mvs.crm_client_id = client.crm_client_id  ");
+			sqlQuery.append(" join  crm_position position on contact.id_position=position.id_position ");
+			sqlQuery.append(" join  crm_company_division division on contact.company_division_id=division.company_division_id ");
 			sqlQuery.append(" where contact.status = 'A' ");
 			//sqlQuery.append(" and client.crm_client_id = ? ");
 			
@@ -50,8 +57,13 @@ public class ContactDAO {
 				lastName = resultSet.getString(3);
 				phone = resultSet.getString(4);
 				email = resultSet.getString(5);
+				positionId = resultSet.getInt(6);
+				divisionId = resultSet.getInt(7);
+				division = resultSet.getString(8);
+				position = resultSet.getString(9);
 				
-				contact = new ContactDTO(contactId, firstName, lastName, phone, email);
+				
+				contact = new ContactDTO(contactId, firstName, lastName, phone, email,divisionId,division,positionId,position);
 				contactArr.add(contact);
 			}
 			

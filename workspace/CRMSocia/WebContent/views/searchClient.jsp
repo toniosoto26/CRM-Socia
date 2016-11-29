@@ -9,6 +9,7 @@
 			 		<label class="col-sm-12 col-md-6">Razón social:</label>
 					<div id="selectClient" name="selectClient"> </div>
 					<input type="hidden" name="AddClient" value="0">
+					<div id="countCalls" name="countCalls"></div>
 				</div>
 			</div>
 		</div>
