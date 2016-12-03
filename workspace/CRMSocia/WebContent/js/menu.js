@@ -35,6 +35,8 @@
     		$("#pageContent").load("/CRMSocia/views/calendar/calendar.jsp");
     	}else if(menuName === "appointment"){
     		$("#pageContent").load("/CRMSocia/views/appointments/generateAppointments.jsp");
+    	}else if(menuName === "diagnosis"){
+    		$("#pageContent").load("/CRMSocia/views/diagnosis/diagnosis.jsp");
     	}
     }
     

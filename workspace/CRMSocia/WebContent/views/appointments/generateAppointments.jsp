@@ -20,6 +20,9 @@
   <li><a href="#">Inicio</a></li>
   <li class="active">Citas</li>
 </ol>
+<div class="panel">
+	<small>Haz clic para abrir un panel secundario </small><button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Segundo Panel</button>
+</div>
 <div class="titulo"><h3>Formato de generación de citas</h3></div>
 
 	<div class="row top">

@@ -181,7 +181,9 @@ public class ControllerAppointment extends HttpServlet {
 				
 				case 6:
 					List<AppointmentDTO>	arrAppointments	=	new AppointmentDAO().getAppointments();
-					System.out.println(arrAppointments.toString());
+					
+					for(int j=0; j<arrAppointments.size(); j++)
+						System.out.println(arrAppointments.get(j).toString());
 					
 					
 					session.removeAttribute("calendarAppointment");

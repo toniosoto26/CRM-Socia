@@ -54,6 +54,7 @@ public class Controller extends HttpServlet {
 		String					url			=	"";	
 		int						clientId	= 	0;
 		int						contactId	= 	0;
+		String					view		=	"";
 		
 		///////**********  DAO ***************
 		
@@ -73,12 +74,17 @@ public class Controller extends HttpServlet {
 		ArrayList<StringBuilder>		queries				= new ArrayList<StringBuilder>();
 		
 		if(option == 1){
+			view = request.getParameter("view");
+			
 			url		=	"/utils/selectClient.jsp";
 			ArrayList<ClientDTO> arrClient = new ArrayList<ClientDTO>(); 
 			arrClient=objClient.getClients();
 			
 			session.removeAttribute("arrClient");
 			session.setAttribute("arrClient", arrClient);
+
+			session.removeAttribute("view");
+			session.setAttribute("view", (view.trim().equals("call")?true:false));
 		}
 		
 		

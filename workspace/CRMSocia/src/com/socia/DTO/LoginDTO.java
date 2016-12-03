@@ -10,6 +10,7 @@ public class LoginDTO {
 	private	String	email;
 	private	String	dateCreated;
 	private	String	status;
+	private String	type;
 	
 	public void LoginDTO(){}
 
@@ -76,6 +77,13 @@ public class LoginDTO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 	
 }

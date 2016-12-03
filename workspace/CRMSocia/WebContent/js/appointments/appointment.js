@@ -3,7 +3,7 @@
  */
 
 $( document ).ready(function() {
-	selectClient();
+	selectClient('appointment');
 	selectBDM();
 
 	$("#modified").hide();

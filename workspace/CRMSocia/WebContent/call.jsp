@@ -8,7 +8,11 @@
   <li><a href="#">Inicio</a></li>
   <li class="active">Llamadas</li>
 </ol>
-<div class="titulo"><h3>Llamadas</h3></div>
+<div class="panel">
+	<small>Haz clic para abrir un panel secundario </small><button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Segundo Panel</button>
+</div>
+
+<div class="titulo"><h3>Llamadas</h3></div>    
 
 <div id="form1">
 	<div class="col-sm-6 col-md-6">

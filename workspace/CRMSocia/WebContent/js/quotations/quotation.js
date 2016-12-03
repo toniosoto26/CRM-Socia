@@ -155,7 +155,7 @@ function changeInput(index){
 }
 
 $( document ).ready(function() {
-	selectClient();
+	selectClient('quotation');
     addProduct();
     
 	// Support for AJAX loaded modal window.

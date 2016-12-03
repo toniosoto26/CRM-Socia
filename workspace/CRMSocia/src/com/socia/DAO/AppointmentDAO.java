@@ -201,7 +201,7 @@ public class AppointmentDAO {
 
 	public List<AppointmentDTO>	getAppointments(){
 		List<AppointmentDTO>	arrAppo		=	new	ArrayList<AppointmentDTO>();
-		AppointmentDTO			appointment	= 	new AppointmentDTO();
+		AppointmentDTO			appointment	= 	null;
 		Connection				con			=	null;
 		PreparedStatement		ps			=	null;
 		ResultSet				rs			=	null;
@@ -223,7 +223,6 @@ public class AppointmentDAO {
 			con			=	conexion.getConnection1();
 			ps			=	con.prepareStatement(query.toString());
 			
-			
 			rs	=	ps.executeQuery();
 			
 			while(rs.next()){
@@ -231,6 +230,8 @@ public class AppointmentDAO {
 				dAppoint	=	rs.getString(2);
 				fName		=	rs.getString(3);
 				lName		=	rs.getString(4);
+				
+				appointment = new AppointmentDTO();
 				
 				appointment.setCompanyName(companyName);
 				appointment.setDate(dAppoint.replace(" ", "T"));

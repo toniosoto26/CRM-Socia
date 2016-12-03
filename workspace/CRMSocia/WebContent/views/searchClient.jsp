@@ -9,8 +9,10 @@
 			 		<label class="col-sm-12 col-md-6">Razón social:</label>
 					<div id="selectClient" name="selectClient"> </div>
 					<input type="hidden" name="AddClient" value="0">
-					<div id="countCalls" name="countCalls"></div>
 				</div>
+			</div>
+			<div class="col-sm-6 col-md-6">
+				<div id="countCalls" name="countCalls"></div>
 			</div>
 		</div>
 		
@@ -31,6 +33,6 @@
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript"> 
 	$(document).ready(function(){
-		selectClient();
+		selectClient('call');
 	});
 </script>

@@ -46,7 +46,7 @@
 	                        <span class="btn btn-default btn-sm notActive" data-toggle="estadollamda" data-value="2" data-active="btn-warning" data-notactive="btn-default">CARTA/INTERES</span>
 	                        <span class="btn btn-default btn-sm notActive" data-toggle="estadollamda" data-value="3" data-active="btn-danger" data-notactive="btn-default">NO INTE/NO CONTESTO</span>
 	                    </div>
-	                    <input type="hidden" name="estadoLlamada" id="estadollamda">
+	                    <input type="hidden" name="estadoLlamada" id="estadollamda" value="1">
 	                </div>
 	        	</div>
 		   		<div class="form-group top">
@@ -56,7 +56,7 @@
 	                        <span class="btn btn-primary btn-sm active" data-toggle="carta" data-value="1">SI</span>
 	                        <span class="btn btn-default btn-sm notActive" data-toggle="carta" data-value="0">NO</span>
 	                    </div>
-	                    <input type="hidden" name="carta" id="carta">
+	                    <input type="hidden" name="carta" id="carta" value="1">
 	                </div>
 	       	 	</div>
 	      	</div>

@@ -21,12 +21,12 @@ function validar(){
 				if(trim(response) === "correcto")
 					document.location.href	=	"home.jsp";
 				else
-					alert("Acceso incorrecto.")
+					alertify.alert("Acceso incorrecto.")
 				$("#mostrar").show();
 			},
 			error: function(){
 				//$("#result").html("Datos incorrectos.");
-				alert("Error");
+				alertify.alert("Error");
 			}
 		});
 	}
@@ -34,7 +34,7 @@ function validar(){
 
 function validarCampos(user,passwd){
 	if(user == "" || passwd == ""){
-		alert("No debe de haber campos vacios.")
+		alertify.alert("No debe de haber campos vacios.")
 		return false;
 	}else{
 		return true;
@@ -54,7 +54,7 @@ function loadClientInfo(selected){
 			$("#clientInfo").html(response);
 		},
 		error: function(){
-			alert("Error");
+			alertify.alert("Error");
 		}
 	});
 }
@@ -73,7 +73,7 @@ function LoadCountCall(selected){
 			$("#countCalls").html(response);
 		},
 		error: function(){
-			alert("Error");
+			alertify.alert("Error");
 		}
 	});
 }
@@ -90,32 +90,26 @@ function loadContactInfo(selected){
 			$("#contactInfo").html(response);
 		},
 		error: function(){
-			alert("Error");
+			alertify.alert("Error");
 		}
 	});
 }
 
-function selectClient(){
-	
+function selectClient(view){
 	$.ajax({
 		type:"post",
 		url:"Controller",
-		data: {"option":1},
+		data: {"option":1, view: view},
 		success: function(response){
 			$("#selectClient").html(response);
 			$(".chosen-select").chosen();
 		},
 		error: function(){
-			alert("no funciona");
+			alertify.alert("no funciona");
 			
 		}
-		
-		
-		
-		
 	})
 }
-
 
 function selectContact(){
 	var clientId = 1;
@@ -131,13 +125,9 @@ function selectContact(){
 			$(".chosen-select").chosen();
 		},
 		error: function(){
-			alert("no funciona");
+			alertify.alert("no funciona");
 			
 		}
-		
-		
-		
-		
 	})
 }
 
@@ -153,13 +143,9 @@ function selectPosition(){
 			$(".chosen-select").chosen();
 		},
 		error: function(){
-			alert("no funciona");
+			alertify.alert("no funciona");
 			
 		}
-		
-		
-		
-		
 	})
 }
 
@@ -176,13 +162,9 @@ function selectDivision(){
 			$(".chosen-select").chosen();
 		},
 		error: function(){
-			alert("no funciona");
+			alertify.alert("no funciona");
 			
 		}
-		
-		
-		
-		
 	})
 }
 
@@ -190,7 +172,6 @@ function pintar(variable){
 	
 	if(variable==0){
 		$("#form1").load("views/newClient.jsp");
-		
 	}
 	else if(variable==1){
 		$("#form1").load("views/searchClient.jsp");
@@ -206,7 +187,7 @@ function pintar(variable){
 function registreCall(variable){
 	var validacion=validateCalls();
 	if(validacion!= ""){
-		alert(validacion);
+		alertify.alert(validacion);
 	}
 	else{
 		
@@ -216,24 +197,18 @@ function registreCall(variable){
 			data: $("#formCalls").serialize()+"&option=4&variable="+variable,
 			success: function(response){
 				if(trim(response)=="correcto"){
-					alert("Insertado Correctamente");
+					alertify.alert("Insertado Correctamente");
 					$("#form1").html("");
 				}
 				else{
-					alert("Incorrecto");
+					alertify.alert("Incorrecto");
 				}
 			},
 			error: function(){
-				alert("Error");
+				alertify.alert("Error");
 			}
 		});
-		
-		
-		
-		
-		
 	}
-	
 }
 
 function validateCalls(){
@@ -247,7 +222,6 @@ function validateCalls(){
 	if($("#companyEmail").val() == ""){
 		mensaje="Es necesario Capturar email ";
 	}
-
 	
 	return mensaje;
 }
@@ -272,8 +246,7 @@ function selectBDM(){
 			$(".chosen-select").chosen();
 		},
 		error: function(){
-			alert("no jalo");
-			
+			alertify.alert("no funcionó");
 		}
 	})
 }
@@ -292,9 +265,7 @@ function loadContactAppointment(selected){
 			$("#result").html(response);
 		},
 		error: function(){
-			alert("Error");
+			alertify.alert("Error");
 		}
 	});
 }
-
-

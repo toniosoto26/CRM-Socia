@@ -79,5 +79,14 @@ public class AppointmentDTO {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-	
+	@Override
+	public String toString() {
+		return "AppointmentDTO [crmAppointmentId=" + crmAppointmentId
+				+ ", date=" + date + ", crmClientId=" + crmClientId
+				+ ", crmUserId=" + crmUserId + ", crmContactId=" + crmContactId
+				+ ", crmBdmId=" + crmBdmId + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", email=" + email
+				+ ", companyName=" + companyName + "]";
+	}
+
 }
