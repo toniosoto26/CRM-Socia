@@ -46,5 +46,6 @@
 	<script src="js/login/d3.v3.min.js"></script>
 	<script src="js/login/trianglify.min.js"></script>
 	<script src="js/login/functions.min.js"></script>
+<script type="text/javascript" src="js/validator/validator.js"></script>
 </body>
 </html>

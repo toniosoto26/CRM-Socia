@@ -83,14 +83,6 @@
 			</c:otherwise>
 		</c:choose>
 		
-		<!-- div id="page-content-wrapper">
-			<span class="navbar-text derecha">
-				IT Solutions 
-				&nbsp;&nbsp; 
-				<a ><span id="salir">Salir</span></a>
-			</span>
-		</div-->
-		
 		<div class="contenido"  id="pageContent">
 			<div class="welcome">
 		    	<h3 style="color:#ff0026;">Bienvenida <c:out value="${sessionScope.sessionLogin.firstName}" ></c:out> <c:out value="${sessionScope.sessionLogin.lastName}" ></c:out></h3>
