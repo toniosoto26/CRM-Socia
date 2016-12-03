@@ -42,12 +42,12 @@ public class ContactDAO {
 			sqlQuery.append(" join  crm_position position on contact.id_position=position.id_position ");
 			sqlQuery.append(" join  crm_company_division division on contact.company_division_id=division.company_division_id ");
 			sqlQuery.append(" where contact.status = 'A' ");
-			//sqlQuery.append(" and client.crm_client_id = ? ");
+			sqlQuery.append(" and client.crm_client_id = ? ");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
 			statement	=	connection.prepareStatement(sqlQuery.toString());
-			//statement.setInt(1, clientId);
+			statement.setInt(1, clientId);
 			
 			resultSet	=	statement.executeQuery();
 			System.out.println("cliente :"+clientId);
