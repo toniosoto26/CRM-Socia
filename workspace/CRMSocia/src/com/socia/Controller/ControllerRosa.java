@@ -132,6 +132,8 @@ public class ControllerRosa extends HttpServlet {
 			/** Address */
 			activeTab = request.getParameter("activeTab");
 			
+			System.out.println(activeTab);
+			
 			if(activeTab.equals("SELECCIONAR")){
 				addressId = Integer.parseInt(request.getParameter("addressId"));
 			}else if(activeTab.equals("AGREGAR")){
@@ -157,7 +159,7 @@ public class ControllerRosa extends HttpServlet {
 				exchangeRate = Double.parseDouble(request.getParameter("exchangeRate"));
 			totalProducts = Integer.parseInt(request.getParameter("totalProducts"));
 			
-			if(option == 2)
+			if(option == 2 || option == 6)
 				quotationId = objConsecutive.getConsecutive("quotations");
 			
 			quotation = new QuotationDTO(quotationId, addressId, contactId, currency, exchangeRate,  ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
@@ -201,8 +203,10 @@ public class ControllerRosa extends HttpServlet {
 					if(activeTab.equals("AGREGAR")){
 						queries = objAddress.insertAddress(address, queries);
 						queries = objAddress.insertContactAddress(clientId, addressId, queries);
-						System.out.println(queries.toString());
 					}
+					
+					System.out.println(queries.toString());
+					
 					queries = objQuotation.insertQuotation(quotation, queries);
 					queries = objQuotationDetail.insertQuotationDetails(arrQuotationDetail, queries);
 					
