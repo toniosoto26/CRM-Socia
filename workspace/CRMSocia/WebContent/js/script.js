@@ -226,15 +226,11 @@ function validateCalls(){
 	return mensaje;
 }
 
-
-
-
 function trim(cadena){
 	var retorno=cadena.replace(/^\s+/g,'');
 	retorno=retorno.replace(/\s+$/g,'');
 	return retorno;
 }
-
 
 function selectBDM(){
 	$.ajax({
@@ -250,7 +246,6 @@ function selectBDM(){
 		}
 	})
 }
-
 
 function loadContactAppointment(selected){
 	var contactId = selected.value;
@@ -268,4 +263,64 @@ function loadContactAppointment(selected){
 			alertify.alert("Error");
 		}
 	});
+}
+
+function openSecondaryPanel(close, options){
+	if(options == 0){
+		$("#secondaryPanel").html('<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'quotation\');">Cotizaciones</button>'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'appointment\');">Citas</button>'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'calendar\');">Calendario</button>');
+	}
+	if(options == 1){
+		$("#secondaryPanel").html('<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'call\');">Llamadas</button>'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'appointment\');">Citas</button>'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'calendar\');">Calendario</button>');
+	}
+	if(options == 2){
+		$("#secondaryPanel").html('<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'call\');">Llamadas</button>'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'quotation\');">Cotizaciones</button>'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'appointment\');">Citas</button>');
+	}
+	if(options == 3){
+		$("#secondaryPanel").html('<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'call\');">Llamadas</button>'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'quotation\');">Cotizaciones</button>'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'calendar\');">Calendario</button>');
+	}
+	
+	if(close == 0){
+		$("#secondaryPanel").addClass('col-md-6');
+		$("#secondaryPanel").addClass('col-sm-6');
+		$("#primaryPanel").css({"border-right": "1px solid rgba(0,0,0,0.05)"});
+	
+		$("#primaryPanel").addClass('col-md-6');
+		$("#primaryPanel").addClass('col-sm-6');
+		
+		$("#openPanel").html('<button type="button" class="btn btn-default btn-sm" onclick="openSecondaryPanel(1,'+options+');" >Cerrar <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>');
+	}
+	else if(close == 1){
+		$("#secondaryPanel").removeClass('col-md-6');
+		$("#secondaryPanel").removeClass('col-sm-6');
+		$("#primaryPanel").css({"border-right": ""});
+		
+		$("#secondaryPanel").html('');
+		
+		$("#primaryPanel").removeClass('col-md-6');
+		$("#primaryPanel").removeClass('col-sm-6');
+		
+		$("#openPanel").html('<small>Haz clic para abrir un panel secundario </small><button type="button" class="btn btn-default btn-sm" onclick="openSecondaryPanel(0,'+options+');" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Segundo Panel</button>');
+	}
+}
+
+function selectSecondaryPanel(optionName){
+	if(optionName === "call"){
+		$("#secondaryPanel").load("call.jsp");
+	}else if(optionName === "quotation"){
+		$("#secondaryPanel").load("/CRMSocia/views/quotations/quotation.jsp");
+	}else if(optionName === "calendar"){
+		$("#secondaryPanel").load("/CRMSocia/views/calendar/calendar.jsp");
+	}else if(optionName === "appointment"){
+		$("#secondaryPanel").load("/CRMSocia/views/appointments/generateAppointments.jsp");
+	}else if(optionName === "diagnosis"){
+		$("#secondaryPanel").load("/CRMSocia/views/diagnosis/diagnosis.jsp");
+	}
 }
