@@ -82,7 +82,7 @@ function validateCon(){
 	var	bdmI	=	$("#bdmI").val();
 	var	nameI	=	$("#idNameI").val();
 	
-	if(rz	=== 5){
+	if(rz	== 5){
 		alertify.alert("Debe seleccionar Razón Social.");
 		return false;
 	}else if(days == ""){
@@ -106,6 +106,7 @@ function validateCon(){
 	}else{
 		return true;
 	}
+	return false;
 		
 }
 
@@ -174,7 +175,7 @@ function saveInfo(){
 						"nameI"		:	nameI,
 						"opc"		:	3
 						}
-			
+			return false;
 			$.ajax({
 				type: "post",
 				url : "ControllerAppointment",
@@ -189,6 +190,7 @@ function saveInfo(){
 			});
 		//}
 	}
+	return false;
 }
 
 function validateMod(){

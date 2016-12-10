@@ -125,7 +125,7 @@ public class ControllerAppointment extends HttpServlet {
 					int		contIdM	=	Integer.parseInt(request.getParameter("contact"));
 					String 	phoneM	=	request.getParameter("phone");
 					String	emailM	=	request.getParameter("email");
-					System.out.println("ENTRA A MODIFICAR CONTACTO");
+				//	System.out.println("ENTRA A MODIFICAR CONTACTO");
 					
 					ContactDTO	contact	=	new	ContactDTO();
 					contact.setContactId(contIdM);
@@ -165,11 +165,11 @@ public class ControllerAppointment extends HttpServlet {
 					appointV.setCrmContactId(contIdV);
 					
 					List<String>	arrInfoContact	=	new	AppointmentDAO().reviewAppointment(appointV, daysV);
-					System.out.println(arrInfoContact.size());
+					//System.out.println(arrInfoContact.size());
 					boolean	isTrue	=	false;
 					if(arrInfoContact.size() > 0)
 						isTrue	=	true;
-					System.out.println(isTrue);
+					//System.out.println(isTrue);
 					session.removeAttribute("exists");
 					session.setAttribute("exists", isTrue);
 					session.removeAttribute("arrInfoC");
@@ -181,10 +181,6 @@ public class ControllerAppointment extends HttpServlet {
 				
 				case 6:
 					List<AppointmentDTO>	arrAppointments	=	new AppointmentDAO().getAppointments();
-					
-					for(int j=0; j<arrAppointments.size(); j++)
-						System.out.println(arrAppointments.get(j).toString());
-					
 					
 					session.removeAttribute("calendarAppointment");
 					session.setAttribute("calendarAppointment", arrAppointments);

@@ -17,8 +17,8 @@
 											<c:out value="${varCon.phone}"></c:out>,
 											<c:out value="${varCon.email}"></c:out>,
 											<c:out value="${varCon.firstName}"></c:out> <c:out value="${varCon.lastName}"></c:out>'>
-											
-								<c:out value="${varCon.firstName}"></c:out> <c:out value="${varCon.lastName}"></c:out>
+								<c:out value="${ varCon.firstName }"></c:out> <c:out value="${varCon.lastName}"></c:out>-<c:out value="${varCon.position}"></c:out>
+								<!--<c:out value="${varCon.firstName}"></c:out> <c:out value="${varCon.lastName}"></c:out>-->
 							</option>
 						</c:forEach>
 					</select>
@@ -32,7 +32,7 @@
 	    	<div class="col-sm-6 col-md-6">
 		  		<div class="form-group">
 				    <label class="col-sm-6 col-md-6">Telefono:</label>
-					 <input type="text" class="form-control" id="phoneContact" name="phoneContact" onkeyup="modifiedInfo()" placeholder="sin telefono" readonly="readonly">
+					 <input required type="text" class="form-control" id="phoneContact" name="phoneContact" onkeyup="modifiedInfo()" placeholder="sin telefono" >
 				     <input type="hidden" id="phoneContactH" name="phoneContactH">
 				</div>
 		  	</div>
@@ -43,7 +43,7 @@
 	    	<div class="col-sm-6 col-md-6">
 		  		<div class="form-group">
 				    <label class="col-sm-6 col-md-6">Email:</label>
-					<input type="text" class="form-control" id="emailContact" name="emailContact" onkeyup="modifiedInfo()" placeholder="sin email" readonly="readonly">
+					<input required type="text" class="form-control" id="emailContact" name="emailContact" onkeyup="modifiedInfo()" placeholder="sin email" >
 				    <input type="hidden" id="emailContactH" name="emailContactH">
 				</div>
 		  	</div>
@@ -56,7 +56,7 @@
 			<div class="col-sm-6 col-md-6">
 		  		<div class="form-group">
 				    <label class="col-sm-6 col-md-6">Contacto:</label>
-				   <input type="text" class="form-control" id="contactI" name="contactI" placeholder="sin contacto">
+				   <input required type="text" class="form-control" id="contactI" name="contactI" placeholder="sin contacto">
 				    <input type="hidden" id="idContactI" name="idContactI" >
 				    <input type="hidden" id="idNameI" name="idNameI">
 				</div>
@@ -67,7 +67,7 @@
 	    	<div class="col-sm-6 col-md-6">
 		  		<div class="form-group">
 				    <label class="col-sm-6 col-md-6">Telefono:</label>
-					 <input type="text" class="form-control" id="phoneContact" name="phoneContact" placeholder="sin telefono">
+					 <input required type="text" class="form-control" id="phoneContact" name="phoneContact" placeholder="sin telefono">
 				    <input type="hidden" id="phoneContactH" name="phoneContactH">
 				</div>
 		  	</div>
@@ -77,7 +77,7 @@
 	    	<div class="col-sm-6 col-md-6">
 		  		<div class="form-group">
 				    <label class="col-sm-6 col-md-6">Email:</label>
-					 <input type="text" class="form-control" id="emailContact" name="emailContact" placeholder="sin email">
+					 <input required type="text" class="form-control" id="emailContact" name="emailContact" placeholder="sin email">
 				    <input type="hidden" id="emailContactH" name="emailContactH">
 				</div>
 		  	</div>
@@ -87,7 +87,7 @@
 		  	<div class="form-group row">
 		  		<div class="col-md-6">
 				    <label for="inputCompanyEmail">Email:</label>
-				    <input type="text" class="form-control" id="emailContact" name="emailContact" placeholder="sin email">
+				    <input required type="text" class="form-control" id="emailContact" name="emailContact" placeholder="sin email">
 				    <input type="hidden" id="emailContactH" name="emailContactH">
 				</div>	  	
 			</div>
