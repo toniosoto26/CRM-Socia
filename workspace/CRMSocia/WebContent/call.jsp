@@ -4,23 +4,21 @@
 <link rel="stylesheet" href="css/prism.css">
 <link rel="stylesheet" href="css/chosen.css">
 
-<ol class="breadcrumb">
-  <li><a href="#">Inicio</a></li>
-  <li class="active">Llamadas</li>
-</ol>
-<div class="panel">
-	<small>Haz clic para abrir un panel secundario </small><button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Segundo Panel</button>
-</div>
-
-<div class="titulo"><h3>Llamadas</h3></div>    
-
-<div id="form1">
-	<div class="col-sm-6 col-md-6">
-		<div class="form-group">
-  			<label class="col-sm-6 col-md-6">Seleccione Tipo de Cliente :</label>
+<div class="row">
+	<div id="primaryPanel" class="col-sm-12 col-md-12">
+		<div class="titulo"><h3>Llamadas</h3></div>    
+		
+		<div id="form1">
+			<div class="col-sm-6 col-md-6">
+				<div class="form-group">
+		  			<label class="col-sm-6 col-md-6">Seleccione Tipo de Cliente :</label>
+				</div>
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="pintar(1);">
+				<input type="button" class="btn btn-primary" id="btnSinSelect" name="btnSinSelect" value="Nuevo" onclick="pintar(0);">
+			</div>
 		</div>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="pintar(1);">
-		<input type="button" class="btn btn-primary" id="btnSinSelect" name="btnSinSelect" value="Nuevo" onclick="pintar(0);">
+	</div>
+	<div id="secondaryPanel">
 	</div>
 </div>
 

@@ -1,14 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
-
-<ol class="breadcrumb">
-  <li><a href="#">Inicio</a></li>
-  <li class="active">Calendario</li>
-</ol>
-<div class="panel">
-	<small>Haz clic para abrir un panel secundario </small><button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Segundo Panel</button>
-</div>
 <div class="titulo"><h3>Calendario</h3></div>
 
 <link href='/CRMSocia/css/calendar/fullcalendar.css' rel='stylesheet' />
@@ -33,6 +24,12 @@ $(document).ready(function() {
 });
 </script>
 
-<div id="resultAppointment">
-	<input type="hidden" id="calendarAppo">
+<div class="row">
+	<div id="primaryPanel" class="col-sm-12 col-md-12">
+		<div id="resultAppointment">
+			<input type="hidden" id="calendarAppo">
+		</div>
+	</div>
+	<div id="secondaryPanel">
+	</div>
 </div>
