@@ -13,17 +13,13 @@
 <script type="text/javascript" src="/CRMSocia/js/script.js"></script>
 
 <script type="text/javascript" src="/CRMSocia/js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="/CRMSocia/js/bootstrap-datetimepicker.fr.js"></script>
+<script type="text/javascript" src="/CRMSocia/js/bootstrap-datetimepicker.es.js"></script>
 <script type="text/javascript" src="/CRMSocia/js/appointments/appointment.js"></script>
 
-<ol class="breadcrumb">
-  <li><a href="#">Inicio</a></li>
-  <li class="active">Citas</li>
-</ol>
-<div class="panel">
-	<small>Haz clic para abrir un panel secundario </small><button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Segundo Panel</button>
-</div>
-<div class="titulo"><h3>Formato de generación de citas</h3></div>
+
+<div class="row">
+	<div id="primaryPanel" class="col-sm-12 col-md-12">
+	<div class="titulo"><h3>Formato de generación de citas</h3></div>
 	<form id="addQuotation" onSubmit="return saveInfo();" data-toggle="validator" role="form">
 	<div class="row top">
     	<div class="col-sm-8 col-md-8">
@@ -173,9 +169,12 @@
 	</div>
 	
 
- <div class="text-left"  style="padding: 6px 12px;">
-	<!--   <button type="button" class="btn btn-primary" onclick="saveInfo();">Agendar</button>-->
-	<button type="submit" class="btn btn-primary" >Agendar</button>
-	  <button type="button" id="modified" class="btn btn-primary" onclick="SaveModifiedInformation();">Guardar cambios</button>
- </div>
+	 <div class="text-left"  style="padding: 6px 12px;">
+		<!--   <button type="button" class="btn btn-primary" onclick="saveInfo();">Agendar</button>-->
+		<button type="submit" class="btn btn-primary" >Agendar</button>
+		  <button type="button" id="modified" class="btn btn-primary" onclick="SaveModifiedInformation();">Guardar cambios</button>
+	 </div>
  </form>
+ </div>
+ 	<div id="secondaryPanel"></div>
+ </div>
