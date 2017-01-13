@@ -20,7 +20,7 @@
 <div class="row">
 	<div id="primaryPanel" class="col-sm-12 col-md-12">
 	<div class="titulo"><h3>Formato de generación de citas</h3></div>
-	<form id="addQuotation" onSubmit="return saveInfo();" data-toggle="validator" role="form">
+	<form id="addAppointment" onSubmit="return saveInfo();" data-toggle="validator" role="form">
 	<div class="row top">
     	<div class="col-sm-8 col-md-8">
 			<div class="form-group">
@@ -112,7 +112,7 @@
 			        <span  class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 			    </div>
-				<input type="hidden" id="dtp_input2" value="" /><br/>
+				<input type="hidden" id="dtp_input2" name="dtp_input2" value="" /><br/>
 			</div>
 			</div>
 			<div class="col-md-6">
@@ -123,7 +123,7 @@
 					<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
 				</div>
-				<input type="hidden" id="dtp_input3" value="" /><br/>
+				<input type="hidden" id="dtp_input3" name="dtp_input3" value="" /><br/>
 		    </div>
 		    </div>
 		  </div>

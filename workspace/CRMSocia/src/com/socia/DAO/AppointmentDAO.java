@@ -104,17 +104,18 @@ public class AppointmentDAO {
 	}
 	
 	
-	public ArrayList<StringBuilder> insertAppointment(AppointmentDTO appoint, ArrayList<StringBuilder> queries){
+	public ArrayList<StringBuilder> insertAppointment(AppointmentDTO appoint,int addressId, ArrayList<StringBuilder> queries){
 		StringBuilder		sqlQuery	=	null;
 		
     	sqlQuery	=	new	StringBuilder();
-		sqlQuery.append(" INSERT INTO crm_appointment(crm_appointment_id,date,crm_client_id,crm_user_id,crm_contact_id,crm_bdm_id )");
+		sqlQuery.append(" INSERT INTO crm_appointment(crm_appointment_id,date,crm_client_id,crm_user_id,crm_contact_id,crm_bdm_id, crm_address_id )");
 		sqlQuery.append(" VALUES ("+appoint.getCrmAppointmentId());
 		sqlQuery.append(",'"+appoint.getDate()+"'");
 		sqlQuery.append(","+appoint.getCrmClientId());
 		sqlQuery.append(","+appoint.getCrmUserId());
 		sqlQuery.append(","+appoint.getCrmContactId());
-		sqlQuery.append(", "+appoint.getcrmBdmId()+" )");
+		sqlQuery.append(", "+appoint.getcrmBdmId());
+		sqlQuery.append(", "+addressId+")");
 		// INSERT INTO crm_appointment VALUES (2,'2016-10-11 05:25',2,2,0)
 		queries.add(sqlQuery);
     

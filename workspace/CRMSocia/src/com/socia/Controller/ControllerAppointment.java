@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.socia.DAO.AddressDAO;
 import com.socia.DAO.AppointmentDAO;
 import com.socia.DAO.ConsecutiveDAO;
 import com.socia.DAO.ContactDAO;
 import com.socia.DAO.TransactionDAO;
+import com.socia.DTO.AddressDTO;
 import com.socia.DTO.AppointmentDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
@@ -54,10 +56,28 @@ public class ControllerAppointment extends HttpServlet {
 	public void  procesar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		HttpSession	session	=	request.getSession();
 		
-		int		opc	=	Integer.parseInt(request.getParameter("opc"));
-		String	url	=	"";
-		TransactionDAO					transaction			= new TransactionDAO();
-		boolean		stat	=	false;
+		int				opc			=	Integer.parseInt(request.getParameter("opc"));
+		String			url			=	"";
+		TransactionDAO	transaction	= new TransactionDAO();
+		boolean			stat		=	false;
+		String			activeTab	=	"";
+		int 			addressId	=	0;
+		String 			street		=	"";
+		String			extNum		=	"";
+		String 			intNum		=	"";
+		String 			suburb		=	"";
+		String			city		=	"";
+		String			state		=	"";
+		String			country		=	"";
+		String			zipCode		=	"";
+		
+		/**DAO**/
+		ConsecutiveDAO	objConsecutive		=	new ConsecutiveDAO();
+		AddressDAO		objAddress 			= 	new AddressDAO();
+		
+		/**DTO**/
+		AddressDTO						address				=	null;
+		
 		try{
 			switch (opc){
 				case 1:
@@ -75,16 +95,40 @@ public class ControllerAppointment extends HttpServlet {
 					url	=	"/views/appointments/responses/getContacts.jsp";
 					break;
 				case 3:
-					int		rz		=	Integer.parseInt(request.getParameter("rz"));
-					int		contId	=	Integer.parseInt(request.getParameter("contact"));
-					int		phone	=	Integer.parseInt(request.getParameter("phoneI"));
+					int		rz		=	Integer.parseInt(request.getParameter("clientId"));
+					int		contId	=	Integer.parseInt(request.getParameter("contactI").split(",")[0]);
+					int		phone	=	Integer.parseInt(request.getParameter("phoneContact"));
 					int		bdmI	=	Integer.parseInt(request.getParameter("bdmI"));
 					int		userId	=	((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId();
-					String	days	=	request.getParameter("days");
-					String	hrs		=	request.getParameter("hrs");
+					String	days	=	request.getParameter("dtp_input2");
+					String	hrs		=	request.getParameter("dtp_input3");
 					String	email	=	request.getParameter("emailI");
 					String	nameI	=	request.getParameter("nameI");
 					boolean	statIn	=	false;
+					activeTab = request.getParameter("activeTab");
+					
+					System.out.println(activeTab);
+					
+					activeTab = request.getParameter("activeTab");
+					   
+					   System.out.println(activeTab);
+					   
+					   if(activeTab.equals("SELECCIONAR")){
+					    addressId = Integer.parseInt(request.getParameter("addressId"));
+					   }else if(activeTab.equals("AGREGAR")){
+					    addressId = objConsecutive.getConsecutive("addresses");
+
+					    street = request.getParameter("street");
+					    extNum = request.getParameter("extNum");
+					    intNum = request.getParameter("intNum");
+					    suburb = request.getParameter("suburb");
+					    city = request.getParameter("city");
+					    state = request.getParameter("state");
+					    country = request.getParameter("country");
+					    zipCode = request.getParameter("zipCode");
+					    
+					    address = new AddressDTO(addressId, street, extNum, intNum, suburb, city, state, country, zipCode);
+					   }
 					
 									
 					AppointmentDTO	c	=	new AppointmentDTO();
@@ -97,7 +141,11 @@ public class ControllerAppointment extends HttpServlet {
 					c.setcrmBdmId(bdmI);
 
 					ArrayList<StringBuilder>	arrQuerys	=	new	ArrayList<StringBuilder>();
-					arrQuerys	=	new AppointmentDAO().insertAppointment(c, arrQuerys);
+					arrQuerys	=	new AppointmentDAO().insertAppointment(c,addressId, arrQuerys);
+					if(activeTab.equals("AGREGAR")){
+						arrQuerys = objAddress.insertAddress(address, arrQuerys);
+						arrQuerys = objAddress.insertContactAddress(rz, addressId, arrQuerys);
+					}
 					try
 					{
 						statIn	=	true;
