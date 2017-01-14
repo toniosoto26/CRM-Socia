@@ -27,9 +27,11 @@ public class ContactDAO {
 		String 					firstName	=	"";
 		String 					lastName	=	"";
 		String 					phone		=	"";
+		String 					ext		=	"";
 		String 					email		=	"";
 		String 					division	=	"";
 		String 					position	=	"";
+		String 		[]tel =  {"",""};
 		ArrayList<ContactDTO>	contactArr	= 	new ArrayList<ContactDTO>();
 		
 		try{
@@ -62,8 +64,18 @@ public class ContactDAO {
 				division = resultSet.getString(8);
 				position = resultSet.getString(9);
 				
+				tel=phone.split("ext.");
+				if(tel.length==1){
+					phone=tel[0].toString();
+					ext=" ";
+				}
+				else{
+					phone=tel[0].toString();
+					ext=tel[1].toString();
+				}
 				
-				contact = new ContactDTO(contactId, firstName, lastName, phone, email,divisionId,division,positionId,position);
+				System.out.println("teEXt  "+phone + "   "+ ext);
+				contact = new ContactDTO(contactId, firstName, lastName, phone, email,divisionId,division,positionId,position,ext);
 				contactArr.add(contact);
 			}
 			
@@ -94,12 +106,13 @@ public class ContactDAO {
 		String 					firstName	=	"";
 		String 					lastName	=	"";
 		String 					phone		=	"";
+		String 					ext		=	"";
 		String 					email		=	"";
 		int 					company_division_id;
 		String 					division		=	"";
 		int 					id_position;
 		String 					position		=	"";
-
+		String 		[]tel =  null;
 
 		
 		try{
@@ -114,7 +127,7 @@ public class ContactDAO {
 			connection	=	sociaDB.getConnection1();
 			statement	=	connection.prepareStatement(sqlQuery.toString());
 			statement.setInt(1, contactId);
-			
+			System.out.println(sqlQuery.toString());
 			resultSet	=	statement.executeQuery();
 			
 			while(resultSet.next()){
@@ -127,8 +140,12 @@ public class ContactDAO {
 				position = resultSet.getString(7);
 				company_division_id = resultSet.getInt(8);
 				id_position =resultSet.getInt(9);
+				tel=phone.split("ext.");
+				phone=tel[0].toString();
+				ext=tel[1].toString();
 				
-				contact = new ContactDTO(contactId, firstName, lastName, phone, email,company_division_id,division,id_position,position);
+				System.out.println("teEXt2  "+phone + "   "+ ext);
+				contact = new ContactDTO(contactId, firstName, lastName, phone, email,company_division_id,division,id_position,position,ext);
 				
 			}
 			

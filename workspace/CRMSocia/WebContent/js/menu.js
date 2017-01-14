@@ -46,5 +46,10 @@ function loadMenu(menuName, option){
 	}else if(menuName === "diagnosis"){
 		$("#pageContent").removeClass("welcome");
 		$("#pageContent").load("/CRMSocia/views/diagnosis/diagnosis.jsp");
+	
+	}else if(menuName === "callLog"){
+		$("#pageContent").removeClass("welcome");
+		$("#pageContent").load("/CRMSocia/CallLog.jsp");
+		
 	}
 }

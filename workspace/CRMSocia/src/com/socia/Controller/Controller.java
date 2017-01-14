@@ -17,6 +17,7 @@ import com.socia.DAO.ContactDAO;
 import com.socia.DAO.DivisionPositionDAO;
 import com.socia.DAO.TransactionDAO;
 import com.socia.DTO.CallDTO;
+import com.socia.DTO.CallLogDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
 import com.socia.DTO.DivisionDTO;
@@ -118,6 +119,7 @@ public class Controller extends HttpServlet {
 			String contact ="";
 			String emailContact="";
 			String telContact="";
+			String telExt="";
 			String lastName="";
 			String observations="";
 			int id_client=0;
@@ -139,6 +141,8 @@ public class Controller extends HttpServlet {
 			emailContact=request.getParameter("companyEmail");
 			System.out.println("emailContact "+emailContact);
 			telContact=request.getParameter("companyPhone");
+			telExt=request.getParameter("ext");
+			telContact=telContact+"ext."+telExt;
 			System.out.println("telContact "+telContact);
 			observations=request.getParameter("observation");
 			System.out.println("observations "+observations);
@@ -169,7 +173,7 @@ public class Controller extends HttpServlet {
 			}
 			if(addContact == 1){
 				consecutiveContact=objConsecutive.getConsecutive("contacts");
-				infoContact = new ContactDTO(consecutiveContact, contact, lastName, telContact, emailContact,division,"division",position,"position");
+				infoContact = new ContactDTO(consecutiveContact, contact, lastName, telContact, emailContact,division,"division",position,"position",telExt);
 				queries=objContact.insertNewContact(infoContact, queries);
 				System.out.println("agrega contacto");
 			}
@@ -249,6 +253,25 @@ public class Controller extends HttpServlet {
 			session.setAttribute("countCallClient", countCallClient);
 			
 			url = "utils/countCalls.jsp";
+		}
+		if(option == 8){
+			String fechaIni=request.getParameter("fechaIni");
+			String fechaFin=request.getParameter("fechaFin");
+			
+			ArrayList <CallLogDTO> arrDatos= new  ArrayList<CallLogDTO>();
+			try{
+			arrDatos=objCall.getCallLog(fechaIni, fechaFin, 1);
+			
+			}catch(Exception e ){
+				e.printStackTrace();
+			}
+			if(arrDatos.size()>0){
+				session.removeAttribute("datos");
+				session.setAttribute("datos", arrDatos);
+				System.out.println("arrDatos"+arrDatos.toString());
+				url = "/views/calls/callDetail.jsp";
+				
+			}
 		}
 		
 		

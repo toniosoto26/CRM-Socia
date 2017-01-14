@@ -12,6 +12,7 @@ public class ContactDTO {
 	private String  name_division;
 	private int 	id_position;
 	private String  position;
+	private String  ext;
 	
 	
 
@@ -21,7 +22,7 @@ public class ContactDTO {
 	
 	public ContactDTO(int contactId, String firstName, String lastName,
 			String phone, String email, int company_division_id,
-			String name_division, int id_position, String position) {
+			String name_division, int id_position, String position,String ext) {
 		super();
 		this.contactId = contactId;
 		this.firstName = firstName;
@@ -32,6 +33,7 @@ public class ContactDTO {
 		this.id_position = id_position;
 		this.position=position;
 		this.name_division=name_division;
+		this.ext=ext;
 	}
 	
 	public ContactDTO(int contactId, String firstName, String lastName,
@@ -64,6 +66,14 @@ public class ContactDTO {
 	public String getPhone() {
 		return phone;
 	}
+	public String getExt() {
+		return ext;
+	}
+
+	public void setExt(String ext) {
+		this.ext = ext;
+	}
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}

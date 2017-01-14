@@ -14,7 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="./css/alerts/alertify.core.css">
 		<link rel="stylesheet" type="text/css" href="./css/alerts/alertify.default.css">
 		<link rel="stylesheet" type="text/css" href="./css/alerts/alertify.bootstrap.css">
-		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+		<!--<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> -->
 	</head>
 	<body>
 		<c:choose>
@@ -46,7 +46,7 @@
 				        <li onClick="loadMenu('appointment', this);"><a href="#">CITAS</a></li>
 				        <li onClick="loadMenu('quotation', this);"><a href="#">COTIZACIONES</a></li>
 				        <li onClick="loadMenu('calendar', this);"><a href="#">CALENDARIO</a></li>
-				        <li><a href="#">INDICADORES</a></li>
+				        <li onClick="loadMenu('callLog', this);"><a href="#">INDICADORES</a></li>
 				        <li><a href="ControllerLogin?cerrarSesion=T"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>  CERRAR SESIÓN</a></li>
 				      </ul>
 				    </div><!-- /.navbar-collapse -->

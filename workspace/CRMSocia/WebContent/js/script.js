@@ -186,6 +186,7 @@ function pintar(variable){
 
 function registreCall(variable){
 	var validacion=validateCalls();
+	
 	if(validacion!= ""){
 		alertify.alert(validacion);
 	}
@@ -209,19 +210,25 @@ function registreCall(variable){
 			}
 		});
 	}
+	
+	return false;
 }
 
 function validateCalls(){
+	
+	alert("Entre a la maldita validacion");
 	var mensaje="";
-	if($("#observation").val() == ""){
-		mensaje="Es necesario Capturar las observaciones ";
-	}
-	if($("#companyPhone").val() == ""){
-		mensaje="Es necesario Capturar telefono ";
-	}
-	if($("#companyEmail").val() == ""){
-		mensaje="Es necesario Capturar email ";
-	}
+	
+		if($("#chosenClient").val() == 0){
+			mensaje= "Debe seleccionar un Cliente";
+		}
+		if($("#chosenDivision").val() == 0){
+			mensaje= "Debe seleccionar un Área";
+		}
+		if($("#chosenPosition").val() == 0){
+			mensaje= "Debe seleccionar un puesto";
+		}
+	
 	
 	return mensaje;
 }
@@ -323,4 +330,16 @@ function selectSecondaryPanel(optionName){
 	}else if(optionName === "diagnosis"){
 		$("#secondaryPanel").load("/CRMSocia/views/diagnosis/diagnosis.jsp");
 	}
+
 }
+
+
+function showAlert(message,typeAlert,nameDiv){
+    var alert= '<div class="alert alert-'+typeAlert+' alert-dismissible" role="alert">';
+    alert += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+    alert += message+'</div>';
+
+    $("#"+nameDiv).html(alert);
+}
+
+

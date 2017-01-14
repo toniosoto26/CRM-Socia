@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  
-	<div class="col-sm-12 col-md-12">
+	<div class="col-sm-9 col-md-9">
 		<div class="row">
 			<div class="col-sm-6 col-md-6">
 				<div class="form-group">
@@ -11,8 +11,10 @@
 	    			<input type="text" class="form-control" id="lastName" name="lastName" disabled value='<c:out value="${ sessionScope.infoContact.lastName }"></c:out>' />
 				</div>
 				<div class="form-group">
-				    <label class="col-sm-6 col-md-6">Teléfono</label>
-				    <input type="text" class="form-control" id="companyPhone" name="companyPhone" disabled value='<c:out value="${sessionScope.infoContact.phone}"></c:out>' >
+				    <label class="col-sm-2 col-md-2">Teléfono</label>
+				    <input type="text" class="form-control col-sm-4 col-md-4" id="companyPhone" name="companyPhone" disabled value='<c:out value="${sessionScope.infoContact.phone}"></c:out>' >
+					<label class="col-sm-2 col-md-2" for="inputExt">Ext.</label>
+		    		<input required type="text" class="col-sm-2 col-md-2" id="ext"  name="ext" disabled value='<c:out value="${sessionScope.infoContact.ext}"></c:out>'>
 				</div>
 				<div class="form-group">
 				    <label class="col-sm-6 col-md-6">Puesto</label>
@@ -34,7 +36,7 @@
 					<div class="col-sm-12 col-md-12">
 						<div class="form-group">
 						    <label class="col-sm-3 col-md3" for="inputObservation">Observaciones de la llamada</label>
-						    <textarea class="form-control" id="observation" placeholder="Observaciones" name="observation"></textarea>
+						    <textarea required class="form-control" id="observation" placeholder="Observaciones" name="observation"></textarea>
 						</div>
 		       	 		<div class="form-group top">
 				            <label  class="col-sm-3 col-md-3" for="happy2">Estado de llamada</label>
@@ -62,12 +64,26 @@
 			    <div class="row">
 			    	<div class="col-sm-12 col-md-12">
 					   	<div class="text-center">
-					    	<input type="button" id="btnGuardar" class="btn btn-primary" name="Guardar" value="Guardar" onclick="registreCall(1);">
+					    	<input type="submit" id="btnGuardar" class="btn btn-primary" name="Guardar" value="Guardar">
 					  	</div>
 					</div>
 				</c:when>
 			</c:choose>
 		</div> 	
+   	</div>
+   	<div class="col-sm-3 col-md-3">
+   		<br><br>
+		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="">
+		<br><br>
+		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="">
+		<br><br>
+		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="">
+		<br><br>
+		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="">
+		<br><br>
+		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="">
+		<br><br>
+		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="">
    	</div>
 	
 	<script src="js/chosen.jquery.js" type="text/javascript"></script>

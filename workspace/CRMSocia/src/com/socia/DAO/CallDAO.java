@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import com.mysql.jdbc.Statement;
 import com.socia.DTO.AddressDTO;
 import com.socia.DTO.CallDTO;
+import com.socia.DTO.CallLogDTO;
+import com.socia.DTO.ContactDTO;
 import com.socia.conexion.Conexion;
 
 
@@ -121,6 +123,97 @@ public class CallDAO {
 			return countCall;
 		}
 	 
+	 	
+	 public ArrayList<CallLogDTO> getCallLog(String fechaIni,String fechaFin,int crm_user_id){
+			Conexion			sociaDB		=	null;
+			Connection			connection	=	null;
+			PreparedStatement	statement	=	null;
+			ResultSet			resultSet	=	null;
+			StringBuilder		sqlQuery	=	null;
+			
+			/** call objects*/
+			CallLogDTO			lobjCallLog		=	null;
+			ArrayList<CallLogDTO>	arrCallLog	= 	new ArrayList<CallLogDTO>();
+			
+			try{
+				sqlQuery	=	new	StringBuilder();
+				sqlQuery.append(" select cal.crm_user_id,usr.first_name,usr.last_name,cal.date_call,cal.status,cli.company_name, ");
+				sqlQuery.append(" cont.email,cont.phone,cont.first_name, cont.last_name,position,comments, letter ");
+				sqlQuery.append(" from crm_contact cont , crm_position pos, crm_call cal,crm_client cli,crm_user usr ");
+				sqlQuery.append(" where cal.crm_client_id=cli.crm_client_id and cal.crm_contact_id=cont.crm_contact_id and  ");
+				sqlQuery.append(" cal.crm_user_id=usr.crm_user_id and cont.id_position=pos.id_position ");
+				
+				//sqlQuery.append(" and client.crm_client_id = ? ");
+				
+				sociaDB		=	new	Conexion();
+				connection	=	sociaDB.getConnection1();
+				statement	=	connection.prepareStatement(sqlQuery.toString());
+				
+				//statement.setInt(1, clientId);
+				
+				
+				String date_call="";
+				String crm_user_name;
+				String crm_user_last_name;
+				String client_name;
+				String phone;
+				String mail;
+				String contact_name;
+				String contact_last_name;
+				String  position;
+				String comments;
+				int letter;
+				int  status;
+				String semaforo="";
+				
+				resultSet	=	statement.executeQuery();
+				System.out.println("calllog :"+sqlQuery.toString());
+				while(resultSet.next()){
+					crm_user_id=resultSet.getInt(1);
+					crm_user_name = resultSet.getString(2);
+					crm_user_last_name = resultSet.getString(3);
+					date_call = resultSet.getString(4);
+					status = resultSet.getInt(5);
+					client_name = resultSet.getString(6);
+					mail = resultSet.getString(7);
+					phone = resultSet.getString(8);
+					contact_name = resultSet.getString(9);
+					contact_last_name = resultSet.getString(10);
+					position = resultSet.getString(11);
+					comments = resultSet.getString(12);
+					letter = resultSet.getInt(13);
+					
+					if(status==1){
+						semaforo="opcion 1 ";
+					}
+					else if(status==2){
+						semaforo="opcion semaforo 2 ";
+					}
+					else{
+						semaforo="opcion semaforo 3 ";
+					}
+					
+					System.out.println("");
+					
+					lobjCallLog = new CallLogDTO(date_call, crm_user_id, crm_user_name,client_name, mail, phone, contact_name,position, comments, letter, semaforo);
+					arrCallLog.add(lobjCallLog);
+					System.out.println(lobjCallLog.toString());
+				}
+				
+			}catch(Exception exception){
+				exception.printStackTrace();
+			}finally{
+				try{
+					resultSet.close();
+					statement.close();
+					connection.close();
+				}catch(Exception closeException){
+					closeException.printStackTrace();
+				}
+			}
+			
+			return arrCallLog;
+		}
 	 
 
 		public static void main(String args[]){
