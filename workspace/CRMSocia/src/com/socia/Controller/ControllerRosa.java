@@ -1,6 +1,9 @@
 package com.socia.Controller;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -11,21 +14,29 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.socia.DAO.AddressDAO;
+import com.socia.DAO.BusinessLineDAO;
 import com.socia.DAO.ClientDAO;
 import com.socia.DAO.ConsecutiveDAO;
 import com.socia.DAO.ContactDAO;
+import com.socia.DAO.DateDAO;
+import com.socia.DAO.IndicatorDAO;
 import com.socia.DAO.ItemDAO;
 import com.socia.DAO.MailDAO;
 import com.socia.DAO.QuotationDAO;
 import com.socia.DAO.QuotationDetailDAO;
+import com.socia.DAO.TenderDAO;
 import com.socia.DAO.TransactionDAO;
 import com.socia.DTO.AddressDTO;
+import com.socia.DTO.BusinessLineDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
+import com.socia.DTO.DateDTO;
+import com.socia.DTO.IndicatorDTO;
 import com.socia.DTO.ItemDTO;
 import com.socia.DTO.LoginDTO;
 import com.socia.DTO.QuotationDTO;
 import com.socia.DTO.QuotationDetailDTO;
+import com.socia.DTO.TenderDTO;
 
 /**
  * Servlet implementation class ControllerTemp
@@ -56,57 +67,80 @@ public class ControllerRosa extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession				session		=	request.getSession();
 		/** Parameters */
-		int								option				=	Integer.parseInt(request.getParameter("option"));
-		int								clientId			= 	0;
-		String							itemId				=	"";
-		String							warranty			=	"";
-		double							unitPrice			=	0;
-		int								quantity			=	0;
-		String							estimatedShipping	=	"";
-		int								contactId			=	0;
-		String							currency			=	"";
-		double							exchangeRate		=	0;
-		int								totalProducts		=	0;
-		int								quotationId			= 	0;
-		String							addItem				=	"";
-		String							description			=	"";
+		int								option					=	Integer.parseInt(request.getParameter("option"));
+		int								clientId				= 	0;
+		String							itemId					=	"";
+		String							warranty				=	"";
+		double							unitPrice				=	0;
+		int								quantity				=	0;
+		String							estimatedShipping		=	"";
+		int								contactId				=	0;
+		String							currency				=	"";
+		double							exchangeRate			=	0;
+		int								totalProducts			=	0;
+		int								quotationId				= 	0;
+		String							addItem					=	"";
+		String							description				=	"";
 		
-		String							activeTab			=	"";
-		int 							addressId			=	0;
-		String 							street				=	"";
-		String							extNum				=	"";
-		String 							intNum				=	"";
-		String 							suburb				=	"";
-		String							city				=	"";
-		String							state				=	"";
-		String							country				=	"";
-		String							zipCode				=	"";
+		String							activeTab				=	"";
+		int 							addressId				=	0;
+		String 							street					=	"";
+		String							extNum					=	"";
+		String 							intNum					=	"";
+		String 							suburb					=	"";
+		String							city					=	"";
+		String							state					=	"";
+		String							country					=	"";
+		String							zipCode					=	"";
 		
 		StringBuilder					body;
-		String[]						to					= 	{"rmmi_ros@hotmail.com", "jossoto14@gmail.com", "vidal.sistemas@hotmail.com"};
+		String[]						to						= 	{"rmmi_ros@hotmail.com", "jossoto14@gmail.com", "vidal.sistemas@hotmail.com"};
 		
-		int 							itemIndex 			=	0; 
-		boolean							insert				= 	false;
+		int 							itemIndex 				=	0; 
+		boolean							insert					= 	false;
+		
+		int 							tenderId				=	0;
+		String							startUpDate				=	"";
+		String							deadline				=	"";
+		String							requirements			=	"";
+		String							comments				=	"";
+		int								businessLineId			=	0;
+		String							decisionMaker			=	"";
+		String		 					currentBrand			=	"";
+		
+		Date							startDate				=	null;
+		Date							endDate					=	null;
+		SimpleDateFormat 				formatter	 			=	new SimpleDateFormat("yyyy-MM-dd");
 		
 		/** DAO */
-		ItemDAO							objItem				=	new ItemDAO();
-		MailDAO							objMail				=	new MailDAO();
-		ClientDAO						objClient			=	new ClientDAO();
-		ContactDAO						objContact			=	new ContactDAO();
-		AddressDAO						objAddress 			= 	new AddressDAO();
-		QuotationDAO					objQuotation		=	new QuotationDAO();
-		ConsecutiveDAO					objConsecutive		=	new ConsecutiveDAO();
-		QuotationDetailDAO				objQuotationDetail	=	new QuotationDetailDAO();
+		ItemDAO							objItem					=	new ItemDAO();
+		MailDAO							objMail					=	new MailDAO();
+		ClientDAO						objClient				=	new ClientDAO();
+		ContactDAO						objContact				=	new ContactDAO();
+		AddressDAO						objAddress 				= 	new AddressDAO();
+		QuotationDAO					objQuotation			=	new QuotationDAO();
+		ConsecutiveDAO					objConsecutive			=	new ConsecutiveDAO();
+		QuotationDetailDAO				objQuotationDetail		=	new QuotationDetailDAO();
+		BusinessLineDAO					objBusinessLine			=	new BusinessLineDAO();
+		TenderDAO						objTender				=	new TenderDAO();
+		IndicatorDAO					objIndicator			=	new IndicatorDAO();
+		DateDAO							objDate					=	new DateDAO();
 		
 		/** DTO*/
 		ItemDTO							item;
-		LoginDTO						login;
 		ClientDTO						client;
-		AddressDTO						address				=	null;
+		AddressDTO						address					=	null;
 		ContactDTO						contact;
 		QuotationDTO					quotation;
 		QuotationDetailDTO				quotationDetail;
-		ArrayList<QuotationDetailDTO> 	arrQuotationDetail	=	new ArrayList<QuotationDetailDTO>();
+		ArrayList<QuotationDetailDTO> 	arrQuotationDetail		=	new ArrayList<QuotationDetailDTO>();
+		ArrayList<BusinessLineDTO>		arrBusinessLine			= 	new ArrayList<BusinessLineDTO>();
+		TenderDTO						tender					=	null;
+		ArrayList<DateDTO>				arrDate					= 	new ArrayList<DateDTO>();
+		ArrayList<IndicatorDTO>			arrCallIndicator		= 	new ArrayList<IndicatorDTO>();
+		ArrayList<IndicatorDTO>			arrAppointmentIndicator	= 	new ArrayList<IndicatorDTO>();
+		ArrayList<IndicatorDTO>			arrQuotationIndicator	= 	new ArrayList<IndicatorDTO>();
+		ArrayList<IndicatorDTO>			arrTenderIndicator		= 	new ArrayList<IndicatorDTO>();
 		
 		/** URL */
 		String							url					=	"";
@@ -162,7 +196,7 @@ public class ControllerRosa extends HttpServlet {
 			if(option == 2 || option == 6)
 				quotationId = objConsecutive.getConsecutive("quotations");
 			
-			quotation = new QuotationDTO(quotationId, addressId, contactId, currency, exchangeRate,  ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
+			quotation = new QuotationDTO(quotationId, addressId, clientId, currency, exchangeRate,  ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 			
 			/** Quotation details*/
 			for(int index = 1; index <= totalProducts; index++){
@@ -204,8 +238,6 @@ public class ControllerRosa extends HttpServlet {
 						queries = objAddress.insertAddress(address, queries);
 						queries = objAddress.insertContactAddress(clientId, addressId, queries);
 					}
-					
-					System.out.println(queries.toString());
 					
 					queries = objQuotation.insertQuotation(quotation, queries);
 					queries = objQuotationDetail.insertQuotationDetails(arrQuotationDetail, queries);
@@ -287,6 +319,99 @@ public class ControllerRosa extends HttpServlet {
 			client = objClient.getClientById(1);
 			contact = objContact.getContactsById(1);
 			address = objAddress.getAddressById(1);
+		}
+		else if(option == 7){
+			arrBusinessLine = objBusinessLine.getBusinessLines();
+			
+			session.removeAttribute("arrBusinessLine");
+			if(arrBusinessLine.size() > 0)
+				session.setAttribute("arrBusinessLine", arrBusinessLine);
+			else
+				session.setAttribute("arrBusinessLine", null);
+			
+			url = "utils/selectBusinessLine.jsp";
+		}
+		else if(option == 8){
+			startUpDate = request.getParameter("startUpDate");
+			deadline = request.getParameter("deadline");
+			requirements = request.getParameter("requirements");
+			comments = request.getParameter("comments");
+			clientId = Integer.parseInt(request.getParameter("clientId"));
+			businessLineId = Integer.parseInt(request.getParameter("businessLineId"));
+			decisionMaker = request.getParameter("decisionMaker");
+			currentBrand = request.getParameter("currentBrand");
+			
+			tenderId = objConsecutive.getConsecutive("tenders");
+			
+			tender = new TenderDTO(tenderId, startUpDate, deadline, requirements, comments, clientId, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId(), businessLineId, decisionMaker, "today", currentBrand);
+			
+			try
+			{
+				queries = objTender.insertTender(tender, queries);
+				
+				transaction.openConnection();
+				transaction.insertAll(queries);
+				
+				transaction.commit();
+				
+				insert = true;
+			}catch(Exception exception){
+				insert = false;
+				transaction.rollback();
+				exception.printStackTrace();
+			}finally{
+				transaction.closeConnection();
+			}
+			
+			session.removeAttribute("insertTender");
+			session.setAttribute("insertTender", insert);
+			
+			url = "views/calendar/responses/validateInsertTender.jsp";
+		}
+		else if(option == 9){
+			startUpDate = request.getParameter("startDate");
+			deadline = request.getParameter("endDate");
+			
+			try{
+				startDate = formatter.parse(startUpDate);
+				endDate = formatter.parse(deadline);
+				arrDate = objDate.getDaysArray(startDate, endDate);
+				
+				arrCallIndicator = objIndicator.getGeneralCallIndicator(arrDate);
+				arrAppointmentIndicator = objIndicator.getGeneralAppointmentIndicator(arrDate);
+				arrQuotationIndicator = objIndicator.getGeneralQuotationIndicator(arrDate);
+				arrTenderIndicator = objIndicator.getGeneralTenderIndicator(arrDate);
+				
+				session.removeAttribute("arrCallIndicator");
+				if(arrCallIndicator.size() > 0)
+					session.setAttribute("arrCallIndicator", arrCallIndicator);
+				else
+					session.setAttribute("arrCallIndicator", null);
+				
+				session.removeAttribute("arrAppointmentIndicator");
+				if(arrAppointmentIndicator.size() > 0)
+					session.setAttribute("arrAppointmentIndicator", arrAppointmentIndicator);
+				else
+					session.setAttribute("arrAppointmentIndicator", null);
+				
+				session.removeAttribute("arrQuotationIndicator");
+				if(arrQuotationIndicator.size() > 0)
+					session.setAttribute("arrQuotationIndicator", arrQuotationIndicator);
+				else
+					session.setAttribute("arrQuotationIndicator", null);
+				
+				session.removeAttribute("arrTenderIndicator");
+				if(arrTenderIndicator.size() > 0)
+					session.setAttribute("arrTenderIndicator", arrTenderIndicator);
+				else
+					session.setAttribute("arrTenderIndicator", null);
+				
+				url = "views/indicators/responses/generateIndicators.jsp";
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+			
 		}
 		
 		request.getRequestDispatcher(url).forward(request, response);

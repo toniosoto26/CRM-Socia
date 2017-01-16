@@ -34,8 +34,8 @@ public class AddressDAO {
 			sqlQuery	=	new	StringBuilder();
 			sqlQuery.append(" select address.* ");
 			sqlQuery.append(" from crm_address address ");
-			sqlQuery.append(" join crm_mvs_address mvs on address.crm_address_id = mvs.crm_address_id ");
-			sqlQuery.append(" join crm_client client on mvs.crm_client_id = client.crm_client_id ");
+			sqlQuery.append(" join crm_client_address ca on address.crm_address_id = ca.crm_address_id ");
+			sqlQuery.append(" join crm_client client on ca.crm_client_id = client.crm_client_id ");
 			sqlQuery.append(" where address.status = 'A' ");
 			sqlQuery.append(" and client.crm_client_id = ? ");
 			
@@ -163,7 +163,7 @@ public class AddressDAO {
 		StringBuilder		sqlQuery	=	null;
 		
     	sqlQuery	=	new	StringBuilder();
-		sqlQuery.append(" INSERT INTO crm_mvs_address (crm_client_id, crm_address_id)");
+		sqlQuery.append(" INSERT INTO crm_client_address (crm_client_id, crm_address_id)");
 		sqlQuery.append(" VALUES ("+contact_id);
 		sqlQuery.append(","+address_id+")");
 		

@@ -3,17 +3,17 @@ package com.socia.DTO;
 public class QuotationDTO {
 	private int 	quotationId;
 	private int		addressId;
-	private int 	contactId;
+	private int 	clientId;
 	private String 	currency;
 	private double	exchangeRate;
 	private int 	userId;
 	
-	public QuotationDTO(int quotationId, int addressId, int contactId,
+	public QuotationDTO(int quotationId, int addressId, int clientId,
 			String currency, double exchangeRate, int userId) {
 		super();
 		this.quotationId = quotationId;
 		this.addressId = addressId;
-		this.contactId = contactId;
+		this.clientId = clientId;
 		this.currency = currency;
 		this.exchangeRate = exchangeRate;
 		this.userId = userId;
@@ -30,11 +30,11 @@ public class QuotationDTO {
 	public void setAddressId(int addressId) {
 		this.addressId = addressId;
 	}
-	public int getContactId() {
-		return contactId;
+	public int getClientId() {
+		return clientId;
 	}
-	public void setContactId(int contactId) {
-		this.contactId = contactId;
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 	public String getCurrency() {
 		return currency;
@@ -57,7 +57,7 @@ public class QuotationDTO {
 	@Override
 	public String toString() {
 		return "QuotationDTO [quotationId=" + quotationId + ", addressId="
-				+ addressId + ", contactId=" + contactId + ", currency="
+				+ addressId + ", clientId=" + clientId + ", currency="
 				+ currency + ", exchangeRate=" + exchangeRate + ", userId="
 				+ userId + "]";
 	}

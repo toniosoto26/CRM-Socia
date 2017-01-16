@@ -3495,12 +3495,32 @@ var Grid = FC.Grid = Class.extend(ListenerMixin, MouseIgnorerMixin, {
 							_this.getHitSpan(origHit),
 							_this.getHitSpan(hit)
 						);
-						if (selectionSpan) {
+						
+						var date = selectionSpan.start;
+						var tender = date.clone().add(3, 'month');
+						
+						console.log(date);
+						
+						$("#chosenClient").val('5');
+						$("#business-select").val('');
+				        $("#startUpDate").val(date.format('DD MMMM YYYY'));
+				        $("#dtp_input1").val(date.format('YYYY-MM-DD'))
+				        $("#deadline").val(tender.format('DD MMMM YYYY'));
+				        $("#dtp_input2").val(tender.format('YYYY-MM-DD'))
+						$("#decisionTaker").val('');
+						$("#currentBrand").val('');
+						$("#requirements").val('');
+						$("#comments").val('');
+						
+						$('#myModal').modal();
+						
+						
+						/*if (selectionSpan) {
 							_this.renderSelection(selectionSpan);
 						}
 						else if (selectionSpan === false) {
 							disableCursor();
-						}
+						}*/
 					}
 				}
 			},
@@ -5173,7 +5193,7 @@ var DayTableMixin = FC.DayTableMixin = {
 	getCellRange: function(row, col) {
 		var start = this.getCellDate(row, col);
 		var end = start.clone().add(1, 'days');
-
+		
 		return { start: start, end: end };
 	},
 
@@ -8726,6 +8746,7 @@ var View = FC.View = Class.extend(EmitterMixin, ListenerMixin, {
 	// Renders a visual indication of the selection
 	renderSelection: function(span) {
 		// subclasses should implement
+		
 	},
 
 

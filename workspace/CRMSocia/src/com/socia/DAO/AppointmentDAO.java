@@ -31,8 +31,8 @@ public class AppointmentDAO {
 			sql.delete(0, sql.length());
 			sql.append(" SELECT user.*  ");
 			sql.append(" FROM crm_user user ");
-			sql.append(" join crm_mvs_user mvs on user.crm_user_id = mvs.crm_user_id ");
-			sql.append(" join crm_user_role role on mvs.crm_user_role_id = role.crm_user_role_id ");
+			sql.append(" join crm_user_userrole uur on user.crm_user_id = uur.crm_user_id ");
+			sql.append(" join crm_user_role role on uur.crm_user_role_id = role.crm_user_role_id ");
 			sql.append(" WHERE role.crm_user_role_id = ?");
 			
 			

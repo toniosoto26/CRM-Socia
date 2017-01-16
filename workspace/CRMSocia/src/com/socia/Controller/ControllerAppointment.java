@@ -15,12 +15,14 @@ import com.socia.DAO.AddressDAO;
 import com.socia.DAO.AppointmentDAO;
 import com.socia.DAO.ConsecutiveDAO;
 import com.socia.DAO.ContactDAO;
+import com.socia.DAO.TenderDAO;
 import com.socia.DAO.TransactionDAO;
 import com.socia.DTO.AddressDTO;
 import com.socia.DTO.AppointmentDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
 import com.socia.DTO.LoginDTO;
+import com.socia.DTO.TenderDTO;
  
 /**
  * Servlet implementation class ControllerAppointment
@@ -229,9 +231,14 @@ public class ControllerAppointment extends HttpServlet {
 				
 				case 6:
 					List<AppointmentDTO>	arrAppointments	=	new AppointmentDAO().getAppointments();
+					List<TenderDTO>			arrTender		=	new	TenderDAO().getTenders();
 					
 					session.removeAttribute("calendarAppointment");
 					session.setAttribute("calendarAppointment", arrAppointments);
+					
+					session.removeAttribute("calendarTender");
+					session.setAttribute("calendarTender", arrTender);
+					
 					url	=	"/views/appointments/responses/getAppointment.jsp";
 					break;
 					

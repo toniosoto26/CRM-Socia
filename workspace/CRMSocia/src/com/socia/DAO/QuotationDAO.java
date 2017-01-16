@@ -29,11 +29,11 @@ public class QuotationDAO {
 		StringBuilder		sqlQuery	=	null;
 		
     	sqlQuery	=	new	StringBuilder();
-		sqlQuery.append(" INSERT INTO crm_quotation (crm_quotation_id, crm_address_id, crm_contact_id, ");
+		sqlQuery.append(" INSERT INTO crm_quotation (crm_quotation_id, crm_address_id, crm_client_id, ");
 									 sqlQuery.append("currency, exchange_rate, crm_user_id, date_created) ");
 		sqlQuery.append(" VALUES ("+quotation.getQuotationId());
 		sqlQuery.append(","+quotation.getAddressId());
-		sqlQuery.append(","+quotation.getContactId());
+		sqlQuery.append(","+quotation.getClientId());
 		sqlQuery.append(",'"+quotation.getCurrency()+"'");
 		sqlQuery.append(","+quotation.getExchangeRate());
 		sqlQuery.append(","+quotation.getUserId());

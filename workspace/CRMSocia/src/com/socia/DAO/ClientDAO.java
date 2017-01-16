@@ -132,7 +132,7 @@ public class ClientDAO {
 		StringBuilder		sqlQuery	=	null;
 		
     	sqlQuery	=	new	StringBuilder();
-		sqlQuery.append(" INSERT INTO crm_mvs_contact (crm_client_id, crm_contact_id)");
+		sqlQuery.append(" INSERT INTO crm_client_contact (crm_client_id, crm_contact_id)");
 		sqlQuery.append(" VALUES ("+client_id);
 		sqlQuery.append(","+contact_id+")");
 		

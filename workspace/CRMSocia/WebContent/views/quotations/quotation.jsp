@@ -103,15 +103,23 @@
 		  		<div id="contactInfo">
 		    		<div class="col-sm-6 col-md-6">
 		  	  			<div class="form-group">
-			    			<label class="col-sm-6 col-md-6">Email:</label>
-			    			<input required type="email" class="form-control" id="companyEmail" name="companyEmail" placeholder="email">
+					    	<label class="col-sm-6 col-md-6">Teléfono:</label>
+					    	<input required type="text" class="form-control" id="companyPhone" name="companyPhone" placeholder="Teléfono">
+					    </div>
+				    	<div class="form-group">
+			    			<label class="col-sm-6 col-md-6">Área:</label>
+			    			<input required type="text" class="form-control" id="companyDivision" name="companyDivision" placeholder="Área">
 				    	</div>
 				    </div>
 				  	<div class="col-sm-6 col-md-6">
 		  	  			<div class="form-group">
-					    	<label class="col-sm-6 col-md-6">Teléfono:</label>
-					    	<input required type="text" class="form-control" id="companyPhone" name="companyPhone" placeholder="Teléfono">
-					    </div>
+			    			<label class="col-sm-6 col-md-6">Email:</label>
+			    			<input required type="email" class="form-control" id="companyEmail" name="companyEmail" placeholder="email">
+				    	</div>
+				    	<div class="form-group">
+			    			<label class="col-sm-6 col-md-6">Puesto:</label>
+			    			<input required type="text" class="form-control" id="companyPosition" name="companyPosition" placeholder="Puesto">
+				    	</div>
 					</div>
 			  	</div>
 			</div>

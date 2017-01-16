@@ -22,11 +22,11 @@ public class LoginDAO {
 		
 		try{
 			sql	=	new	StringBuilder();
-			sql.append(" select u.*, mvs.crm_user_role_id ");
-			sql.append(" from crm_user u, crm_mvs_user mvs  ");
+			sql.append(" select u.*, uur.crm_user_role_id ");
+			sql.append(" from crm_user u, crm_user_userrole uur  ");
 			sql.append(" where u.user = ?");
 			sql.append(" and u.password = ? ");
-			sql.append(" and u.crm_user_id = mvs.crm_user_id ");
+			sql.append(" and u.crm_user_id = uur.crm_user_id ");
 			
 			c	=	new	Conexion();
 			con	=	c.getConnection1();
