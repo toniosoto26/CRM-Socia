@@ -13,6 +13,8 @@
 <c:set var="totalEffectivesPro" value="${0}"/>
 <c:set var="totalObjectiePro" value="${0}"/>
 <c:set var="totaValue" value="${0}"/>
+<c:set var="fechaIni" value="${''}"/>
+<c:set var="fechaFin" value="${''}"/>
 
 <div class="table-responsive">
    	<table class="table table-bordered">
@@ -36,25 +38,33 @@
     		</tr>
     	</thead>
     	<tbody>
-    		<c:forEach  items="${sessionScope.arrCallIndicator}" var="varIndicator" >
+    		<c:forEach items="${sessionScope.arrCallIndicator}" var="varIndicator" varStatus="varCount">
 				<c:set var="totalTotalsAct" value="${totalTotalsAct + varIndicator.indicatorAct.total}" />
 				<c:set var="totalEffectivesAct" value="${totalEffectivesAct + varIndicator.indicatorAct.effective}" />
 				<c:set var="totalTotalsPro" value="${totalTotalsPro + varIndicator.indicatorPro.total}" />
 				<c:set var="totalEffectivesPro" value="${totalEffectivesPro + varIndicator.indicatorPro.effective}" />
+				<c:choose>
+					<c:when test="${varCount.index==0 }">
+						<c:set var="fechaIni" value="${varIndicator.date.date}"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="fechaFin" value="${varIndicator.date.date}"/>
+					</c:otherwise>
+				</c:choose>
 				<tr>
 					<td><c:out value="${ varIndicator.date.dayOfWeek }"></c:out></td>
-					<td><c:out value="${ varIndicator.indicatorPro.total }"></c:out></td>
+					<td><a data-toggle="modal" href="#myModal" onClick="loadCallDetail('P', '<fmt:formatDate type="date" value="${varIndicator.date.date.time}" pattern="yyyy-MM-dd"/>');"><c:out value="${ varIndicator.indicatorPro.total }"></c:out></a></td>
 					<td><c:out value="${ varIndicator.indicatorPro.effective }"></c:out></td>
-					<td><c:out value="${ varIndicator.indicatorAct.total }"></c:out></td>
+					<td><a data-toggle="modal" href="#myModal" onClick="loadCallDetail('A', '<fmt:formatDate type="date" value="${varIndicator.date.date.time}" pattern="yyyy-MM-dd"/>');"><c:out value="${ varIndicator.indicatorAct.total }"></c:out></a></td>
 					<td><c:out value="${ varIndicator.indicatorAct.effective }"></c:out></td>
 				</tr>
 			</c:forEach>
 			
 			<tr style="background-color: red;color: white;">
 				<td>SEMANAL</td>
-				<td><c:out value="${ totalTotalsPro }"></c:out></td>
+				<td><a data-toggle="modal" href="#myModal" onClick="loadCallDetail('P', '<fmt:formatDate type="date" value="${fechaIni.time}" pattern="yyyy-MM-dd"/>', '<fmt:formatDate type="date" value="${fechaFin.time}" pattern="yyyy-MM-dd"/>');"><c:out value="${ totalTotalsPro }"></c:out></a></td>
 				<td><c:out value="${ totalEffectivesPro }"></c:out></td>
-				<td><c:out value="${ totalTotalsAct }"></c:out></td>
+				<td><a data-toggle="modal" href="#myModal" onClick="loadCallDetail('A', '<fmt:formatDate type="date" value="${fechaIni.time}" pattern="yyyy-MM-dd"/>', '<fmt:formatDate type="date" value="${fechaFin.time}" pattern="yyyy-MM-dd"/>');"><c:out value="${ totalTotalsAct }"></c:out></a></td>
 				<td><c:out value="${ totalEffectivesAct }"></c:out></td>
 			</tr>
     	</tbody>
@@ -85,25 +95,33 @@
   			</tr>
 	   	</thead>
 	   	<tbody>
-	   		<c:forEach  items="${sessionScope.arrAppointmentIndicator}" var="varAppointment" >
+	   		<c:forEach  items="${sessionScope.arrAppointmentIndicator}" var="varAppointment"  varStatus="varCount">
 				<c:set var="totalTotalsAct" value="${totalTotalsAct + varAppointment.indicatorAct.total}" />
 				<c:set var="totalObjectiveAct" value="${totalObjectiveAct + varAppointment.indicatorAct.objective}" />
 				<c:set var="totalTotalsPro" value="${totalTotalsPro + varAppointment.indicatorPro.total}" />
 				<c:set var="totalObjectivePro" value="${totalObjectivePro + varAppointment.indicatorPro.objective}" />
+				<c:choose>
+					<c:when test="${varCount.index==0 }">
+						<c:set var="fechaIni" value="${varAppointment.date.date}"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="fechaFin" value="${varAppointment.date.date}"/>
+					</c:otherwise>
+				</c:choose>
 				<tr>
 					<td><c:out value="${ varAppointment.date.dayOfWeek }"></c:out></td>
-					<td><c:out value="${ varAppointment.indicatorPro.total }"></c:out></td>
+					<td><a data-toggle="modal" href="#myModal" onClick="loadAppointmentDetail('P', '<fmt:formatDate type="date" value="${varAppointment.date.date.time}" pattern="yyyy-MM-dd"/>');"><c:out value="${ varAppointment.indicatorPro.total }"></c:out></a></td>
 					<td><c:out value="${ varAppointment.indicatorPro.objective }"></c:out></td>
-					<td><c:out value="${ varAppointment.indicatorAct.total }"></c:out></td>
+					<td><a data-toggle="modal" href="#myModal" onClick="loadAppointmentDetail('A', '<fmt:formatDate type="date" value="${varAppointment.date.date.time}" pattern="yyyy-MM-dd"/>');"><c:out value="${ varAppointment.indicatorAct.total }"></c:out></a></td>
 					<td><c:out value="${ varAppointment.indicatorAct.objective }"></c:out></td>
 				</tr>
 			</c:forEach>
 			
 			<tr style="background-color: red;color: white;">
 				<td>SEMANAL</td>
-				<td><c:out value="${ totalTotalsPro }"></c:out></td>
+				<td><a data-toggle="modal" href="#myModal" onClick="loadAppointmentDetail('P', '<fmt:formatDate type="date" value="${fechaIni.time}" pattern="yyyy-MM-dd"/>', '<fmt:formatDate type="date" value="${fechaFin.time}" pattern="yyyy-MM-dd"/>');"><c:out value="${ totalTotalsPro }"></c:out></a></td>
 				<td><c:out value="${ totalObjectiveAct }"></c:out></td>
-				<td><c:out value="${ totalTotalsAct }"></c:out></td>
+				<td><a data-toggle="modal" href="#myModal" onClick="loadAppointmentDetail('A', '<fmt:formatDate type="date" value="${fechaIni.time}" pattern="yyyy-MM-dd"/>', '<fmt:formatDate type="date" value="${fechaFin.time}" pattern="yyyy-MM-dd"/>');"><c:out value="${ totalTotalsAct }"></c:out></a></td>
 				<td><c:out value="${ totalObjectivePro }"></c:out></td>
 			</tr>
 	   	</tbody>
@@ -134,7 +152,7 @@
   			</tr>
 	   	</thead>
 	   	<tbody>
-	   		<c:forEach  items="${sessionScope.arrQuotationIndicator}" var="varQuotation" >
+	   		<c:forEach  items="${sessionScope.arrQuotationIndicator}" var="varQuotation"  varStatus="varCount">
 				<c:set var="totalTotalsAct" value="${totalTotalsAct + varQuotation.indicatorAct.total}" />
 				<c:set var="totalObjectiveAct" value="${totalObjectiveAct + varQuotation.indicatorAct.objective}" />
 				<c:set var="totalValue" value="${totalValue + varQuotation.indicatorAct.value}" />
@@ -181,11 +199,19 @@
   			</tr>
 	   	</thead>
 	   	<tbody>
-	   		<c:forEach  items="${sessionScope.arrTenderIndicator}" var="varTender" >
+	   		<c:forEach  items="${sessionScope.arrTenderIndicator}" var="varTender"  varStatus="varCount">
 				<c:set var="totalTotalsAct" value="${totalTotalsAct + varTender.indicatorAct.total}" />
+				<c:choose>
+					<c:when test="${varCount.index==0 }">
+						<c:set var="fechaIni" value="${varTender.date.date}"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="fechaFin" value="${varTender.date.date}"/>
+					</c:otherwise>
+				</c:choose>
 				<tr>
 					<td><c:out value="${ varTender.date.dayOfWeek }"></c:out></td>
-					<td><c:out value="${ varTender.indicatorAct.total }"></c:out></td>
+					<td><a data-toggle="modal" href="#myModal" onClick="loadTenderDetail('<fmt:formatDate type="date" value="${varTender.date.date.time}" pattern="yyyy-MM-dd"/>');"><c:out value="${ varTender.indicatorAct.total }"></c:out></a></td>
 					<td><c:out value="${ varTender.indicatorAct.type }"></c:out></td>
 					<td><c:out value="${ varTender.indicatorAct.date }"></c:out></td>
 				</tr>
@@ -193,10 +219,24 @@
 			
 			<tr style="background-color: red;color: white;">
 				<td>SEMANAL</td>
-				<td><c:out value="${ totalTotalsAct }"></c:out></td>
+				<td><a data-toggle="modal" href="#myModal" onClick="loadTenderDetail('<fmt:formatDate type="date" value="${fechaIni.time}" pattern="yyyy-MM-dd"/>', '<fmt:formatDate type="date" value="${fechaFin.time}" pattern="yyyy-MM-dd"/>');"><c:out value="${ totalTotalsAct }"></c:out></a></td>
 				<td></td>
 				<td></td>
 			</tr>
 	   	</tbody>
 	</table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog" style="width:100%">
+    	<!-- Modal content-->
+      	<div class="modal-content">
+        	<div class="modal-header">
+          		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		<h4 class="modal-title">Detalle</h4>
+        	</div>
+        	<div class="modal-body" id="modalContent"></div>
+      	</div>
+    </div>
 </div>

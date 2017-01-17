@@ -11,10 +11,14 @@
 		<title>Grupo Socia CRM</title>
 		
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap_new.css">
+		<link rel="stylesheet" type="text/css" href="./css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="./css/alerts/alertify.core.css">
 		<link rel="stylesheet" type="text/css" href="./css/alerts/alertify.default.css">
 		<link rel="stylesheet" type="text/css" href="./css/alerts/alertify.bootstrap.css">
-		<!--<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> -->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+		<link href='/CRMSocia/css/calendar/fullcalendar.css' rel='stylesheet' />
+		<link href='/CRMSocia/css/calendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+		<link rel="stylesheet" type="text/css" media="screen" href="./css/ui/jquery-ui.min.css">
 	</head>
 	<body>
 		<c:choose>
@@ -46,7 +50,8 @@
 				        <li onClick="loadMenu('appointment', this);"><a href="#">CITAS</a></li>
 				        <li onClick="loadMenu('quotation', this);"><a href="#">COTIZACIONES</a></li>
 				        <li onClick="loadMenu('calendar', this);"><a href="#">CALENDARIO</a></li>
-				        <li onClick="loadMenu('callLog', this);"><a href="#">INDICADORES</a></li>
+				        <!-- li onClick="loadMenu('callLog', this);"><a href="#">INDICADORES</a></li -->
+				        <li onClick="loadMenu('indicators', this);"><a href="#">INDICADORES</a></li>
 				        <li><a href="ControllerLogin?cerrarSesion=T"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>  CERRAR SESIÓN</a></li>
 				      </ul>
 				    </div><!-- /.navbar-collapse -->
@@ -130,7 +135,13 @@
 		    </div>
 		</div>
 		<script src="js/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="js/ui/jquery-ui.min.js"></script>
+    
+		<script src="js/bootstrap.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
 		<script type="text/javascript" src="js/alerts/alertify.js"></script>
+		<script src='/CRMSocia/js/calendar/moment.min.js'></script>
+		<script src='/CRMSocia/js/calendar/fullcalendar.js'></script>
+		<script src='/CRMSocia/js/calendar/lang/es.js'></script>
 	</body>
 </html>

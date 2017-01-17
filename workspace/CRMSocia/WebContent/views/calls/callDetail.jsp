@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<fmt:setLocale value="es_MX"/>
          			<div class="dataTable_wrapper">
          				<table class="table table-striped table-bordered table-hover" id="tablaCalls">
          					<thead>
@@ -20,7 +22,7 @@
                             <tbody>
 	                          	<c:forEach items="${sessionScope.datos}" var="calls" varStatus="contCall">
 	          						<tr class="odd gradeX">
-		          						<td><c:out value="${calls.date_call}"></c:out> </td>
+		          						<td><fmt:formatDate type="date" value="${calls.date_call}" pattern="dd/MM/yyyy"/> </td>
 				                 		<td><c:out value="${calls.status}"></c:out> </td>
 				                 		<td> 1 </td>
 				                 		<td><c:out value="${calls.cust_name}"></c:out> </td>

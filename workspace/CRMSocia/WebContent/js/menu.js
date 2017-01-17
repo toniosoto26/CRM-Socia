@@ -50,6 +50,12 @@ function loadMenu(menuName, option){
 	}else if(menuName === "callLog"){
 		$("#pageContent").removeClass("welcome");
 		$("#pageContent").load("/CRMSocia/CallLog.jsp");
-		
+	}else if(menuName === "indicators"){
+		$("#pageContent").removeClass("welcome");
+		$("#pageContent").load("/CRMSocia/views/indicators/indicator.jsp");
+		$("#pageHeader").html('<ol class="breadcrumb">'+
+				  '<li><a href="#">Inicio</a></li>'+
+				  '<li class="active">Indicadores</li>'+
+				'</ol>');
 	}
 }

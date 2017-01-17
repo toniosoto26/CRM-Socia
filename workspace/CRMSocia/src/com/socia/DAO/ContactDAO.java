@@ -39,8 +39,8 @@ public class ContactDAO {
 			sqlQuery.append(" select contact.crm_contact_id, contact.first_name,contact.last_name,contact.phone, ");
 			sqlQuery.append(" contact.email,contact.id_position,contact.company_division_id, ");
 			sqlQuery.append(" division.name,position.position   ");
-			sqlQuery.append(" from crm_contact contact join crm_mvs_contact mvs on contact.crm_contact_id = mvs.crm_contact_id ");
-			sqlQuery.append(" join crm_client client on mvs.crm_client_id = client.crm_client_id  ");
+			sqlQuery.append(" from crm_contact contact join crm_client_contact clco on contact.crm_contact_id = clco.crm_contact_id ");
+			sqlQuery.append(" join crm_client client on clco.crm_client_id = client.crm_client_id  ");
 			sqlQuery.append(" join  crm_position position on contact.id_position=position.id_position ");
 			sqlQuery.append(" join  crm_company_division division on contact.company_division_id=division.company_division_id ");
 			sqlQuery.append(" where contact.status = 'A' ");

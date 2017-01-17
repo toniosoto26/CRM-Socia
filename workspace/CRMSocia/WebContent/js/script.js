@@ -215,8 +215,7 @@ function registreCall(variable){
 }
 
 function validateCalls(){
-	
-	alert("Entre a la maldita validacion");
+	//alert("Entre a la maldita validacion");
 	var mensaje="";
 	
 		if($("#chosenClient").val() == 0){
@@ -274,37 +273,28 @@ function loadContactAppointment(selected){
 
 function openSecondaryPanel(close, options){
 	if(options == 0){
-		$("#secondaryPanel").html('<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'quotation\');">Cotizaciones</button>'+
-				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'appointment\');">Citas</button>'+
-				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'calendar\');">Calendario</button>');
+		$("#openPanel").html(
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'appointment\', '+options+');">Citas</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'quotation\', '+options+');">Cotizaciones</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'calendar\', '+options+');">Calendario</button>');
 	}
 	if(options == 1){
-		$("#secondaryPanel").html('<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'call\');">Llamadas</button>'+
-				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'appointment\');">Citas</button>'+
-				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'calendar\');">Calendario</button>');
+		$("#openPanel").html('<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'call\', '+options+');">Llamadas</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'appointment\', '+options+');">Citas</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'calendar\', '+options+');">Calendario</button>');
 	}
 	if(options == 2){
-		$("#secondaryPanel").html('<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'call\');">Llamadas</button>'+
-				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'quotation\');">Cotizaciones</button>'+
-				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'appointment\');">Citas</button>');
+		$("#openPanel").html('<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'call\', '+options+');">Llamadas</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'appointment\', '+options+');">Citas</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'quotation\', '+options+');">Cotizaciones</button>');
 	}
 	if(options == 3){
-		$("#secondaryPanel").html('<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'call\');">Llamadas</button>'+
-				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'quotation\');">Cotizaciones</button>'+
-				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'calendar\');">Calendario</button>');
+		$("#openPanel").html('<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'call\', '+options+');">Llamadas</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'quotation\', '+options+');">Cotizaciones</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'calendar\', '+options+');">Calendario</button>');
 	}
 	
-	if(close == 0){
-		$("#secondaryPanel").addClass('col-md-6');
-		$("#secondaryPanel").addClass('col-sm-6');
-		$("#primaryPanel").css({"border-right": "1px solid rgba(0,0,0,0.05)"});
-	
-		$("#primaryPanel").addClass('col-md-6');
-		$("#primaryPanel").addClass('col-sm-6');
-		
-		$("#openPanel").html('<button type="button" class="btn btn-default btn-sm" onclick="openSecondaryPanel(1,'+options+');" >Cerrar <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>');
-	}
-	else if(close == 1){
+	if(close == 1){
 		$("#secondaryPanel").removeClass('col-md-6');
 		$("#secondaryPanel").removeClass('col-sm-6');
 		$("#primaryPanel").css({"border-right": ""});
@@ -318,7 +308,16 @@ function openSecondaryPanel(close, options){
 	}
 }
 
-function selectSecondaryPanel(optionName){
+function selectSecondaryPanel(optionName, options){
+	$("#secondaryPanel").addClass('col-md-6');
+	$("#secondaryPanel").addClass('col-sm-6');
+	$("#primaryPanel").css({"border-right": "1px solid rgba(0,0,0,0.05)"});
+
+	$("#primaryPanel").addClass('col-md-6');
+	$("#primaryPanel").addClass('col-sm-6');
+	
+	$("#openPanel").html('<button type="button" class="btn btn-default btn-sm" onclick="openSecondaryPanel(1,'+options+');" >Cerrar <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>');
+	
 	if(optionName === "call"){
 		$("#secondaryPanel").load("call.jsp");
 	}else if(optionName === "quotation"){
@@ -330,7 +329,6 @@ function selectSecondaryPanel(optionName){
 	}else if(optionName === "diagnosis"){
 		$("#secondaryPanel").load("/CRMSocia/views/diagnosis/diagnosis.jsp");
 	}
-
 }
 
 

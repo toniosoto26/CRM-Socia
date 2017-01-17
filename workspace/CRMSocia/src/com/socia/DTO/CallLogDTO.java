@@ -1,8 +1,10 @@
 package com.socia.DTO;
 
+import java.util.Date;
+
 public class CallLogDTO {
 	
-	private String date_call="";
+	private Date date_call;
 	private int crm_user_id;
 	private String crm_user_name;
 	private String cust_name;
@@ -15,7 +17,7 @@ public class CallLogDTO {
 	private String  status;
 	
 
-	public CallLogDTO(String date_call, int crm_user_id, String crm_user_name,
+	public CallLogDTO(Date date_call, int crm_user_id, String crm_user_name,
 			String cust_name, String mail, String phone, String contact_name,
 			String position, String comments, int letter, String status) {
 		super();
@@ -40,10 +42,10 @@ public class CallLogDTO {
 				+ position + ", comments=" + comments + ", letter=" + letter
 				+ ", status=" + status + "]";
 	}
-	public String getDate_call() {
+	public Date getDate_call() {
 		return date_call;
 	}
-	public void setDate_call(String date_call) {
+	public void setDate_call(Date date_call) {
 		this.date_call = date_call;
 	}
 	public int getCrm_user_id() {

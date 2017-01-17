@@ -97,7 +97,7 @@ function sendMail(optionSelected){
 function addQuotation(){
 	var activeTab = $('.nav-tabs .active').text();
 	
-	if($("#chosenClient").val()== "5"){ //Corregir
+	if($("#chosenClient").val()== "0"){ 
 		alertify.alert("Por favor, selecciona un cliente");
 		return false;
 	}
@@ -115,7 +115,7 @@ function addQuotation(){
 		}
 	}
 	
-	if($("#chosenContact").val()== "5"){ //Corregir
+	if($("#chosenContact").val()== "0"){ 
 		alertify.alert("Por favor, selecciona un contacto");
 		return false;
 	}

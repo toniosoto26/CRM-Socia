@@ -21,6 +21,7 @@ import com.socia.DTO.CallLogDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
 import com.socia.DTO.DivisionDTO;
+import com.socia.DTO.LoginDTO;
 import com.socia.DTO.PositionDTO;
 
 /**
@@ -79,7 +80,7 @@ public class Controller extends HttpServlet {
 			
 			url		=	"/utils/selectClient.jsp";
 			ArrayList<ClientDTO> arrClient = new ArrayList<ClientDTO>(); 
-			arrClient=objClient.getClients();
+			arrClient=objClient.getClients(((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 			
 			session.removeAttribute("arrClient");
 			session.setAttribute("arrClient", arrClient);
@@ -166,7 +167,7 @@ public class Controller extends HttpServlet {
 			System.out.println("Inicia a construir Insertos");
 			if(addClient == 1){
 				consecutiveClient=objConsecutive.getConsecutive("clients");
-				infoClient = new ClientDTO(consecutiveClient, companyName, 1);
+				infoClient = new ClientDTO(consecutiveClient, companyName, 1, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 				queries=objClient.insertNewClient(infoClient, queries);
 				System.out.println("agrega cliente");
 				
@@ -255,12 +256,15 @@ public class Controller extends HttpServlet {
 			url = "utils/countCalls.jsp";
 		}
 		if(option == 8){
+			String clientType=(request.getParameter("clientType")==null?"":request.getParameter("clientType"));
 			String fechaIni=request.getParameter("fechaIni");
 			String fechaFin=request.getParameter("fechaFin");
 			
+			System.out.println("type: "+clientType);
+			
 			ArrayList <CallLogDTO> arrDatos= new  ArrayList<CallLogDTO>();
 			try{
-			arrDatos=objCall.getCallLog(fechaIni, fechaFin, 1);
+			arrDatos=objCall.getCallLog(clientType, fechaIni, fechaFin, 1);
 			
 			}catch(Exception e ){
 				e.printStackTrace();

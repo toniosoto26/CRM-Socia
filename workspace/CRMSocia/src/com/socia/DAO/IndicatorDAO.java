@@ -59,11 +59,6 @@ public class IndicatorDAO {
 				sqlQuery.append(" AND c2.status <> 3 ");
 				sqlQuery.append(" AND cl2.client_type = '"+type+"' ");
 				sqlQuery.append(" AND date(ca.date_call) = date(c2.date_call)),0)) efectivas, 5 objetivo ");
-//				sqlQuery.append(" ifnull((SELECT count(*) ");
-//				sqlQuery.append(" FROM crm_tender t ");
-//				sqlQuery.append(" where t.crm_user_id = 2 ");
-//				sqlQuery.append(" and month(t.deadline) = 1 ");
-//				sqlQuery.append(" and date(crm_call.date_call) = date(t.deadline)),0) tender  ");
 			sqlQuery.append(" FROM crm_call ca ");
 			sqlQuery.append(" JOIN crm_client cl ON ca.crm_client_id = cl.crm_client_id ");
 			sqlQuery.append(" WHERE ca.crm_user_id = 2 ");
@@ -283,7 +278,6 @@ public class IndicatorDAO {
 			date = arrDate.get(i);
 			
 			indicatorAct = getTenderIndicator(format.format(date.getDate().getTime()));
-			
 			indicator = new IndicatorDTO(date, indicatorAct, indicatorPro);
 			
 			arrIndicator.add(indicator);
@@ -311,8 +305,6 @@ public class IndicatorDAO {
 		IndicatorDetailDTO			indicator	=	null;
 		
 		SimpleDateFormat			sdf			=	new SimpleDateFormat("dd 'de' MMMM 'de' yyyy");
-		
-		
 		
 		try{
 			sqlQuery	=	new	StringBuilder();

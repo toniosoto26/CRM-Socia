@@ -2,7 +2,6 @@ package com.socia.Controller;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.socia.DAO.AddressDAO;
+import com.socia.DAO.AppointmentDAO;
 import com.socia.DAO.BusinessLineDAO;
 import com.socia.DAO.ClientDAO;
 import com.socia.DAO.ConsecutiveDAO;
@@ -27,7 +27,9 @@ import com.socia.DAO.QuotationDetailDAO;
 import com.socia.DAO.TenderDAO;
 import com.socia.DAO.TransactionDAO;
 import com.socia.DTO.AddressDTO;
+import com.socia.DTO.AppointmentLogDTO;
 import com.socia.DTO.BusinessLineDTO;
+import com.socia.DTO.CallLogDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
 import com.socia.DTO.DateDTO;
@@ -37,6 +39,7 @@ import com.socia.DTO.LoginDTO;
 import com.socia.DTO.QuotationDTO;
 import com.socia.DTO.QuotationDetailDTO;
 import com.socia.DTO.TenderDTO;
+import com.socia.DTO.TenderLogDTO;
 
 /**
  * Servlet implementation class ControllerTemp
@@ -111,6 +114,9 @@ public class ControllerRosa extends HttpServlet {
 		Date							startDate				=	null;
 		Date							endDate					=	null;
 		SimpleDateFormat 				formatter	 			=	new SimpleDateFormat("yyyy-MM-dd");
+		String 							fechaIni				=	"";
+		String 							fechaFin				=	"";
+		String 							clientType				=	"";
 		
 		/** DAO */
 		ItemDAO							objItem					=	new ItemDAO();
@@ -125,6 +131,7 @@ public class ControllerRosa extends HttpServlet {
 		TenderDAO						objTender				=	new TenderDAO();
 		IndicatorDAO					objIndicator			=	new IndicatorDAO();
 		DateDAO							objDate					=	new DateDAO();
+		AppointmentDAO					objAppointment			=	new AppointmentDAO();
 		
 		/** DTO*/
 		ItemDTO							item;
@@ -141,6 +148,8 @@ public class ControllerRosa extends HttpServlet {
 		ArrayList<IndicatorDTO>			arrAppointmentIndicator	= 	new ArrayList<IndicatorDTO>();
 		ArrayList<IndicatorDTO>			arrQuotationIndicator	= 	new ArrayList<IndicatorDTO>();
 		ArrayList<IndicatorDTO>			arrTenderIndicator		= 	new ArrayList<IndicatorDTO>();
+		ArrayList <AppointmentLogDTO> 	arrAppointmentLog		=	new ArrayList <AppointmentLogDTO>();
+		ArrayList <TenderLogDTO> 		arrTenderLog			=	new ArrayList <TenderLogDTO>();
 		
 		/** URL */
 		String							url					=	"";
@@ -165,8 +174,6 @@ public class ControllerRosa extends HttpServlet {
 		}else if(option == 2 || option == 3 || option == 6){
 			/** Address */
 			activeTab = request.getParameter("activeTab");
-			
-			System.out.println(activeTab);
 			
 			if(activeTab.equals("SELECCIONAR")){
 				addressId = Integer.parseInt(request.getParameter("addressId"));
@@ -412,6 +419,39 @@ public class ControllerRosa extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+		}
+		else if(option == 10){
+			clientType = (request.getParameter("clientType")==null?"":request.getParameter("clientType"));
+			fechaIni = request.getParameter("fechaIni");
+			fechaFin = request.getParameter("fechaFin");
+			
+			arrAppointmentLog = objAppointment.getAppointmentLog(clientType, fechaIni, fechaFin, 1);
+			
+			session.removeAttribute("arrAppointmentLog");
+			if(arrAppointmentLog.size()>0){
+				session.setAttribute("arrAppointmentLog", arrAppointmentLog);
+			}
+			else{
+				session.setAttribute("arrAppointmentLog", null);
+			}
+			
+			url = "/views/appointments/responses/appointmentDetail.jsp";
+		}
+		else if(option == 11){
+			fechaIni = request.getParameter("fechaIni");
+			fechaFin = request.getParameter("fechaFin");
+			
+			arrTenderLog = objTender.getTenderLog(fechaIni, fechaFin, 1);
+			
+			session.removeAttribute("arrTenderLog");
+			if(arrTenderLog.size()>0){
+				session.setAttribute("arrTenderLog", arrTenderLog);
+			}
+			else{
+				session.setAttribute("arrTenderLog", null);
+			}
+			
+			url = "/views/tenders/responses/tenderDetail.jsp";
 		}
 		
 		request.getRequestDispatcher(url).forward(request, response);

@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import com.socia.DTO.AppointmentLogDTO;
 import com.socia.DTO.TenderDTO;
+import com.socia.DTO.TenderLogDTO;
 import com.socia.conexion.Conexion;
 
 public class TenderDAO {
@@ -107,6 +110,72 @@ public class TenderDAO {
 				e.printStackTrace();
 			}
 		}
+		return arrTender;
+	}
+	
+	public ArrayList<TenderLogDTO> getTenderLog(String fechaIni,String fechaFin,int userId){
+		Conexion			sociaDB		=	null;
+		Connection			connection	=	null;
+		PreparedStatement	statement	=	null;
+		ResultSet			resultSet	=	null;
+		StringBuilder		sqlQuery	=	null;
+		
+		/** Appointment objects*/
+		String		 			companyName		= "";
+		String				 	businessLine	= "";
+		String	 				brand			= "";
+		String					comments		= "";
+		Date					deadline		= null;
+		TenderLogDTO			tender			=	null;
+		ArrayList<TenderLogDTO>	arrTender		= 	new ArrayList<TenderLogDTO>();
+		
+		try{
+			sqlQuery	=	new	StringBuilder();
+			sqlQuery.append(" select cli.company_name, bl.name, ten.current_brand, ten.comments, deadline  ");
+			sqlQuery.append(" from crm_tender ten, crm_client cli, crm_business_line bl ");
+			sqlQuery.append(" where ten.crm_client_id=cli.crm_client_id ");
+			sqlQuery.append(" and ten.crm_business_line_id = bl.crm_business_line_id ");
+			sqlQuery.append(" and DATE(ten.date_created) >= ? ");
+			sqlQuery.append(" and DATE(ten.date_created) <= ? ");
+			sqlQuery.append(" order by ten.date_created ");
+			
+			//sqlQuery.append(" and client.crm_client_id = ? ");
+			
+			sociaDB		=	new	Conexion();
+			connection	=	sociaDB.getConnection1();
+			statement	=	connection.prepareStatement(sqlQuery.toString());
+			
+			//statement.setInt(1, clientId);
+			statement.setString(1, fechaIni);
+			statement.setString(2, fechaFin);
+			
+			resultSet	=	statement.executeQuery();
+			
+			while(resultSet.next()){
+				companyName=resultSet.getString(1);
+				businessLine = resultSet.getString(2);
+				brand = resultSet.getString(3);
+				comments = resultSet.getString(4);
+				deadline = resultSet.getDate(5);
+				
+				tender = new TenderLogDTO(companyName, businessLine, brand, comments, deadline);
+				
+				tender.toString();
+				arrTender.add(tender);
+			}
+			
+		}catch(Exception exception){
+			exception.printStackTrace();
+		}finally{
+			try{
+				resultSet.close();
+				statement.close();
+				connection.close();
+			}catch(Exception closeException){
+				closeException.printStackTrace();
+			}
+		}
+		
 		return arrTender;
 	}
 

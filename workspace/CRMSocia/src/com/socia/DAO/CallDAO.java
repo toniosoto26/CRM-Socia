@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.mysql.jdbc.Statement;
 import com.socia.DTO.AddressDTO;
@@ -124,7 +125,7 @@ public class CallDAO {
 		}
 	 
 	 	
-	 public ArrayList<CallLogDTO> getCallLog(String fechaIni,String fechaFin,int crm_user_id){
+	 public ArrayList<CallLogDTO> getCallLog(String clientType, String fechaIni,String fechaFin,int crm_user_id){
 			Conexion			sociaDB		=	null;
 			Connection			connection	=	null;
 			PreparedStatement	statement	=	null;
@@ -142,6 +143,10 @@ public class CallDAO {
 				sqlQuery.append(" from crm_contact cont , crm_position pos, crm_call cal,crm_client cli,crm_user usr ");
 				sqlQuery.append(" where cal.crm_client_id=cli.crm_client_id and cal.crm_contact_id=cont.crm_contact_id and  ");
 				sqlQuery.append(" cal.crm_user_id=usr.crm_user_id and cont.id_position=pos.id_position ");
+				sqlQuery.append(" and DATE(cal.date_call) >= ? ");
+				sqlQuery.append(" and DATE(cal.date_call) <= ? ");
+				sqlQuery.append(clientType.equals("")?"":" and cli.client_type = ? ");
+				sqlQuery.append(" order by cal.date_call ");
 				
 				//sqlQuery.append(" and client.crm_client_id = ? ");
 				
@@ -150,9 +155,13 @@ public class CallDAO {
 				statement	=	connection.prepareStatement(sqlQuery.toString());
 				
 				//statement.setInt(1, clientId);
+				statement.setString(1, fechaIni);
+				statement.setString(2, fechaFin);
+				if(!clientType.equals(""))
+					statement.setString(3, clientType);
+					
 				
-				
-				String date_call="";
+				Date date_call;
 				String crm_user_name;
 				String crm_user_last_name;
 				String client_name;
@@ -172,7 +181,7 @@ public class CallDAO {
 					crm_user_id=resultSet.getInt(1);
 					crm_user_name = resultSet.getString(2);
 					crm_user_last_name = resultSet.getString(3);
-					date_call = resultSet.getString(4);
+					date_call = resultSet.getDate(4);
 					status = resultSet.getInt(5);
 					client_name = resultSet.getString(6);
 					mail = resultSet.getString(7);

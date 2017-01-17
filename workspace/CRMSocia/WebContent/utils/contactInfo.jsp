@@ -6,10 +6,14 @@
 	<div class="col-sm-9 col-md-9">
 		<div class="row">
 			<div class="col-sm-6 col-md-6">
-				<div class="form-group">
-					<label class="col-sm-6 col-md-6">Apellido</label>
-	    			<input type="text" class="form-control" id="lastName" name="lastName" disabled value='<c:out value="${ sessionScope.infoContact.lastName }"></c:out>' />
-				</div>
+				<c:choose>
+					<c:when test="${sessionScope.view == 'true' }">
+						<div class="form-group">
+							<label class="col-sm-6 col-md-6">Apellido</label>
+			    			<input type="text" class="form-control" id="lastName" name="lastName" disabled value='<c:out value="${ sessionScope.infoContact.lastName }"></c:out>' />
+						</div>
+					</c:when>
+				</c:choose>
 				<div class="form-group">
 				    <label class="col-sm-2 col-md-2">Teléfono</label>
 				    <input type="text" class="form-control col-sm-4 col-md-4" id="companyPhone" name="companyPhone" disabled value='<c:out value="${sessionScope.infoContact.phone}"></c:out>' >

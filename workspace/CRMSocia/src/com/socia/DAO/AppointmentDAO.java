@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.socia.DTO.AppointmentDTO;
+import com.socia.DTO.AppointmentLogDTO;
 import com.socia.DTO.CallDTO;
+import com.socia.DTO.CallLogDTO;
 import com.socia.DTO.ContactDTO;
 import com.socia.conexion.Conexion;
 
@@ -254,4 +257,77 @@ public class AppointmentDAO {
 		}
 		return arrAppo;
 	}
+	
+	public ArrayList<AppointmentLogDTO> getAppointmentLog(String clientType, String fechaIni,String fechaFin,int userId){
+		Conexion			sociaDB		=	null;
+		Connection			connection	=	null;
+		PreparedStatement	statement	=	null;
+		ResultSet			resultSet	=	null;
+		StringBuilder		sqlQuery	=	null;
+		
+		/** Appointment objects*/
+		String				 			companyName		= "";
+		String						 	contactName		= "";
+		String	 						position		= "";
+		Date							date			= null;
+		String							subject			= "";
+		String							bdmName			= "";
+		AppointmentLogDTO				appointment		=	null;
+		ArrayList<AppointmentLogDTO>	arrAppointment	= 	new ArrayList<AppointmentLogDTO>();
+		
+		try{
+			sqlQuery	=	new	StringBuilder();
+			sqlQuery.append(" select cli.company_name,cont.first_name, cont.last_name, position, apo.date,  ");
+			sqlQuery.append(" apo.subject, usr.first_name, usr.last_name ");
+			sqlQuery.append(" from crm_contact cont , crm_position pos, crm_appointment apo, crm_client cli, crm_user usr ");
+			sqlQuery.append(" where apo.crm_client_id=cli.crm_client_id ");
+			sqlQuery.append(" and apo.crm_contact_id=cont.crm_contact_id ");
+			sqlQuery.append(" and apo.crm_bdm_id=usr.crm_user_id ");
+			sqlQuery.append(" and cont.id_position=pos.id_position ");
+			sqlQuery.append(" and DATE(apo.date) >= ? ");
+			sqlQuery.append(" and DATE(apo.date) <= ? ");
+			sqlQuery.append(clientType.equals("")?"":" and cli.client_type = ? ");
+			sqlQuery.append(" order by apo.date ");
+			
+			//sqlQuery.append(" and client.crm_client_id = ? ");
+			
+			sociaDB		=	new	Conexion();
+			connection	=	sociaDB.getConnection1();
+			statement	=	connection.prepareStatement(sqlQuery.toString());
+			
+			//statement.setInt(1, clientId);
+			statement.setString(1, fechaIni);
+			statement.setString(2, fechaFin);
+			if(!clientType.equals(""))
+				statement.setString(3, clientType);
+			
+			resultSet	=	statement.executeQuery();
+			
+			while(resultSet.next()){
+				companyName=resultSet.getString(1);
+				contactName = resultSet.getString(2)+" "+resultSet.getString(3);
+				position = resultSet.getString(4);
+				date = resultSet.getDate(5);
+				subject = resultSet.getString(6);
+				bdmName = resultSet.getString(7)+" "+resultSet.getString(8);
+				
+				appointment = new AppointmentLogDTO(companyName, contactName, position, date, subject, bdmName);
+				arrAppointment.add(appointment);
+			}
+			
+		}catch(Exception exception){
+			exception.printStackTrace();
+		}finally{
+			try{
+				resultSet.close();
+				statement.close();
+				connection.close();
+			}catch(Exception closeException){
+				closeException.printStackTrace();
+			}
+		}
+		
+		return arrAppointment;
+	}
+	
 }
