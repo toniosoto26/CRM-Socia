@@ -384,10 +384,10 @@ public class ControllerRosa extends HttpServlet {
 				endDate = formatter.parse(deadline);
 				arrDate = objDate.getDaysArray(startDate, endDate);
 				
-				arrCallIndicator = objIndicator.getGeneralCallIndicator(arrDate);
-				arrAppointmentIndicator = objIndicator.getGeneralAppointmentIndicator(arrDate);
-				arrQuotationIndicator = objIndicator.getGeneralQuotationIndicator(arrDate);
-				arrTenderIndicator = objIndicator.getGeneralTenderIndicator(arrDate);
+				arrCallIndicator = objIndicator.getGeneralCallIndicator(arrDate, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
+				arrAppointmentIndicator = objIndicator.getGeneralAppointmentIndicator(arrDate, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
+				arrQuotationIndicator = objIndicator.getGeneralQuotationIndicator(arrDate, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
+				arrTenderIndicator = objIndicator.getGeneralTenderIndicator(arrDate, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 				
 				session.removeAttribute("arrCallIndicator");
 				if(arrCallIndicator.size() > 0)

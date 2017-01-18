@@ -14,7 +14,7 @@ import com.socia.conexion.Conexion;
 
 public class IndicatorDAO {
 	
-	public ArrayList<IndicatorDTO> getGeneralCallIndicator(ArrayList<DateDTO> arrDate){
+	public ArrayList<IndicatorDTO> getGeneralCallIndicator(ArrayList<DateDTO> arrDate, int userId){
 		DateDTO							date		=	null;
 		IndicatorDTO					indicator	=	null;
 		ArrayList<IndicatorDTO>			arrIndicator= 	new ArrayList<IndicatorDTO>();
@@ -25,8 +25,8 @@ public class IndicatorDAO {
 		for(int i = 0; i < arrDate.size(); i++){
 			date = arrDate.get(i);
 			
-			indicatorAct = getCallIndicatorByType("A", format.format(date.getDate().getTime()));
-			indicatorPro = getCallIndicatorByType("P", format.format(date.getDate().getTime()));
+			indicatorAct = getCallIndicatorByType("A", format.format(date.getDate().getTime()), userId);
+			indicatorPro = getCallIndicatorByType("P", format.format(date.getDate().getTime()), userId);
 			
 			indicator = new IndicatorDTO(date, indicatorAct, indicatorPro);
 			
@@ -36,7 +36,7 @@ public class IndicatorDAO {
 		return arrIndicator;
 	}
 	
-	public IndicatorDetailDTO getCallIndicatorByType(String type, String date){
+	public IndicatorDetailDTO getCallIndicatorByType(String type, String date, int userId){
 		Conexion					sociaDB		=	null;
 		Connection					connection	=	null;
 		PreparedStatement			statement	=	null;
@@ -55,19 +55,26 @@ public class IndicatorDAO {
 			sqlQuery.append("(ifnull((SELECT count(*) ");
 				sqlQuery.append(" FROM crm_call c2 ");
 				sqlQuery.append(" JOIN crm_client cl2 ON c2.crm_client_id = cl2.crm_client_id ");
-				sqlQuery.append(" WHERE c2.crm_user_id = 2 ");
+				sqlQuery.append(" WHERE c2.crm_user_id = ? ");
 				sqlQuery.append(" AND c2.status <> 3 ");
-				sqlQuery.append(" AND cl2.client_type = '"+type+"' ");
+				sqlQuery.append(" AND cl2.client_type = ? ");
 				sqlQuery.append(" AND date(ca.date_call) = date(c2.date_call)),0)) efectivas, 5 objetivo ");
 			sqlQuery.append(" FROM crm_call ca ");
 			sqlQuery.append(" JOIN crm_client cl ON ca.crm_client_id = cl.crm_client_id ");
-			sqlQuery.append(" WHERE ca.crm_user_id = 2 ");
-			sqlQuery.append(" AND DATE(ca.date_call) = '"+date+"' ");
-			sqlQuery.append(" AND cl.client_type = '"+type+"' ");
+			sqlQuery.append(" WHERE ca.crm_user_id = ? ");
+			sqlQuery.append(" AND DATE(ca.date_call) = ? ");
+			sqlQuery.append(" AND cl.client_type = ? ");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
 			statement	=	connection.prepareStatement(sqlQuery.toString());
+			
+			statement.setInt(1, userId);
+			statement.setString(2, type);
+			statement.setInt(3, userId);
+			statement.setString(4, date);
+			statement.setString(5, type);
+			
 			resultSet	=	statement.executeQuery();
 			
 			if(resultSet.next()){
@@ -98,7 +105,7 @@ public class IndicatorDAO {
 		return indicator;
 	}
 	
-	public ArrayList<IndicatorDTO> getGeneralAppointmentIndicator(ArrayList<DateDTO> arrDate){
+	public ArrayList<IndicatorDTO> getGeneralAppointmentIndicator(ArrayList<DateDTO> arrDate, int userId){
 		DateDTO							date		=	null;
 		IndicatorDTO					indicator	=	null;
 		ArrayList<IndicatorDTO>			arrIndicator= 	new ArrayList<IndicatorDTO>();
@@ -109,8 +116,8 @@ public class IndicatorDAO {
 		for(int i = 0; i < arrDate.size(); i++){
 			date = arrDate.get(i);
 			
-			indicatorAct = getAppointmentIndicatorByType("A", format.format(date.getDate().getTime()));
-			indicatorPro = getAppointmentIndicatorByType("P", format.format(date.getDate().getTime()));
+			indicatorAct = getAppointmentIndicatorByType("A", format.format(date.getDate().getTime()), userId);
+			indicatorPro = getAppointmentIndicatorByType("P", format.format(date.getDate().getTime()), userId);
 			
 			indicator = new IndicatorDTO(date, indicatorAct, indicatorPro);
 			
@@ -120,7 +127,7 @@ public class IndicatorDAO {
 		return arrIndicator;
 	}
 	
-	public IndicatorDetailDTO getAppointmentIndicatorByType(String type, String date){
+	public IndicatorDetailDTO getAppointmentIndicatorByType(String type, String date, int userId){
 		Conexion					sociaDB		=	null;
 		Connection					connection	=	null;
 		PreparedStatement			statement	=	null;
@@ -138,13 +145,18 @@ public class IndicatorDAO {
 			sqlQuery.append(" SELECT count(*) total, 1 objetivo ");
 			sqlQuery.append(" FROM crm_appointment a ");
 			sqlQuery.append(" JOIN crm_client cl ON a.crm_client_id = cl.crm_client_id ");
-			sqlQuery.append(" WHERE a.crm_user_id = 2 ");
-			sqlQuery.append(" AND DATE(a.date) = '"+date+"' ");
-			sqlQuery.append(" AND cl.client_type = '"+type+"' ");
+			sqlQuery.append(" WHERE a.crm_user_id = ? ");
+			sqlQuery.append(" AND DATE(a.date) = ? ");
+			sqlQuery.append(" AND cl.client_type = ? ");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
 			statement	=	connection.prepareStatement(sqlQuery.toString());
+			
+			statement.setInt(1, userId);
+			statement.setString(2, date);
+			statement.setString(3, type);
+			
 			resultSet	=	statement.executeQuery();
 			
 			if(resultSet.next()){
@@ -175,7 +187,7 @@ public class IndicatorDAO {
 		return indicator;
 	}
 	
-	public ArrayList<IndicatorDTO> getGeneralQuotationIndicator(ArrayList<DateDTO> arrDate){
+	public ArrayList<IndicatorDTO> getGeneralQuotationIndicator(ArrayList<DateDTO> arrDate, int userId){
 		DateDTO							date		=	null;
 		IndicatorDTO					indicator	=	null;
 		ArrayList<IndicatorDTO>			arrIndicator= 	new ArrayList<IndicatorDTO>();
@@ -186,7 +198,7 @@ public class IndicatorDAO {
 		for(int i = 0; i < arrDate.size(); i++){
 			date = arrDate.get(i);
 			
-			indicatorAct = getQuotationIndicator(format.format(date.getDate().getTime()));
+			indicatorAct = getQuotationIndicator(format.format(date.getDate().getTime()), userId);
 			
 			indicator = new IndicatorDTO(date, indicatorAct, indicatorPro);
 			
@@ -196,7 +208,7 @@ public class IndicatorDAO {
 		return arrIndicator;
 	}
 
-	public IndicatorDetailDTO getQuotationIndicator(String date){
+	public IndicatorDetailDTO getQuotationIndicator(String date, int userId){
 		Conexion					sociaDB		=	null;
 		Connection					connection	=	null;
 		PreparedStatement			statement	=	null;
@@ -220,16 +232,21 @@ public class IndicatorDAO {
 				sqlQuery.append(" ifnull((SELECT sum(qd.unit_price + qd.quantity) ");
 				sqlQuery.append(" FROM crm_quotation_detail qd ");
 				sqlQuery.append(" JOIN crm_quotation q2 ON qd.crm_quotation_id = q2.crm_quotation_id ");
-				sqlQuery.append(" where q2.crm_user_id = 2 ");
+				sqlQuery.append(" where q2.crm_user_id = ? ");
 				sqlQuery.append(" and DATE(q2.date_created) = DATE(q.date_created) ),0) value, cl.client_type ");
 			sqlQuery.append(" FROM crm_quotation q ");
 			sqlQuery.append(" JOIN crm_client cl ON q.crm_client_id = cl.crm_client_id  ");
-			sqlQuery.append(" WHERE q.crm_user_id = 2 ");
-			sqlQuery.append(" AND DATE(q.date_created) = '"+date+"' ");
+			sqlQuery.append(" WHERE q.crm_user_id = ? ");
+			sqlQuery.append(" AND DATE(q.date_created) = ? ");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
 			statement	=	connection.prepareStatement(sqlQuery.toString());
+			
+			statement.setInt(1, userId);
+			statement.setInt(2, userId);
+			statement.setString(3, date);
+			
 			resultSet	=	statement.executeQuery();
 			
 			while(resultSet.next()){
@@ -266,7 +283,7 @@ public class IndicatorDAO {
 		return indicator;
 	}
 	
-	public ArrayList<IndicatorDTO> getGeneralTenderIndicator(ArrayList<DateDTO> arrDate){
+	public ArrayList<IndicatorDTO> getGeneralTenderIndicator(ArrayList<DateDTO> arrDate, int userId){
 		DateDTO							date		=	null;
 		IndicatorDTO					indicator	=	null;
 		ArrayList<IndicatorDTO>			arrIndicator= 	new ArrayList<IndicatorDTO>();
@@ -277,7 +294,7 @@ public class IndicatorDAO {
 		for(int i = 0; i < arrDate.size(); i++){
 			date = arrDate.get(i);
 			
-			indicatorAct = getTenderIndicator(format.format(date.getDate().getTime()));
+			indicatorAct = getTenderIndicator(format.format(date.getDate().getTime()), userId);
 			indicator = new IndicatorDTO(date, indicatorAct, indicatorPro);
 			
 			arrIndicator.add(indicator);
@@ -286,7 +303,7 @@ public class IndicatorDAO {
 		return arrIndicator;
 	}
 	
-	public IndicatorDetailDTO getTenderIndicator(String date){
+	public IndicatorDetailDTO getTenderIndicator(String date, int userId){
 		Conexion					sociaDB		=	null;
 		Connection					connection	=	null;
 		PreparedStatement			statement	=	null;
@@ -311,12 +328,16 @@ public class IndicatorDAO {
 			sqlQuery.append(" SELECT count(*), bl.name, t.deadline ");
 			sqlQuery.append(" FROM crm_tender t ");
 			sqlQuery.append(" JOIN crm_business_line bl ON t.crm_business_line_id = bl.crm_business_line_id ");
-			sqlQuery.append(" where t.crm_user_id = 2 ");
-			sqlQuery.append(" AND DATE(t.date_created) = '"+date+"' ");
+			sqlQuery.append(" where t.crm_user_id = ? ");
+			sqlQuery.append(" AND DATE(t.date_created) = ? ");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
 			statement	=	connection.prepareStatement(sqlQuery.toString());
+			
+			statement.setInt(1, userId);
+			statement.setString(2, date);
+			
 			resultSet	=	statement.executeQuery();
 			
 			while(resultSet.next()){
