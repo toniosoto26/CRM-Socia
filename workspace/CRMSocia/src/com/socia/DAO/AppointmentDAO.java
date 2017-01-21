@@ -286,20 +286,21 @@ public class AppointmentDAO {
 			sqlQuery.append(" and cont.id_position=pos.id_position ");
 			sqlQuery.append(" and DATE(apo.date) >= ? ");
 			sqlQuery.append(" and DATE(apo.date) <= ? ");
+			sqlQuery.append(" and apo.crm_user_id = ? ");
 			sqlQuery.append(clientType.equals("")?"":" and cli.client_type = ? ");
 			sqlQuery.append(" order by apo.date ");
-			
-			//sqlQuery.append(" and client.crm_client_id = ? ");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
 			statement	=	connection.prepareStatement(sqlQuery.toString());
 			
-			//statement.setInt(1, clientId);
+			System.out.println(userId);
+			
 			statement.setString(1, fechaIni);
 			statement.setString(2, fechaFin);
+			statement.setInt(3, userId);
 			if(!clientType.equals(""))
-				statement.setString(3, clientType);
+				statement.setString(4, clientType);
 			
 			resultSet	=	statement.executeQuery();
 			

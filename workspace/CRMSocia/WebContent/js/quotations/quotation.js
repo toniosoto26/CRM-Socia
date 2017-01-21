@@ -12,7 +12,8 @@ function addProduct(){
 													'<td><div id="description'+itemNum+'"><input required style="width:100%;" type="text" class="form-control" name="description'+itemNum+'" /></div></td>'+
 													'<td><input required style="width:100%;" type="text" class="form-control" name="warranty'+itemNum+'" /></td>'+
 													'<td><input required style="width:100%;" type="text" class="form-control" name="estimatedShipping'+itemNum+'" /></td>'+
-													'<td><input style="width:100%;" type="text" pattern="^[0-9]*[\.]?[0-9]*$" class="form-control" name="unitPrice'+itemNum+'" required /><input type="hidden" value="false" name="addItem'+itemNum+'" id="addItem'+itemNum+'"  /></td>'+
+													'<td><input style="width:100%;" type="text" pattern="^[0-9]*[\.]?[0-9]*$" class="form-control" name="unitPrice'+itemNum+'" required />'+
+													'<td><input style="width:100%;" type="text" pattern="^[0-9]*[\.]?[0-9]*$" class="form-control" name="margin'+itemNum+'" required /><input type="hidden" value="false" name="addItem'+itemNum+'" id="addItem'+itemNum+'"  /></td>'+
 												  '</tr>');
 	$('#totalProducts').val(itemNum);
 	loadItemsInfo(itemNum);

@@ -38,6 +38,7 @@ import com.socia.DTO.ItemDTO;
 import com.socia.DTO.LoginDTO;
 import com.socia.DTO.QuotationDTO;
 import com.socia.DTO.QuotationDetailDTO;
+import com.socia.DTO.QuotationLogDTO;
 import com.socia.DTO.TenderDTO;
 import com.socia.DTO.TenderLogDTO;
 
@@ -75,6 +76,7 @@ public class ControllerRosa extends HttpServlet {
 		String							itemId					=	"";
 		String							warranty				=	"";
 		double							unitPrice				=	0;
+		double							margin					=	0;
 		int								quantity				=	0;
 		String							estimatedShipping		=	"";
 		int								contactId				=	0;
@@ -150,6 +152,7 @@ public class ControllerRosa extends HttpServlet {
 		ArrayList<IndicatorDTO>			arrTenderIndicator		= 	new ArrayList<IndicatorDTO>();
 		ArrayList <AppointmentLogDTO> 	arrAppointmentLog		=	new ArrayList <AppointmentLogDTO>();
 		ArrayList <TenderLogDTO> 		arrTenderLog			=	new ArrayList <TenderLogDTO>();
+		ArrayList <QuotationLogDTO> 	arrQuotationLog			=	new ArrayList <QuotationLogDTO>();
 		
 		/** URL */
 		String							url					=	"";
@@ -203,7 +206,7 @@ public class ControllerRosa extends HttpServlet {
 			if(option == 2 || option == 6)
 				quotationId = objConsecutive.getConsecutive("quotations");
 			
-			quotation = new QuotationDTO(quotationId, addressId, clientId, currency, exchangeRate,  ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
+			quotation = new QuotationDTO(quotationId, addressId, clientId, currency, exchangeRate, "", ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 			
 			/** Quotation details*/
 			for(int index = 1; index <= totalProducts; index++){
@@ -214,6 +217,7 @@ public class ControllerRosa extends HttpServlet {
 				warranty = request.getParameter("warranty"+index);
 				estimatedShipping = request.getParameter("estimatedShipping"+index);
 				unitPrice = Double.parseDouble(request.getParameter("unitPrice"+index));
+				margin = Double.parseDouble(request.getParameter("margin"+index));
 				
 				addItem = request.getParameter("addItem"+index);
 				
@@ -227,7 +231,7 @@ public class ControllerRosa extends HttpServlet {
 					description = item.getDescription();
 				}
 					
-				quotationDetail = new QuotationDetailDTO(quotationId, itemId, description, warranty, unitPrice, quantity, estimatedShipping);
+				quotationDetail = new QuotationDetailDTO(quotationId, itemId, description, warranty, unitPrice, margin, quantity, estimatedShipping);
 				arrQuotationDetail.add(quotationDetail);
 			}
 				
@@ -425,7 +429,7 @@ public class ControllerRosa extends HttpServlet {
 			fechaIni = request.getParameter("fechaIni");
 			fechaFin = request.getParameter("fechaFin");
 			
-			arrAppointmentLog = objAppointment.getAppointmentLog(clientType, fechaIni, fechaFin, 1);
+			arrAppointmentLog = objAppointment.getAppointmentLog(clientType, fechaIni, fechaFin, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 			
 			session.removeAttribute("arrAppointmentLog");
 			if(arrAppointmentLog.size()>0){
@@ -441,7 +445,7 @@ public class ControllerRosa extends HttpServlet {
 			fechaIni = request.getParameter("fechaIni");
 			fechaFin = request.getParameter("fechaFin");
 			
-			arrTenderLog = objTender.getTenderLog(fechaIni, fechaFin, 1);
+			arrTenderLog = objTender.getTenderLog(fechaIni, fechaFin, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 			
 			session.removeAttribute("arrTenderLog");
 			if(arrTenderLog.size()>0){
@@ -452,6 +456,24 @@ public class ControllerRosa extends HttpServlet {
 			}
 			
 			url = "/views/tenders/responses/tenderDetail.jsp";
+		}
+		else if(option == 12){
+			fechaIni = request.getParameter("fechaIni");
+			fechaFin = request.getParameter("fechaFin");
+			
+			arrQuotationLog = objQuotation.getQuotationLog(fechaIni, fechaFin, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
+			
+			System.out.println(arrQuotationLog.toString());
+			
+			session.removeAttribute("arrQuotationLog");
+			if(arrQuotationLog.size()>0){
+				session.setAttribute("arrQuotationLog", arrQuotationLog);
+			}
+			else{
+				session.setAttribute("arrQuotationLog", null);
+			}
+			
+			url = "/views/quotations/responses/quotationDetail.jsp";
 		}
 		
 		request.getRequestDispatcher(url).forward(request, response);

@@ -120,7 +120,7 @@ public class TenderDAO {
 		ResultSet			resultSet	=	null;
 		StringBuilder		sqlQuery	=	null;
 		
-		/** Appointment objects*/
+		/** Tender objects*/
 		String		 			companyName		= "";
 		String				 	businessLine	= "";
 		String	 				brand			= "";
@@ -137,17 +137,16 @@ public class TenderDAO {
 			sqlQuery.append(" and ten.crm_business_line_id = bl.crm_business_line_id ");
 			sqlQuery.append(" and DATE(ten.date_created) >= ? ");
 			sqlQuery.append(" and DATE(ten.date_created) <= ? ");
+			sqlQuery.append(" and ten.crm_user_id = ? ");
 			sqlQuery.append(" order by ten.date_created ");
-			
-			//sqlQuery.append(" and client.crm_client_id = ? ");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
 			statement	=	connection.prepareStatement(sqlQuery.toString());
 			
-			//statement.setInt(1, clientId);
 			statement.setString(1, fechaIni);
 			statement.setString(2, fechaFin);
+			statement.setInt(3, userId);
 			
 			resultSet	=	statement.executeQuery();
 			

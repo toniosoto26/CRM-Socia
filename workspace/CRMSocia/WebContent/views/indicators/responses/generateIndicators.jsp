@@ -156,9 +156,17 @@
 				<c:set var="totalTotalsAct" value="${totalTotalsAct + varQuotation.indicatorAct.total}" />
 				<c:set var="totalObjectiveAct" value="${totalObjectiveAct + varQuotation.indicatorAct.objective}" />
 				<c:set var="totalValue" value="${totalValue + varQuotation.indicatorAct.value}" />
+				<c:choose>
+					<c:when test="${varCount.index==0 }">
+						<c:set var="fechaIni" value="${varQuotation.date.date}"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="fechaFin" value="${varQuotation.date.date}"/>
+					</c:otherwise>
+				</c:choose>
 				<tr>
 					<td><c:out value="${ varQuotation.date.dayOfWeek }"></c:out></td>
-					<td><c:out value="${ varQuotation.indicatorAct.total }"></c:out></td>
+					<td><a data-toggle="modal" href="#myModal" onClick="loadQuotationDetail('<fmt:formatDate type="date" value="${varQuotation.date.date.time}" pattern="yyyy-MM-dd"/>');"><c:out value="${ varQuotation.indicatorAct.total }"></c:out></a></td>
 					<td><c:out value="${ varQuotation.indicatorAct.objective }"></c:out></td>
 					<td><c:out value="${ varQuotation.indicatorAct.type }"></c:out></td>
 					<td><fmt:formatNumber value="${varQuotation.indicatorAct.value}" type="currency"/></td>
@@ -167,7 +175,7 @@
 			
 			<tr style="background-color: red;color: white;">
 				<td>SEMANAL</td>
-				<td><c:out value="${ totalTotalsAct }"></c:out></td>
+				<td><a data-toggle="modal" href="#myModal" onClick="loadQuotationDetail('<fmt:formatDate type="date" value="${fechaIni.time}" pattern="yyyy-MM-dd"/>', '<fmt:formatDate type="date" value="${fechaFin.time}" pattern="yyyy-MM-dd"/>');"><c:out value="${ totalTotalsAct }"></c:out></a></td>
 				<td><c:out value="${ totalObjectiveAct }"></c:out></td>
 				<td></td>
 				<td><fmt:formatNumber value="${totalValue}" type="currency"/></td>

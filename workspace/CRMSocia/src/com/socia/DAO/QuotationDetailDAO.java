@@ -13,12 +13,13 @@ public class QuotationDetailDAO {
 		{
 			sqlQuery	=	new	StringBuilder();
 			sqlQuery.append(" INSERT INTO crm_quotation_detail (crm_quotation_id, crm_item_id, warranty, unit_price, ");
-										 sqlQuery.append("quantity, estimatedShipping) ");
+										 sqlQuery.append("margin, quantity, estimatedShipping) ");
 
 			sqlQuery.append(" VALUES ("+quotationDetail.get(index).getQuotationId());
 			sqlQuery.append(", '"+quotationDetail.get(index).getItemId()+"'");
 			sqlQuery.append(",'"+quotationDetail.get(index).getWarranty()+"'");
 			sqlQuery.append(","+ quotationDetail.get(index).getUnitPrice());
+			sqlQuery.append(","+ quotationDetail.get(index).getMargin());
 			sqlQuery.append(","+quotationDetail.get(index).getQuantity());
 			sqlQuery.append(",'"+quotationDetail.get(index).getEstimatedShipping()+"')");
 											
