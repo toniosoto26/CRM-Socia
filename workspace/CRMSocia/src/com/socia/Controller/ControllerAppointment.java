@@ -106,6 +106,7 @@ public class ControllerAppointment extends HttpServlet {
 					String	hrs		=	request.getParameter("dtp_input3");
 					String	email	=	request.getParameter("emailI");
 					String	nameI	=	request.getParameter("nameI");
+					String	comment	=	request.getParameter("observationA");
 					boolean	statIn	=	false;
 					activeTab = request.getParameter("activeTab");
 					
@@ -141,6 +142,7 @@ public class ControllerAppointment extends HttpServlet {
 					c.setCrmUserId(userId);
 					c.setCrmContactId(contId);
 					c.setcrmBdmId(bdmI);
+					c.setComments(comment);
 
 					ArrayList<StringBuilder>	arrQuerys	=	new	ArrayList<StringBuilder>();
 					arrQuerys	=	new AppointmentDAO().insertAppointment(c,addressId, arrQuerys);

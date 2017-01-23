@@ -157,6 +157,14 @@
 				</div>
 		  	</div>
 	  	</div>
+	  	<div class="row">
+	    	<div class="col-sm-6 col-md-6">
+		  		<div class="form-group">
+				    <label class="col-sm-6 col-md-6">Observaciones:</label>
+					 <textarea required class="form-control" id="observationA" placeholder="Observaciones" name="observationA"></textarea>
+				</div>
+		  	</div>
+	  	</div>
   	</div>
   	<div class="row top">
     	<div class="col-sm-8 col-md-8">

@@ -48,7 +48,14 @@
 				</div>
 		  	</div>
 	  	</div>
-	  	
+	  	<div class="row">
+	    	<div class="col-sm-6 col-md-6">
+		  		<div class="form-group">
+				    <label class="col-sm-6 col-md-6">Observaciones:</label>
+					 <textarea required class="form-control" id="observationA" placeholder="Observaciones" name="observationA"></textarea>
+				</div>
+		  	</div>
+	  	</div>
  	</c:when>
  	<c:otherwise>
  	
@@ -92,7 +99,14 @@
 				</div>	  	
 			</div>
 		</div>
- 	
+ 		<div class="row">
+	    	<div class="col-sm-6 col-md-6">
+		  		<div class="form-group">
+				    <label class="col-sm-6 col-md-6">Observaciones:</label>
+					 <textarea required class="form-control" id="observationA" placeholder="Observaciones" name="observationA"></textarea>
+				</div>
+		  	</div>
+	  	</div>
  	</c:otherwise>
  </c:choose>
     
