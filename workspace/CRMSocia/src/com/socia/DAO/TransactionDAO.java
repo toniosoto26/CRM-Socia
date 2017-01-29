@@ -21,7 +21,7 @@ public class TransactionDAO {
 		Statement	statement	=	this.connection.createStatement();
 		
 		for(int index=0; index < queries.size(); index++){
-			System.out.println(queries.get(index).toString());
+			//System.out.println(queries.get(index).toString());
 			statement.execute(queries.get(index).toString());
 		}
 

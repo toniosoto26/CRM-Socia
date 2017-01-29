@@ -32,6 +32,11 @@ public class Conexion {
 	}
 	
 	public static void main(String [] args){
-	
+		try{
+			Conexion	c	=	new	Conexion();
+			Connection	con 	=	c.getConnection1();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 }
