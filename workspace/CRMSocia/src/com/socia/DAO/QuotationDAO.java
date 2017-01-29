@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +25,9 @@ import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
 import com.socia.DTO.QuotationDTO;
 import com.socia.DTO.QuotationDetailDTO;
+import com.socia.DTO.QuotationLogDTO;
+import com.socia.DTO.TenderLogDTO;
+import com.socia.conexion.Conexion;
 
 public class QuotationDAO {
 	
@@ -30,13 +36,14 @@ public class QuotationDAO {
 		
     	sqlQuery	=	new	StringBuilder();
 		sqlQuery.append(" INSERT INTO crm_quotation (crm_quotation_id, crm_address_id, crm_client_id, ");
-									 sqlQuery.append("currency, exchange_rate, crm_user_id, date_created) ");
+									 sqlQuery.append("currency, exchange_rate, crm_user_id, closing_date, date_created) ");
 		sqlQuery.append(" VALUES ("+quotation.getQuotationId());
 		sqlQuery.append(","+quotation.getAddressId());
 		sqlQuery.append(","+quotation.getClientId());
 		sqlQuery.append(",'"+quotation.getCurrency()+"'");
 		sqlQuery.append(","+quotation.getExchangeRate());
 		sqlQuery.append(","+quotation.getUserId());
+		sqlQuery.append(","+quotation.getClosingDate());
 		sqlQuery.append(", now())");
 		
 		queries.add(sqlQuery);
@@ -821,6 +828,75 @@ public class QuotationDAO {
     	  sqlQuery.append("</html>");
     	
     	return sqlQuery;
+	}
+	
+	public ArrayList<QuotationLogDTO> getQuotationLog(String fechaIni,String fechaFin,int userId){
+		Conexion			sociaDB		=	null;
+		Connection			connection	=	null;
+		PreparedStatement	statement	=	null;
+		ResultSet			resultSet	=	null;
+		StringBuilder		sqlQuery	=	null;
+		
+		/** Quotation objects*/
+		int							quotationId		= 0;
+		String			 			companyName		= "";
+		String					 	itemId			= "";
+		int		 					quantity		= 0;
+		double						unitPrice		= 0;
+		String						currency		= "";
+		double						margin			= 0;
+		Date						deadline		= null;
+		QuotationLogDTO				quotation		= null;
+		ArrayList<QuotationLogDTO>	arrQuotation	=  new ArrayList<QuotationLogDTO>();
+		
+		try{
+			sqlQuery	=	new	StringBuilder();
+			sqlQuery.append(" SELECT q.crm_quotation_id, cli.company_name, qd.crm_item_id, qd.quantity, qd.unit_price, q.currency, qd.margin ");
+			sqlQuery.append(" FROM crm_quotation_detail qd ");
+			sqlQuery.append(" JOIN crm_quotation q ON qd.crm_quotation_id = q.crm_quotation_id ");
+			sqlQuery.append(" JOIN crm_client cli ON cli.crm_client_id = q.crm_client_id ");
+			sqlQuery.append(" WHERE DATE(q.date_created) >= ? ");
+			sqlQuery.append(" AND DATE(q.date_created) <= ? ");
+			sqlQuery.append(" AND q.crm_user_id = ? ");
+			sqlQuery.append(" ORDER BY q.date_created ");
+			
+			sociaDB		=	new	Conexion();
+			connection	=	sociaDB.getConnection1();
+			statement	=	connection.prepareStatement(sqlQuery.toString());
+			
+			statement.setString(1, fechaIni);
+			statement.setString(2, fechaFin);
+			statement.setInt(3, userId);
+			
+			resultSet	=	statement.executeQuery();
+			
+			while(resultSet.next()){
+				quotationId = resultSet.getInt(1);
+				companyName=resultSet.getString(2);
+				itemId = resultSet.getString(3);
+				quantity = resultSet.getInt(4);
+				unitPrice = resultSet.getDouble(5);
+				currency = resultSet.getString(6);
+				margin = resultSet.getDouble(7);
+				
+				quotation = new QuotationLogDTO(quotationId, companyName, itemId, quantity, unitPrice, currency, margin, deadline);
+				
+				arrQuotation.add(quotation);
+			}
+			
+		}catch(Exception exception){
+			exception.printStackTrace();
+		}finally{
+			try{
+				resultSet.close();
+				statement.close();
+				connection.close();
+			}catch(Exception closeException){
+				closeException.printStackTrace();
+			}
+		}
+		
+		return arrQuotation;
 	}
 	
 }

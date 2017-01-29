@@ -7,18 +7,20 @@ public class QuotationDetailDTO {
 	private String	description;
 	private String	warranty;
 	private double	unitPrice;
+	private double  margin;
 	private int		quantity;
 	private String	estimatedShipping;
 	
 	public QuotationDetailDTO(int quotationId, String itemId,
 			String description, String warranty, double unitPrice,
-			int quantity, String estimatedShipping) {
+			double margin, int quantity, String estimatedShipping) {
 		super();
 		this.quotationId = quotationId;
 		this.itemId = itemId;
 		this.description = description;
 		this.warranty = warranty;
 		this.unitPrice = unitPrice;
+		this.margin = margin;
 		this.quantity = quantity;
 		this.estimatedShipping = estimatedShipping;
 	}
@@ -52,6 +54,12 @@ public class QuotationDetailDTO {
 	public void setUnitPrice(double unitPrice) {
 		this.unitPrice = unitPrice;
 	}
+	public double getMargin() {
+		return margin;
+	}
+	public void setMargin(double margin) {
+		this.margin = margin;
+	}
 	public int getQuantity() {
 		return quantity;
 	}
@@ -68,8 +76,9 @@ public class QuotationDetailDTO {
 	public String toString() {
 		return "QuotationDetailDTO [quotationId=" + quotationId + ", itemId="
 				+ itemId + ", description=" + description + ", warranty="
-				+ warranty + ", unitPrice=" + unitPrice + ", quantity="
-				+ quantity + ", estimatedShipping=" + estimatedShipping + "]";
+				+ warranty + ", unitPrice=" + unitPrice + ", margin=" + margin
+				+ ", quantity=" + quantity + ", estimatedShipping="
+				+ estimatedShipping + "]";
 	}
 	
 }

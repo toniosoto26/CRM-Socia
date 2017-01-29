@@ -153,6 +153,7 @@
 					    		<th>Garantía</th>
 					    		<th>Tiempo de entrega</th>
 					    		<th>Precio unitario</th>
+					    		<th>Margen</th>
 				    		</tr>
 				    	</thead>
 				    	<tbody>
