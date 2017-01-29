@@ -1,24 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<div class="titulo"><h3>Indicadores</h3></div>
+<div class="titulo"><h3>Indicadores Ejecutivos</h3></div>
 
-<div class="row">
-	<div id="primaryPanel" class="col-sm-12 col-md-12">
-		<div class="text-center">
-			<label>Seleccione el rango:</label><div class="week-picker" style="margin: 0 auto;width: 240px;"></div>
-		</div>
-		<br /><br />
-		<div class="text-center">
-			<label>Semana:</label> <input type="text" id="startDate" readonly/> - <input type="text" id="endDate" readonly/>
-		</div>
-		<input type="button" class="btn btn-primary" value="Generar" onclick="loadIndicator();">
-		<div id="indicators">
+<div class="row top">
+	<div id="primaryPanel" class="col-sm-2 col-md-2">
+		<div class="container">
+			<label class="negro">Seleccionar fechas 
+				<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+			   		<i class="fa fa-calendar" aria-hidden="true"></i>
+			  	</button>
+			</label>
 		</div>
 	</div>
-	<div id="secondaryPanel">
+	<div class="col-sm-4 col-md-4">
+		<div class="collapse" id="collapseExample">
+			<div class="week-picker" style="margin: 0 auto;width: 240px;"></div>
+		</div>
+	</div>
+	<div class="col-sm-4 col-md-4">
+		<label>Semana:</label> <input type="text" id="startDate" readonly/> - <input type="text" id="endDate" readonly/>
+	</div>
+	<div class="col-sm-2 col-md-2">
+		<div class="text-center">
+			<input type="button" class="btn btn-primary" value="Generar" onclick="loadIndicator();">
+		</div>
 	</div>
 </div>
+<div  id="indicators"></div>
 	
 <script>
 	$(function() {

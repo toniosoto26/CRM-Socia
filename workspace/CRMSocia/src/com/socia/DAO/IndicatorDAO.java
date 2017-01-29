@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.socia.DTO.BusinessLineDTO;
 import com.socia.DTO.DateDTO;
 import com.socia.DTO.IndicatorDTO;
 import com.socia.DTO.IndicatorDetailDTO;
@@ -36,7 +37,7 @@ public class IndicatorDAO {
 		return arrIndicator;
 	}
 	
-	public IndicatorDetailDTO getCallIndicatorByType(String type, String date, int userId){
+	private IndicatorDetailDTO getCallIndicatorByType(String type, String date, int userId){
 		Conexion					sociaDB		=	null;
 		Connection					connection	=	null;
 		PreparedStatement			statement	=	null;
@@ -127,7 +128,7 @@ public class IndicatorDAO {
 		return arrIndicator;
 	}
 	
-	public IndicatorDetailDTO getAppointmentIndicatorByType(String type, String date, int userId){
+	private IndicatorDetailDTO getAppointmentIndicatorByType(String type, String date, int userId){
 		Conexion					sociaDB		=	null;
 		Connection					connection	=	null;
 		PreparedStatement			statement	=	null;
@@ -208,7 +209,7 @@ public class IndicatorDAO {
 		return arrIndicator;
 	}
 
-	public IndicatorDetailDTO getQuotationIndicator(String date, int userId){
+	private IndicatorDetailDTO getQuotationIndicator(String date, int userId){
 		Conexion					sociaDB		=	null;
 		Connection					connection	=	null;
 		PreparedStatement			statement	=	null;
@@ -303,7 +304,7 @@ public class IndicatorDAO {
 		return arrIndicator;
 	}
 	
-	public IndicatorDetailDTO getTenderIndicator(String date, int userId){
+	private IndicatorDetailDTO getTenderIndicator(String date, int userId){
 		Conexion					sociaDB		=	null;
 		Connection					connection	=	null;
 		PreparedStatement			statement	=	null;
@@ -377,5 +378,80 @@ public class IndicatorDAO {
 		return indicator;
 	}
 	
+	public ArrayList<IndicatorDTO> getTenderChart(String startDate, String endDate, ArrayList<BusinessLineDTO> arrBusinessLine, int userId){
+		DateDTO							date		=	null;
+		IndicatorDTO					indicator	=	null;
+		BusinessLineDTO					businessLine=	null;
+		ArrayList<IndicatorDTO>			arrIndicator= 	new ArrayList<IndicatorDTO>();
+		IndicatorDetailDTO				indicatorAct= 	null;
+		IndicatorDetailDTO				indicatorPro= 	null;
+		
+		for(int j=0; j < arrBusinessLine.size(); j++){
+			businessLine = arrBusinessLine.get(j);
+			
+			indicatorAct = getTenderChartData(startDate, endDate, businessLine.getBusinessLineId(), userId);
+		
+			indicator = new IndicatorDTO(date, indicatorAct, indicatorPro);
+		
+			arrIndicator.add(indicator);
+		}
+		
+		return arrIndicator;
+	}
+	
+	private IndicatorDetailDTO getTenderChartData(String startDate, String endDate, int businessLineId, int userId){
+		Conexion					sociaDB		=	null;
+		Connection					connection	=	null;
+		PreparedStatement			statement	=	null;
+		ResultSet					resultSet	=	null;
+		StringBuilder				sqlQuery	=	null;
+		
+		/** Indicator objects*/
+		int 						total		=	0;
+		String						type		=	"";
+		IndicatorDetailDTO			indicator	=	null;
+		
+		try{
+			sqlQuery	=	new	StringBuilder();
+			sqlQuery.append(" SELECT count(*), bl.name ");
+			sqlQuery.append(" FROM crm_tender t ");
+			sqlQuery.append(" JOIN crm_business_line bl ON t.crm_business_line_id = bl.crm_business_line_id ");
+			sqlQuery.append(" where t.crm_user_id = ? ");
+			sqlQuery.append(" AND bl.crm_business_line_id = ? ");
+			sqlQuery.append(" AND DATE(t.date_created) >= ? ");
+			sqlQuery.append(" AND DATE(t.date_created) <= ? ");
+			
+			sociaDB		=	new	Conexion();
+			connection	=	sociaDB.getConnection1();
+			statement	=	connection.prepareStatement(sqlQuery.toString());
+			
+			statement.setInt(1, userId);
+			statement.setInt(2, businessLineId);
+			statement.setString(3, startDate);
+			statement.setString(4, endDate);
+			
+			resultSet	=	statement.executeQuery();
+			
+			if(resultSet.next()){
+				total = resultSet.getInt(1);
+				type = (resultSet.getString(2)!=null?resultSet.getString(2):"");
+			}
+			
+			indicator = new IndicatorDetailDTO(total, type);
+			
+		}catch(Exception exception){
+			exception.printStackTrace();
+		}finally{
+			try{
+				resultSet.close();
+				statement.close();
+				connection.close();
+			}catch(Exception closeException){
+				closeException.printStackTrace();
+			}
+		}
+		
+		return indicator;
+	}
 	
 }

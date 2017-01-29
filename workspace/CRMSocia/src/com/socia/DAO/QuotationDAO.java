@@ -43,8 +43,10 @@ public class QuotationDAO {
 		sqlQuery.append(",'"+quotation.getCurrency()+"'");
 		sqlQuery.append(","+quotation.getExchangeRate());
 		sqlQuery.append(","+quotation.getUserId());
-		sqlQuery.append(","+quotation.getClosingDate());
+		sqlQuery.append(",'"+quotation.getClosingDate()+"'");
 		sqlQuery.append(", now())");
+		
+		System.out.println(quotation.toString());
 		
 		queries.add(sqlQuery);
     

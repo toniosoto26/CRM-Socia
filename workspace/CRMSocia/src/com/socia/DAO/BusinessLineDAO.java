@@ -17,7 +17,7 @@ public class BusinessLineDAO {
 		ResultSet			resultSet	=	null;
 		StringBuilder		sqlQuery	=	null;
 		
-		/** Item objects*/
+		/** Business lines objects*/
 		BusinessLineDTO				businessLine	=	null;
 		int							businessLineId	=	0;
 		String 						name			=	"";

@@ -95,8 +95,6 @@ public class TenderDAO {
 				tender.setStartUpDate(startUpDate);
 				tender.setDeadline(deadLine);
 				
-				System.out.println(tender.toString());
-				
 				arrTender.add(tender);
 			}
 			

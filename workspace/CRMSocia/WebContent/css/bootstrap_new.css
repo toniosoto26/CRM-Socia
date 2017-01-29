@@ -2275,13 +2275,16 @@ th {
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfoot > tr > th,
-.table > thead > tr > td,
-.table > tbody > tr > td,
-.table > tfoot > tr > td {
+.table > thead > tr > td
+ {
   padding: 8px;
   line-height: 1.42857143;
   vertical-align: top;
   border-top: 1px solid #ddd;
+}
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+	padding: 2px;
 }
 .table > thead > tr > th {
   vertical-align: bottom;
@@ -2374,14 +2377,14 @@ table th[class*="col-"] {
 .table > thead > tr.success > th,
 .table > tbody > tr.success > th,
 .table > tfoot > tr.success > th {
-  background-color: #dff0d8;
+  background-color: #b6e0b6;
 }
 .table-hover > tbody > tr > td.success:hover,
 .table-hover > tbody > tr > th.success:hover,
 .table-hover > tbody > tr.success:hover > td,
 .table-hover > tbody > tr:hover > .success,
 .table-hover > tbody > tr.success:hover > th {
-  background-color: #d0e9c6;
+  background-color: #9fdd9f;
 }
 .table > thead > tr > td.info,
 .table > tbody > tr > td.info,
@@ -2395,14 +2398,14 @@ table th[class*="col-"] {
 .table > thead > tr.info > th,
 .table > tbody > tr.info > th,
 .table > tfoot > tr.info > th {
-  background-color: #d9edf7;
+  background-color: #9bb9dd;
 }
 .table-hover > tbody > tr > td.info:hover,
 .table-hover > tbody > tr > th.info:hover,
 .table-hover > tbody > tr.info:hover > td,
 .table-hover > tbody > tr:hover > .info,
 .table-hover > tbody > tr.info:hover > th {
-  background-color: #c4e3f3;
+  background-color: #81a9e1;
 }
 .table > thead > tr > td.warning,
 .table > tbody > tr > td.warning,
@@ -2416,14 +2419,14 @@ table th[class*="col-"] {
 .table > thead > tr.warning > th,
 .table > tbody > tr.warning > th,
 .table > tfoot > tr.warning > th {
-  background-color: #fcf8e3;
+  background-color: #f4dc76;
 }
 .table-hover > tbody > tr > td.warning:hover,
 .table-hover > tbody > tr > th.warning:hover,
 .table-hover > tbody > tr.warning:hover > td,
 .table-hover > tbody > tr:hover > .warning,
 .table-hover > tbody > tr.warning:hover > th {
-  background-color: #faf2cc;
+  background-color: #f5cd21;
 }
 .table > thead > tr > td.danger,
 .table > tbody > tr > td.danger,
@@ -2437,14 +2440,15 @@ table th[class*="col-"] {
 .table > thead > tr.danger > th,
 .table > tbody > tr.danger > th,
 .table > tfoot > tr.danger > th {
-  background-color: #f2dede;
+  background-color: #ff4367;
+  color: white;
 }
 .table-hover > tbody > tr > td.danger:hover,
 .table-hover > tbody > tr > th.danger:hover,
 .table-hover > tbody > tr.danger:hover > td,
 .table-hover > tbody > tr:hover > .danger,
 .table-hover > tbody > tr.danger:hover > th {
-  background-color: #ebcccc;
+  background-color: #ff0026;
 }
 .table-responsive {
   min-height: .01%;
@@ -2513,7 +2517,6 @@ legend {
   border-bottom: 1px solid #e5e5e5;
 }
 label {
-  color: #4d4d4d;
   display: inline-block;
   width: auto;
   margin-bottom: 5px;
@@ -3070,12 +3073,12 @@ fieldset[disabled] a.btn {
 .btn-default:focus,
 .btn-default.focus {
   color: #333;
-  background-color: #e6e6e6;
+  background-color: #fff;
   border-color: #8c8c8c;
 }
 .btn-default:hover {
   color: #333;
-  background-color: #e6e6e6;
+  background-color: #fff;
   border-color: #adadad;
 }
 .btn-default:active,
@@ -4734,7 +4737,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 }
 .breadcrumb {
   padding: 0 15px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   list-style: none;
 }
 .breadcrumb > li {
@@ -6804,10 +6807,32 @@ button.close {
 .azul {
 	background-color: #abd2e4;
 }
+.campo-tabla {
+	height: auto;
+	width: 100%;
+}
+.campo-tabla-azul {
+	background-color: #abd2e4;
+	height: auto;
+	width: 100%;
+}
+.campo-tabla-gris {
+	background-color: #f9f9f9;
+	height: auto;
+	width: 100%;
+}
 .centrado {
 	display: block;
 	margin: 0 auto;
 	max-width: 70%;
+}
+.circulo-verde {
+	width: 16px;
+    height: 16px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #a6db6d;
 }
 .contactos {
 	margin-top: 30px;
@@ -6832,7 +6857,6 @@ button.close {
 }
 .lista {
 	color: #4D4D4D;
-	line-height: 2.3;
 	margin-left: 15px;
 	padding-top: 45px;
 }
@@ -6849,6 +6873,9 @@ button.close {
 	padding-top: 17%;
 	width: 100%;
 	/*z-index:1;*/
+}
+.negro {
+color: black;
 }
 .panel {
 	margin-right: 15px;

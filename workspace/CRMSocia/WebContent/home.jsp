@@ -143,5 +143,8 @@
 		<script src='/CRMSocia/js/calendar/moment.min.js'></script>
 		<script src='/CRMSocia/js/calendar/fullcalendar.js'></script>
 		<script src='/CRMSocia/js/calendar/lang/es.js'></script>
+
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	</body>
 </html>

@@ -132,6 +132,11 @@ function addQuotation(){
 		type: "post",
 		url : "ControllerTemp",
 		data: $("#addQuotation").serialize()+"&option="+option+"&activeTab="+activeTab,
+		beforeSend: function(){
+			alertify.set({ delay: 3000 });
+			alertify.log("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Enviando...</center>");
+		}, 
+		
 		success: function(response){
 			if(trim(response)=="correcto"){
 				alertify.alert("Correo enviado correctamente");
@@ -181,6 +186,17 @@ $( document ).ready(function() {
 			});
 		}
 	});
+});
+
+$('.form_date').datetimepicker({
+    language:  'es',
+    weekStart: 1,
+    todayBtn:  1,
+	autoclose: 1,
+	todayHighlight: 1,
+	startView: 2,
+	minView: 2,
+	forceParse: 0
 });
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {

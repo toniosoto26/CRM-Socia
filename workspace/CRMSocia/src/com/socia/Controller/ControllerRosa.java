@@ -150,6 +150,7 @@ public class ControllerRosa extends HttpServlet {
 		ArrayList<IndicatorDTO>			arrAppointmentIndicator	= 	new ArrayList<IndicatorDTO>();
 		ArrayList<IndicatorDTO>			arrQuotationIndicator	= 	new ArrayList<IndicatorDTO>();
 		ArrayList<IndicatorDTO>			arrTenderIndicator		= 	new ArrayList<IndicatorDTO>();
+		ArrayList<IndicatorDTO>			arrTenderChart			= 	new ArrayList<IndicatorDTO>();
 		ArrayList <AppointmentLogDTO> 	arrAppointmentLog		=	new ArrayList <AppointmentLogDTO>();
 		ArrayList <TenderLogDTO> 		arrTenderLog			=	new ArrayList <TenderLogDTO>();
 		ArrayList <QuotationLogDTO> 	arrQuotationLog			=	new ArrayList <QuotationLogDTO>();
@@ -199,6 +200,8 @@ public class ControllerRosa extends HttpServlet {
 			clientId = Integer.parseInt(request.getParameter("clientId"));
 			contactId = Integer.parseInt(request.getParameter("contactId"));
 			currency = request.getParameter("currency");
+			deadline = request.getParameter("deadline");
+			
 			if(request.getParameter("currency") == "USD")
 				exchangeRate = Double.parseDouble(request.getParameter("exchangeRate"));
 			totalProducts = Integer.parseInt(request.getParameter("totalProducts"));
@@ -206,7 +209,7 @@ public class ControllerRosa extends HttpServlet {
 			if(option == 2 || option == 6)
 				quotationId = objConsecutive.getConsecutive("quotations");
 			
-			quotation = new QuotationDTO(quotationId, addressId, clientId, currency, exchangeRate, "", ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
+			quotation = new QuotationDTO(quotationId, addressId, clientId, currency, exchangeRate, deadline, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 			
 			/** Quotation details*/
 			for(int index = 1; index <= totalProducts; index++){
@@ -387,11 +390,13 @@ public class ControllerRosa extends HttpServlet {
 				startDate = formatter.parse(startUpDate);
 				endDate = formatter.parse(deadline);
 				arrDate = objDate.getDaysArray(startDate, endDate);
+				arrBusinessLine = objBusinessLine.getBusinessLines();
 				
 				arrCallIndicator = objIndicator.getGeneralCallIndicator(arrDate, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 				arrAppointmentIndicator = objIndicator.getGeneralAppointmentIndicator(arrDate, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 				arrQuotationIndicator = objIndicator.getGeneralQuotationIndicator(arrDate, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 				arrTenderIndicator = objIndicator.getGeneralTenderIndicator(arrDate, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
+				arrTenderChart = objIndicator.getTenderChart(startUpDate, deadline, arrBusinessLine, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 				
 				session.removeAttribute("arrCallIndicator");
 				if(arrCallIndicator.size() > 0)
@@ -416,6 +421,13 @@ public class ControllerRosa extends HttpServlet {
 					session.setAttribute("arrTenderIndicator", arrTenderIndicator);
 				else
 					session.setAttribute("arrTenderIndicator", null);
+				
+				session.removeAttribute("arrTenderChart");
+				if(arrTenderChart.size() > 0)
+					session.setAttribute("arrTenderChart", arrTenderChart);
+				else
+					session.setAttribute("arrTenderChart", null);
+				
 				
 				url = "views/indicators/responses/generateIndicators.jsp";
 			}
@@ -462,8 +474,6 @@ public class ControllerRosa extends HttpServlet {
 			fechaFin = request.getParameter("fechaFin");
 			
 			arrQuotationLog = objQuotation.getQuotationLog(fechaIni, fechaFin, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
-			
-			System.out.println(arrQuotationLog.toString());
 			
 			session.removeAttribute("arrQuotationLog");
 			if(arrQuotationLog.size()>0){

@@ -34,6 +34,16 @@ public class IndicatorDetailDTO {
 		this.value = 0;
 		this.date = date;
 	}
+	public IndicatorDetailDTO(int total,
+			String type) {
+		super();
+		this.total = total;
+		this.effective = 0;
+		this.objective = 0;
+		this.type = type;
+		this.value = 0;
+		this.date = "";
+	}
 	public int getTotal() {
 		return total;
 	}
