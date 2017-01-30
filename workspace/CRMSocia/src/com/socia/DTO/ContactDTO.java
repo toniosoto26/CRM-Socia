@@ -13,7 +13,8 @@ public class ContactDTO {
 	private int 	id_position;
 	private String  position;
 	private String  ext;
-	
+	private	String	cellPhone;
+	private	String	birthday;
 	
 
 	public ContactDTO(){
@@ -123,11 +124,34 @@ public class ContactDTO {
 		this.position = position;
 	}
 
+	
+	public String getCellPhone() {
+		return cellPhone;
+	}
+
+	public void setCellPhone(String cellPhone) {
+		this.cellPhone = cellPhone;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
 	@Override
 	public String toString() {
 		return "ContactDTO [contactId=" + contactId + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", phone=" + phone
-				+ ", email=" + email + "]";
+				+ ", email=" + email + ", status=" + status
+				+ ", company_division_id=" + company_division_id
+				+ ", name_division=" + name_division + ", id_position="
+				+ id_position + ", position=" + position + ", ext=" + ext
+				+ ", cellPhone=" + cellPhone + ", birthday=" + birthday + "]";
 	}
+
+	
 	
 }

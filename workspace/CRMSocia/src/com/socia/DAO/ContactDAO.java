@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.socia.DTO.ContactDTO;
 import com.socia.DTO.DivisionDTO;
@@ -185,6 +186,68 @@ public class ContactDAO {
         return queries;
     }
 	
+	
+	public List<ContactDTO>	getDetailsPosition(int	clientId, Connection con){
+		
+		List<ContactDTO>	lst	=	new	ArrayList<ContactDTO>();
+		
+		ContactDTO	contDto	=	null;
+		
+		PreparedStatement	ps	=	null;
+		ResultSet			rs	=	null;
+		
+		StringBuilder		sql	=	new	StringBuilder();	
+		
+		try{
+			
+			sql.delete(0, sql.length());
+			sql.append(" select	p.position ");
+			sql.append(" ,CONCAT(c.first_name,' ',c.last_name) nameCom" );
+			sql.append(" ,c.email ");
+			sql.append(" ,c.phone ");
+			sql.append(" ,c.cellphone ");
+			sql.append(" ,c.birthday ");
+			sql.append(" ,cd.name division ");
+			sql.append(" from 	crm_contact c	");
+			sql.append(" ,crm_position p ");
+			sql.append(" ,crm_client_contact cc ");
+			sql.append(" ,crm_company_division cd ");
+			sql.append(" where	cc.crm_client_id  = ? ");
+			sql.append(" and		c.crm_contact_id = cc.crm_contact_id ");
+			sql.append(" and		c.id_position	= p.id_position ");
+			sql.append(" and		cd.company_division_id = c.company_division_id ");
+			
+			ps	=	con.prepareStatement(sql.toString());
+			ps.setInt(1, clientId);
+			
+			rs	=	ps.executeQuery();
+			
+			while(rs.next()){
+				contDto	=	new	ContactDTO();
+				contDto.setPosition(rs.getString("position"));
+				contDto.setFirstName(rs.getString("nameCom"));
+				contDto.setEmail(rs.getString("email"));
+				contDto.setPhone(rs.getString("phone"));
+				contDto.setCellPhone(rs.getString("cellphone"));
+				contDto.setBirthday(rs.getString("birthday"));
+				contDto.setName_division(rs.getString("division"));
+				
+				lst.add(contDto);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				if(ps != null) ps.close();
+				if(rs != null) rs.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		return lst;
+	}
 	
 	public static void main(String[] args){
 		ContactDAO contact = new ContactDAO();
