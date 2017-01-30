@@ -26,6 +26,7 @@ CREATE TABLE `crm_diagnosis` (
   `crm_diagnosis_id` int(11) NOT NULL,
   `date_updated` date DEFAULT NULL,
   `crm_user_id` int(11) DEFAULT NULL,
+  `crm_client_id` int(11) NOT NULL,
   PRIMARY KEY (`crm_diagnosis_id`),
   KEY `pk_crm_diagnosis` (`crm_diagnosis_id`),
   KEY `fk_crm_user_id_idx` (`crm_user_id`),
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-29  1:03:56
+-- Dump completed on 2017-01-30  7:48:10
