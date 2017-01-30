@@ -13,8 +13,8 @@
 				<div class="form-group">
 		  			<label class="col-sm-6 col-md-6">Seleccione Tipo de Cliente :</label>
 				</div>
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="pintar(1);">
-				<input type="button" class="btn btn-primary" id="btnSinSelect" name="btnSinSelect" value="Nuevo" onclick="pintar(0);">
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Actual" onclick="pintar(1);">
+				<input type="button" class="btn btn-primary" id="btnSinSelect" name="btnSinSelect" value="Prospecto" onclick="pintar(0);">
 			</div>
 		</div>
 	</div>

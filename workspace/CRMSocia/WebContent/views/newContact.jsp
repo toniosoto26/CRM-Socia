@@ -62,6 +62,16 @@
 	                    <input type="hidden" name="carta" id="carta" value="1">
 	                </div>
 	       	 	</div>
+	       	 	<div class="form-group top">
+				            <label class="col-sm-3 col-md-3" for="happy" >Se detecto concurso:</label>
+				                <div class="input-group">
+				                    <div id="radioBtn" class="btn-group">
+				                        <span class="btn btn-primary btn-sm active" data-toggle="concurso" data-value="1">SI</span>
+				                        <span class="btn btn-default btn-sm notActive" data-toggle="concurso" data-value="0">NO</span>
+				                    </div>
+				                    <input type="hidden" name="concurso" id="concurso" value="1">
+				                </div>
+				</div>
 	      	</div>
 	    </div>
 	    <div class="row">
@@ -74,17 +84,21 @@
 	</div>
 	<div class="col-sm-3 col-md-3">
 		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="">
+		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Speech" onclick="">
 		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="">
+		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Guia" onclick="">
 		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="">
+		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Manejo de objeciones" onclick="">
 		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="">
+		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio Carta" onclick="">
 		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="">
+		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio presentacion" onclick="">
 		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Existente" onclick="">
+		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio promociones" onclick="">
+		<br><br>
+		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio Cartera" onclick="">
+		<br><br>
+		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Lineas de negocio " onclick="">
 	</div>
 </div>
 

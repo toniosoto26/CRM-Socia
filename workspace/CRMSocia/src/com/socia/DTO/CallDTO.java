@@ -8,12 +8,11 @@ public class CallDTO {
 	private int crm_contact_id;
 	private int status;
 	private int letter;
+	private int competition;
 	
-	public CallDTO(){
-		
-	}
+	
 	public CallDTO(int id_call, String comments, int crm_client_id,
-			int crm_user_id, int crm_contact_id, int status, int letter) {
+			int crm_user_id, int crm_contact_id, int status, int letter,int competition) {
 		super();
 		this.id_call = id_call;
 		this.comments = comments;
@@ -22,6 +21,7 @@ public class CallDTO {
 		this.crm_contact_id = crm_contact_id;
 		this.status = status;
 		this.letter = letter;
+		this.competition = competition;
 	}
 	
 	public CallDTO(int id_call, String comments, int crm_client_id,
@@ -32,6 +32,15 @@ public class CallDTO {
 		this.crm_client_id = crm_client_id;
 		this.crm_user_id = crm_user_id;
 		this.crm_contact_id = crm_contact_id;
+	}
+	public int getCompetition() {
+		return competition;
+	}
+	public void setCompetition(int competition) {
+		this.competition = competition;
+	}
+	public CallDTO(){
+		
 	}
 	public int getId_call() {
 		return id_call;
