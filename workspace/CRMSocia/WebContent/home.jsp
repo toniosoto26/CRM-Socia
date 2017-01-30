@@ -18,6 +18,9 @@
 		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 		<link href='/CRMSocia/css/calendar/fullcalendar.css' rel='stylesheet' />
 		<link href='/CRMSocia/css/calendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+		<link rel="stylesheet" href="/CRMSocia/css/bootstrap-datetimepicker.css">
+		<link rel="stylesheet" href="css/prism.css">
+		<link rel="stylesheet" href="css/chosen.css">
 		<link rel="stylesheet" type="text/css" media="screen" href="./css/ui/jquery-ui.min.css">
 	</head>
 	<body>
@@ -143,6 +146,10 @@
 		<script src='/CRMSocia/js/calendar/moment.min.js'></script>
 		<script src='/CRMSocia/js/calendar/fullcalendar.js'></script>
 		<script src='/CRMSocia/js/calendar/lang/es.js'></script>
+		<script type="text/javascript" src="/CRMSocia/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="/CRMSocia/js/bootstrap-datetimepicker.es.js"></script>
+		<script src="js/chosen.jquery.js" type="text/javascript"></script>
+		<script src="js/prism.js" type="text/javascript" charset="utf-8"></script>
 
 		<script src="https://code.highcharts.com/highcharts.js"></script>
 		<script src="https://code.highcharts.com/modules/exporting.js"></script>

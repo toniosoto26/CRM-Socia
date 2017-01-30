@@ -139,6 +139,7 @@ public class ControllerRosa extends HttpServlet {
 		ItemDTO							item;
 		ClientDTO						client;
 		AddressDTO						address					=	null;
+		ArrayList<AddressDTO>			arrAddress				= 	new ArrayList<AddressDTO>();
 		ContactDTO						contact;
 		QuotationDTO					quotation;
 		QuotationDetailDTO				quotationDetail;
@@ -164,8 +165,6 @@ public class ControllerRosa extends HttpServlet {
 		
 		if(option == 1){
 			clientId = Integer.parseInt(request.getParameter("clientId"));
-			
-			ArrayList<AddressDTO>	arrAddress	= new ArrayList<AddressDTO>();
 			arrAddress = objAddress.getAddressByClient(clientId);
 			
 			session.removeAttribute("arrAddress");
@@ -329,10 +328,6 @@ public class ControllerRosa extends HttpServlet {
 			session.setAttribute("itemIndex", itemIndex);
 			
 			url = "views/quotations/responses/itemDescription.jsp";
-		}else if(option == 6){
-			client = objClient.getClientById(1);
-			contact = objContact.getContactsById(1);
-			address = objAddress.getAddressById(1);
 		}
 		else if(option == 7){
 			arrBusinessLine = objBusinessLine.getBusinessLines();
@@ -428,13 +423,11 @@ public class ControllerRosa extends HttpServlet {
 				else
 					session.setAttribute("arrTenderChart", null);
 				
-				
 				url = "views/indicators/responses/generateIndicators.jsp";
 			}
 			catch(Exception e){
 				e.printStackTrace();
 			}
-			
 		}
 		else if(option == 10){
 			clientType = (request.getParameter("clientType")==null?"":request.getParameter("clientType"));
@@ -484,6 +477,17 @@ public class ControllerRosa extends HttpServlet {
 			}
 			
 			url = "/views/quotations/responses/quotationDetail.jsp";
+		}
+		if(option == 13){
+			clientId = Integer.parseInt(request.getParameter("clientId"));
+			
+			client = objClient.getClientById(clientId);
+			
+			session.removeAttribute("clientType");
+			
+			session.setAttribute("clientType", client.getClientType());
+
+			url = "/utils/clientType.jsp";
 		}
 		
 		request.getRequestDispatcher(url).forward(request, response);

@@ -3,6 +3,8 @@ package com.socia.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -270,16 +272,20 @@ public class AppointmentDAO {
 		String				 			companyName		= "";
 		String						 	contactName		= "";
 		String	 						position		= "";
+		String							strDate			= "";
+		String							strTime			= "";
 		Date							date			= null;
 		String							subject			= "";
 		String							bdmName			= "";
 		AppointmentLogDTO				appointment		=	null;
 		ArrayList<AppointmentLogDTO>	arrAppointment	= 	new ArrayList<AppointmentLogDTO>();
+
+		DateFormat 						format 			= new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
 		try{
 			sqlQuery	=	new	StringBuilder();
-			sqlQuery.append(" select cli.company_name,cont.first_name, cont.last_name, position, apo.date,  ");
-			sqlQuery.append(" apo.subject, usr.first_name, usr.last_name ");
+			sqlQuery.append(" select cli.company_name,cont.first_name, cont.last_name, position, DATE(apo.date),  ");
+			sqlQuery.append(" TIME(apo.date), apo.subject, usr.first_name, usr.last_name ");
 			sqlQuery.append(" from crm_contact cont , crm_position pos, crm_appointment apo, crm_client cli, crm_user usr ");
 			sqlQuery.append(" where apo.crm_client_id=cli.crm_client_id ");
 			sqlQuery.append(" and apo.crm_contact_id=cont.crm_contact_id ");
@@ -309,9 +315,13 @@ public class AppointmentDAO {
 				companyName=resultSet.getString(1);
 				contactName = resultSet.getString(2)+" "+resultSet.getString(3);
 				position = resultSet.getString(4);
-				date = resultSet.getDate(5);
-				subject = resultSet.getString(6);
-				bdmName = resultSet.getString(7)+" "+resultSet.getString(8);
+				strDate = resultSet.getString(5);
+				strTime = resultSet.getString(6);
+				
+				date = format.parse(strDate+" "+strTime);
+				
+				subject = resultSet.getString(7);
+				bdmName = resultSet.getString(8)+" "+resultSet.getString(9);
 				
 				appointment = new AppointmentLogDTO(companyName, contactName, position, date, subject, bdmName);
 				arrAppointment.add(appointment);

@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-<link rel="stylesheet" href="css/prism.css">
-<link rel="stylesheet" href="css/chosen.css">
-
 <div class="row">
 	<div id="primaryPanel" class="col-sm-12 col-md-12">
 		<div class="titulo"><h3>Llamadas</h3></div>    
@@ -22,7 +19,4 @@
 	</div>
 </div>
 
-<script src="js/jquery.min.js" type="text/javascript"></script>
-<script src="js/chosen.jquery.js" type="text/javascript"></script>
-<script src="js/prism.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="js/script.js"></script>

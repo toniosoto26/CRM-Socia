@@ -848,12 +848,14 @@ public class QuotationDAO {
 		String						currency		= "";
 		double						margin			= 0;
 		Date						deadline		= null;
+		Date						date			= null;
 		QuotationLogDTO				quotation		= null;
 		ArrayList<QuotationLogDTO>	arrQuotation	=  new ArrayList<QuotationLogDTO>();
 		
 		try{
 			sqlQuery	=	new	StringBuilder();
-			sqlQuery.append(" SELECT q.crm_quotation_id, cli.company_name, qd.crm_item_id, qd.quantity, qd.unit_price, q.currency, qd.margin ");
+			sqlQuery.append(" SELECT q.crm_quotation_id, cli.company_name, qd.crm_item_id, qd.quantity, qd.unit_price, ");
+			sqlQuery.append(" q.currency, qd.margin, q.date_created ");
 			sqlQuery.append(" FROM crm_quotation_detail qd ");
 			sqlQuery.append(" JOIN crm_quotation q ON qd.crm_quotation_id = q.crm_quotation_id ");
 			sqlQuery.append(" JOIN crm_client cli ON cli.crm_client_id = q.crm_client_id ");
@@ -880,8 +882,9 @@ public class QuotationDAO {
 				unitPrice = resultSet.getDouble(5);
 				currency = resultSet.getString(6);
 				margin = resultSet.getDouble(7);
+				date = resultSet.getDate(8);
 				
-				quotation = new QuotationLogDTO(quotationId, companyName, itemId, quantity, unitPrice, currency, margin, deadline);
+				quotation = new QuotationLogDTO(quotationId, date, companyName, itemId, quantity, unitPrice, currency, margin, deadline);
 				
 				arrQuotation.add(quotation);
 			}

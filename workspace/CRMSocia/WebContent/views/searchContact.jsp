@@ -5,7 +5,7 @@
 	<div class="col-sm-6 col-md-6">
 		<div class="form-group">
 				<label class="col-sm-6 col-md-6">Nombre Contacto:</label>
-				<div id="selectContact" name="selectContact" class="top"> </div>
+				<div id="selectContact" class="top"> </div>
 				<input type="hidden" name="AddContact" value="0">
 		</div>
 	</div>

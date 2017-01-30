@@ -257,7 +257,7 @@
 		  				<th class="info"></th>
 		  				<th class="info">Cantidad</th>
 		  				<th class="info">Línea de negocio</th>
-		  				<th class="info">Fecha</th>
+		  				<th class="info">Fecha concurso</th>
 		  			</tr>
 			   	</thead>
 			   	<tbody class="cuerpo-tabla">
@@ -508,7 +508,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
-	<div class="modal-dialog" style="width:100%">
+	<div class="modal-dialog" style="width:80%">
     	<!-- Modal content-->
       	<div class="modal-content">
         	<div class="modal-header">

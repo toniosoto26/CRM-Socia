@@ -13,12 +13,11 @@ function getInfo(type){
 		data: {"option":1, "type": type},
 		success: function(response){
 			if(type=="P"){
-				$("#selectProspD").html(response);
-				$(".chosen-select").chosen();				
+				$("#selectProspD").html(response);		
 			}else{
-				$("#selectClientD").html(response);
-				$(".chosen-select").chosen();				
+				$("#selectClientD").html(response);		
 			}
+			$(".chosen-select").chosen();		
 			
 		},
 		error: function(){
@@ -41,7 +40,23 @@ function getDiagnosis(value, type){
 			}else{
 				getInfo("P");
 			}
+			getBLDetails(value);
+		},
+		error: function(){
+			alertify.alert("no funciona");
 			
+		}
+	})
+	
+}
+
+function getBLDetails(value){
+	$.ajax({
+		type:"post",
+		url:"ControllerDiagnosis",
+		data: {"option":3, "clientId":value},
+		success: function(response){
+			$("#blTable").html(response);
 		},
 		error: function(){
 			alertify.alert("no funciona");

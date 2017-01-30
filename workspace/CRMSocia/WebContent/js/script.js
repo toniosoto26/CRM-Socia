@@ -34,7 +34,7 @@ function validar(){
 
 function validarCampos(user,passwd){
 	if(user == "" || passwd == ""){
-		alertify.alert("No debe de haber campos vacios.")
+		alertify.alert("No debe haber campos vacios.")
 		return false;
 	}else{
 		return true;
@@ -52,6 +52,7 @@ function loadClientInfo(selected){
 		},
 		success: function(response){
 			$("#clientInfo").html(response);
+			$("#chosenContact").chosen();
 		},
 		error: function(){
 			alertify.alert("Error");
@@ -102,7 +103,7 @@ function selectClient(view){
 		data: {"option":1, view: view},
 		success: function(response){
 			$("#selectClient").html(response);
-			$(".chosen-select").chosen();
+			$("#chosenClient").chosen();
 		},
 		error: function(){
 			alertify.alert("no funciona");
@@ -111,8 +112,34 @@ function selectClient(view){
 	})
 }
 
-function selectContact(){
+
+function loadClientType(selected){
 	var clientId = 1;
+	if(selected != undefined)
+		clientId = selected.value;
+
+	
+	$.ajax({
+		type:"post",
+		url:"ControllerTemp",
+		data: {
+			"option":13, 
+		    clientId: clientId
+		},
+		success: function(response){
+			$("#clientTypeContainer").html(response);
+		},
+		error: function(){
+			alertify.alert("no funciona");
+			
+		}
+	});
+}
+
+function selectContact(selected){
+	var clientId = 1;
+	if(selected != undefined)
+		clientId = selected.value;
 	$.ajax({
 		type:"post",
 		url:"Controller",
@@ -122,7 +149,7 @@ function selectContact(){
 		},
 		success: function(response){
 			$("#selectContact").html(response);
-			$(".chosen-select").chosen();
+			$("#chosenContact").chosen();
 		},
 		error: function(){
 			alertify.alert("no funciona");
@@ -140,7 +167,7 @@ function selectPosition(){
 		},
 		success: function(response){
 			$("#selectPosition").html(response);
-			$(".chosen-select").chosen();
+			$("#chosenPosition").chosen();
 		},
 		error: function(){
 			alertify.alert("no funciona");
@@ -159,7 +186,7 @@ function selectDivision(){
 		},
 		success: function(response){
 			$("#selectDivision").html(response);
-			$(".chosen-select").chosen();
+			$("#chosenDivision").chosen();
 		},
 		error: function(){
 			alertify.alert("no funciona");
@@ -199,7 +226,7 @@ function registreCall(variable){
 			success: function(response){
 				if(trim(response)=="correcto"){
 					alertify.alert("Insertado Correctamente");
-					$("#form1").html("");
+					$("#form1").load("CallLog.jsp");
 				}
 				else{
 					alertify.alert("Incorrecto");
@@ -245,7 +272,7 @@ function selectBDM(){
 		data: {"opc":1},
 		success: function(response){
 			$("#selectBDM").html(response);
-			$(".chosen-select").chosen();
+			$("#bdmI").chosen();
 		},
 		error: function(){
 			alertify.alert("no funcionó");

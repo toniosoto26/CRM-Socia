@@ -140,7 +140,7 @@ public class CallDAO {
 			try{
 				sqlQuery	=	new	StringBuilder();
 				sqlQuery.append(" select cal.crm_user_id,usr.first_name,usr.last_name,cal.date_call,cal.status,cli.company_name, ");
-				sqlQuery.append(" cont.email,cont.phone,cont.first_name, cont.last_name,position,comments, letter ");
+				sqlQuery.append(" cont.email,cont.phone,cont.first_name, cont.last_name,position,comments, letter, competition ");
 				sqlQuery.append(" from crm_contact cont , crm_position pos, crm_call cal,crm_client cli,crm_user usr ");
 				sqlQuery.append(" where cal.crm_client_id=cli.crm_client_id and cal.crm_contact_id=cont.crm_contact_id and  ");
 				sqlQuery.append(" cal.crm_user_id=usr.crm_user_id and cont.id_position=pos.id_position ");
@@ -173,6 +173,7 @@ public class CallDAO {
 				String  position;
 				String comments;
 				int letter;
+				int competition;
 				int  status;
 				String semaforo="";
 				
@@ -192,6 +193,7 @@ public class CallDAO {
 					position = resultSet.getString(11);
 					comments = resultSet.getString(12);
 					letter = resultSet.getInt(13);
+					competition = resultSet.getInt(14);
 					
 					if(status==1){
 						semaforo="opcion 1 ";
@@ -205,7 +207,7 @@ public class CallDAO {
 					
 					System.out.println("");
 					
-					lobjCallLog = new CallLogDTO(date_call, crm_user_id, crm_user_name,client_name, mail, phone, contact_name,position, comments, letter, semaforo);
+					lobjCallLog = new CallLogDTO(date_call, crm_user_id, crm_user_name,client_name, mail, phone, contact_name,position, comments, letter, competition, semaforo);
 					arrCallLog.add(lobjCallLog);
 					System.out.println(lobjCallLog.toString());
 				}

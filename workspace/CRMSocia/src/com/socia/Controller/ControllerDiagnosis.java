@@ -12,9 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.socia.DAO.BlDetailsDAO;
+import com.socia.DAO.BrandDAO;
+import com.socia.DAO.BusinessLineDAO;
 import com.socia.DAO.ClientDAO;
 import com.socia.DAO.ContactDAO;
 import com.socia.DAO.DiagnosisDAO;
+import com.socia.DTO.BlDetailsDTO;
+import com.socia.DTO.BrandDTO;
+import com.socia.DTO.BusinessLineDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
 import com.socia.DTO.DiagnosisDTO;
@@ -102,7 +108,43 @@ public class ControllerDiagnosis extends HttpServlet {
 				session.setAttribute("lstDetailsContact", lstCo);
 				url		=	"/views/diagnosis/responses/getDetailsDiagnosis.jsp";
 				break;	
-		
+			case 3:
+				BusinessLineDTO				businessLine	= null;
+				BusinessLineDAO				objBusinessLine	= new BusinessLineDAO();
+				BrandDAO					objBrand		= new BrandDAO();
+				ArrayList<BusinessLineDTO>	arrBusinessLine	= new ArrayList<BusinessLineDTO>();
+				BlDetailsDTO				blDetails 		= null;
+				ArrayList<BrandDTO>			arrBrands		= new ArrayList<BrandDTO>();
+				ArrayList<BlDetailsDTO>		arrBLDetails	= new ArrayList<BlDetailsDTO>();
+				
+				arrBusinessLine = objBusinessLine.getBusinessLines();
+				
+				session.removeAttribute("arrBusinessLine");
+				if(arrBusinessLine.size() > 0)
+					session.setAttribute("arrBusinessLine", arrBusinessLine);
+				else
+					session.setAttribute("arrBusinessLine", null);
+				
+				for(int i=0;i<arrBusinessLine.size();i++){
+					businessLine = arrBusinessLine.get(i);
+					
+					blDetails = new BlDetailsDTO();
+					blDetails.setBusinessLineId(businessLine.getBusinessLineId());
+					
+					arrBrands = objBrand.getBrandsByBL(businessLine.getBusinessLineId());
+					blDetails.setBrandArray(arrBrands);
+					
+					arrBLDetails.add(blDetails);
+				}
+				
+				session.removeAttribute("arrBLDetails");
+				if(arrBLDetails.size() > 0)
+					session.setAttribute("arrBLDetails", arrBLDetails);
+				else
+					session.setAttribute("arrBLDetails", null);
+				
+				url = "views/diagnosis/responses/businessLineDetails.jsp";
+				break;
 		}
 		try{
 			if(con != null)

@@ -3,7 +3,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  
-	<div class="col-sm-9 col-md-9">
+ 	<c:set var="className" value="${'col-sm-12 col-md-12'}"></c:set>
+ 	
+ 	<c:choose>
+ 		<c:when test="${sessionScope.view == 'true' }">
+ 			<c:set var="className" value="${'col-sm-10 col-md-10'}"></c:set>
+ 		</c:when>
+ 	</c:choose>
+ 
+	<div class="<c:out value="${className }"></c:out>" >
 		<div class="row">
 			<div class="col-sm-6 col-md-6">
 				<c:choose>
@@ -50,7 +58,7 @@
 			                        <span class="btn btn-default btn-sm notActive" data-toggle="estadollamda" data-value="2" data-active="btn-warning" data-notactive="btn-default">CARTA/INTERES</span>
 			                        <span class="btn btn-default btn-sm notActive" data-toggle="estadollamda" data-value="3" data-active="btn-danger" data-notactive="btn-default">NO INTE/NO CONTESTO</span>
 			                    </div>
-			                    <input type="hidden" name="estadoLlamada" id="estadollamda">
+			                    <input type="hidden" name="estadoLlamada" id="estadollamda" value="1">
 			                </div>
 				        </div>
 					   	<div class="form-group top">
@@ -60,17 +68,17 @@
 				                        <span class="btn btn-primary btn-sm active" data-toggle="carta" data-value="1">SI</span>
 				                        <span class="btn btn-default btn-sm notActive" data-toggle="carta" data-value="0">NO</span>
 				                    </div>
-				                    <input type="hidden" name="carta" id="carta">
+				                    <input type="hidden" name="carta" id="carta" value="1">
 				                </div>
 				       	 </div>
 				       	 <div class="form-group top">
-				            <label class="col-sm-3 col-md-3" for="happy" >Se detecto concurso:</label>
+				            <label class="col-sm-3 col-md-3" for="happy" >Se detectó concurso</label>
 				                <div class="input-group">
 				                    <div id="radioBtn" class="btn-group">
 				                        <span class="btn btn-primary btn-sm active" data-toggle="concurso" data-value="1">SI</span>
 				                        <span class="btn btn-default btn-sm notActive" data-toggle="concurso" data-value="0">NO</span>
 				                    </div>
-				                    <input type="hidden" name="concurso" id="concurso">
+				                    <input type="hidden" name="concurso" id="concurso" value="1">
 				                </div>
 				       	 </div>
 		       	 	</div>
@@ -85,24 +93,27 @@
 			</c:choose>
 		</div> 	
    	</div>
-   	<div class="col-sm-3 col-md-3">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Speech" onclick="">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Guia" onclick="">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Manejo de objeciones" onclick="">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio Carta" onclick="">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio presentacion" onclick="">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio promociones" onclick="">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio Cartera" onclick="">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Lineas de negocio " onclick="">
-	</div>
+   	<c:choose>
+	   	<c:when test="${sessionScope.view == 'true' }">
+		   	<div class="col-sm-2 col-md-2">
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Speech" onclick="">
+				<br><br>
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Guia" onclick="">
+				<br><br>
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Manejo de objeciones" onclick="">
+				<br><br>
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio Carta" onclick="">
+				<br><br>
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio presentacion" onclick="">
+				<br><br>
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio promociones" onclick="">
+				<br><br>
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio Cartera" onclick="">
+				<br><br>
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Lineas de negocio " onclick="">
+			</div>
+		</c:when>
+	</c:choose>
 	
 	<script src="js/chosen.jquery.js" type="text/javascript"></script>
 	<script src="js/prism.js" type="text/javascript" charset="utf-8"></script>

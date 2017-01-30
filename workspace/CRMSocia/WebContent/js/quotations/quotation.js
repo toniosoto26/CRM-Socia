@@ -46,6 +46,8 @@ function loadItemsInfo(number){
 		async: false,
 		success: function(response){
 			$("#itemNum"+number).html(response);
+
+			$("#itemId"+number).chosen();
 		},
 		error: function(){
 			alert("Error");
@@ -83,7 +85,7 @@ function loadAddressInfo(selected){
 		},
 		success: function(response){
 			$("#addressInfo").html(response);
-			$(".chosen-select").chosen();
+			$("#address-select").chosen();
 		},
 		error: function(){
 			alert("Error");
@@ -118,6 +120,11 @@ function addQuotation(){
 	
 	if($("#chosenContact").val()== "0"){ 
 		alertify.alert("Por favor, selecciona un contacto");
+		return false;
+	}
+	
+	if($("#dtp_input1").val() == ""){
+		alertify.alert("Por favor, selecciona fecha de cierre");
 		return false;
 	}
 	

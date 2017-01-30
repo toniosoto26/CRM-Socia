@@ -235,8 +235,11 @@
 		</div>
 	</div>
 	
+	<div id="blTable"></div>
+	
 	 <div class="requisitos">
-            	<h5>INFORMACIÓN REQUERIDA COMO LÍNEA DE NEGOCIO</h5>
+     	<h5>INFORMACIÓN REQUERIDA COMO LÍNEA DE NEGOCIO</h5>
+     		
                 <div class="table-responsive">
                 	<table class="table table-bordered">
                     	<thead class="tabla-grande">
@@ -614,4 +617,10 @@ Otro</div>
                   </div>
 		   		</div>
 	   </div>
+	   
+	   <div class="contactos">
+		  	<div class="text-center">
+				<button type="submit" class="btn btn-primary" onClick="return addDiagnosis(1);">Guardar</button>
+		  	  </div>
+		</div>
 </form>

@@ -5,6 +5,7 @@ import java.util.Date;
 public class QuotationLogDTO {
 
 	private int 	quotationId;
+	private Date	date;
 	private String 	companyName;
 	private String	itemId;
 	private int		quantity;
@@ -13,11 +14,12 @@ public class QuotationLogDTO {
 	private double	margin;
 	private Date	deadline;
 	
-	public QuotationLogDTO(int quotationId, String companyName, String itemId,
-			int quantity, double unitPrice, String currency, double margin,
-			Date deadline) {
+	public QuotationLogDTO(int quotationId, Date date, String companyName,
+			String itemId, int quantity, double unitPrice, String currency,
+			double margin, Date deadline) {
 		super();
 		this.quotationId = quotationId;
+		this.date = date;
 		this.companyName = companyName;
 		this.itemId = itemId;
 		this.quantity = quantity;
@@ -31,6 +33,12 @@ public class QuotationLogDTO {
 	}
 	public void setQuotationId(int quotationId) {
 		this.quotationId = quotationId;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	public String getCompanyName() {
 		return companyName;

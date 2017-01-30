@@ -6804,6 +6804,9 @@ button.close {
 .alta {
 	padding-left:20px;
 }
+.amarillo {
+	background-color: #f5e354;
+}
 .azul {
 	background-color: #abd2e4;
 }
@@ -6826,13 +6829,35 @@ button.close {
 	margin: 0 auto;
 	max-width: 70%;
 }
+.circulo-amarillo {
+	display: inline-block;
+	width: 16px;
+    height: 16px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #f5e354;
+    vertical-align: middle;
+}
 .circulo-verde {
+	display: inline-block;
 	width: 16px;
     height: 16px;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
     background: #a6db6d;
+    vertical-align: middle;
+}
+.circulo-rojo {
+	display: inline-block;
+	width: 16px;
+    height: 16px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #ff0026;
+    vertical-align: middle;
 }
 .contactos {
 	margin-top: 30px;
@@ -6850,6 +6875,14 @@ button.close {
 }
 .destacado {
 	font-family: 'Montserrat-bold';
+}
+.fecha {
+	color: #4D4D4D;
+	padding-bottom: 10px;
+}
+.indicadores {
+	margin: 15px; auto;
+	padding-bottom: 30px;
 }
 .ingresar {
 	margin: 0 auto;
@@ -6882,6 +6915,33 @@ color: black;
 	padding-bottom: 15px;
 	text-align: right;
 }
+.puntos {
+	color:#4d4d4d;
+	margin-bottom: 40px;
+}
+.requisitos {
+	background-color: #f2f2f2;
+	margin-top:20px;
+	padding:15px;
+}
+.rojo {
+	background-color: #ff0026;
+	color: white;
+}
+.tabla-grande {
+	font-size: 13px;
+}
+.titulo {
+	border-bottom: solid 1px #666;
+	margin: auto 15px 20px;
+	padding:3px 0;
+}
+.top {
+	margin-bottom:30px;
+}
+.verde {
+	background-color: #a6db6d;
+}
 .welcome {
 	background-image:url(http://gruposocia.com/wp-content/uploads/2013/10/SetWidth1920-consultancy-white-gradient.jpg);
 	background-position: center;
@@ -6894,22 +6954,6 @@ color: black;
     margin-top: -75px;
     text-align: center;
 	/*z-index:1;*/
-}
-.requisitos {
-	background-color: #f2f2f2;
-	margin-top:20px;
-	padding:15px;
-}
-.tabla-grande {
-	font-size: 13px;
-}
-.titulo {
-	border-bottom: solid 1px #666;
-	margin: auto 15px 20px;
-	padding:3px 0;
-}
-.top {
-	margin-bottom:30px;
 }
 @media screen and (max-width: 768px) {
 	.centrado {

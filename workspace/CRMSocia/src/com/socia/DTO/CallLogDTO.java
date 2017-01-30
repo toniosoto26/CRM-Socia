@@ -14,12 +14,13 @@ public class CallLogDTO {
 	private String  position;
 	private String comments;
 	private int letter;
+	private int competition;
 	private String  status;
 	
-
 	public CallLogDTO(Date date_call, int crm_user_id, String crm_user_name,
 			String cust_name, String mail, String phone, String contact_name,
-			String position, String comments, int letter, String status) {
+			String position, String comments, int letter, int competition,
+			String status) {
 		super();
 		this.date_call = date_call;
 		this.crm_user_id = crm_user_id;
@@ -31,6 +32,7 @@ public class CallLogDTO {
 		this.position = position;
 		this.comments = comments;
 		this.letter = letter;
+		this.competition = competition;
 		this.status = status;
 	}
 	@Override
@@ -101,6 +103,13 @@ public class CallLogDTO {
 	}
 	public void setLetter(int letter) {
 		this.letter = letter;
+	}
+	
+	public int getCompetition() {
+		return competition;
+	}
+	public void setCompetition(int competition) {
+		this.competition = competition;
 	}
 	public String getStatus() {
 		return status;

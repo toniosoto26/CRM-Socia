@@ -11,8 +11,18 @@
 					<input type="hidden" name="AddClient" value="0">
 				</div>
 			</div>
-			<div class="col-sm-3 col-md-3">
-				<div id="countCalls" name="countCalls"></div>
+			<div class="col-sm-6 col-md-6">
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-6 col-lg-6"">
+							<div id="countCalls"></div>
+						</div>
+						<div class="col-md-6 col-lg-6">
+							<div class="input-group" id="clientTypeContainer" style="float:right">
+					        </div>
+				   		</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		

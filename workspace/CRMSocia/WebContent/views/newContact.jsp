@@ -10,32 +10,46 @@
 					<input required type="text" class="form-control" id="nameContact"  placeholder="Nombre contacto" name="selectContact">
 					<input type="hidden" name="AddContact" value="1">
 				</div>
+				</div>
+			<div class="col-sm-6 col-md-6">
 				<div class="form-group">
+					<label class="col-sm-6 col-md-6" for="inputCompanyContact">Apellido</label>
+				    <input required type="text" class="form-control" id="lastName" placeholder="Apellido" name="lastName">
+			  	</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 col-md-6">
+			  	<div class="form-group top">
 				    <label class="col-sm-6 col-md-6" for="inputCompanyEmail">Email</label>
 				    <input required type="email" class="form-control" id="companyEmail" placeholder="email" name="companyEmail">
-			  	</div>
-			  	<div class="form-group top">
-			    	<label class="col-sm-6 col-md-6" for="inputCompanyPhone">Área</label>
-			     	<div id="selectDivision" name="selectDivision"> </div>
 		  		</div>
 		  	</div>
 		  	<div class="col-sm-6 col-md-6">
 			  	<div class="form-group">
-				    <label class="col-sm-6 col-md-6" for="inputCompanyContact">Apellido</label>
-				    <input required type="text" class="form-control" id="lastName" placeholder="Apellido" name="lastName">
-			  	</div>
-		  		<div class="form-group top">
-		    		<label class="col-sm-2 col-md-2" for="inputCompanyPhone">Teléfono</label>
+				    <label class="col-sm-2 col-md-2" for="inputCompanyPhone">Teléfono</label>
 		    		<input required type="text" pattern="[0-9\(\)\-\+]+" class="col-sm-4 col-md-4" id="companyPhone" placeholder="[###]##-##-##-##" name="companyPhone">
 		  		
 		    		<label class="col-sm-2 col-md-2" for="inputExt">Ext.</label>
 		    		<input  type="text" pattern="[0-9]+" class="col-sm-2 col-md-2" id="ext" placeholder="ext." name="ext">
+			  	</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 col-md-6">
+		  		<div class="form-group top">
+		    		<label class="col-sm-6 col-md-6" for="inputCompanyPhone">Área</label>
+			     	<div id="selectDivision" name="selectDivision"> </div>
 		  		</div>
+		  	</div>
+		  	<div class="col-sm-6 col-md-6">
 			   	<div class="form-group top">
 				    <label class="col-sm-6 col-md-6" for="inputCompanyPhone">Puesto</label>
 				    <div id="selectPosition" name="selectPosition"> </div>
 			  	</div>
 	   		</div>
+	   	</div>
+	   	<div class="row">
 		   	<div class="col-sm-12 col-md-12">
 				<div class="form-group">
 				    <label class="col-sm-3 col-md3" for="inputObservation">Observaciones de la llamada</label>
@@ -63,7 +77,7 @@
 	                </div>
 	       	 	</div>
 	       	 	<div class="form-group top">
-				            <label class="col-sm-3 col-md-3" for="happy" >Se detecto concurso:</label>
+				            <label class="col-sm-3 col-md-3" for="happy" >Se detectó concurso</label>
 				                <div class="input-group">
 				                    <div id="radioBtn" class="btn-group">
 				                        <span class="btn btn-primary btn-sm active" data-toggle="concurso" data-value="1">SI</span>

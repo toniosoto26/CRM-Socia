@@ -31,14 +31,15 @@ $( document ).ready(function() {
 			maxView: 1,
 			forceParse: 0
 	    });
+		
+		$('#dtp_input1').val("2017-01-23");
+		$('#dtp_input2').val("2017-01-30");
+		ValidaIndicadorLlamadas();
 });
 
 function ValidaIndicadorLlamadas(){
-	/* var fech1=$("#fechaIni").val(); 
-	var fech2=$("#fechaFin").val(); */
-	var fech1="01/01/2016";
-	var fech2="10/01/2017";
-	var user=45;
+	var fech1=$("#dtp_input1").val(); 
+	var fech2=$("#dtp_input2").val(); 
 	if(fech1== ""){
 		showAlert("Fecha inicio no puede ser vacia","danger","alertaFecha");
 	}
@@ -49,19 +50,18 @@ function ValidaIndicadorLlamadas(){
 		
 		var datos= {fechaIni:fech1,
 				fechaFin:fech2,
-				idUser:user,
 				option:8};
 		
 		$.ajax({
 			url: "Controller",
 			type :"post",
 			data :datos,
-			beforeSend: function(){$('#tablaLlamadas').html("<center><img src='/images/ajax-loader (1).gif' border='0'><br> Cargando...</center>");},
-	         success: function(dataResponse){
+			beforeSend: function(){$('#modalContent').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");}, 
+			 success: function(dataResponse){
 	        	
 	        	 setTimeout(function(){
 	        		 $('#tablaLlamadas').html(dataResponse);
-	        		        $('#tablaCalls').DataTable({
+	        		        /*$('#tablaCalls').DataTable({
 	        		                responsive: true,
 	        		                "iDisplayLength":100,
 	        		                "bSort": true,
@@ -83,7 +83,7 @@ function ValidaIndicadorLlamadas(){
 	        		                        $('td', nRow).css('background-color', '#FAAC58');
 	        		                    }
 	        		                }
-	        		        });
+	        		        });*/
 	        		    
 	        	 }, 2000);
 	         },

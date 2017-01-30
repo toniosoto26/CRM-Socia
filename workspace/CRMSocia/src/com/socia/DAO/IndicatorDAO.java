@@ -239,6 +239,7 @@ public class IndicatorDAO {
 			sqlQuery.append(" JOIN crm_client cl ON q.crm_client_id = cl.crm_client_id  ");
 			sqlQuery.append(" WHERE q.crm_user_id = ? ");
 			sqlQuery.append(" AND DATE(q.date_created) = ? ");
+			sqlQuery.append(" GROUP BY objetivo, value, cl.client_type ");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
@@ -262,7 +263,7 @@ public class IndicatorDAO {
 				if(count==0)
 					totalType = total+(type.equals("P")?" pros ":(type.equals("A")?" act ":""));
 				else
-					totalType = "/ "+total+(type.equals("P")?" pros ":(type.equals("A")?" act ":""));
+					totalType += "/ "+total+(type.equals("P")?" pros ":(type.equals("A")?" act ":""));
 				
 				count++;
 			}
@@ -330,7 +331,8 @@ public class IndicatorDAO {
 			sqlQuery.append(" FROM crm_tender t ");
 			sqlQuery.append(" JOIN crm_business_line bl ON t.crm_business_line_id = bl.crm_business_line_id ");
 			sqlQuery.append(" where t.crm_user_id = ? ");
-			sqlQuery.append(" AND DATE(t.date_created) = ? ");
+			sqlQuery.append(" AND DATE(t.start_up_date) = ? ");
+			sqlQuery.append(" GROUP BY bl.name, t.deadline ");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
@@ -354,10 +356,11 @@ public class IndicatorDAO {
 					totalDate = dateString;
 				}
 				else{
-					totalType = "/ "+type;
-					totalDate = "/ "+dateString;
+					totalType += "/ "+type;
+					totalDate += "/ "+dateString;
 				}
 				
+				System.out.println("pero que demo");
 				count++;
 			}
 			
@@ -418,8 +421,8 @@ public class IndicatorDAO {
 			sqlQuery.append(" JOIN crm_business_line bl ON t.crm_business_line_id = bl.crm_business_line_id ");
 			sqlQuery.append(" where t.crm_user_id = ? ");
 			sqlQuery.append(" AND bl.crm_business_line_id = ? ");
-			sqlQuery.append(" AND DATE(t.date_created) >= ? ");
-			sqlQuery.append(" AND DATE(t.date_created) <= ? ");
+			sqlQuery.append(" AND DATE(t.start_up_date) >= ? ");
+			sqlQuery.append(" AND DATE(t.start_up_date) <= ? ");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();

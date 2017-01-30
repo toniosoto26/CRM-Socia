@@ -4,22 +4,23 @@ import java.util.Date;
 
 public class TenderLogDTO {
 	
-	private String companyName;
-	private String businessLine;
-	private String brand;
-	private String comments;
+	private Date	date;
+	private String 	companyName;
+	private String 	businessLine;
+	private String 	brand;
+	private String 	comments;
 	private Date	deadline;
 	
-	public TenderLogDTO(String companyName, String businessLine, String brand,
-			String comments, Date deadline) {
+	public TenderLogDTO(Date date, String companyName, String businessLine,
+			String brand, String comments, Date deadline) {
 		super();
+		this.date = date;
 		this.companyName = companyName;
 		this.businessLine = businessLine;
 		this.brand = brand;
 		this.comments = comments;
 		this.deadline = deadline;
 	}
-
 	public String getCompanyName() {
 		return companyName;
 	}
@@ -50,7 +51,13 @@ public class TenderLogDTO {
 	public void setDeadline(Date deadline) {
 		this.deadline = deadline;
 	}
-
+	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	@Override
 	public String toString() {
 		return "TenderLogDTO [companyName=" + companyName + ", businesLine="

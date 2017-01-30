@@ -1,5 +1,7 @@
 package com.socia.DTO;
 
+import java.util.ArrayList;
+
 public class BlDetailsDTO {
 
 	private int		diagnosisId;
@@ -13,6 +15,9 @@ public class BlDetailsDTO {
 	private String	currentVendor;
 	private String	serviceContract;
 	private String	specialConfig;
+	private String	deliverBy;
+	private String	lease;
+	private	String	nextTender;
 	private String	requirementsNeeded;
 	private String	demo;
 	private String	sales;
@@ -25,6 +30,37 @@ public class BlDetailsDTO {
 	private String	requirements;
 	private String	nextStep;
 	private String	commercialProposal;
+	private ArrayList<BrandDTO> brandArray;
+	
+	public BlDetailsDTO() {
+		super();
+		diagnosisId = 0;
+		clientId = 0;
+		businessLineId =0;
+		currentBrand = 0; 
+		equipmentBrand = ""; 
+		equipmentType=0; 
+		equipmentQty = 0; 
+		unitPrice = 0; 
+		currentVendor = ""; 
+		serviceContract = "";
+		specialConfig = "";
+		deliverBy = "";
+		lease = "";
+		nextTender = "";
+		requirementsNeeded="";
+		demo = ""; 
+		sales = ""; 
+		executive = ""; 
+		gainFactor = ""; 
+		decisionMaker = ""; 
+		position = "";
+		phone = ""; 
+		email = ""; 
+		requirements = ""; 
+		nextStep = ""; 
+		commercialProposal = "";
+	}
 	public BlDetailsDTO(int diagnosisId, int clientId, int businessLineId,
 			int currentBrand, String equipmentBrand, int equipmentType,
 			int equipmentQty, double unitPrice, String currentVendor,
@@ -196,4 +232,29 @@ public class BlDetailsDTO {
 	public void setCommercialProposal(String commercialProposal) {
 		this.commercialProposal = commercialProposal;
 	}
+	public ArrayList<BrandDTO> getBrandArray() {
+		return brandArray;
+	}
+	public void setBrandArray(ArrayList<BrandDTO> brandArray) {
+		this.brandArray = brandArray;
+	}
+	public String getDeliverBy() {
+		return deliverBy;
+	}
+	public void setDeliverBy(String deliverBy) {
+		this.deliverBy = deliverBy;
+	}
+	public String getLease() {
+		return lease;
+	}
+	public void setLease(String lease) {
+		this.lease = lease;
+	}
+	public String getNextTender() {
+		return nextTender;
+	}
+	public void setNextTender(String nextTender) {
+		this.nextTender = nextTender;
+	}
+	
 }

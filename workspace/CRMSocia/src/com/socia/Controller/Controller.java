@@ -171,7 +171,7 @@ public class Controller extends HttpServlet {
 			System.out.println("Inicia a construir Insertos");
 			if(addClient == 1){
 				consecutiveClient=objConsecutive.getConsecutive("clients");
-				infoClient = new ClientDTO(consecutiveClient, companyName, 1, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
+				infoClient = new ClientDTO(consecutiveClient, companyName, 2, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 				queries=objClient.insertNewClient(infoClient, queries);
 				System.out.println("agrega cliente");
 				
@@ -200,7 +200,7 @@ public class Controller extends HttpServlet {
 			
 			//inserto llamada
 			System.out.println("va insertar llamada");
-			infoCall = new CallDTO(consecutiveCall, observations, consecutiveClient, 1, consecutiveContact,statusCall,letter,competition);
+			infoCall = new CallDTO(consecutiveCall, observations, consecutiveClient, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId(), consecutiveContact,statusCall,letter,competition);
 			queries=objCall.insertNewCall(infoCall, queries);
 			System.out.println("inserto llamda llamada");
 			

@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-<link rel="stylesheet" href="css/prism.css">
-<link rel="stylesheet" href="css/chosen.css">
 <link rel="stylesheet" href="css/address.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
 
 <div class="row">
 	<div id="primaryPanel" class="col-sm-12 col-md-12">
@@ -13,13 +9,18 @@
 	
 		<form id="addQuotation" onSubmit="return addQuotation();" data-toggle="validator" role="form">
 			<div class="row top">
-		    	<div class="col-sm-6 col-md-6">
+		    	<div class="col-sm-8 col-md-8">
 					<div class="form-group">
 				 		<label class="col-sm-12 col-md-6">Razón social</label>
 				    	<div id="selectClient" style="padding: 6px 12px;"></div>
 				    	<small id="companyNameHelp" class="form-text text-muted" style="padding: 6px 12px;">Por favor, selecciona la razón social que necesites.</small>
 				  	</div>
 				</div>
+				<div class="col-md-4 col-lg-4">
+					<div class="input-group" id="clientTypeContainer" style="float:right"></div>
+		   		</div>
+		   	</div>
+		   	<div class="row">
 				<div class="col-sm-6 col-md-6">
 					<div class="form-group top">
 						<label for="inputDeadline" class="col-sm-6 col-md-6">Fecha cierre</label>
@@ -189,10 +190,5 @@
 	</div>
 </div>
 
-<script src="js/chosen.jquery.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="js/bootstrap-datetimepicker.es.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/prism.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/quotations/quotation.js"></script>
