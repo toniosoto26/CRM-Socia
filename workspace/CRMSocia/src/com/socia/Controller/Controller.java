@@ -130,6 +130,7 @@ public class Controller extends HttpServlet {
 			int addContact=0;
 			int statusCall=0;
 			int letter=0;
+			int competition=0;
 			int division=0;
 			int position=0;
 			variable = Integer.parseInt(request.getParameter("variable"));
@@ -156,6 +157,9 @@ public class Controller extends HttpServlet {
 			statusCall=Integer.parseInt(request.getParameter("estadoLlamada"));
 			System.out.println("statusCall "+statusCall);
 			letter=Integer.parseInt(request.getParameter("carta"));
+			System.out.println("carta "+letter);
+			competition=Integer.parseInt(request.getParameter("concurso"));
+			System.out.println("carta "+competition);
 			
 			if(request.getParameter("idDivision")!= null)
 				division=Integer.parseInt(request.getParameter("idDivision"));
@@ -196,7 +200,7 @@ public class Controller extends HttpServlet {
 			
 			//inserto llamada
 			System.out.println("va insertar llamada");
-			infoCall = new CallDTO(consecutiveCall, observations, consecutiveClient, 1, consecutiveContact,statusCall,letter);
+			infoCall = new CallDTO(consecutiveCall, observations, consecutiveClient, 1, consecutiveContact,statusCall,letter,competition);
 			queries=objCall.insertNewCall(infoCall, queries);
 			System.out.println("inserto llamda llamada");
 			

@@ -123,6 +123,8 @@ public class ContactDAO {
 			sqlQuery.append(" where c.company_division_id=d.company_division_id ");
 			sqlQuery.append(" and c.id_position=p.id_position and c.crm_contact_id =?");
 			
+			
+			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
 			statement	=	connection.prepareStatement(sqlQuery.toString());
@@ -141,8 +143,15 @@ public class ContactDAO {
 				company_division_id = resultSet.getInt(8);
 				id_position =resultSet.getInt(9);
 				tel=phone.split("ext.");
-				phone=tel[0].toString();
-				ext=tel[1].toString();
+				if(tel.length==1){
+					phone=tel[0].toString();
+					ext="";
+				}
+				else if(tel.length==2){
+					phone=tel[0].toString();
+					ext=tel[1].toString();
+				}
+				
 				
 				System.out.println("teEXt2  "+phone + "   "+ ext);
 				contact = new ContactDTO(contactId, firstName, lastName, phone, email,company_division_id,division,id_position,position,ext);
@@ -188,7 +197,11 @@ public class ContactDAO {
 	
 	public static void main(String[] args){
 		ContactDAO contact = new ContactDAO();
-		System.out.println(contact.getContactsByClient(1).toString());	
+		//System.out.println(contact.getContactsByClient(1).toString());
+		System.out.println(contact.getContactsById(2).toString());
+		
+		
+		
 	}
 
 }

@@ -25,14 +25,15 @@ public class CallDAO {
 		StringBuilder		sqlQuery	=	null;
 		
     	sqlQuery	=	new	StringBuilder();
-		sqlQuery.append(" INSERT INTO crm_call (crm_call_id, comments, crm_client_id, crm_user_id, crm_contact_id,date_call,status,letter)");
+		sqlQuery.append(" INSERT INTO crm_call (crm_call_id, comments, crm_client_id, crm_user_id, crm_contact_id,date_call,status,letter,competition)");
 		sqlQuery.append(" VALUES ("+calls.getId_call());
 		sqlQuery.append(",'"+calls.getComments()+"'");
 		sqlQuery.append(","+calls.getCrm_client_id());
 		sqlQuery.append(","+calls.getCrm_user_id());
 		sqlQuery.append(","+calls.getCrm_contact_id());
 		sqlQuery.append(",Now(),"+calls.getStatus());
-		sqlQuery.append(","+calls.getLetter()+")");
+		sqlQuery.append(","+calls.getLetter());
+		sqlQuery.append(","+calls.getCompetition()+")");
 		
 		queries.add(sqlQuery);
     
@@ -157,7 +158,7 @@ public class CallDAO {
 				//statement.setInt(1, clientId);
 				statement.setString(1, fechaIni);
 				statement.setString(2, fechaFin);
-				if(!clientType.equals(""))
+				if(!clientType.equals(""))	
 					statement.setString(3, clientType);
 					
 				
