@@ -125,7 +125,7 @@ public class ControllerDiagnosis extends HttpServlet {
 				session.setAttribute("opportunities", opportunities);
 				
 				session.removeAttribute("arrRunRate");
-				session.setAttribute("arrRunRate", arrRunRateType);
+				session.setAttribute("arrRunRate", arrRunRate);
 				
 				url		=	"/views/diagnosis/responses/getDetailsDiagnosis.jsp";
 				break;	
