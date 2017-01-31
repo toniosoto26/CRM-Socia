@@ -182,12 +182,14 @@
 			 			</table>
 			 			<table class="table table-bordered table-striped">
 			 				<thead>
-		                    	<th>Puesto</th>
-		                        <th>Nombre</th>
-		                        <th>Email</th>
-		                        <th>Tel&eacute;fono</th>
-		                        <th>Celular</th>
-		                        <th>Fecha Nacimiento</th>
+			 					<tr>
+			                    	<th>Puesto</th>
+			                        <th>Nombre</th>
+			                        <th>Email</th>
+			                        <th>Tel&eacute;fono</th>
+			                        <th>Celular</th>
+			                        <th>Fecha Nacimiento</th>
+		                        </tr>
 		                    </thead>
 		                    <tbody class="cuerpo-tabla">
 		                    	<tr>
@@ -206,12 +208,14 @@
 				<c:otherwise>
 					<table class="table table-bordered table-striped">
 		 				<thead>
-	                    	<th>Puesto</th>
-	                        <th>Nombre</th>
-	                        <th>Email</th>
-	                        <th>Tel&eacute;fono</th>
-	                        <th>Celular</th>
-	                        <th>Fecha Nacimiento</th>
+		 					<tr>
+		                    	<th>Puesto</th>
+		                        <th>Nombre</th>
+		                        <th>Email</th>
+		                        <th>Tel&eacute;fono</th>
+		                        <th>Celular</th>
+		                        <th>Fecha Nacimiento</th>
+		                     </tr>
 	                    </thead>
 	                    <tbody class="cuerpo-tabla">
 	                    	<tr>
@@ -229,72 +233,75 @@
 		</div>
 	</div>
 	
-	 <div class="requisitos">
-     	<h5>INFORMACIÓN REQUERIDA COMO LÍNEA DE NEGOCIO</h5>
-     		
-                <div class="table-responsive" id="blTable">
-                	
-                </div>
-              </div>
-              <div class="contactos">
-            	<h5>COMPRAS RECURRENTES (RUN RATE)</h5>
-            	<div class="row">
-            		<div class="col-sm-5 col-md-4 lista">Consumibles <br>
-Refacciones<br>
-Monitores/pantallas/videoproyectores<br>
-Accesorios<br>
-Energía<br>
-Otro</div>
-				  <div class="col-sm-6 col-md-7">
-  						<div class="table-responsive">
-                  <table class="table table-bordered table-striped">
-                    <thead>
-                    	<th>Marca</th>
-                        <th>Modelo</th>
-                        <th>Cantidad compra</th>
-                        <th>Recurrencia</th>
-                    </thead>
-                    <tbody class="cuerpo-tabla">
-                    	<tr>
-                        	<td><input type="text" class="campo-tabla-gris" placeholder="HP"></td>
-                            <td><input type="text" class="campo-tabla-gris" placeholder="Q2612A"></td>
-                            <td><input type="text" class="campo-tabla-gris" placeholder="500"></td>
-                            <td><input type="text" class="campo-tabla-gris" placeholder="mensual"></td>
-                        </tr>
-                        <tr>
-                        	<td><input type="text" class="campo-tabla"></td>
-                            <td><input type="text" class="campo-tabla"></td>
-                            <td><input type="text" class="campo-tabla"></td>
-                            <td><input type="text" class="campo-tabla"></td>
-                        </tr>
-                        <tr>
-                        	<td><input type="text" class="campo-tabla-gris"></td>
-                            <td><input type="text" class="campo-tabla-gris"></td>
-                            <td><input type="text" class="campo-tabla-gris"></td>
-                            <td><input type="text" class="campo-tabla-gris"></td>
-                        </tr>
-                        <tr>
-                        	<td><input type="text" class="campo-tabla" placeholder="Microsoft teclados"></td>
-                            <td><input type="text" class="campo-tabla" placeholder="Indistinta"></td>
-                            <td><input type="text" class="campo-tabla" placeholder="150"></td>
-                            <td><input type="text" class="campo-tabla" placeholder="bimestre"></td>
-                        </tr>
-                        <tr>
-                        	<td><input type="text" class="campo-tabla-gris"></td>
-                            <td><input type="text" class="campo-tabla-gris"></td>
-                            <td><input type="text" class="campo-tabla-gris"></td>
-                            <td><input type="text" class="campo-tabla-gris"></td>
-                        </tr>
-                        <tr>
-                        	<td colspan="4"><input type="text" class="campo-tabla" placeholder="estan por licitar concurso de reparacion de sucursales"></td>
-                        </tr>
-                    </tbody>
-                  </table>
-                </div>
+	<div class="requisitos">
+    	<h5>INFORMACIÓN REQUERIDA COMO LÍNEA DE NEGOCIO</h5>
+        <div class="table-responsive" id="blTable"></div>
+    </div>
+              
+              
+   	<div class="contactos">
+      	<h5>COMPRAS RECURRENTES (RUN RATE)</h5>
+        <div class="row">
+			<div class="col-sm-10 col-md-10 lista">
+  				<div class="table-responsive">
+                  	<table class="table table-bordered table-striped">
+	                    <thead>
+	                    	<tr>
+		                    	<th></th>
+		                    	<th>Marca</th>
+		                        <th>Modelo</th>
+		                        <th>Cantidad compra</th>
+		                        <th>Recurrencia</th>
+	                        </tr>
+	                    </thead>
+	                    <tbody class="cuerpo-tabla">
+	                    	<c:set var="className" value="${''}"/>
+	                 		<c:forEach items="${sessionScope.arrRunRate}" var="runRate" varStatus="varCount">
+	                 			<c:choose>
+									<c:when test="${varCount.index%2==0 }">
+										<c:set var="className" value="${'campo-tabla-gris'}"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="className" value="${'campo-tabla'}"/>
+									</c:otherwise>
+								</c:choose>
+								
+								<c:choose>
+									<c:when test="${runRate.runRateName == 'Otros' }">
+				                        <tr>
+				                        	<td colspan="5"><input type="text" class="campo-tabla" placeholder="estan por licitar concurso de reparacion de sucursales"></td>
+				                        </tr>
+									</c:when>
+									<c:otherwise>
+										<tr>
+											<td>
+												<c:out value="${runRate.runRateName}"></c:out>
+											</td>
+											<td>
+												<input type="text" name="brandId<c:out value="${runRate.detail.runRateTypeId}"></c:out>" class='<c:out value="${className}"></c:out>' value='<c:out value="${runRate.detail.brandId}"></c:out>' />
+											</td>
+											<td>
+												<input type="text" class='<c:out value="${className}"></c:out>' value='<c:out value="${runRate.detail.modelId}"></c:out>' />
+											</td>
+											<td>
+												<input type="text" class='<c:out value="${className}"></c:out>' value='<c:out value="${runRate.detail.qty}"></c:out>' />
+											</td>
+											<td>
+												<input type="text" class='<c:out value="${className}"></c:out>' value='<c:out value="${runRate.detail.frequency}"></c:out>' />
+											</td>
+										</tr>
+									</c:otherwise>
+								</c:choose>
+										
+							</c:forEach>
+	                    </tbody>
+	                  </table>
+	                </div>
   					</div>
             	</div>
 			</div>
-       <div class="requisitos">
+              
+                     <div class="requisitos">
             	<h5>PROBLEMÁTICAS DETECTADAS</h5>
          <div class="table-responsive">
                 	<div class="centrado">
