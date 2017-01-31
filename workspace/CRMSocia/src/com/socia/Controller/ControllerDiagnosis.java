@@ -18,13 +18,19 @@ import com.socia.DAO.BusinessLineDAO;
 import com.socia.DAO.ClientDAO;
 import com.socia.DAO.ContactDAO;
 import com.socia.DAO.DiagnosisDAO;
+import com.socia.DAO.EquipmentTypeDAO;
+import com.socia.DAO.OpportunitiesDAO;
+import com.socia.DAO.RunRateTypeDAO;
 import com.socia.DTO.BlDetailsDTO;
 import com.socia.DTO.BrandDTO;
 import com.socia.DTO.BusinessLineDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
 import com.socia.DTO.DiagnosisDTO;
+import com.socia.DTO.EquipmentTypeDTO;
 import com.socia.DTO.LoginDTO;
+import com.socia.DTO.OpportunitiesDTO;
+import com.socia.DTO.RunRateTypeDTO;
 import com.socia.conexion.Conexion;
 
 /**
@@ -83,16 +89,20 @@ public class ControllerDiagnosis extends HttpServlet {
 				session.setAttribute("clientType", typeD);
 				break;
 			case 2:
-				List<DiagnosisDTO>	lst		= 	null;
-				List<ClientDTO>		lstC	=	null;
-				List<ContactDTO>	lstCo	=	null;
+				List<DiagnosisDTO>		lst				= 	null;
+				List<ClientDTO>			lstC			=	null;
+				List<ContactDTO>		lstCo			=	null;
+				OpportunitiesDTO	 	opportunities	= null;
+				ArrayList<RunRateTypeDTO> arrRunRateType= new ArrayList<RunRateTypeDTO>();
+				
 				try{
-					con			=	conexion.getConnection1();
-					clientId	=	Integer.valueOf(request.getParameter("clientId"));
-					lst			=	new	DiagnosisDAO().getLastUpdate(clientId, con);
-					lstC		=	new	ClientDAO().getClientDetails(clientId, con);
-					lstCo		=	new	ContactDAO().getDetailsPosition(clientId, con);
-					
+					con				=	conexion.getConnection1();
+					clientId		=	Integer.valueOf(request.getParameter("clientId"));
+					lst				=	new	DiagnosisDAO().getLastUpdate(clientId, con);
+					lstC			=	new	ClientDAO().getClientDetails(clientId, con);
+					lstCo			=	new	ContactDAO().getDetailsPosition(clientId, con);
+					opportunities	=  	new OpportunitiesDAO().getOpportunities(clientId);
+					arrRunRateType	=	new RunRateTypeDAO().getRunRateTypes();
 					
 				}catch(Exception e){
 					e.printStackTrace();
@@ -106,17 +116,28 @@ public class ControllerDiagnosis extends HttpServlet {
 				
 				session.removeAttribute("lstDetailsContact");
 				session.setAttribute("lstDetailsContact", lstCo);
+				
+				session.removeAttribute("opportunities");
+				session.setAttribute("opportunities", opportunities);
+				
+				session.removeAttribute("arrRunRateType");
+				session.setAttribute("arrRunRateType", arrRunRateType);
+				
 				url		=	"/views/diagnosis/responses/getDetailsDiagnosis.jsp";
 				break;	
 			case 3:
 				BusinessLineDTO				businessLine	= null;
 				BusinessLineDAO				objBusinessLine	= new BusinessLineDAO();
 				BrandDAO					objBrand		= new BrandDAO();
-				ArrayList<BusinessLineDTO>	arrBusinessLine	= new ArrayList<BusinessLineDTO>();
+				EquipmentTypeDAO			objEquipmentType= new EquipmentTypeDAO();
+				BlDetailsDAO				objBlDetails	= new BlDetailsDAO();
 				BlDetailsDTO				blDetails 		= null;
+				ArrayList<BusinessLineDTO>	arrBusinessLine	= new ArrayList<BusinessLineDTO>();
 				ArrayList<BrandDTO>			arrBrands		= new ArrayList<BrandDTO>();
 				ArrayList<BlDetailsDTO>		arrBLDetails	= new ArrayList<BlDetailsDTO>();
-				
+				ArrayList<EquipmentTypeDTO>	arrEquipmentType= 	new ArrayList<EquipmentTypeDTO>();
+
+				clientId	=	Integer.valueOf(request.getParameter("clientId"));
 				arrBusinessLine = objBusinessLine.getBusinessLines();
 				
 				session.removeAttribute("arrBusinessLine");
@@ -128,11 +149,14 @@ public class ControllerDiagnosis extends HttpServlet {
 				for(int i=0;i<arrBusinessLine.size();i++){
 					businessLine = arrBusinessLine.get(i);
 					
-					blDetails = new BlDetailsDTO();
+					blDetails = objBlDetails.getBusinessLineDetails(clientId, businessLine.getBusinessLineId());
 					blDetails.setBusinessLineId(businessLine.getBusinessLineId());
 					
 					arrBrands = objBrand.getBrandsByBL(businessLine.getBusinessLineId());
 					blDetails.setBrandArray(arrBrands);
+					
+					arrEquipmentType = objEquipmentType.getEquipmentTypeByBL(businessLine.getBusinessLineId());
+					blDetails.setEquipmentTypeArray(arrEquipmentType);
 					
 					arrBLDetails.add(blDetails);
 				}

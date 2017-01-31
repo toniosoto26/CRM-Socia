@@ -1,23 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-    <link rel="stylesheet" href="css/prism.css">
-	<link rel="stylesheet" href="css/chosen.css">
-	<link rel="stylesheet" href="css/address.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="/CRMSocia/css/bootstrap-datetimepicker.css">
-	
-	<script src="js/chosen.jquery.js" type="text/javascript"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="js/prism.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="/CRMSocia/js/script.js"></script>
-	
-	<script type="text/javascript" src="/CRMSocia/js/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript" src="/CRMSocia/js/bootstrap-datetimepicker.es.js"></script>
 	<script type="text/javascript" src="/CRMSocia/js/diagnosis/diagnosis.js"></script>
-	    
-    
-    
+	   
 	<ol class="breadcrumb">
       <li><a href="#">Inicio</a></li>
       <li><a href="#">Cotizaciones</a></li>
@@ -25,7 +11,6 @@
     </ol>
     
     <div class="titulo"><h3>Formato de Diagnóstico Cliente Corporativo</h3></div>
-    <div align="center"><h4>DESARROLLO DE LINEAS DE NEGOCIO</h4></div>
     <br />
     <div class="row top">
     	<div class="col-sm-6 col-md-6" style="text-align:center">

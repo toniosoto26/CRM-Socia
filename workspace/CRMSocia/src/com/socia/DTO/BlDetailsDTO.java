@@ -31,6 +31,7 @@ public class BlDetailsDTO {
 	private String	nextStep;
 	private String	commercialProposal;
 	private ArrayList<BrandDTO> brandArray;
+	private ArrayList<EquipmentTypeDTO> equipmentTypeArray;
 	
 	public BlDetailsDTO() {
 		super();
@@ -237,6 +238,12 @@ public class BlDetailsDTO {
 	}
 	public void setBrandArray(ArrayList<BrandDTO> brandArray) {
 		this.brandArray = brandArray;
+	}
+	public ArrayList<EquipmentTypeDTO> getEquipmentTypeArray() {
+		return equipmentTypeArray;
+	}
+	public void setEquipmentTypeArray(ArrayList<EquipmentTypeDTO> equipmentTypeArray) {
+		this.equipmentTypeArray = equipmentTypeArray;
 	}
 	public String getDeliverBy() {
 		return deliverBy;

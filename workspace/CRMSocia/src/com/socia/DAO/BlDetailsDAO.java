@@ -1,8 +1,13 @@
 package com.socia.DAO;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.socia.DTO.BlDetailsDTO;
+import com.socia.DTO.EquipmentTypeDTO;
+import com.socia.conexion.Conexion;
 
 public class BlDetailsDAO {
 	public ArrayList<StringBuilder> insertQuotationDetails(ArrayList<BlDetailsDTO> blDetail, ArrayList<StringBuilder> queries){
@@ -46,5 +51,77 @@ public class BlDetailsDAO {
     
         return queries;
     }
+	
+	public BlDetailsDTO getBusinessLineDetails(int clientId, int businessLineId){
+		Conexion			sociaDB		=	null;
+		Connection			connection	=	null;
+		PreparedStatement	statement	=	null;
+		ResultSet			resultSet	=	null;
+		StringBuilder		sqlQuery	=	null;
+		
+		/** Equipment type objects*/
+		BlDetailsDTO		businessLineDetails	=	new BlDetailsDTO();
+		
+		try{
+			sqlQuery	=	new	StringBuilder();
+			sqlQuery.append(" SELECT bl.* ");
+			sqlQuery.append(" FROM crm_bl_details bl ");
+			sqlQuery.append(" JOIN crm_diagnosis d on bl.crm_diagnosis_id = d.crm_diagnosis_id ");
+			sqlQuery.append(" WHERE bl.crm_client_id = ? ");
+			sqlQuery.append(" AND bl.crm_business_line_id = ? ");
+			sqlQuery.append(" ORDER BY d.date_updated ASC ");
+			sqlQuery.append(" LIMIT 1 ");
+			
+			sociaDB		=	new	Conexion();
+			connection	=	sociaDB.getConnection1();
+			statement	=	connection.prepareStatement(sqlQuery.toString());
+			statement.setInt(1, clientId);
+			statement.setInt(2, businessLineId);
+			
+			resultSet	=	statement.executeQuery();
+			
+			if(resultSet.next()){
+				businessLineDetails.setDiagnosisId(resultSet.getInt("crm_diagnosis_id"));
+				businessLineDetails.setClientId(clientId);
+				businessLineDetails.setBusinessLineId(businessLineId);
+				businessLineDetails.setCurrentBrand(resultSet.getInt("currentBrand"));
+				businessLineDetails.setEquipmentBrand(resultSet.getString("equipmentBrand"));
+				businessLineDetails.setEquipmentType(resultSet.getInt("equipmentType"));
+				businessLineDetails.setEquipmentQty(resultSet.getInt("equipmentQty"));
+				businessLineDetails.setUnitPrice(resultSet.getDouble("unitPrice"));
+				businessLineDetails.setCurrentVendor(resultSet.getString("currentVendor"));
+				businessLineDetails.setServiceContract(resultSet.getString("serviceContract"));
+				businessLineDetails.setSpecialConfig(resultSet.getString("specialConfig"));
+				businessLineDetails.setDeliverBy(resultSet.getString("deliverBy"));
+				businessLineDetails.setLease(resultSet.getString("lease"));
+				businessLineDetails.setNextTender(resultSet.getString("nextTender"));
+				businessLineDetails.setRequirementsNeeded(resultSet.getString("requirementsNeeded"));
+				businessLineDetails.setDemo(resultSet.getString("demo"));
+				businessLineDetails.setSales(resultSet.getString("sales"));
+				businessLineDetails.setExecutive(resultSet.getString("executive"));
+				businessLineDetails.setGainFactor(resultSet.getString("gainFactor"));
+				businessLineDetails.setDecisionMaker(resultSet.getString("decisionMaker"));
+				businessLineDetails.setPosition(resultSet.getString("position"));
+				businessLineDetails.setPhone(resultSet.getString("phone"));
+				businessLineDetails.setEmail(resultSet.getString("email"));
+				businessLineDetails.setRequirements(resultSet.getString("requirements"));
+				businessLineDetails.setNextStep(resultSet.getString("nextStep"));
+				businessLineDetails.setCommercialProposal(resultSet.getString("commercialProposal"));
+			}
+			
+		}catch(Exception exception){
+			exception.printStackTrace();
+		}finally{
+			try{
+				resultSet.close();
+				statement.close();
+				connection.close();
+			}catch(Exception closeException){
+				closeException.printStackTrace();
+			}
+		}
+		
+		return businessLineDetails;
+	}
 
 }
