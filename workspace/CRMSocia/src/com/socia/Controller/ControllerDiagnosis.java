@@ -20,6 +20,7 @@ import com.socia.DAO.ContactDAO;
 import com.socia.DAO.DiagnosisDAO;
 import com.socia.DAO.EquipmentTypeDAO;
 import com.socia.DAO.OpportunitiesDAO;
+import com.socia.DAO.RunRateDAO;
 import com.socia.DAO.RunRateTypeDAO;
 import com.socia.DTO.BlDetailsDTO;
 import com.socia.DTO.BrandDTO;
@@ -30,6 +31,7 @@ import com.socia.DTO.DiagnosisDTO;
 import com.socia.DTO.EquipmentTypeDTO;
 import com.socia.DTO.LoginDTO;
 import com.socia.DTO.OpportunitiesDTO;
+import com.socia.DTO.RunRateDTO;
 import com.socia.DTO.RunRateTypeDTO;
 import com.socia.conexion.Conexion;
 
@@ -94,6 +96,7 @@ public class ControllerDiagnosis extends HttpServlet {
 				List<ContactDTO>		lstCo			=	null;
 				OpportunitiesDTO	 	opportunities	= null;
 				ArrayList<RunRateTypeDTO> arrRunRateType= new ArrayList<RunRateTypeDTO>();
+				ArrayList<RunRateDTO>	 arrRunRate		= new ArrayList<RunRateDTO>();
 				
 				try{
 					con				=	conexion.getConnection1();
@@ -103,6 +106,7 @@ public class ControllerDiagnosis extends HttpServlet {
 					lstCo			=	new	ContactDAO().getDetailsPosition(clientId, con);
 					opportunities	=  	new OpportunitiesDAO().getOpportunities(clientId);
 					arrRunRateType	=	new RunRateTypeDAO().getRunRateTypes();
+					arrRunRate		=	new RunRateDAO().getRunRates(arrRunRateType, clientId);
 					
 				}catch(Exception e){
 					e.printStackTrace();
@@ -120,8 +124,8 @@ public class ControllerDiagnosis extends HttpServlet {
 				session.removeAttribute("opportunities");
 				session.setAttribute("opportunities", opportunities);
 				
-				session.removeAttribute("arrRunRateType");
-				session.setAttribute("arrRunRateType", arrRunRateType);
+				session.removeAttribute("arrRunRate");
+				session.setAttribute("arrRunRate", arrRunRateType);
 				
 				url		=	"/views/diagnosis/responses/getDetailsDiagnosis.jsp";
 				break;	
