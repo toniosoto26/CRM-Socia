@@ -269,7 +269,10 @@
 								<c:choose>
 									<c:when test="${runRate.runRateName == 'Otros' }">
 				                        <tr>
-				                        	<td colspan="5"><input type="text" class="campo-tabla" placeholder="estan por licitar concurso de reparacion de sucursales"></td>
+				                        	<td>
+												<c:out value="${runRate.runRateName}"></c:out>
+											</td>
+				                        	<td colspan="4"><input type="text" name="other<c:out value="${runRate.detail.runRateTypeId}"></c:out>"  class="campo-tabla" value='<c:out value="${runRate.detail.other}"></c:out>' placeholder="estan por licitar concurso de reparacion de sucursales" /></td>
 				                        </tr>
 									</c:when>
 									<c:otherwise>
@@ -281,13 +284,13 @@
 												<input type="text" name="brandId<c:out value="${runRate.detail.runRateTypeId}"></c:out>" class='<c:out value="${className}"></c:out>' value='<c:out value="${runRate.detail.brandId}"></c:out>' />
 											</td>
 											<td>
-												<input type="text" class='<c:out value="${className}"></c:out>' value='<c:out value="${runRate.detail.modelId}"></c:out>' />
+												<input type="text" name="modelId<c:out value="${runRate.detail.runRateTypeId}"></c:out>" class='<c:out value="${className}"></c:out>' value='<c:out value="${runRate.detail.modelId}"></c:out>' />
 											</td>
 											<td>
-												<input type="text" class='<c:out value="${className}"></c:out>' value='<c:out value="${runRate.detail.qty}"></c:out>' />
+												<input type="text" name="qty<c:out value="${runRate.detail.runRateTypeId}"></c:out>" class='<c:out value="${className}"></c:out>' value='<c:out value="${runRate.detail.qty}"></c:out>' />
 											</td>
 											<td>
-												<input type="text" class='<c:out value="${className}"></c:out>' value='<c:out value="${runRate.detail.frequency}"></c:out>' />
+												<input type="text" name="frequency<c:out value="${runRate.detail.runRateTypeId}"></c:out>" class='<c:out value="${className}"></c:out>' value='<c:out value="${runRate.detail.frequency}"></c:out>' />
 											</td>
 										</tr>
 									</c:otherwise>

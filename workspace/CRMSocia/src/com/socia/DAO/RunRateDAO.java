@@ -52,8 +52,8 @@ public class RunRateDAO {
 			sqlQuery.append(" SELECT rr.* ");
 			sqlQuery.append(" FROM crm_run_rate rr ");
 			sqlQuery.append(" JOIN crm_diagnosis d on rr.crm_diagnosis_id = d.crm_diagnosis_id ");
-			sqlQuery.append(" WHERE rr.crm_client_id = ? ");
-			sqlQuery.append(" AND rr.crm_run_rate_type_id = ? ");
+			sqlQuery.append(" WHERE rr.cmr_client_id = ? ");
+			sqlQuery.append(" AND rr.crm_run_rate_type = ? ");
 			sqlQuery.append(" ORDER BY d.date_updated ASC ");
 			sqlQuery.append(" LIMIT 1 ");
 			
@@ -68,14 +68,15 @@ public class RunRateDAO {
 			if(resultSet.next()){
 				runRateDetail.setRunRateId(resultSet.getInt("crm_run_rate_id"));
 				runRateDetail.setDiagnosisId(resultSet.getInt("crm_diagnosis_id"));
-				runRateDetail.setClientId(clientId);
-				runRateDetail.setRunRateTypeId(runRateTypeId);
 				runRateDetail.setModelId(resultSet.getInt("crm_model_id"));
 				runRateDetail.setBrandId(resultSet.getInt("crm_brand_id"));
 				runRateDetail.setQty(resultSet.getInt("qty"));
 				runRateDetail.setFrequency(resultSet.getString("frequency"));
 				runRateDetail.setOther(resultSet.getString("other"));
 			}
+
+			runRateDetail.setClientId(clientId);
+			runRateDetail.setRunRateTypeId(runRateTypeId);
 			
 		}catch(Exception exception){
 			exception.printStackTrace();

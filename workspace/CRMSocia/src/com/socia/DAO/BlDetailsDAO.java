@@ -82,8 +82,6 @@ public class BlDetailsDAO {
 			
 			if(resultSet.next()){
 				businessLineDetails.setDiagnosisId(resultSet.getInt("crm_diagnosis_id"));
-				businessLineDetails.setClientId(clientId);
-				businessLineDetails.setBusinessLineId(businessLineId);
 				businessLineDetails.setCurrentBrand(resultSet.getInt("currentBrand"));
 				businessLineDetails.setEquipmentBrand(resultSet.getString("equipmentBrand"));
 				businessLineDetails.setEquipmentType(resultSet.getInt("equipmentType"));
@@ -108,6 +106,8 @@ public class BlDetailsDAO {
 				businessLineDetails.setNextStep(resultSet.getString("nextStep"));
 				businessLineDetails.setCommercialProposal(resultSet.getString("commercialProposal"));
 			}
+			businessLineDetails.setClientId(clientId);
+			businessLineDetails.setBusinessLineId(businessLineId);
 			
 		}catch(Exception exception){
 			exception.printStackTrace();
