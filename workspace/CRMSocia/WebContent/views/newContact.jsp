@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 	
 <div id="formNewContact">
-	<div class="col-sm-9 col-md-9">
+	<div class="col-sm-10 col-md-10">
 		<div class="row">
 			<div class="col-sm-6 col-md-6">
 				<div class="form-group">
@@ -96,24 +96,23 @@
 	  		</div>
 	  	</div>
 	</div>
-	<div class="col-sm-3 col-md-3">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Speech" onclick="">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Guia" onclick="">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Manejo de objeciones" onclick="">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio Carta" onclick="">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio presentacion" onclick="">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio promociones" onclick="">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio Cartera" onclick="">
-		<br><br>
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Lineas de negocio " onclick="">
-	</div>
+	<div class="col-sm-2 col-md-2">
+		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Speech" onclick=""  style="width: 180px;">
+				<br><br>
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Guía" onclick="" style="width: 180px;">
+				<br><br>
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Manejo de objeciones" onclick="" style="width: 180px;">
+				<br><br>
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío Carta" onclick="" style="width: 180px;">
+				<br><br>
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío presentación" onclick="" style="width: 180px;">
+				<br><br>
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío promociones" onclick="" style="width: 180px;">
+				<br><br>
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío Cartera" onclick="" style="width: 180px;">
+				<br><br>
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Líneas de negocio " onclick="" style="width: 180px;">
+			</div>
 </div>
 
 	<script src="js/chosen.jquery.js" type="text/javascript"></script>

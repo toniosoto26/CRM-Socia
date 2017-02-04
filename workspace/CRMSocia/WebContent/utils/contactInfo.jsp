@@ -96,21 +96,21 @@
    	<c:choose>
 	   	<c:when test="${sessionScope.view == 'true' }">
 		   	<div class="col-sm-2 col-md-2">
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Speech" onclick="">
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Speech" onclick=""  style="width: 180px;">
 				<br><br>
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Guia" onclick="">
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Guía" onclick="" style="width: 180px;">
 				<br><br>
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Manejo de objeciones" onclick="">
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Manejo de objeciones" onclick="" style="width: 180px;">
 				<br><br>
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio Carta" onclick="">
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío Carta" onclick="" style="width: 180px;">
 				<br><br>
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio presentacion" onclick="">
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío presentación" onclick="" style="width: 180px;">
 				<br><br>
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio promociones" onclick="">
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío promociones" onclick="" style="width: 180px;">
 				<br><br>
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envio Cartera" onclick="">
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío Cartera" onclick="" style="width: 180px;">
 				<br><br>
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Lineas de negocio " onclick="">
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Líneas de negocio " onclick="" style="width: 180px;">
 			</div>
 		</c:when>
 	</c:choose>

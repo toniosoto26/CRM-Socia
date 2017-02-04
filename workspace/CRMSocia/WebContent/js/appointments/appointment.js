@@ -416,7 +416,8 @@ function saveInfo(){
 				data: $("#addAppointment").serialize()+"&opc=3&activeTab="+activeTab,
 				success: function(response){
 					//alertify.alert(trim(response));
-					alert("------------> "+response);
+					//alert("------------> "+response);
+					alertify.alert("Cita guardada correctamente");
 					$("#pageContent").load("/CRMSocia/views/appointments/generateAppointments.jsp");
 					return false;
 				},
