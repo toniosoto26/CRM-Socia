@@ -99,7 +99,8 @@ public class ControllerRosa extends HttpServlet {
 		String							zipCode					=	"";
 		
 		StringBuilder					body;
-		String[]						to						= 	{"rmmi_ros@hotmail.com", "jossoto14@gmail.com", "vidal.sistemas@hotmail.com"};
+		String[]						to						= 	{"jossoto14@gmail.com", "vidal.sistemas@hotmail.com"};
+		String[]						cc						=	{""};
 		
 		int 							itemIndex 				=	0; 
 		boolean							insert					= 	false;
@@ -262,13 +263,14 @@ public class ControllerRosa extends HttpServlet {
 					
 					insert = true;
 					body = objQuotation.generateMail(client, contact, address, quotation, arrQuotationDetail);
+					cc[0] =  ((LoginDTO)session.getAttribute("sessionLogin")).getEmail();
 					
 					if(option == 2){
-						objMail.sendFromGMail("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, "Cotización", body.toString());
+						objMail.sendFromGMail("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, cc, "Cotización", body.toString());
 					}
 					else if(option == 6){
 						objQuotation.generateExcelFile(client, contact, address, quotation, arrQuotationDetail);
-						objMail.sendFromGMailAttachment("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, "Cotización", body.toString());
+						objMail.sendFromGMailAttachment("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, cc, "Cotización", body.toString());
 					}
 					
 				}catch(Exception exception){

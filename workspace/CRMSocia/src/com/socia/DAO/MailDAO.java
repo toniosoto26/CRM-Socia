@@ -30,10 +30,10 @@ public class MailDAO {
         String body = "Welcome to JavaMail!";
 
         MailDAO mail = new MailDAO();
-        mail.sendFromGMail(from, pass, to, subject, body);
+        mail.sendFromGMail(from, pass, to, to, subject, body);
     }
     
-    public void sendFromGMail(String from, String pass, String[] to, String subject, String body) {
+    public void sendFromGMail(String from, String pass, String[] to, String [] cc, String subject, String body) {
         Properties props = System.getProperties();
         String host = "smtp.gmail.com";
         props.put("mail.smtp.starttls.enable", "true");
@@ -49,14 +49,24 @@ public class MailDAO {
         try {
             message.setFrom(new InternetAddress(from));
             InternetAddress[] toAddress = new InternetAddress[to.length];
+            InternetAddress[] ccAddress = new InternetAddress[cc.length];
 
-            // To get the array of addresses
+            // To get the array of addresses TO
             for( int i = 0; i < to.length; i++ ) {
                 toAddress[i] = new InternetAddress(to[i]);
+            }
+            
+            // To get the array of addresses CC
+            for( int i = 0; i < cc.length; i++ ) {
+            	ccAddress[i] = new InternetAddress(cc[i]);
             }
 
             for( int i = 0; i < toAddress.length; i++) {
                 message.addRecipient(Message.RecipientType.TO, toAddress[i]);
+            }
+            
+            for( int i = 0; i < ccAddress.length; i++) {
+                message.addRecipient(Message.RecipientType.CC, ccAddress[i]);
             }
 
             message.setSubject(subject);
@@ -74,7 +84,7 @@ public class MailDAO {
         }
     }
 
-    public void sendFromGMailAttachment(String from, String pass, String[] to, String subject, String body) {
+    public void sendFromGMailAttachment(String from, String pass, String[] to, String [] cc, String subject, String body) {
         Properties props = System.getProperties();
         String host = "smtp.gmail.com";
         props.put("mail.smtp.starttls.enable", "true");
@@ -90,14 +100,24 @@ public class MailDAO {
         try {
             message.setFrom(new InternetAddress(from));
             InternetAddress[] toAddress = new InternetAddress[to.length];
+            InternetAddress[] ccAddress = new InternetAddress[cc.length];
 
-            // To get the array of addresses
+            // To get the array of addresses TO
             for( int i = 0; i < to.length; i++ ) {
                 toAddress[i] = new InternetAddress(to[i]);
+            }
+            
+            // To get the array of addresses CC
+            for( int i = 0; i < cc.length; i++ ) {
+            	ccAddress[i] = new InternetAddress(cc[i]);
             }
 
             for( int i = 0; i < toAddress.length; i++) {
                 message.addRecipient(Message.RecipientType.TO, toAddress[i]);
+            }
+            
+            for( int i = 0; i < ccAddress.length; i++) {
+                message.addRecipient(Message.RecipientType.CC, ccAddress[i]);
             }
 
             // Create a multipart message
