@@ -2,6 +2,21 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
+<div class="container row">
+	<div class="col-md-8 puntos row">
+		<div class="col-sm-4 col-md-4">
+			<div class="circulo-verde"></div> Cita / Cot /Concurso
+		</div>
+		<div class="col-sm-4 col-md-4">
+			<div class="circulo-rojo"></div> Carta / Interés / Cobranza
+		</div>
+		<div class="col-sm-4 col-md-4">
+			<div class="circulo-amarillo"></div> No inte / No contestó
+		</div>
+	</div>
+</div>
+
 <fmt:setLocale value="es_MX"/>
 <c:set var="className" value="${'amarillo'}"></c:set>
          			<div class="dataTable_wrapper">
