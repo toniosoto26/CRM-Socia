@@ -171,7 +171,7 @@ public class QuotationDAO {
 		cell = row.createCell(cellnum++);
 		cell.setCellValue("Cantidad");
 		cell = row.createCell(cellnum++);
-		cell.setCellValue("Producto");
+		cell.setCellValue("SKU / No. Parte");
 		cell = row.createCell(cellnum++);
 		cell.setCellValue("Descripción");
 		cell = row.createCell(cellnum++);
@@ -706,7 +706,7 @@ public class QuotationDAO {
 														sqlQuery.append("<table class='invoice-items' cellpadding='0' cellspacing='0' style='width:100%;font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>");
 															sqlQuery.append("<tr  class='header aligncenter' style='font-weight:bold;'>");
 																sqlQuery.append("<td>Cantidad</td>");
-																	sqlQuery.append("<td>Producto</td>");
+																	sqlQuery.append("<td>SKU / No. Parte</td>");
 																	sqlQuery.append("<td>Descripción</td>");
 																	sqlQuery.append("<td>Tiempo de entrega</td>");
 																	sqlQuery.append("<td>Precio unitario</td>");

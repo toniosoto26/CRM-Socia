@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.socia.DTO.BusinessLineDTO;
@@ -26,8 +27,8 @@ public class IndicatorDAO {
 		for(int i = 0; i < arrDate.size(); i++){
 			date = arrDate.get(i);
 			
-			indicatorAct = getCallIndicatorByType("A", format.format(date.getDate().getTime()), userId);
-			indicatorPro = getCallIndicatorByType("P", format.format(date.getDate().getTime()), userId);
+			indicatorAct = getCallIndicatorByType("A", format.format(date.getDate().getTime()), date.getDate().get(Calendar.DAY_OF_WEEK), userId);
+			indicatorPro = getCallIndicatorByType("P", format.format(date.getDate().getTime()), date.getDate().get(Calendar.DAY_OF_WEEK), userId);
 			
 			indicator = new IndicatorDTO(date, indicatorAct, indicatorPro);
 			
@@ -37,7 +38,7 @@ public class IndicatorDAO {
 		return arrIndicator;
 	}
 	
-	private IndicatorDetailDTO getCallIndicatorByType(String type, String date, int userId){
+	private IndicatorDetailDTO getCallIndicatorByType(String type, String date, int dayOfWeek, int userId){
 		Conexion					sociaDB		=	null;
 		Connection					connection	=	null;
 		PreparedStatement			statement	=	null;
@@ -56,10 +57,15 @@ public class IndicatorDAO {
 			sqlQuery.append("(ifnull((SELECT count(*) ");
 				sqlQuery.append(" FROM crm_call c2 ");
 				sqlQuery.append(" JOIN crm_client cl2 ON c2.crm_client_id = cl2.crm_client_id ");
-				sqlQuery.append(" WHERE c2.crm_user_id = ? ");
+				sqlQuery.append(" WHERE c2.crm_user_id = ca.crm_user_id ");
 				sqlQuery.append(" AND c2.status <> 3 ");
-				sqlQuery.append(" AND cl2.client_type = ? ");
-				sqlQuery.append(" AND date(ca.date_call) = date(c2.date_call)),0)) efectivas, 5 objetivo ");
+				sqlQuery.append(" AND cl2.client_type = cl.client_type ");
+				sqlQuery.append(" AND date(ca.date_call) = date(c2.date_call)),0)) efectivas, ");
+			sqlQuery.append(" (SELECT goal."+(type.equals("P")?"prospect":"actual")+"_calls ");
+				sqlQuery.append(" FROM crm_goal goal ");
+				sqlQuery.append(" WHERE goal.crm_user_id = ? ");
+				sqlQuery.append(" AND goal.day_of_week = ? ");
+			sqlQuery.append(" ) objetivo ");
 			sqlQuery.append(" FROM crm_call ca ");
 			sqlQuery.append(" JOIN crm_client cl ON ca.crm_client_id = cl.crm_client_id ");
 			sqlQuery.append(" WHERE ca.crm_user_id = ? ");
@@ -69,9 +75,9 @@ public class IndicatorDAO {
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
 			statement	=	connection.prepareStatement(sqlQuery.toString());
-			
+
 			statement.setInt(1, userId);
-			statement.setString(2, type);
+			statement.setInt(2, dayOfWeek);
 			statement.setInt(3, userId);
 			statement.setString(4, date);
 			statement.setString(5, type);
@@ -117,8 +123,8 @@ public class IndicatorDAO {
 		for(int i = 0; i < arrDate.size(); i++){
 			date = arrDate.get(i);
 			
-			indicatorAct = getAppointmentIndicatorByType("A", format.format(date.getDate().getTime()), userId);
-			indicatorPro = getAppointmentIndicatorByType("P", format.format(date.getDate().getTime()), userId);
+			indicatorAct = getAppointmentIndicatorByType("A", format.format(date.getDate().getTime()), date.getDate().get(Calendar.DAY_OF_WEEK), userId);
+			indicatorPro = getAppointmentIndicatorByType("P", format.format(date.getDate().getTime()), date.getDate().get(Calendar.DAY_OF_WEEK), userId);
 			
 			indicator = new IndicatorDTO(date, indicatorAct, indicatorPro);
 			
@@ -128,7 +134,7 @@ public class IndicatorDAO {
 		return arrIndicator;
 	}
 	
-	private IndicatorDetailDTO getAppointmentIndicatorByType(String type, String date, int userId){
+	private IndicatorDetailDTO getAppointmentIndicatorByType(String type, String date, int dayOfWeek, int userId){
 		Conexion					sociaDB		=	null;
 		Connection					connection	=	null;
 		PreparedStatement			statement	=	null;
@@ -143,7 +149,12 @@ public class IndicatorDAO {
 		
 		try{
 			sqlQuery	=	new	StringBuilder();
-			sqlQuery.append(" SELECT count(*) total, 1 objetivo ");
+			sqlQuery.append(" SELECT count(*) total,  ");
+			sqlQuery.append(" (SELECT goal."+(type.equals("P")?"prospect":"actual")+"_appointments ");
+				sqlQuery.append(" FROM crm_goal goal ");
+				sqlQuery.append(" WHERE goal.crm_user_id = ? ");
+				sqlQuery.append(" AND goal.day_of_week = ? ");
+			sqlQuery.append(") objetivo ");
 			sqlQuery.append(" FROM crm_appointment a ");
 			sqlQuery.append(" JOIN crm_client cl ON a.crm_client_id = cl.crm_client_id ");
 			sqlQuery.append(" WHERE a.crm_user_id = ? ");
@@ -155,8 +166,10 @@ public class IndicatorDAO {
 			statement	=	connection.prepareStatement(sqlQuery.toString());
 			
 			statement.setInt(1, userId);
-			statement.setString(2, date);
-			statement.setString(3, type);
+			statement.setInt(2, dayOfWeek);
+			statement.setInt(3, userId);
+			statement.setString(4, date);
+			statement.setString(5, type);
 			
 			resultSet	=	statement.executeQuery();
 			
@@ -199,7 +212,7 @@ public class IndicatorDAO {
 		for(int i = 0; i < arrDate.size(); i++){
 			date = arrDate.get(i);
 			
-			indicatorAct = getQuotationIndicator(format.format(date.getDate().getTime()), userId);
+			indicatorAct = getQuotationIndicator(format.format(date.getDate().getTime()), date.getDate().get(Calendar.DAY_OF_WEEK), userId);
 			
 			indicator = new IndicatorDTO(date, indicatorAct, indicatorPro);
 			
@@ -209,7 +222,7 @@ public class IndicatorDAO {
 		return arrIndicator;
 	}
 
-	private IndicatorDetailDTO getQuotationIndicator(String date, int userId){
+	private IndicatorDetailDTO getQuotationIndicator(String date, int dayOfWeek, int userId){
 		Conexion					sociaDB		=	null;
 		Connection					connection	=	null;
 		PreparedStatement			statement	=	null;
@@ -229,8 +242,13 @@ public class IndicatorDAO {
 		
 		try{
 			sqlQuery	=	new	StringBuilder();
-			sqlQuery.append(" SELECT count(*) total, 4 objetivo, ");
-				sqlQuery.append(" ifnull((SELECT sum(qd.unit_price + qd.quantity) ");
+			sqlQuery.append(" SELECT count(*) total, ");
+			sqlQuery.append(" (SELECT goal.quotations ");
+				sqlQuery.append(" FROM crm_goal goal ");
+				sqlQuery.append(" WHERE goal.crm_user_id = ? ");
+				sqlQuery.append(" AND goal.day_of_week = ? ");
+			sqlQuery.append(") objetivo, ");
+			sqlQuery.append(" ifnull((SELECT sum(qd.unit_price + qd.quantity) ");
 				sqlQuery.append(" FROM crm_quotation_detail qd ");
 				sqlQuery.append(" JOIN crm_quotation q2 ON qd.crm_quotation_id = q2.crm_quotation_id ");
 				sqlQuery.append(" where q2.crm_user_id = ? ");
@@ -246,26 +264,50 @@ public class IndicatorDAO {
 			statement	=	connection.prepareStatement(sqlQuery.toString());
 			
 			statement.setInt(1, userId);
-			statement.setInt(2, userId);
-			statement.setString(3, date);
+			statement.setInt(2, dayOfWeek);
+			statement.setInt(3, userId);
+			statement.setInt(4, userId);
+			statement.setString(5, date);
 			
 			resultSet	=	statement.executeQuery();
 			
-			while(resultSet.next()){
-				total = resultSet.getInt(1);
-				objective = resultSet.getInt(2);
-				value = resultSet.getDouble(3);
-				type = (resultSet.getString(4)!=null?resultSet.getString(4):"");
+			if(resultSet.next()){
+				do{
+					total = resultSet.getInt(1);
+					objective = resultSet.getInt(2);
+					value = resultSet.getDouble(3);
+					type = (resultSet.getString(4)!=null?resultSet.getString(4):"");
+					
+					sumTotal = total + sumTotal;
+					sumValue = value + sumValue;
+					
+					if(count==0)
+						totalType = total+(type.equals("P")?" pros ":(type.equals("A")?" act ":""));
+					else
+						totalType += "/ "+total+(type.equals("P")?" pros ":(type.equals("A")?" act ":""));
+					
+					count++;
+				}while(resultSet.next());
+			}
+			else{
+				statement.close();
+				resultSet.close();
+				sqlQuery.delete(0, sqlQuery.length());
 				
-				sumTotal = total + sumTotal;
-				sumValue = value + sumValue;
+				sqlQuery.append(" SELECT goal.quotations objective ");
+				sqlQuery.append(" FROM crm_goal goal ");
+				sqlQuery.append(" WHERE goal.crm_user_id = ? ");
+				sqlQuery.append(" AND goal.day_of_week = ? ");
 				
-				if(count==0)
-					totalType = total+(type.equals("P")?" pros ":(type.equals("A")?" act ":""));
-				else
-					totalType += "/ "+total+(type.equals("P")?" pros ":(type.equals("A")?" act ":""));
+				statement	=	connection.prepareStatement(sqlQuery.toString());
 				
-				count++;
+				statement.setInt(1, userId);
+				statement.setInt(2, dayOfWeek);
+
+				resultSet	=	statement.executeQuery();
+				
+				if(resultSet.next())
+					objective = resultSet.getInt("objective");
 			}
 			
 			indicator = new IndicatorDetailDTO(sumTotal, objective, totalType, sumValue);

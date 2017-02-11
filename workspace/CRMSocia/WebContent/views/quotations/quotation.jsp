@@ -155,12 +155,12 @@
 			</div>
 		 
 		 	<div class="requisitos">
-		  		<div class="table-responsive">
+		  		<div class="table-responsive" style="overflow-x: inherit;">
 			    	<h5>Registro de partidas</h5>
 			    	<table class="table table-bordered" id="productsTable">
 			    		<thead class="tabla-grande">
 			    			<tr>
-				    			<th>No. Parte</th>
+				    			<th>SKU / No. Parte</th>
 				    			<th>Cantidad</th>
 				    			<th>Descripción</th>
 					    		<th>Garantía</th>

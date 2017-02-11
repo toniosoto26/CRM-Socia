@@ -580,7 +580,7 @@
 											<table class="invoice-items" cellpadding="0" cellspacing="0" style="width:100%;font-family: Arial, sans-serif; color: #333333; font-size: 12px;">
 												<tr  class="header aligncenter" style="font-weight:bold;">
 													<td>Cantidad</td>
-													<td>Producto</td>
+													<td>SKU / No. Parte</td>
 													<td>Descripción</td>
 													<td>Tiempo de entrega</td>
 													<td>Precio unitario</td>

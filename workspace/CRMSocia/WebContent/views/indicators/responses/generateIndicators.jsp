@@ -45,9 +45,9 @@
 		   			<tr>
 		   				<td class="danger"></td>
 		   				<td class="danger">Objetivo PRO</td>
-		   				<td class="danger"></td>
+		   				<td class="danger" id="callObjPro" style="text-align:right;"></td>
 		   				<td class="danger">Objetivo ACT</td>
-		   				<td class="danger"></td>
+		   				<td class="danger" id="callObjAct" style="text-align:right;"></td>
 		   			</tr>
 		   			<tr>
 			    		<td class="negro"></td>
@@ -97,6 +97,10 @@
 		    </table>
 		</div>
 	</div>
+	<script>
+		$("#callObjPro").text(<c:out value="${ totalObjectivePro }"></c:out>);
+		$("#callObjAct").text(<c:out value="${ totalObjectiveAct }"></c:out>);
+	</script>
 	<div class="col-md-4 col-lg-4">
 		<div id="calls" style="min-width: 310px; height: 400px; max-width: 600px; float:right"></div>
 	</div>
@@ -157,9 +161,9 @@
 					<tr>
 						<td class="negro">SEMANAL</td>
 						<td style="text-align:right;"><a data-toggle="modal" href="#myModal" onClick="loadAppointmentDetail('P', '<fmt:formatDate type="date" value="${fechaIni.time}" pattern="yyyy-MM-dd"/>', '<fmt:formatDate type="date" value="${fechaFin.time}" pattern="yyyy-MM-dd"/>');"><c:out value="${ totalTotalsPro }"></c:out></a></td>
-						<td style="text-align:right;"><c:out value="${ totalObjectiveAct }"></c:out></td>
-						<td style="text-align:right;"><a data-toggle="modal" href="#myModal" onClick="loadAppointmentDetail('A', '<fmt:formatDate type="date" value="${fechaIni.time}" pattern="yyyy-MM-dd"/>', '<fmt:formatDate type="date" value="${fechaFin.time}" pattern="yyyy-MM-dd"/>');"><c:out value="${ totalTotalsAct }"></c:out></a></td>
 						<td style="text-align:right;"><c:out value="${ totalObjectivePro }"></c:out></td>
+						<td style="text-align:right;"><a data-toggle="modal" href="#myModal" onClick="loadAppointmentDetail('A', '<fmt:formatDate type="date" value="${fechaIni.time}" pattern="yyyy-MM-dd"/>', '<fmt:formatDate type="date" value="${fechaFin.time}" pattern="yyyy-MM-dd"/>');"><c:out value="${ totalTotalsAct }"></c:out></a></td>
+						<td style="text-align:right;"><c:out value="${ totalObjectiveAct }"></c:out></td>
 					</tr>
 			   	</tbody>
 			</table>
