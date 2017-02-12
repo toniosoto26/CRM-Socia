@@ -109,7 +109,7 @@ public class QuotationDAO {
 		cell = row.createCell(cellnum++);
 		cell.setCellValue("Dirección");
 		cell = row.createCell(cellnum++);
-		cell.setCellValue("Medellín 81, int. 302, Col. Roma Norte");
+		cell.setCellValue("Av. Constituyentes 653, Col. 16 de Septiembre");
 		
 		cellnum = 0;
 		row = sheet.createRow(rownum++);
@@ -124,7 +124,7 @@ public class QuotationDAO {
 		cell = row.createCell(cellnum++);
 		cell.setCellValue("");
 		cell = row.createCell(cellnum++);
-		cell.setCellValue("Del. Cuauhtémoc, DF, C.P.06700");
+		cell.setCellValue("Del. Miguel Hidalgo, DF, C.P.11810");
 		
 		cellnum = 0;
 		row = sheet.createRow(rownum++);
@@ -251,7 +251,32 @@ public class QuotationDAO {
 		cellnum = 0;
 		row = sheet.createRow(rownum++);
 		cell = row.createCell(cellnum++);
+		cell.setCellValue("LAS EXISTENCIAS SOLICITADAS EN LA COTIZACIÓN ESTÁN SUJETAS A CAMBIOS SIN PREVIO AVISO");
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("LOS TIEMPOS DE ENTREGA SON DE 24 A 48 HORAS HÁBILES (EN CASO DE ZONA EXTENDIDA REQUIERE DÍAS ADICIONALES)");
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
 		cell.setCellValue("LOS PRECIOS SON SUJETOS A CAMBIOS SIN PREVIO AVISO");
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("NO SE ACEPTAN DEVOLUCIONES NI CANCELACIONES EN PRODUCTO ABIERTO");
+		
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("");
+
+		cellnum = 0;
+		row = sheet.createRow(rownum++);
+		cell = row.createCell(cellnum++);
+		cell.setCellValue("VIGENCIA DE LA COTIZACIÓN:");
 		
 		try {
 			FileOutputStream out = 
@@ -563,7 +588,7 @@ public class QuotationDAO {
 																					sqlQuery.append("<td style='padding: 0 0 10px 0;'>");
 																						sqlQuery.append("<table cellpadding='0' cellspacing='0' border='0' width='100%'>");
 																							sqlQuery.append("<tr>");
-																								sqlQuery.append("<td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;' id='previewCompanyAddress'> Medellín 81, int. 302, Col. Roma Norte</td>");
+																								sqlQuery.append("<td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;' id='previewCompanyAddress'>Av. Constituyentes 653, Col. 16 de Septiembre</td>");
 																							sqlQuery.append("</tr>");
 																						sqlQuery.append("</table>");
 																					sqlQuery.append("</td>");
@@ -598,7 +623,7 @@ public class QuotationDAO {
 																						sqlQuery.append("<td style='padding: 0 0 10px 0;'>");
 																							sqlQuery.append("<table cellpadding='0' cellspacing='0' border='0' width='100%'>");
 																								sqlQuery.append("<tr>");
-																									sqlQuery.append("<td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>Del. Cuauhtémoc, DF, C.P.06700</td>");
+																									sqlQuery.append("<td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>Del. Miguel Hidalgo, DF, C.P.11810</td>");
 																								sqlQuery.append("</tr>");
 																							sqlQuery.append("</table>");
 																						sqlQuery.append("</td>");
@@ -786,7 +811,22 @@ public class QuotationDAO {
 														sqlQuery.append("<!-- COPY -->");
 														sqlQuery.append("<table width='100%' border='0' cellspacing='0' cellpadding='0'>");
 															sqlQuery.append("<tr>");
-																sqlQuery.append("<td align='left' style='padding: 0 0 0 0; font-size: 14px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;' class='padding-copy'>LOS PRECIOS SON SUJETOS A CAMBIOS SIN PREVIO AVISO.</td>");
+																sqlQuery.append("<td align='left' style='padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;' class='padding-copy'>LAS EXISTENCIAS SOLICITADAS EN LA COTIZACIÓN ESTÁN SUJETAS A CAMBIOS SIN PREVIO AVISO.</td>");
+															sqlQuery.append("</tr>");
+															sqlQuery.append("<tr>");
+																sqlQuery.append("<td align='left' style='padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;' class='padding-copy'>LOS TIEMPOS DE ENTREGA SON DE 24 A 48 HORAS HÁBILES (EN CASO DE ZONA EXTENDIDA REQUIERE DÍAS ADICIONALES).</td>");
+															sqlQuery.append("</tr>");
+															sqlQuery.append("<tr>");
+																sqlQuery.append("<td align='left' style='padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;' class='padding-copy'>LOS PRECIOS SON SUJETOS A CAMBIOS SIN PREVIO AVISO.</td>");
+															sqlQuery.append("</tr>");
+															sqlQuery.append("<tr>");
+																sqlQuery.append("<td align='left' style='padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;' class='padding-copy'>NO SE ACEPTAN DEVOLUCIONES NI CANCELACIONES EN PRODUCTO ABIERTO.</td>");
+															sqlQuery.append("</tr>");
+															sqlQuery.append("<tr>");
+																sqlQuery.append("<td align='left' style='padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;' class='padding-copy'></td>");
+															sqlQuery.append("</tr>");
+															sqlQuery.append("<tr>");
+																sqlQuery.append("<td align='left' style='padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; font-weight:bold; font-style: italic;' class='padding-copy'>VIGENCIA DE LA COTIZACIÓN:</td>");
 															sqlQuery.append("</tr>");
 														sqlQuery.append("</table>");
 													sqlQuery.append("</td>");
@@ -813,8 +853,9 @@ public class QuotationDAO {
 									sqlQuery.append("<table width='100%' border='0' cellspacing='0' cellpadding='0' align='center' style='max-width: 800px;' class='responsive-table'>");
 										sqlQuery.append("<tr>");
 											sqlQuery.append("<td align='center' style='font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color:#666666;'>");
-												sqlQuery.append("Medellín 81 302, Roma Norte, Cuauhtémoc, D.F.");
+												sqlQuery.append("Av. Constituyentes 653, 16 de Septiembre, Miguel Hidalgo, D.F.");
 												sqlQuery.append("<br>");
+												sqlQuery.append("Tel. 67216096");
 											sqlQuery.append("</td>");
 										sqlQuery.append("</tr>");
 									sqlQuery.append("</table>");

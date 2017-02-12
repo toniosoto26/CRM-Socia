@@ -437,7 +437,7 @@
 				                                            <td style="padding: 0 0 10px 0;">
 				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
 				                                                    <tr>
-				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;" id="previewCompanyAddress"> Medellín 81, int. 302, Col. Roma Norte</td>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;" id="previewCompanyAddress"> Av. Constituyentes 653, Col. 16 de Septiembre</td>
 				                                                    </tr>
 				                                                </table>
 				                                            </td>
@@ -472,7 +472,7 @@
 				                                            <td style="padding: 0 0 10px 0;">
 				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
 				                                                    <tr>
-				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">Del. Cuauhtémoc, DF, C.P.06700</td>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">Del. Miguel Hidalgo, DF, C.P.11810</td>
 				                                                    </tr>
 				                                                </table>
 				                                            </td>
@@ -655,7 +655,22 @@
 		                                    <!-- COPY -->
 		                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
 		                                        <tr>
-		                                            <td align="left" style="padding: 0 0 0 0; font-size: 14px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy">LOS PRECIOS SON SUJETOS A CAMBIOS SIN PREVIO AVISO.</td>
+		                                            <td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy">LAS EXISTENCIAS SOLICITADAS EN LA COTIZACIÓN ESTÁN SUJETAS A CAMBIOS SIN PREVIO AVISO.</td>
+		                                        </tr>
+		                                        <tr>
+		                                        	<td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy">LOS TIEMPOS DE ENTREGA SON DE 24 A 48 HORAS HÁBILES (EN CASO DE ZONA EXTENDIDA REQUIERE DÍAS ADICIONALES).</td>
+			                                    </tr>
+		                                        <tr>
+			                                        <td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy">LOS PRECIOS SON SUJETOS A CAMBIOS SIN PREVIO AVISO.</td>
+			                                    </tr>
+		                                        <tr>
+			                                        <td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy">NO SE ACEPTAN DEVOLUCIONES NI CANCELACIONES EN PRODUCTO ABIERTO.</td>
+			                                    </tr>
+		                                        <tr>
+			                                        <td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy"></td>
+			                                    </tr>
+		                                        <tr>
+			                                        <td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif;  font-weight:bold; font-style: italic;" class="padding-copy">VIGENCIA DE LA COTIZACIÓN:</td>
 		                                        </tr>
 		                                    </table>
 		                                </td>
@@ -682,8 +697,9 @@
 		            <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="max-width: 800px;" class="responsive-table">
 		                <tr>
 		                    <td align="center" style="font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color:#666666;">
-		                        Medellín 81 302, Roma Norte, Cuauhtémoc, D.F.
+		                        Av. Constituyentes 653, 16 de Septiembre, Miguel Hidalgo, D.F.
 		                        <br>
+		                        Tel. 67216096
 		                    </td>
 		                </tr>
 		            </table>
