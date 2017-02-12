@@ -64,20 +64,20 @@
 				                 		<td class="<c:out value="${className}"></c:out>">
 				                 			<c:choose>
 										 		<c:when test="${calls.letter == 1 }">
-										 			Si
+										 			<span class="glyphicon glyphicon-ok"></span>
 										 		</c:when>
 										 		<c:otherwise>
-										 			No
+										 			<span class="glyphicon glyphicon-remove"></span> 
 										 		</c:otherwise>
 										 	</c:choose>
 				                 		</td>
 				                 		<td class="<c:out value="${className}"></c:out>">
 				                 			<c:choose>
 										 		<c:when test="${calls.competition == 1 }">
-										 			Si
+										 			<span class="glyphicon glyphicon-ok"></span>
 										 		</c:when>
 										 		<c:otherwise>
-										 			No
+										 			<span class="glyphicon glyphicon-remove"></span>
 										 		</c:otherwise>
 										 	</c:choose>
 				                 		</td>

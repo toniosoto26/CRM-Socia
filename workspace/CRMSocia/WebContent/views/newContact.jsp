@@ -60,7 +60,7 @@
 	                <div class="input-group">
 	                    <div id="radioBtnV2" class="btn-group">
 	                        <span class="btn btn-success btn-sm active" data-toggle="estadollamda" data-value="1" data-active="btn-success" data-notactive="btn-default">CITA/COT/CONCURSO</span>
-	                        <span class="btn btn-default btn-sm notActive" data-toggle="estadollamda" data-value="2" data-active="btn-warning" data-notactive="btn-default">CARTA/INTERES</span>
+	                        <span class="btn btn-default btn-sm notActive" data-toggle="estadollamda" data-value="2" data-active="btn-warning" data-notactive="btn-default">CARTA/INTERES/COBRANZA</span>
 	                        <span class="btn btn-default btn-sm notActive" data-toggle="estadollamda" data-value="3" data-active="btn-danger" data-notactive="btn-default">NO INTE/NO CONTESTO</span>
 	                    </div>
 	                    <input type="hidden" name="estadoLlamada" id="estadollamda" value="1">
@@ -103,9 +103,9 @@
 				<br><br>
 				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Manejo de objeciones" onclick="" style="width: 180px;">
 				<br><br>
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío Carta" onclick="" style="width: 180px;">
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío Carta" onclick="sendMailCall(9);" style="width: 180px;">
 				<br><br>
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío presentación" onclick="" style="width: 180px;">
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío presentación" onclick="sendMailCall(10);" style="width: 180px;">
 				<br><br>
 				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío promociones" onclick="" style="width: 180px;">
 				<br><br>

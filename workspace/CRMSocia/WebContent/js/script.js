@@ -298,6 +298,39 @@ function loadContactAppointment(selected){
 	});
 }
 
+
+function sendMailCall(opcion){
+	$.ajax({
+		type: "post",
+		url : "Controller",
+		data: {
+			option:opcion
+		},
+		beforeSend: function(){
+			alertify.set({ delay: 3000 });
+			alertify.log("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Enviando...</center>");
+		}, 
+		
+		success: function(response){
+			if(trim(response)=="correcto"){
+				alertify.alert("Correo enviado correctamente");
+				$('#addQuotation').find("input[type=text], textarea, select, input[type=number]").val("");
+			}
+			else{
+				alertify.alert("Incorrecto");			
+			}
+			console.log("success");
+		},
+		error: function(){
+			alert("Error");
+		}
+	});
+	
+	return false;
+}
+
+
+
 function openSecondaryPanel(close, options){
 	if(options == 0){
 		$("#openPanel").html(

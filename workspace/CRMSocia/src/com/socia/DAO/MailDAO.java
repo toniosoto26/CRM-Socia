@@ -84,7 +84,7 @@ public class MailDAO {
         }
     }
 
-    public void sendFromGMailAttachment(String from, String pass, String[] to, String [] cc, String subject, String body) {
+    public void sendFromGMailAttachment(String from, String pass, String[] to, String [] cc, String subject, String body,String urlFile,String myFile) {
         Properties props = System.getProperties();
         String host = "smtp.gmail.com";
         props.put("mail.smtp.starttls.enable", "true");
@@ -128,23 +128,23 @@ public class MailDAO {
             
             // Part two is attachment
             messageBodyPart = new MimeBodyPart();
-            String filename = "cotizacion.xls";
+            String filename = urlFile; //"cotizacion.xls";
             DataSource source = new FileDataSource(filename);
             messageBodyPart.setDataHandler(new DataHandler(source));
-            messageBodyPart.setFileName(filename);
+            messageBodyPart.setFileName(myFile);
             multipart.addBodyPart(messageBodyPart);
 
             messageBodyPart = new MimeBodyPart();
             messageBodyPart.setContent(body, "text/html");
             multipart.addBodyPart(messageBodyPart);
-            
+            /*
             messageBodyPart = new MimeBodyPart();
             messageBodyPart.setDataHandler(new DataHandler(source));
-            messageBodyPart.setFileName(filename);
+            messageBodyPart.setFileName(myFile);
 
             messageBodyPart.setContent(body, "text/html");
             multipart.addBodyPart(messageBodyPart);
-            
+            */
             // Send the complete message parts
             message.setContent(multipart);
             message.setSubject(subject);

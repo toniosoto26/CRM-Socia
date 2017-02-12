@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -11,7 +13,10 @@ import com.mysql.jdbc.Statement;
 import com.socia.DTO.AddressDTO;
 import com.socia.DTO.CallDTO;
 import com.socia.DTO.CallLogDTO;
+import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
+import com.socia.DTO.QuotationDTO;
+import com.socia.DTO.QuotationDetailDTO;
 import com.socia.conexion.Conexion;
 
 
@@ -176,9 +181,10 @@ public class CallDAO {
 				int competition;
 				int  status;
 				String semaforo="";
+				String 		[]tel ;
 				
 				resultSet	=	statement.executeQuery();
-				System.out.println("calllog :"+sqlQuery.toString());
+				
 				while(resultSet.next()){
 					crm_user_id=resultSet.getInt(1);
 					crm_user_name = resultSet.getString(2);
@@ -194,6 +200,18 @@ public class CallDAO {
 					comments = resultSet.getString(12);
 					letter = resultSet.getInt(13);
 					competition = resultSet.getInt(14);
+					
+					tel=phone.split("ext.");
+					
+					if(tel.length==1){
+						phone=tel[0].toString();
+						
+					}
+					else{
+						phone=tel[0].toString()+" Ext."+tel[1].toString();
+						
+					}
+
 					
 					if(status==1){
 						semaforo="opcion 1 ";
@@ -226,6 +244,71 @@ public class CallDAO {
 			
 			return arrCallLog;
 		}
+	 
+	 
+		public StringBuilder generateMailLetter(){
+			StringBuilder		sqlQuery	=	null;
+	    	sqlQuery	=	new	StringBuilder();
+	    	
+	    	sqlQuery.append("<!DOCTYPE>");
+	    	  sqlQuery.append("<html>");
+	    		sqlQuery.append("<head>");
+	    		sqlQuery.append("</head>");
+	    		sqlQuery.append("<body>");
+	    		 	sqlQuery.append("<table border='0' cellpadding='0' cellspacing='0' width='100%'>");
+			 			sqlQuery.append("<tr>");
+			 				sqlQuery.append("<td bgcolor='#ffffff' align='center'>");
+								sqlQuery.append("<a href='http://gruposocia.com' target='_blank'>");
+									sqlQuery.append("<img alt='Logo' src='http://gruposocia.com/wp-content/uploads/2016/06/grupo-socia-logo-jp-hz-01-1.png' width='250' height='60' style='display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;' border='0'>");
+								sqlQuery.append("</a>");		           
+							sqlQuery.append("</td>");
+						sqlQuery.append("</tr>");
+						sqlQuery.append("<tr>");
+							sqlQuery.append("<td align='center'>");
+								sqlQuery.append("<font size=4 face='Arial, Helvetica, sans-serif' color='#0000FF'><b>AVISO DE ENVIO DE CARTA PARA CLIENTE</b></font>");
+							sqlQuery.append("</td>");
+						sqlQuery.append("</tr>");
+					sqlQuery.append("</table>");
+	    		sqlQuery.append("</body>");
+	    	  sqlQuery.append("</html>");
+	    	
+	    	
+	    	return sqlQuery;
+		}
+		
+		public StringBuilder generateMailPresentation(){
+			StringBuilder		sqlQuery	=	null;
+	    	sqlQuery	=	new	StringBuilder();
+	    	
+	    	sqlQuery.append("<!DOCTYPE>");
+	    	  sqlQuery.append("<html>");
+	    		sqlQuery.append("<head>");
+	    		sqlQuery.append("</head>");
+	    		sqlQuery.append("<body>");
+	    		 	sqlQuery.append("<table border='0' cellpadding='0' cellspacing='0' width='100%'>");
+			 			sqlQuery.append("<tr>");
+			 				sqlQuery.append("<td bgcolor='#ffffff' align='center'>");
+								sqlQuery.append("<a href='http://gruposocia.com' target='_blank'>");
+									sqlQuery.append("<img alt='Logo' src='http://gruposocia.com/wp-content/uploads/2016/06/grupo-socia-logo-jp-hz-01-1.png' width='250' height='60' style='display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;' border='0'>");
+								sqlQuery.append("</a>");		           
+							sqlQuery.append("</td>");
+						sqlQuery.append("</tr>");
+						sqlQuery.append("<tr>");
+							sqlQuery.append("<td align='center'>");
+								sqlQuery.append("<font size=4 face='Arial, Helvetica, sans-serif' color='#0000FF'><b>AVISO DE ENVIO DE PRESENTACION PARA CLIENTE</b></font>");
+							sqlQuery.append("</td>");
+						sqlQuery.append("</tr>");
+					sqlQuery.append("</table>");
+	    		sqlQuery.append("</body>");
+	    	  sqlQuery.append("</html>");
+	    	
+	    	
+	    	return sqlQuery;
+		}
+		
+		
+	 
+	 
 	 
 
 		public static void main(String args[]){

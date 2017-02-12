@@ -15,6 +15,7 @@ import com.socia.DAO.ClientDAO;
 import com.socia.DAO.ConsecutiveDAO;
 import com.socia.DAO.ContactDAO;
 import com.socia.DAO.DivisionPositionDAO;
+import com.socia.DAO.MailDAO;
 import com.socia.DAO.TransactionDAO;
 import com.socia.DTO.CallDTO;
 import com.socia.DTO.CallLogDTO;
@@ -57,6 +58,8 @@ public class Controller extends HttpServlet {
 		int						clientId	= 	0;
 		int						contactId	= 	0;
 		String					view		=	"";
+		String[]	to= {"rmmi_ros@hotmail.com", "jossoto14@gmail.com", "vidal.sistemas@hotmail.com"};
+		//String[]	to= {"vidal.sistemas@hotmail.com"};
 		
 		///////**********  DAO ***************
 		
@@ -65,6 +68,7 @@ public class Controller extends HttpServlet {
 		DivisionPositionDAO objDivPos =new  DivisionPositionDAO();
 		ConsecutiveDAO	objConsecutive=	new ConsecutiveDAO();
 		CallDAO objCall = new CallDAO();
+		MailDAO		objMail	=	new MailDAO();
 		
 		///////**********  DTO ****************
 		ContactDTO	infoContact	= new ContactDTO();
@@ -276,12 +280,54 @@ public class Controller extends HttpServlet {
 			if(arrDatos.size()>0){
 				session.removeAttribute("datos");
 				session.setAttribute("datos", arrDatos);
-				System.out.println("arrDatos"+arrDatos.toString());
+				
 				url = "/views/calls/callDetail.jsp";
 				
 			}
 		}
+		//correo  de carta 
+		if(option == 9){
+			boolean sendMail=true;
+			StringBuilder body;
+			String[] cc	= {""};
+			cc[0] =  ((LoginDTO)session.getAttribute("sessionLogin")).getEmail();
+			
+			body = objCall.generateMailLetter();
+			try{
+				objMail.sendFromGMailAttachment("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, cc, "Envio de Carta - Grupo Socia ", body.toString(),"C:\\Users\\Vidal\\Documents\\DoocumentsMail\\Carta Corporativa GRUPO SOCIA.pdf","Carta Corporativa GRUPO SOCIA.pdf");
+			}
+			catch(Exception e ){
+				sendMail= false;
+				e.printStackTrace();
+			}
+			session.removeAttribute("sendMailCalls");
+			session.setAttribute("sendMailCalls", sendMail);
+			
+			url = "views/calls/responses/sendMailCalls.jsp";
+		}
 		
+		
+		//correo  de envio de presentacion 
+		if(option == 10){
+			boolean sendMail=true;
+			StringBuilder body;
+			String[] cc	= {""};
+			cc[0] =  ((LoginDTO)session.getAttribute("sessionLogin")).getEmail();
+			
+			body = objCall.generateMailPresentation();
+			try{
+				objMail.sendFromGMailAttachment("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, cc, "Envio de Presentación - Grupo Socia", body.toString(),"C:\\Users\\Vidal\\Documents\\DoocumentsMail\\Presentacion Corporativa GRUPO SOCIA.pdf","Presentacion Corporativa GRUPO SOCIA.pdf");
+			}
+			catch(Exception e ){
+				sendMail= false;
+				e.printStackTrace();
+			}
+			session.removeAttribute("sendMailCalls");
+			session.setAttribute("sendMailCalls", sendMail);
+			
+			url = "views/calls/responses/sendMailCalls.jsp";
+		}
+
 		
 		request.getRequestDispatcher(url).forward(request, response);
 	}

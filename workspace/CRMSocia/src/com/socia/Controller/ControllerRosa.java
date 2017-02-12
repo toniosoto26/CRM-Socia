@@ -270,7 +270,7 @@ public class ControllerRosa extends HttpServlet {
 					}
 					else if(option == 6){
 						objQuotation.generateExcelFile(client, contact, address, quotation, arrQuotationDetail);
-						objMail.sendFromGMailAttachment("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, cc, "Cotización", body.toString());
+						objMail.sendFromGMailAttachment("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, cc, "Cotización", body.toString(),"cotizacion.xls","cotizacion.xls");
 					}
 					
 				}catch(Exception exception){
