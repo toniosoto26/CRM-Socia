@@ -6824,6 +6824,10 @@ button.close {
 	height: auto;
 	width: 100%;
 }
+#calendar {
+	max-width: 900px;
+	margin: 0 auto;
+}
 .centrado {
 	display: block;
 	margin: 0 auto;

@@ -14,6 +14,9 @@ public class AppointmentDTO {
 	private	String	companyName;
 	private	String	comments;
 	
+	private String	bdmName;
+	private String	addressDescription;
+	
 	public int getCrmAppointmentId() {
 		return crmAppointmentId;
 	}
@@ -86,6 +89,19 @@ public class AppointmentDTO {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+	
+	public String getBdmName() {
+		return bdmName;
+	}
+	public void setBdmName(String bdmName) {
+		this.bdmName = bdmName;
+	}
+	public String getAddressDescription() {
+		return addressDescription;
+	}
+	public void setAddressDescription(String addressDescription) {
+		this.addressDescription = addressDescription;
+	}
 	@Override
 	public String toString() {
 		return "AppointmentDTO [crmAppointmentId=" + crmAppointmentId
@@ -94,8 +110,8 @@ public class AppointmentDTO {
 				+ ", crmBdmId=" + crmBdmId + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", email=" + email
 				+ ", companyName=" + companyName + ", comments=" + comments
-				+ "]";
+				+ ", bdmName=" + bdmName + ", addressDescription="
+				+ addressDescription + "]";
 	}
 	
-
 }

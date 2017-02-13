@@ -55,15 +55,16 @@ public class TenderDAO {
 		String				name		=	"";
 		String				date		=	"";
 		String				type		=	"";
+		int					tenderId	=	0;
 		
 		try{
 			query	=	new	StringBuilder();
-			query.append(" SELECT t.start_up_date, c.company_name, bl.name, 'Inicio gestión' ");
+			query.append(" SELECT t.start_up_date, c.company_name, bl.name, 'Inicio gestión', t.crm_tender_id ");
 			query.append(" FROM crm_tender t  ");
 			query.append(" JOIN crm_client c ON t.crm_client_id = c.crm_client_id ");
 			query.append(" JOIN crm_business_line bl ON t.crm_business_line_id = bl.crm_business_line_id ");
 			query.append(" UNION ");
-			query.append(" SELECT t.deadline, c.company_name, bl.name, 'Fecha concurso' ");
+			query.append(" SELECT t.deadline, c.company_name, bl.name, 'Fecha concurso', t.crm_tender_id ");
 			query.append(" FROM crm_tender t  ");
 			query.append(" JOIN crm_client c ON t.crm_client_id = c.crm_client_id ");
 			query.append(" JOIN crm_business_line bl ON t.crm_business_line_id = bl.crm_business_line_id ");
@@ -79,6 +80,7 @@ public class TenderDAO {
 				companyName	=	rs.getString(2);
 				name		=	rs.getString(3);
 				type		=	rs.getString(4);
+				tenderId	=	rs.getInt("crm_tender_id");
 				
 				if(type.equals("Inicio gestión")){
 					startUpDate = date.substring(0,10);
@@ -94,6 +96,7 @@ public class TenderDAO {
 				tender.setBusinessLineName(name);
 				tender.setStartUpDate(startUpDate);
 				tender.setDeadline(deadLine);
+				tender.setTenderId(tenderId);
 				
 				arrTender.add(tender);
 			}
@@ -159,7 +162,6 @@ public class TenderDAO {
 				
 				tender = new TenderLogDTO(date, companyName, businessLine, brand, comments, deadline);
 				
-				System.out.println(tender.toString());
 				arrTender.add(tender);
 			}
 			

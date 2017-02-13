@@ -218,10 +218,11 @@ public class AppointmentDAO {
 		String					fName		=	"";
 		String					lName		=	"";
 		String					dAppoint	=	"";
+		int						appointmentId=  0;
 		
 		try{
 			query	=	new	StringBuilder();
-			query.append(" SELECT client.company_name, appointment.date, contact.first_name, contact.last_name ");
+			query.append(" SELECT client.company_name, appointment.date, contact.first_name, contact.last_name, appointment.crm_appointment_id ");
 			query.append(" FROM crm_appointment appointment, crm_client client, crm_contact contact ");
 			query.append(" where appointment.crm_client_id = client.crm_client_id ");
 			query.append(" and appointment.crm_contact_id = contact.crm_contact_id ");
@@ -237,6 +238,7 @@ public class AppointmentDAO {
 				dAppoint	=	rs.getString(2);
 				fName		=	rs.getString(3);
 				lName		=	rs.getString(4);
+				appointmentId=	rs.getInt("crm_appointment_id");
 				
 				appointment = new AppointmentDTO();
 				
@@ -244,6 +246,7 @@ public class AppointmentDAO {
 				appointment.setDate(dAppoint.replace(" ", "T"));
 				appointment.setFirstName(fName);
 				appointment.setLastName(lName);
+				appointment.setCrmAppointmentId(appointmentId);
 				
 				arrAppo.add(appointment);
 			}
@@ -340,6 +343,80 @@ public class AppointmentDAO {
 		}
 		
 		return arrAppointment;
+	}
+	
+	public AppointmentDTO getAppointmentById(int crmAppointmentId){
+		AppointmentDTO			appointment	= 	null;
+		Connection				con			=	null;
+		PreparedStatement		ps			=	null;
+		ResultSet				rs			=	null;
+		Conexion				conexion	=	null;
+		StringBuilder			query		=	null;
+
+		Date					date		=	null;
+		String					strDate		=	"";
+		String					companyName	=	"";
+		String					contactName	=	"";
+		String					fName		=	"";
+		String					lName		=	"";
+		String					bdmName		=	"";
+		String					addressDesc =	"";
+		String					comments	=	"";
+
+		DateFormat 				format 		= new SimpleDateFormat("dd 'de' MMMM 'de' yyyy 'a las' HH:mm 'hrs'");
+		
+		try{
+			query	=	new	StringBuilder();
+			query.append(" SELECT a.date, client.company_name,  contact.first_name, contact.last_name, ");
+			query.append(" user.first_name bdm_fname, user.last_name bdm_lname, address.street, ");
+			query.append(" address.ext_num, address.int_num,address.suburb, address.city, address.state, ");
+			query.append(" address.country, a.subject ");
+			query.append(" FROM crm_appointment a ");
+			query.append(" JOIN crm_client client ON a.crm_client_id = client.crm_client_id ");
+			query.append(" JOIN crm_contact contact ON a.crm_contact_id = contact.crm_contact_id ");
+			query.append(" JOIN crm_address address ON a.crm_address_id = address.crm_address_id ");
+			query.append(" JOIN crm_user user ON a.crm_bdm_id = user.crm_user_id ");
+			
+			conexion	=	new	Conexion();
+			con			=	conexion.getConnection1();
+			ps			=	con.prepareStatement(query.toString());
+			
+			rs	=	ps.executeQuery();
+			
+			while(rs.next()){
+				date		=	rs.getDate("date");
+				strDate		=	format.format(date);
+				companyName	=	rs.getString("company_name");
+				fName		=	rs.getString("first_name");
+				lName		=	rs.getString("last_name");
+				bdmName		=	rs.getString("bdm_fname")+" "+rs.getString("bdm_lname");
+				addressDesc	=	rs.getString("street")+" No. "+rs.getInt("ext_num")+
+				(rs.getString("int_num")!=null?" Int. "+rs.getInt("int_num"):"")+", "+rs.getString("suburb")+", "
+				+rs.getString("city")+", "+rs.getString("state")+", "+rs.getString("country");
+				comments	=	rs.getString("subject");
+				
+				appointment = new AppointmentDTO();
+				
+				appointment.setDate(strDate);
+				appointment.setCompanyName(companyName);
+				appointment.setFirstName(fName);
+				appointment.setLastName(lName);
+				appointment.setBdmName(bdmName);
+				appointment.setAddressDescription(addressDesc);
+				appointment.setComments(comments);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				ps.close();
+				con.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		return appointment;
 	}
 	
 }

@@ -29,9 +29,9 @@
 			eventLimit: true, // allow "more" link when too many events
 			eventClick: function(calEvent, jsEvent, view) {
 
-		        alert('Event: ' + calEvent.title);
-		        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-		        alert('View: ' + view.name);
+		        //alert('Event: ' + calEvent.title);
+		        //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+		        alert('Id: ' + calEvent.id);
 
 		        // change the border color just for fun
 		        $(this).css('border-color', 'red');
@@ -39,27 +39,18 @@
 		    },
 			events: [
 						<c:choose>
-							<c:when test="${not empty sessionScope.calendarAppointment}">
-								<c:forEach items="${sessionScope.calendarAppointment}" var="calendar" varStatus="calenCount">
-									{
-										title: 'Cita con <c:out value="${calendar.companyName}"></c:out>',
-										start: '<c:out value="${calendar.date}"></c:out>',
-										color: '#6083e4'
-									},
-								</c:forEach>
-							</c:when>
-						</c:choose>
-						<c:choose>
 							<c:when test="${not empty sessionScope.calendarTender}">
 								<c:forEach items="${sessionScope.calendarTender}" var="calendar" varStatus="calenCount">
 									{
 										<c:choose>
 											<c:when test="${calendar.startUpDate != null}">
+												id: 'ten-<c:out value="${calendar.tenderId}"></c:out>',
 												title: 'Inicio gestión <c:out value="${calendar.companyName}"></c:out> en <c:out value="${calendar.businessLineName}"></c:out>',
 												start: '<c:out value="${calendar.startUpDate}"></c:out>',
 												color: '#57d896'
 											</c:when>
 											<c:otherwise>
+												id: 'ten-<c:out value="${calendar.tenderId}"></c:out>',
 												title: 'Concurso <c:out value="${calendar.companyName}"></c:out> en <c:out value="${calendar.businessLineName}"></c:out>',
 												start: '<c:out value="${calendar.deadline}"></c:out>',
 												color: '#de2c16'
@@ -69,19 +60,47 @@
 								</c:forEach>
 							</c:when>
 						</c:choose>
-						{
-							title: 'Test',
-							start: '2016-12-08'
-						}
+						<c:choose>
+							<c:when test="${not empty sessionScope.calendarAppointment}">
+								<c:forEach items="${sessionScope.calendarAppointment}" var="calendar" varStatus="calenCount">
+									<c:choose>
+										<c:when test="${!calenCount.last}">
+											{
+												id: 'apo-<c:out value="${calendar.crmAppointmentId}"></c:out>',
+												title: 'Cita con <c:out value="${calendar.companyName}"></c:out>',
+												start: '<c:out value="${calendar.date}"></c:out>',
+												color: '#6083e4'
+											},
+										</c:when>
+										<c:otherwise>
+											{
+												id: 'apo-<c:out value="${calendar.crmAppointmentId}"></c:out>',
+												title: 'Cita con <c:out value="${calendar.companyName}"></c:out>',
+												start: '<c:out value="${calendar.date}"></c:out>',
+												color: '#6083e4'
+											}
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</c:when>
+						</c:choose>
 					]
 		});
 	});
 </script>
-<style>
-	#calendar {
-		max-width: 900px;
-		margin: 0 auto;
-	}
-</style>
 
 <div id='calendar'></div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog" style="width:80%">
+    	<!-- Modal content-->
+      	<div class="modal-content">
+        	<div class="modal-header">
+          		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		<h4 class="modal-title">Detalle</h4>
+        	</div>
+        	<div class="modal-body" id="modalContent"></div>
+      	</div>
+    </div>
+</div>

@@ -96,3 +96,19 @@ function addTender(){
 	
 	return false;
 }
+
+function viewCalendarDetail(calendarEvent){
+	$.ajax({
+		type:"post",
+		url:"ControllerTemp",
+		data: {"option":14, event: calendarEvent },
+		beforeSend: function(){$('#modalContent').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");}, 
+		success: function(response){
+			$("#selectBusinessLine").html(response);
+			$(".chosen-select").chosen();
+		},
+		error: function(){
+			alertify.alert("no funciona");
+		}
+	})
+}
