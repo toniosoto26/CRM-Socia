@@ -90,7 +90,7 @@ function addTender(){
 			console.log("success");
 		},
 		error: function(){
-			alert("Error");
+			alertify.alert("Error");
 		}
 	});
 	
@@ -98,14 +98,21 @@ function addTender(){
 }
 
 function viewCalendarDetail(calendarEvent){
+	$('#detailModal').modal('toggle');
+	
 	$.ajax({
 		type:"post",
 		url:"ControllerTemp",
 		data: {"option":14, event: calendarEvent },
-		beforeSend: function(){$('#modalContent').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");}, 
+		beforeSend: function(){$('#detailModalContent').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");}, 
 		success: function(response){
-			$("#selectBusinessLine").html(response);
-			$(".chosen-select").chosen();
+			$("#detailModalContent").html(response);
+			if(calendarEvent.includes("ten")){
+				$(".modal-title").text("Detalle concurso");
+			}
+			else{
+				$(".modal-title").text("Detalle cita");
+			}
 		},
 		error: function(){
 			alertify.alert("no funciona");

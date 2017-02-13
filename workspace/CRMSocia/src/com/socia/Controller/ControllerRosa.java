@@ -27,6 +27,7 @@ import com.socia.DAO.QuotationDetailDAO;
 import com.socia.DAO.TenderDAO;
 import com.socia.DAO.TransactionDAO;
 import com.socia.DTO.AddressDTO;
+import com.socia.DTO.AppointmentDTO;
 import com.socia.DTO.AppointmentLogDTO;
 import com.socia.DTO.BusinessLineDTO;
 import com.socia.DTO.CallLogDTO;
@@ -121,6 +122,8 @@ public class ControllerRosa extends HttpServlet {
 		String 							fechaFin				=	"";
 		String 							clientType				=	"";
 		
+		String							eventId					=	"";
+		
 		/** DAO */
 		ItemDAO							objItem					=	new ItemDAO();
 		MailDAO							objMail					=	new MailDAO();
@@ -156,6 +159,7 @@ public class ControllerRosa extends HttpServlet {
 		ArrayList <AppointmentLogDTO> 	arrAppointmentLog		=	new ArrayList <AppointmentLogDTO>();
 		ArrayList <TenderLogDTO> 		arrTenderLog			=	new ArrayList <TenderLogDTO>();
 		ArrayList <QuotationLogDTO> 	arrQuotationLog			=	new ArrayList <QuotationLogDTO>();
+		AppointmentDTO					appointmentDetail		=	null;
 		
 		/** URL */
 		String							url					=	"";
@@ -486,10 +490,32 @@ public class ControllerRosa extends HttpServlet {
 			client = objClient.getClientById(clientId);
 			
 			session.removeAttribute("clientType");
-			
 			session.setAttribute("clientType", client.getClientType());
 
 			url = "/utils/clientType.jsp";
+		}
+		if(option == 14){
+			String[] arrId;
+			
+			eventId = request.getParameter("event");
+			arrId = eventId.split("-");
+			
+			session.removeAttribute("appointmentDetail");
+			session.removeAttribute("tenderDetail");
+			
+			if(eventId.contains("ten")){
+				tender = objTender.geTenderById(Integer.parseInt(arrId[1]));
+				System.out.println("Tender "+tender.toString());
+
+				session.setAttribute("tenderDetail", tender);
+			}else{
+				appointmentDetail = objAppointment.getAppointmentById(Integer.parseInt(arrId[1]));
+				System.out.println("Appointment "+appointmentDetail.toString());
+
+				session.setAttribute("appointmentDetail", appointmentDetail);
+			}
+			
+			url = "/views/calendar/responses/calendarDetail.jsp";
 		}
 		
 		request.getRequestDispatcher(url).forward(request, response);

@@ -16,26 +16,15 @@
 			selectable: true,
 			selectHelper: true,
 			select: function(start, end) {
-				/*var eventData;
-				eventData = {
-					start: start,
-					end: end
-				};
-				$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true*/
-				
 				$('#calendar').fullCalendar('unselect');
 			},
 			editable: true,
 			eventLimit: true, // allow "more" link when too many events
 			eventClick: function(calEvent, jsEvent, view) {
-
-		        //alert('Event: ' + calEvent.title);
-		        //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-		        alert('Id: ' + calEvent.id);
-
+				viewCalendarDetail(calEvent.id);
+		        
 		        // change the border color just for fun
 		        $(this).css('border-color', 'red');
-
 		    },
 			events: [
 						<c:choose>
@@ -92,15 +81,15 @@
 <div id='calendar'></div>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-	<div class="modal-dialog" style="width:80%">
+<div class="modal fade" id="detailModal" role="dialog">
+	<div class="modal-dialog" style="width:60%">
     	<!-- Modal content-->
       	<div class="modal-content">
         	<div class="modal-header">
           		<button type="button" class="close" data-dismiss="modal">&times;</button>
           		<h4 class="modal-title">Detalle</h4>
         	</div>
-        	<div class="modal-body" id="modalContent"></div>
+        	<div class="modal-body" id="detailModalContent"></div>
       	</div>
     </div>
 </div>

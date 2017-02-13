@@ -3,11 +3,12 @@ package com.socia.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.socia.DTO.AppointmentLogDTO;
 import com.socia.DTO.TenderDTO;
 import com.socia.DTO.TenderLogDTO;
 import com.socia.conexion.Conexion;
@@ -38,8 +39,6 @@ public class TenderDAO {
     
         return queries;
     }
-	
-
 
 	public List<TenderDTO>	getTenders(){
 		List<TenderDTO>		arrTender	=	new	ArrayList<TenderDTO>();
@@ -180,4 +179,78 @@ public class TenderDAO {
 		return arrTender;
 	}
 
+	public TenderDTO geTenderById(int tenderId){
+		TenderDTO			tender			= 	null;
+		Connection			con				=	null;
+		PreparedStatement	ps				=	null;
+		ResultSet			rs				=	null;
+		Conexion			conexion		=	null;
+		StringBuilder		query			=	null;
+
+		String				startUpDate		=	"";
+		Date				startUp			=	null;
+		String				deadline		=	"";
+		Date				deadlineDate	=	null;
+		String				requirements	=	"";
+		String				comments		=	"";
+		String				decisionMaker	=	"";
+		String 				currentBrand	=	"";
+		String				companyName		=	"";
+		String				businessLineName=	"";
+
+		DateFormat 			format 			= new SimpleDateFormat("dd 'de' MMMM 'de' yyyy");
+		
+		try{
+			query	=	new	StringBuilder();
+			query.append(" SELECT t.start_up_date, t.deadline, t.requirements, t.comments, bl.name, ");
+			query.append(" t.decision_maker, t.current_brand, client.company_name ");
+			query.append(" FROM crm_tender t ");
+			query.append(" JOIN crm_client client ON t.crm_client_id = client.crm_client_id ");
+			query.append(" JOIN crm_business_line bl ON t.crm_business_line_id = bl.crm_business_line_id ");
+			query.append(" WHERE t.crm_tender_id = ? ");
+			
+			conexion	=	new	Conexion();
+			con			=	conexion.getConnection1();
+			ps			=	con.prepareStatement(query.toString());
+			
+			ps.setInt(1, tenderId);
+			
+			rs	=	ps.executeQuery();
+			
+			while(rs.next()){
+				startUp = rs.getDate("start_up_date");
+				startUpDate = format.format(startUp);
+				deadlineDate = rs.getDate("deadline");
+				deadline = format.format(deadlineDate);
+				requirements = rs.getString("requirements");
+				comments = rs.getString("comments");
+				businessLineName = rs.getString("name");
+				decisionMaker = rs.getString("decision_maker");
+				currentBrand = rs.getString("current_brand");
+				companyName = rs.getString("company_name");
+				
+				tender = new TenderDTO();
+				tender.setCompanyName(companyName);
+				tender.setStartUpDate(startUpDate);
+				tender.setDeadline(deadline);
+				tender.setRequirements(requirements);
+				tender.setComments(comments);
+				tender.setBusinessLineName(businessLineName);
+				tender.setDecisionMaker(decisionMaker);
+				tender.setCurrentBrand(currentBrand);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				ps.close();
+				con.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		return tender;
+	}
+	
 }

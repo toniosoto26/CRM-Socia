@@ -11,8 +11,6 @@ import java.util.List;
 
 import com.socia.DTO.AppointmentDTO;
 import com.socia.DTO.AppointmentLogDTO;
-import com.socia.DTO.CallDTO;
-import com.socia.DTO.CallLogDTO;
 import com.socia.DTO.ContactDTO;
 import com.socia.conexion.Conexion;
 
@@ -356,7 +354,6 @@ public class AppointmentDAO {
 		Date					date		=	null;
 		String					strDate		=	"";
 		String					companyName	=	"";
-		String					contactName	=	"";
 		String					fName		=	"";
 		String					lName		=	"";
 		String					bdmName		=	"";
@@ -376,10 +373,13 @@ public class AppointmentDAO {
 			query.append(" JOIN crm_contact contact ON a.crm_contact_id = contact.crm_contact_id ");
 			query.append(" JOIN crm_address address ON a.crm_address_id = address.crm_address_id ");
 			query.append(" JOIN crm_user user ON a.crm_bdm_id = user.crm_user_id ");
+			query.append(" WHERE a.crm_appointment_id = ? ");
 			
 			conexion	=	new	Conexion();
 			con			=	conexion.getConnection1();
 			ps			=	con.prepareStatement(query.toString());
+			
+			ps.setInt(1, crmAppointmentId);
 			
 			rs	=	ps.executeQuery();
 			
