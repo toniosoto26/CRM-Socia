@@ -6,9 +6,9 @@
     
 <c:choose>
 	<c:when test="${sessionScope.stat != false }">
-		Se registro un cita con: <c:out value="${sessionScope.nombre}"></c:out>		
+		Cita guardada correctamente.
 	</c:when>
 	<c:otherwise>
-		Error al insertar la cita con: <c:out value="${sessionScope.nombre}"></c:out>
+		Error, intentarlo de nuevo.
 	</c:otherwise>	
 </c:choose>    

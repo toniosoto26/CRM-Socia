@@ -105,16 +105,16 @@ public class ControllerAppointment extends HttpServlet {
 					String	days	=	request.getParameter("dtp_input2");
 					String	hrs		=	request.getParameter("dtp_input3");
 					String	email	=	request.getParameter("emailI");
-					String	nameI	=	request.getParameter("nameI");
+					String	nameI	=	request.getParameter("idNameI");
 					String	comment	=	request.getParameter("observationA");
 					boolean	statIn	=	false;
 					activeTab = request.getParameter("activeTab");
 					
-					System.out.println(activeTab);
+					
 					
 					activeTab = request.getParameter("activeTab");
 					   
-					   System.out.println(activeTab);
+					  
 					   
 					   if(activeTab.equals("SELECCIONAR")){
 					    addressId = Integer.parseInt(request.getParameter("addressId"));
