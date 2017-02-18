@@ -158,7 +158,7 @@ public class IndicatorDAO {
 			sqlQuery.append(" FROM crm_appointment a ");
 			sqlQuery.append(" JOIN crm_client cl ON a.crm_client_id = cl.crm_client_id ");
 			sqlQuery.append(" WHERE a.crm_user_id = ? ");
-			sqlQuery.append(" AND DATE(a.date) = ? ");
+			sqlQuery.append(" AND DATE(a.date_created) = ? ");
 			sqlQuery.append(" AND cl.client_type = ? ");
 			
 			sociaDB		=	new	Conexion();
@@ -373,7 +373,7 @@ public class IndicatorDAO {
 			sqlQuery.append(" FROM crm_tender t ");
 			sqlQuery.append(" JOIN crm_business_line bl ON t.crm_business_line_id = bl.crm_business_line_id ");
 			sqlQuery.append(" where t.crm_user_id = ? ");
-			sqlQuery.append(" AND DATE(t.start_up_date) = ? ");
+			sqlQuery.append(" AND DATE(t.date_created) = ? ");
 			sqlQuery.append(" GROUP BY bl.name, t.deadline ");
 			
 			sociaDB		=	new	Conexion();
@@ -402,7 +402,6 @@ public class IndicatorDAO {
 					totalDate += "/ "+dateString;
 				}
 				
-				System.out.println("pero que demo");
 				count++;
 			}
 			
@@ -463,8 +462,8 @@ public class IndicatorDAO {
 			sqlQuery.append(" JOIN crm_business_line bl ON t.crm_business_line_id = bl.crm_business_line_id ");
 			sqlQuery.append(" where t.crm_user_id = ? ");
 			sqlQuery.append(" AND bl.crm_business_line_id = ? ");
-			sqlQuery.append(" AND DATE(t.start_up_date) >= ? ");
-			sqlQuery.append(" AND DATE(t.start_up_date) <= ? ");
+			sqlQuery.append(" AND DATE(t.date_created) >= ? ");
+			sqlQuery.append(" AND DATE(t.date_created) <= ? ");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();

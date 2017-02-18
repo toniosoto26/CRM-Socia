@@ -278,6 +278,7 @@ public class AppointmentDAO {
 		Date							date			= null;
 		String							subject			= "";
 		String							bdmName			= "";
+		Date							dateCreated		= null;
 		AppointmentLogDTO				appointment		=	null;
 		ArrayList<AppointmentLogDTO>	arrAppointment	= 	new ArrayList<AppointmentLogDTO>();
 
@@ -286,23 +287,21 @@ public class AppointmentDAO {
 		try{
 			sqlQuery	=	new	StringBuilder();
 			sqlQuery.append(" select cli.company_name,cont.first_name, cont.last_name, position, DATE(apo.date),  ");
-			sqlQuery.append(" TIME(apo.date), apo.subject, usr.first_name, usr.last_name ");
+			sqlQuery.append(" TIME(apo.date), apo.subject, usr.first_name, usr.last_name, apo.date_created ");
 			sqlQuery.append(" from crm_contact cont , crm_position pos, crm_appointment apo, crm_client cli, crm_user usr ");
 			sqlQuery.append(" where apo.crm_client_id=cli.crm_client_id ");
 			sqlQuery.append(" and apo.crm_contact_id=cont.crm_contact_id ");
 			sqlQuery.append(" and apo.crm_bdm_id=usr.crm_user_id ");
 			sqlQuery.append(" and cont.id_position=pos.id_position ");
-			sqlQuery.append(" and DATE(apo.date) >= ? ");
-			sqlQuery.append(" and DATE(apo.date) <= ? ");
+			sqlQuery.append(" and DATE(apo.date_created) >= ? ");
+			sqlQuery.append(" and DATE(apo.date_created) <= ? ");
 			sqlQuery.append(" and apo.crm_user_id = ? ");
 			sqlQuery.append(clientType.equals("")?"":" and cli.client_type = ? ");
-			sqlQuery.append(" order by apo.date ");
+			sqlQuery.append(" order by apo.date_created desc ");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
 			statement	=	connection.prepareStatement(sqlQuery.toString());
-			
-			System.out.println(userId);
 			
 			statement.setString(1, fechaIni);
 			statement.setString(2, fechaFin);
@@ -324,7 +323,9 @@ public class AppointmentDAO {
 				subject = resultSet.getString(7);
 				bdmName = resultSet.getString(8)+" "+resultSet.getString(9);
 				
-				appointment = new AppointmentLogDTO(companyName, contactName, position, date, subject, bdmName);
+				dateCreated = resultSet.getDate("date_created");
+				
+				appointment = new AppointmentLogDTO(companyName, contactName, position, date, subject, bdmName, dateCreated);
 				arrAppointment.add(appointment);
 			}
 			

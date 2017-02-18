@@ -29,6 +29,7 @@ function loadCallDetail(type, fechaIni, fechaFin){
 				fechaFin:(fechaFin==undefined?fechaIni:fechaFin),
 				clientType: type,
 				option:8};
+	$(".modal-title").text('Llamadas');
 	
 	$.ajax({
 		url: "Controller",
@@ -38,7 +39,6 @@ function loadCallDetail(type, fechaIni, fechaFin){
          success: function(dataResponse){
         	 setTimeout(function(){
         		 $('#modalContent').html(dataResponse);
-        		 $(".modal-title").text('Llamadas');
         	 }, 2000);
          },
          error: function(XMLHttpRequest, textStatus, errorThrown){alertify.alert(errorThrown);}
@@ -53,6 +53,7 @@ function loadAppointmentDetail(type, fechaIni, fechaFin){
 			option:10
 	};
 	
+	$(".modal-title").text('Citas');
 	$.ajax({
 		url: "ControllerTemp",
 		type :"post",
@@ -61,7 +62,6 @@ function loadAppointmentDetail(type, fechaIni, fechaFin){
          success: function(dataResponse){
         	 setTimeout(function(){
         		 $('#modalContent').html(dataResponse);
-        		 $(".modal-title").text('Citas');
         	 }, 2000);
          },
          error: function(XMLHttpRequest, textStatus, errorThrown){alertify.alert(errorThrown);}
@@ -74,7 +74,8 @@ function loadTenderDetail(fechaIni, fechaFin){
 			fechaFin:(fechaFin==undefined?fechaIni:fechaFin),
 			option:11
 	};
-	
+
+	$(".modal-title").text('Concursos');
 	$.ajax({
 		url: "ControllerTemp",
 		type :"post",
@@ -83,7 +84,6 @@ function loadTenderDetail(fechaIni, fechaFin){
          success: function(dataResponse){
         	 setTimeout(function(){
         		 $('#modalContent').html(dataResponse);
-        		 $(".modal-title").text('Concursos');
         	 }, 2000);
          },
          error: function(XMLHttpRequest, textStatus, errorThrown){alertify.alert(errorThrown);}
@@ -96,6 +96,7 @@ function loadQuotationDetail(fechaIni, fechaFin){
 			fechaFin:(fechaFin==undefined?fechaIni:fechaFin),
 			option:12
 	};
+	$(".modal-title").text('Cotizaciones');
 	
 	$.ajax({
 		url: "ControllerTemp",
@@ -105,7 +106,6 @@ function loadQuotationDetail(fechaIni, fechaFin){
          success: function(dataResponse){
         	 setTimeout(function(){
         		 $('#modalContent').html(dataResponse);
-        		 $(".modal-title").text('Cotizaciones');
         	 }, 2000);
          },
          error: function(XMLHttpRequest, textStatus, errorThrown){alertify.alert(errorThrown);}

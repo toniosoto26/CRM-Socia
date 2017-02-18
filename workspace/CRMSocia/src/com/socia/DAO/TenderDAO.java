@@ -127,19 +127,21 @@ public class TenderDAO {
 		String	 				brand			= "";
 		String					comments		= "";
 		Date					deadline		= null;
+		Date					dateCreated		= null;
 		TenderLogDTO			tender			=	null;
 		ArrayList<TenderLogDTO>	arrTender		= 	new ArrayList<TenderLogDTO>();
 		
 		try{
 			sqlQuery	=	new	StringBuilder();
-			sqlQuery.append(" select ten.start_up_date, cli.company_name, bl.name, ten.current_brand, ten.comments, deadline  ");
+			sqlQuery.append(" select ten.start_up_date, cli.company_name, bl.name, ten.current_brand, ten.comments, deadline,  ");
+			sqlQuery.append(" ten.date_created ");
 			sqlQuery.append(" from crm_tender ten, crm_client cli, crm_business_line bl ");
 			sqlQuery.append(" where ten.crm_client_id=cli.crm_client_id ");
 			sqlQuery.append(" and ten.crm_business_line_id = bl.crm_business_line_id ");
-			sqlQuery.append(" and DATE(ten.start_up_date) >= ? ");
-			sqlQuery.append(" and DATE(ten.start_up_date) <= ? ");
+			sqlQuery.append(" and DATE(ten.date_created) >= ? ");
+			sqlQuery.append(" and DATE(ten.date_created) <= ? ");
 			sqlQuery.append(" and ten.crm_user_id = ? ");
-			sqlQuery.append(" order by ten.start_up_date ");
+			sqlQuery.append(" order by ten.date_created desc ");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
@@ -158,8 +160,9 @@ public class TenderDAO {
 				brand = resultSet.getString(4);
 				comments = resultSet.getString(5);
 				deadline = resultSet.getDate(6);
+				dateCreated = resultSet.getDate("date_created");
 				
-				tender = new TenderLogDTO(date, companyName, businessLine, brand, comments, deadline);
+				tender = new TenderLogDTO(date, companyName, businessLine, brand, comments, deadline, dateCreated);
 				
 				arrTender.add(tender);
 			}

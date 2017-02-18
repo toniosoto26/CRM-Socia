@@ -10,9 +10,10 @@ public class TenderLogDTO {
 	private String 	brand;
 	private String 	comments;
 	private Date	deadline;
+	private Date	dateCreated;
 	
 	public TenderLogDTO(Date date, String companyName, String businessLine,
-			String brand, String comments, Date deadline) {
+			String brand, String comments, Date deadline, Date dateCreated) {
 		super();
 		this.date = date;
 		this.companyName = companyName;
@@ -20,6 +21,7 @@ public class TenderLogDTO {
 		this.brand = brand;
 		this.comments = comments;
 		this.deadline = deadline;
+		this.dateCreated = dateCreated;
 	}
 	public String getCompanyName() {
 		return companyName;
@@ -58,11 +60,18 @@ public class TenderLogDTO {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
 	@Override
 	public String toString() {
-		return "TenderLogDTO [companyName=" + companyName + ", businesLine="
-				+ businessLine + ", brand=" + brand + ", comments=" + comments
-				+ ", deadline=" + deadline + "]";
+		return "TenderLogDTO [date=" + date + ", companyName=" + companyName
+				+ ", businessLine=" + businessLine + ", brand=" + brand
+				+ ", comments=" + comments + ", deadline=" + deadline
+				+ ", dateCreated=" + dateCreated + "]";
 	}
 
 }

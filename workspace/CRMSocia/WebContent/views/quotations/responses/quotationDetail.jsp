@@ -46,7 +46,7 @@
 						</c:otherwise>
 					</c:choose>
 					<tr class="odd gradeX">
-						<td><fmt:formatDate type="date" value="${quotations.date}" pattern="dd/MM/yyyy HH:mm 'hrs'"/></td>
+						<td><fmt:formatDate type="date" value="${quotations.date}" pattern="dd/MM/yyyy"/></td>
 			      		<td><c:out value="${quotations.companyName}"></c:out> </td>
 			      		<td><c:out value="${quotations.itemId}"></c:out> </td>
 			      		<td><c:out value="${quotations.quantity}"></c:out></td>

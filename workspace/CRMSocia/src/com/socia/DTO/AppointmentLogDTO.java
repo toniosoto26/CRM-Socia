@@ -10,9 +10,11 @@ public class AppointmentLogDTO {
 	private Date	date;
 	private String	subject;
 	private String	bdmName;
+	private Date	dateCreated;
 	
 	public AppointmentLogDTO(String companyName, String contactName,
-			String position, Date date, String subject, String bdmName) {
+			String position, Date date, String subject, String bdmName,
+			Date dateCreated) {
 		super();
 		this.companyName = companyName;
 		this.contactName = contactName;
@@ -20,6 +22,7 @@ public class AppointmentLogDTO {
 		this.date = date;
 		this.subject = subject;
 		this.bdmName = bdmName;
+		this.dateCreated = dateCreated;
 	}
 	public String getCompanyName() {
 		return companyName;
@@ -56,6 +59,12 @@ public class AppointmentLogDTO {
 	}
 	public void setBdmName(String bdmName) {
 		this.bdmName = bdmName;
+	}
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 
 }

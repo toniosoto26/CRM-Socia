@@ -46,8 +46,6 @@ public class QuotationDAO {
 		sqlQuery.append(",'"+quotation.getClosingDate()+"'");
 		sqlQuery.append(", now())");
 		
-		System.out.println(quotation.toString());
-		
 		queries.add(sqlQuery);
     
         return queries;
@@ -903,7 +901,7 @@ public class QuotationDAO {
 			sqlQuery.append(" WHERE DATE(q.date_created) >= ? ");
 			sqlQuery.append(" AND DATE(q.date_created) <= ? ");
 			sqlQuery.append(" AND q.crm_user_id = ? ");
-			sqlQuery.append(" ORDER BY q.date_created ");
+			sqlQuery.append(" ORDER BY q.date_created desc ");
 			
 			sociaDB		=	new	Conexion();
 			connection	=	sociaDB.getConnection1();
