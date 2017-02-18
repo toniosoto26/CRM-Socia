@@ -141,7 +141,7 @@
 		<script type="text/javascript" src="js/ui/jquery-ui.min.js"></script>
     
 		<script src="js/bootstrap.min.js" type="text/javascript"></script>
-		<script type="text/javascript" src="js/menu.js"></script>
+		<script type="text/javascript" src="js/menu.js"></script> 
 		<script type="text/javascript" src="js/alerts/alertify.js"></script>
 		<script src='/CRMSocia/js/calendar/moment.min.js'></script>
 		<script src='/CRMSocia/js/calendar/fullcalendar.js'></script>

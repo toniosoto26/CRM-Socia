@@ -30,6 +30,7 @@ import com.socia.DTO.AddressDTO;
 import com.socia.DTO.AppointmentDTO;
 import com.socia.DTO.AppointmentLogDTO;
 import com.socia.DTO.BusinessLineDTO;
+import com.socia.DTO.CallLogDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
 import com.socia.DTO.DateDTO;
@@ -504,9 +505,13 @@ public class ControllerRosa extends HttpServlet {
 			
 			if(eventId.contains("ten")){
 				tender = objTender.geTenderById(Integer.parseInt(arrId[1]));
+				System.out.println("Tender "+tender.toString());
+
 				session.setAttribute("tenderDetail", tender);
 			}else{
 				appointmentDetail = objAppointment.getAppointmentById(Integer.parseInt(arrId[1]));
+				System.out.println("Appointment "+appointmentDetail.toString());
+
 				session.setAttribute("appointmentDetail", appointmentDetail);
 			}
 			
