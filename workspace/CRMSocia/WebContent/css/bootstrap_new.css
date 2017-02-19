@@ -3988,6 +3988,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   display: block;
 }
 .nav > li > a {
+  color: black;
   position: relative;
   display: block;
   padding: 10px 15px;
@@ -4010,8 +4011,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
-  background-color: #eee;
-  border-color: #337ab7;
+  color: #fff;
+  background-color: #ff0026;
 }
 .nav .nav-divider {
   height: 1px;
@@ -4518,7 +4519,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-default .navbar-nav > li > a {
   border-left: solid 1px #cccccc;
-  color: black;
   position: relative;
 }
 .navbar-default .navbar-nav > li > a:hover,
@@ -4562,6 +4562,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 	border-top-color: #ff0026;
 	border-width: 8px;
 	margin-left: -8px;
+	z-index:30;
 }
 .navbar-default .navbar-nav > .disabled > a,
 .navbar-default .navbar-nav > .disabled > a:hover,
@@ -4570,7 +4571,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background-color: transparent;
 }
 .navbar-default .navbar-toggle {
-  border-color: #ddd;
+  border-color: #ccc;
+  z-index:2;
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
@@ -4586,8 +4588,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-  color: #555;
-  background-color: #e7e7e7;
+  
 }
 @media (max-width: 767px) {
   .navbar-default .navbar-nav > li > a {
@@ -4604,8 +4605,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #555;
-    background-color: #e7e7e7;
+    color: #fff;
+    background-color: #ff0026;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a,
   .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover,

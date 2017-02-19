@@ -49,7 +49,15 @@
 				    <!-- Collect the nav links, forms, and other content for toggling -->
 				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				      <ul class="nav navbar-nav navbar-right">
-				        <li onClick="loadMenu('call', this);"><a href="#">LLAMADAS</a></li>
+				        <li onClick="loadMenu('call', this);">
+				        	<a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">
+				        		LLAMADAS
+				        		<span class="caret"></span>
+				        	</a>
+				        	<ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu1">
+					            <li onClick="loadMenu('callLog', this);"><a href="#">Historial de llamadas</a></li>
+					   		</ul>
+				        </li>
 				        <li onClick="loadMenu('appointment', this);"><a href="#">CITAS</a></li>
 				        <li onClick="loadMenu('quotation', this);"><a href="#">COTIZACIONES</a></li>
 				        <li onClick="loadMenu('calendar', this);"><a href="#">CALENDARIO</a></li>

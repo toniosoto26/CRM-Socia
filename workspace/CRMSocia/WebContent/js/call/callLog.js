@@ -32,9 +32,9 @@ $( document ).ready(function() {
 			forceParse: 0
 	    });
 		
-		$('#dtp_input1').val("2017-01-23");
+		/*$('#dtp_input1').val("2017-01-23");
 		$('#dtp_input2').val("2017-01-30");
-		ValidaIndicadorLlamadas();
+		ValidaIndicadorLlamadas();*/
 });
 
 function ValidaIndicadorLlamadas(){
@@ -56,7 +56,7 @@ function ValidaIndicadorLlamadas(){
 			url: "Controller",
 			type :"post",
 			data :datos,
-			beforeSend: function(){$('#modalContent').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");}, 
+			beforeSend: function(){$('#tablaLlamadas').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");}, 
 			 success: function(dataResponse){
 	        	
 	        	 setTimeout(function(){
