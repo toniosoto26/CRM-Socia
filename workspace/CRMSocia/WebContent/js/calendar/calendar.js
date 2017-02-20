@@ -60,18 +60,20 @@ function addTender(){
 		url : "ControllerTemp",
 		data: $("#addTender").serialize()+"&option=8",
 		success: function(response){
-			if(trim(response)=="correcto"){
+			if(trim(response)>0){
 		        var firstDate = $("#dtp_input1").val();
 		        var secondDate = $("#dtp_input2").val();
 				var client = $("#chosenClient :selected").text();
 				var businessLine = $("#business-select :selected").text();
 
 		        var firstEvent = {
+		          id: 'ten-'+response.trim(),
 		          title:"Inicio gestión "+client+" en "+businessLine,
 		          start: firstDate,
 		        };
 		        
 		        var secondEvent = {
+		          id: 'ten-'+response.trim(),
 		          title:"Concurso "+client+" en "+businessLine,
 		          start: secondDate,
 		        };

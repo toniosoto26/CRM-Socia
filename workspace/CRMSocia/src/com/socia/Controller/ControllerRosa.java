@@ -369,9 +369,8 @@ public class ControllerRosa extends HttpServlet {
 				
 				transaction.commit();
 				
-				insert = true;
 			}catch(Exception exception){
-				insert = false;
+				tenderId = 0;
 				transaction.rollback();
 				exception.printStackTrace();
 			}finally{
@@ -379,7 +378,7 @@ public class ControllerRosa extends HttpServlet {
 			}
 			
 			session.removeAttribute("insertTender");
-			session.setAttribute("insertTender", insert);
+			session.setAttribute("insertTender", tenderId);
 			
 			url = "views/calendar/responses/validateInsertTender.jsp";
 		}

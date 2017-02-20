@@ -3,11 +3,4 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-<c:choose>
-	<c:when test="${sessionScope.insertTender == true}">
-		correcto	
-	</c:when>
-	<c:otherwise>
-		incorrecto
-	</c:otherwise>
-</c:choose>
+<c:out value="${sessionScope.insertTender}"></c:out>
