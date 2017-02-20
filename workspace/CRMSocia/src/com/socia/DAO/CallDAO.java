@@ -152,7 +152,7 @@ public class CallDAO {
 				sqlQuery.append(" and DATE(cal.date_call) >= ? ");
 				sqlQuery.append(" and DATE(cal.date_call) <= ? ");
 				sqlQuery.append(clientType.equals("")?"":" and cli.client_type = ? ");
-				sqlQuery.append(" order by cal.date_call ");
+				sqlQuery.append(" order by cal.date_call asc");
 				
 				//sqlQuery.append(" and client.crm_client_id = ? ");
 				

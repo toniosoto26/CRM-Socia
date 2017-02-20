@@ -97,11 +97,11 @@
 	  	</div>
 	</div>
 	<div class="col-sm-2 col-md-2">
-		<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Speech" onclick=""  style="width: 180px;">
+				<button type="button" class="btn btn-primary" id="myBtn" onclick="modalCalls(1);" style="width: 180px;">Speech</button>
 				<br><br>
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Guía" onclick="" style="width: 180px;">
+				<button type="button" class="btn btn-primary" id="myBtn" onclick="modalCalls(2);" style="width: 180px;">Guia</button>
 				<br><br>
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Manejo de objeciones" onclick="" style="width: 180px;">
+				<button type="button" class="btn btn-primary" id="myBtn" onclick="modalCalls(3);" style="width: 180px;">Manejo de objeciones</button>
 				<br><br>
 				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío Carta" onclick="sendMailCall(9);" style="width: 180px;">
 				<br><br>
@@ -111,13 +111,37 @@
 				<br><br>
 				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío Cartera" onclick="" style="width: 180px;">
 				<br><br>
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Líneas de negocio " onclick="" style="width: 180px;">
+				<button type="button" class="btn btn-primary" id="myBtn" onclick="modalCalls(4);" style="width: 180px;">Lineas de Negocio</button>
 			</div>
 </div>
+
+
+ <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Titulo</h4>
+        </div>
+        <div class="modal-body">
+          <p>Cuerpo de modal</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
 
 	<script src="js/chosen.jquery.js" type="text/javascript"></script>
 	<script src="js/prism.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript" src="js/call/callModal.js"></script>
 	<script type="text/javascript"> 
 		$(document).ready(function(){
 			selectContact();
