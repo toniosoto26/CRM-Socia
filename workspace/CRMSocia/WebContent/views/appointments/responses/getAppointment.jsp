@@ -22,9 +22,6 @@
 			eventLimit: true, // allow "more" link when too many events
 			eventClick: function(calEvent, jsEvent, view) {
 				viewCalendarDetail(calEvent.id);
-		        
-		        // change the border color just for fun
-		        $(this).css('border-color', 'red');
 		    },
 			events: [
 						<c:choose>

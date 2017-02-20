@@ -49,8 +49,8 @@
 				    <!-- Collect the nav links, forms, and other content for toggling -->
 				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				      <ul class="nav navbar-nav navbar-right">
-				        <li onClick="loadMenu('call', this);">
-				        	<a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">
+				        <li>
+				        	<a  onClick="loadMenu('call', this);" class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">
 				        		LLAMADAS
 				        		<span class="caret"></span>
 				        	</a>
@@ -61,7 +61,6 @@
 				        <li onClick="loadMenu('appointment', this);"><a href="#">CITAS</a></li>
 				        <li onClick="loadMenu('quotation', this);"><a href="#">COTIZACIONES</a></li>
 				        <li onClick="loadMenu('calendar', this);"><a href="#">CALENDARIO</a></li>
-				        <!-- li onClick="loadMenu('callLog', this);"><a href="#">INDICADORES</a></li -->
 				        <li onClick="loadMenu('indicators', this);"><a href="#">INDICADORES</a></li>
 				        <li><a href="ControllerLogin?cerrarSesion=T"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>  CERRAR SESIÓN</a></li>
 				      </ul>
@@ -149,7 +148,6 @@
 		<script type="text/javascript" src="js/ui/jquery-ui.min.js"></script>
     
 		<script src="js/bootstrap.min.js" type="text/javascript"></script>
-		<script type="text/javascript" src="js/menu.js"></script> 
 		<script type="text/javascript" src="js/alerts/alertify.js"></script>
 		<script src='/CRMSocia/js/calendar/moment.min.js'></script>
 		<script src='/CRMSocia/js/calendar/fullcalendar.js'></script>
@@ -161,5 +159,6 @@
 
 		<script src="https://code.highcharts.com/highcharts.js"></script>
 		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script type="text/javascript" src="js/menu.js"></script> 
 	</body>
 </html>

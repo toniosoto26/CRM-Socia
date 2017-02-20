@@ -2,7 +2,6 @@
     pageEncoding="ISO-8859-1"%>
     
 	<script type="text/javascript" src="/CRMSocia/js/call/callLog.js"></script>
-	<script type="text/javascript" src="/CRMSocia/js/script.js"></script>
     
     <link rel="stylesheet" href="/CRMSocia/css/jquery.dataTables.css">
     <script type="text/javascript" src="/CRMSocia/js/jquery.dataTables.js"></script>
@@ -38,8 +37,7 @@
         		<button type="button" class="btn btn-primary" onclick ="ValidaIndicadorLlamadas();">Muestra Llamadas</button>
         	</div>	
         </div>
-        <br/><br/>
-        <div id="alertaFecha">
+        <div class="row">
         	
         </div>
         <div class="row">

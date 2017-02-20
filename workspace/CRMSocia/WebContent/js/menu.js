@@ -49,6 +49,11 @@ function loadMenu(menuName, option){
 	
 	}else if(menuName === "callLog"){
 		$("#pageContent").removeClass("welcome");
+		$("#pageHeader").html('<ol class="breadcrumb">'+
+				  '<li><a href="#">Inicio</a></li>'+
+				  '<li>Llamadas</li>'+
+				  '<li class="active">Historial de llamadas</li>'+
+				'</ol>');
 		$("#pageContent").load("/CRMSocia/CallLog.jsp");
 	}else if(menuName === "indicators"){
 		$("#pageContent").removeClass("welcome");

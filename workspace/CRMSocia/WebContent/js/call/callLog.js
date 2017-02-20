@@ -61,30 +61,6 @@ function ValidaIndicadorLlamadas(){
 	        	
 	        	 setTimeout(function(){
 	        		 $('#tablaLlamadas').html(dataResponse);
-	        		        /*$('#tablaCalls').DataTable({
-	        		                responsive: true,
-	        		                "iDisplayLength":100,
-	        		                "bSort": true,
-	        		                "dom": 'Bfrtip',
-	        		                buttons: [
-	        		                    'copy', 'csv', 'excel', 'pdf', 'print'
-	        		                ],
-	        		                "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-	        		                    if ( aData[1].substring(0,15) == "OPCION1" )
-	        		                    {
-	        		                        $('td', nRow).css('background-color', '#81BEF7');
-	        		                    }
-	        		                    else if ( aData[1] == "OPCION2" )
-	        		                    {
-	        		                        $('td', nRow).css('background-color', '#40FF00');
-	        		                    }
-	        		                    else if ( aData[1] == "OPCION3" )
-	        		                    {
-	        		                        $('td', nRow).css('background-color', '#FAAC58');
-	        		                    }
-	        		                }
-	        		        });*/
-	        		    
 	        	 }, 2000);
 	         },
 	         error: function(XMLHttpRequest, textStatus, errorThrown){showAlert(errorThrown,"danger","alertaFecha");}

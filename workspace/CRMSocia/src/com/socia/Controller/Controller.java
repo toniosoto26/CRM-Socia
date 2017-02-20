@@ -119,7 +119,6 @@ public class Controller extends HttpServlet {
 		//registro de llamadas 
 		if(option == 4){
 			
-			int variable=1;
 			String companyName="";
 			String contact ="";
 			String emailContact="";
@@ -137,7 +136,6 @@ public class Controller extends HttpServlet {
 			int competition=0;
 			int division=0;
 			int position=0;
-			variable = Integer.parseInt(request.getParameter("variable"));
 			companyName=request.getParameter("selectClient");
 			System.out.println("companyName "+companyName);
 			contact =request.getParameter("selectContact");
@@ -277,13 +275,16 @@ public class Controller extends HttpServlet {
 			}catch(Exception e ){
 				e.printStackTrace();
 			}
+			
+			session.removeAttribute("datos");
 			if(arrDatos.size()>0){
-				session.removeAttribute("datos");
 				session.setAttribute("datos", arrDatos);
-				
-				url = "/views/calls/callDetail.jsp";
-				
 			}
+			else{
+				session.setAttribute("datos", null);
+			}
+			
+			url = "/views/calls/callDetail.jsp";
 		}
 		//correo  de carta 
 		if(option == 9){

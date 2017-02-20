@@ -226,7 +226,23 @@ function registreCall(variable){
 			success: function(response){
 				if(trim(response)=="correcto"){
 					alertify.alert("Insertado Correctamente");
-					$("#form1").load("CallLog.jsp");
+					
+					var today = moment();
+					var end = today.subtract(7, "day");
+					
+					$("#pageContent").removeClass("welcome");
+					$("#pageHeader").html('<ol class="breadcrumb">'+
+							  '<li><a href="#">Inicio</a></li>'+
+							  '<li>Llamadas</li>'+
+							  '<li class="active">Historial de llamadas</li>'+
+							'</ol>');
+					$("#pageContent").load("CallLog.jsp");
+					
+					setTimeout(function(){
+						$('#dtp_input1').val(today.format('YYYY-MM-DD'));
+						$('#dtp_input2').val(end.format('YYYY-MM-DD'));
+						ValidaIndicadorLlamadas();
+					}, 500);
 				}
 				else{
 					alertify.alert("Incorrecto");
