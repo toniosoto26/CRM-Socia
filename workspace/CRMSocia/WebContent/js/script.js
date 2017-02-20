@@ -227,8 +227,8 @@ function registreCall(variable){
 				if(trim(response)=="correcto"){
 					alertify.alert("Insertado Correctamente");
 					
-					var today = moment();
-					var end = today.subtract(7, "day");
+					var today = moment().format('YYYY-MM-DD');
+					var end = moment().subtract(7, "day").format('YYYY-MM-DD');
 					
 					$("#pageContent").removeClass("welcome");
 					$("#pageHeader").html('<ol class="breadcrumb">'+
@@ -239,8 +239,8 @@ function registreCall(variable){
 					$("#pageContent").load("CallLog.jsp");
 					
 					setTimeout(function(){
-						$('#dtp_input1').val(today.format('YYYY-MM-DD'));
-						$('#dtp_input2').val(end.format('YYYY-MM-DD'));
+						$('#dtp_input1').val(end);
+						$('#dtp_input2').val(today);
 						ValidaIndicadorLlamadas();
 					}, 500);
 				}
