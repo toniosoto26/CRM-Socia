@@ -30,7 +30,6 @@ import com.socia.DTO.AddressDTO;
 import com.socia.DTO.AppointmentDTO;
 import com.socia.DTO.AppointmentLogDTO;
 import com.socia.DTO.BusinessLineDTO;
-import com.socia.DTO.CallLogDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
 import com.socia.DTO.DateDTO;
@@ -123,6 +122,7 @@ public class ControllerRosa extends HttpServlet {
 		String 							clientType				=	"";
 		
 		String							eventId					=	"";
+		int								newClientType			=	0;
 		
 		/** DAO */
 		ItemDAO							objItem					=	new ItemDAO();
@@ -241,7 +241,7 @@ public class ControllerRosa extends HttpServlet {
 				quotationDetail = new QuotationDetailDTO(quotationId, itemId, description, warranty, unitPrice, margin, quantity, estimatedShipping);
 				arrQuotationDetail.add(quotationDetail);
 			}
-				
+			
 			if(address == null)
 				address = objAddress.getAddressById(addressId);
 				
@@ -256,6 +256,11 @@ public class ControllerRosa extends HttpServlet {
 						queries = objAddress.insertAddress(address, queries);
 						queries = objAddress.insertContactAddress(clientId, addressId, queries);
 					}
+					
+					/** Client type */
+					newClientType = Integer.parseInt(request.getParameter("clientType"));
+					if(newClientType==1 && client.getClientType().equals("P"))
+						queries = objClient.updateClientType(client.getClientId(), "A", queries);
 					
 					queries = objQuotation.insertQuotation(quotation, queries);
 					queries = objQuotationDetail.insertQuotationDetails(arrQuotationDetail, queries);

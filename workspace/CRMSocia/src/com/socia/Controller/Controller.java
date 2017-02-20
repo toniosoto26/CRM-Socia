@@ -136,6 +136,7 @@ public class Controller extends HttpServlet {
 			int competition=0;
 			int division=0;
 			int position=0;
+			int newClientType;
 			companyName=request.getParameter("selectClient");
 			System.out.println("companyName "+companyName);
 			contact =request.getParameter("selectContact");
@@ -188,6 +189,8 @@ public class Controller extends HttpServlet {
 			if(addClient==0){
 				id_client=Integer.parseInt(request.getParameter("clientId"));
 				consecutiveClient=id_client;
+				
+				infoClient = objClient.getClientById(id_client);
 			}
 			if(addContact==0){
 				id_contact=Integer.parseInt(request.getParameter("contactId"));
@@ -199,6 +202,10 @@ public class Controller extends HttpServlet {
 				System.out.println("inserto cliente contacto");
 			}
 
+			/** Client type */
+			newClientType = Integer.parseInt(request.getParameter("clientType"));
+			if(newClientType==1 && infoClient.getClientType().equals("P"))
+				queries = objClient.updateClientType(infoClient.getClientId(), "A", queries);
 			
 			//inserto llamada
 			System.out.println("va insertar llamada");

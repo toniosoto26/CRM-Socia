@@ -44,6 +44,7 @@ public class ClientDTO {
 		this.companyName = companyName;
 		this.bdmId = bdmId;
 		this.userId = userId;
+		this.clientType = "P";
 	}
 
 	public int getClientId() {

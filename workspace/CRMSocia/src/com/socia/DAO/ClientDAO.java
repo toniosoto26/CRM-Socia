@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.socia.DTO.CallDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.conexion.Conexion;
 
@@ -272,6 +271,18 @@ public class ClientDAO {
         return queries;
     }
 
+	public ArrayList<StringBuilder> updateClientType(int client_id, String client_type, ArrayList<StringBuilder> queries){
+		StringBuilder		sqlQuery	=	null;
+		
+    	sqlQuery	=	new	StringBuilder();
+		sqlQuery.append(" UPDATE crm_client ");
+		sqlQuery.append(" SET client_type = '"+client_type+"'");
+		sqlQuery.append(" WHERE crm_client_id = "+client_id);
+		
+		queries.add(sqlQuery);
+    
+        return queries;
+    }
 	
 	public static void main(String[] args){
 		ClientDAO contact = new ClientDAO();

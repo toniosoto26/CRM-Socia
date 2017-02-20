@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.socia.DAO.AddressDAO;
 import com.socia.DAO.AppointmentDAO;
+import com.socia.DAO.ClientDAO;
 import com.socia.DAO.ConsecutiveDAO;
 import com.socia.DAO.ContactDAO;
 import com.socia.DAO.TenderDAO;
@@ -108,13 +109,15 @@ public class ControllerAppointment extends HttpServlet {
 					String	nameI	=	request.getParameter("idNameI");
 					String	comment	=	request.getParameter("observationA");
 					boolean	statIn	=	false;
+					
+					int		newClientType;
+					ClientDTO	client;
+					ClientDAO	objClient	=	new ClientDAO();
+					client = objClient.getClientById(rz);
+					
+					
 					activeTab = request.getParameter("activeTab");
-					
-					
-					
 					activeTab = request.getParameter("activeTab");
-					   
-					  
 					   
 					   if(activeTab.equals("SELECCIONAR")){
 					    addressId = Integer.parseInt(request.getParameter("addressId"));
@@ -145,6 +148,12 @@ public class ControllerAppointment extends HttpServlet {
 					c.setComments(comment);
 
 					ArrayList<StringBuilder>	arrQuerys	=	new	ArrayList<StringBuilder>();
+					
+					/** Client type */
+					newClientType = Integer.parseInt(request.getParameter("clientType"));
+					if(newClientType==1 && client.getClientType().equals("P"))
+						arrQuerys = objClient.updateClientType(client.getClientId(), "A", arrQuerys);
+					
 					arrQuerys	=	new AppointmentDAO().insertAppointment(c,addressId, arrQuerys);
 					if(activeTab.equals("AGREGAR")){
 						arrQuerys = objAddress.insertAddress(address, arrQuerys);
