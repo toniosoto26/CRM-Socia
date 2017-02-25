@@ -1,9 +1,11 @@
 Panel Host
+https://cp5.astrahosting.com:2083/
 
 Username: crmsocia
 Password: 7h3Eg4d9Cm
 
 Tomcat Server
+http://crmsocia.com
 
 Username: crmsocia
 Password: fdQPvTJN
