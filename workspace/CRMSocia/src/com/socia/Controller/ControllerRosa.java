@@ -108,6 +108,8 @@ public class ControllerRosa extends HttpServlet {
 		int 							tenderId				=	0;
 		String							startUpDate				=	"";
 		String							deadline				=	"";
+		String							effectiveDate			=	"";
+		String							deliveryTimes			=	"";
 		String							requirements			=	"";
 		String							comments				=	"";
 		int								businessLineId			=	0;
@@ -205,6 +207,8 @@ public class ControllerRosa extends HttpServlet {
 			contactId = Integer.parseInt(request.getParameter("contactId"));
 			currency = request.getParameter("currency");
 			deadline = request.getParameter("deadline");
+			effectiveDate = request.getParameter("effectiveDate");
+			deliveryTimes = request.getParameter("deliveryTimes");
 			
 			if(request.getParameter("currency") == "USD")
 				exchangeRate = Double.parseDouble(request.getParameter("exchangeRate"));
@@ -213,7 +217,7 @@ public class ControllerRosa extends HttpServlet {
 			if(option == 2 || option == 6)
 				quotationId = objConsecutive.getConsecutive("quotations");
 			
-			quotation = new QuotationDTO(quotationId, addressId, clientId, currency, exchangeRate, deadline, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
+			quotation = new QuotationDTO(quotationId, addressId, clientId, currency, exchangeRate, deadline, effectiveDate, deliveryTimes, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 			
 			/** Quotation details*/
 			for(int index = 1; index <= totalProducts; index++){

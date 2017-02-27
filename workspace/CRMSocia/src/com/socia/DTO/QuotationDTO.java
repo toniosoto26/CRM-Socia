@@ -1,7 +1,5 @@
 package com.socia.DTO;
 
-import java.util.Date;
-
 public class QuotationDTO {
 	private int 	quotationId;
 	private int		addressId;
@@ -9,10 +7,13 @@ public class QuotationDTO {
 	private String 	currency;
 	private double	exchangeRate;
 	private String	closingDate;
+	private String	effectiveDate;
+	private String	deliveryTimes;
 	private int 	userId;
 	
 	public QuotationDTO(int quotationId, int addressId, int clientId,
-			String currency, double exchangeRate, String closingDate, int userId) {
+			String currency, double exchangeRate, String closingDate, 
+			String effectiveDate, String deliveryTimes, int userId) {
 		super();
 		this.quotationId = quotationId;
 		this.addressId = addressId;
@@ -20,6 +21,8 @@ public class QuotationDTO {
 		this.currency = currency;
 		this.exchangeRate = exchangeRate;
 		this.closingDate = closingDate;
+		this.effectiveDate = effectiveDate;
+		this.deliveryTimes = deliveryTimes;
 		this.userId = userId;
 	}
 	public int getQuotationId() {
@@ -58,6 +61,18 @@ public class QuotationDTO {
 	public void setClosingDate(String closingDate) {
 		this.closingDate = closingDate;
 	}
+	public String getEffectiveDate() {
+		return effectiveDate;
+	}
+	public void setEffectiveDate(String effectiveDate) {
+		this.effectiveDate = effectiveDate;
+	}
+	public String getDeliveryTimes() {
+		return deliveryTimes;
+	}
+	public void setDeliveryTimes(String deliveryTimes) {
+		this.deliveryTimes = deliveryTimes;
+	}
 	public int getUserId() {
 		return userId;
 	}
@@ -69,7 +84,9 @@ public class QuotationDTO {
 		return "QuotationDTO [quotationId=" + quotationId + ", addressId="
 				+ addressId + ", clientId=" + clientId + ", currency="
 				+ currency + ", exchangeRate=" + exchangeRate
-				+ ", closingDate=" + closingDate + ", userId=" + userId + "]";
+				+ ", closingDate=" + closingDate + ", effectiveDate="
+				+ effectiveDate + ", deliveryTimes=" + deliveryTimes
+				+ ", userId=" + userId + "]";
 	}
 
 }

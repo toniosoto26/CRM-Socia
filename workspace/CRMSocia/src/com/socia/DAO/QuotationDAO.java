@@ -16,9 +16,6 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 import com.socia.DTO.AddressDTO;
 import com.socia.DTO.ClientDTO;
@@ -26,7 +23,6 @@ import com.socia.DTO.ContactDTO;
 import com.socia.DTO.QuotationDTO;
 import com.socia.DTO.QuotationDetailDTO;
 import com.socia.DTO.QuotationLogDTO;
-import com.socia.DTO.TenderLogDTO;
 import com.socia.conexion.Conexion;
 
 public class QuotationDAO {
@@ -51,7 +47,7 @@ public class QuotationDAO {
         return queries;
     }
 	
-	public void generateExcelFile(ClientDTO client, ContactDTO contact, AddressDTO address, QuotationDTO quotation, ArrayList<QuotationDetailDTO> arrQuotationDetail){
+	public void generateExcelFile(ClientDTO client, ContactDTO contact, AddressDTO address, QuotationDTO quotation, ArrayList<QuotationDetailDTO> arrQuotationDetail) throws Exception{
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		HSSFSheet sheet = workbook.createSheet("Cotización");
 		
@@ -254,7 +250,7 @@ public class QuotationDAO {
 		cellnum = 0;
 		row = sheet.createRow(rownum++);
 		cell = row.createCell(cellnum++);
-		cell.setCellValue("LOS TIEMPOS DE ENTREGA SON DE 24 A 48 HORAS HÁBILES (EN CASO DE ZONA EXTENDIDA REQUIERE DÍAS ADICIONALES)");
+		cell.setCellValue("LOS TIEMPOS DE ENTREGA SON "+quotation.getDeliveryTimes()+" (EN CASO DE ZONA EXTENDIDA REQUIERE DÍAS ADICIONALES)");
 		
 		cellnum = 0;
 		row = sheet.createRow(rownum++);
@@ -274,7 +270,9 @@ public class QuotationDAO {
 		cellnum = 0;
 		row = sheet.createRow(rownum++);
 		cell = row.createCell(cellnum++);
-		cell.setCellValue("VIGENCIA DE LA COTIZACIÓN:");
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		cell.setCellValue("VIGENCIA DE LA COTIZACIÓN: "+sdf.format(dateFormat.parse(quotation.getEffectiveDate())));
 		
 		try {
 			FileOutputStream out = 
@@ -290,7 +288,7 @@ public class QuotationDAO {
 		}
 	}
 	
-	public StringBuilder generateMail(ClientDTO client, ContactDTO contact, AddressDTO address, QuotationDTO quotation, ArrayList<QuotationDetailDTO> arrQuotationDetail){
+	public StringBuilder generateMail(ClientDTO client, ContactDTO contact, AddressDTO address, QuotationDTO quotation, ArrayList<QuotationDetailDTO> arrQuotationDetail)  throws Exception{
 		StringBuilder		sqlQuery	=	null;
 		SimpleDateFormat	sdf			=	new SimpleDateFormat("dd 'de' MMMM 'de' yyyy");
 		String				today		=	sdf.format(new Date());
@@ -324,7 +322,6 @@ public class QuotationDAO {
     		 								sqlQuery.append("</a>");
     		 							sqlQuery.append("</td>");
     		 							sqlQuery.append("<td align='right'>");
-		 									sqlQuery.append("<p style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>Referencia: </p>");
 		 									sqlQuery.append("<p style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>"+today+"</p>");
 					                    sqlQuery.append("</td>");
 					                sqlQuery.append("</tr>");
@@ -812,7 +809,7 @@ public class QuotationDAO {
 																sqlQuery.append("<td align='left' style='padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;' class='padding-copy'>LAS EXISTENCIAS SOLICITADAS EN LA COTIZACIÓN ESTÁN SUJETAS A CAMBIOS SIN PREVIO AVISO.</td>");
 															sqlQuery.append("</tr>");
 															sqlQuery.append("<tr>");
-																sqlQuery.append("<td align='left' style='padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;' class='padding-copy'>LOS TIEMPOS DE ENTREGA SON DE 24 A 48 HORAS HÁBILES (EN CASO DE ZONA EXTENDIDA REQUIERE DÍAS ADICIONALES).</td>");
+																sqlQuery.append("<td align='left' style='padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;' class='padding-copy'>LOS TIEMPOS DE ENTREGA SON  "+quotation.getDeliveryTimes()+" (EN CASO DE ZONA EXTENDIDA REQUIERE DÍAS ADICIONALES).</td>");
 															sqlQuery.append("</tr>");
 															sqlQuery.append("<tr>");
 																sqlQuery.append("<td align='left' style='padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;' class='padding-copy'>LOS PRECIOS SON SUJETOS A CAMBIOS SIN PREVIO AVISO.</td>");
@@ -823,8 +820,12 @@ public class QuotationDAO {
 															sqlQuery.append("<tr>");
 																sqlQuery.append("<td align='left' style='padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;' class='padding-copy'></td>");
 															sqlQuery.append("</tr>");
+															
+
+															SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+																
 															sqlQuery.append("<tr>");
-																sqlQuery.append("<td align='left' style='padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; font-weight:bold; font-style: italic;' class='padding-copy'>VIGENCIA DE LA COTIZACIÓN:</td>");
+																sqlQuery.append("<td align='left' style='padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; font-weight:bold; font-style: italic;' class='padding-copy'>VIGENCIA DE LA COTIZACIÓN: "+sdf.format(dateFormat.parse(quotation.getEffectiveDate()))+"</td>");
 															sqlQuery.append("</tr>");
 														sqlQuery.append("</table>");
 													sqlQuery.append("</td>");

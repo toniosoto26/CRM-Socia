@@ -174,7 +174,6 @@
 		                        </a>
 		                    </td>
 		                    <td align="right">
-		                    	<p style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">Referencia: </p>
 		                    	<p style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><fmt:formatDate type="date" value="${today}" pattern="dd 'de' MMMM 'de' yyyy"/>   </p>
 		                    </td>
 		                </tr>
@@ -658,7 +657,7 @@
 		                                            <td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy">LAS EXISTENCIAS SOLICITADAS EN LA COTIZACIÓN ESTÁN SUJETAS A CAMBIOS SIN PREVIO AVISO.</td>
 		                                        </tr>
 		                                        <tr>
-		                                        	<td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy">LOS TIEMPOS DE ENTREGA SON DE 24 A 48 HORAS HÁBILES (EN CASO DE ZONA EXTENDIDA REQUIERE DÍAS ADICIONALES).</td>
+		                                        	<td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy">LOS TIEMPOS DE ENTREGA SON <c:out value="${sessionScope.quotation.deliveryTimes }"></c:out> (EN CASO DE ZONA EXTENDIDA REQUIERE DÍAS ADICIONALES).</td>
 			                                    </tr>
 		                                        <tr>
 			                                        <td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy">LOS PRECIOS SON SUJETOS A CAMBIOS SIN PREVIO AVISO.</td>
@@ -670,7 +669,7 @@
 			                                        <td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy"></td>
 			                                    </tr>
 		                                        <tr>
-			                                        <td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif;  font-weight:bold; font-style: italic;" class="padding-copy">VIGENCIA DE LA COTIZACIÓN:</td>
+			                                        <td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif;  font-weight:bold; font-style: italic;" class="padding-copy">VIGENCIA DE LA COTIZACIÓN: <c:out value="${sessionScope.quotation.effectiveDate }"></c:out></td>
 		                                        </tr>
 		                                    </table>
 		                                </td>

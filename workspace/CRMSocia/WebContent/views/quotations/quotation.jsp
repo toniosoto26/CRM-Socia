@@ -32,6 +32,25 @@
 						<input type="hidden" name="deadline" id="dtp_input1" value="" />
 					</div>
 				</div>
+				<div class="col-sm-6 col-md-6">
+					<div class="form-group top">
+						<label for="inputDeadline" class="col-sm-6 col-md-6">Vigencia</label>
+						<div class="input-group date form_date col-md-6 col-sm-6" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+					    	<input id="startUpDate" required class="form-control" size="16" type="text" value="" readonly>
+					        <span  class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+					    </div>
+						<input type="hidden" name="effectiveDate" id="dtp_input2" value="" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 col-md-6">
+					<div class="form-group">
+				    	<label class="col-sm-6 col-md-6">Tiempos de entrega</label>
+				    	<input type="text" class="form-control col-md-6" name="deliveryTimes" id="deliveryTimes" value="DE 24 A 48 HORAS HÁBILES">
+				  	</div>
+				</div>
 			</div>
 			
 		  	<label class="col-sm-12 col-md-6">Dirección</label>
@@ -62,32 +81,50 @@
 											    	<label class="col-sm-6 col-md-6">Calle</label>
 											    	<input type="text" class="form-control col-md-6" name="street" id="street" placeholder="Calle">
 											  	</div>
-											    <div class="form-group">
+											</div>
+											<div class="col-sm-6 col-md-6">
+												<div class="form-group">
+											    	<label class="col-sm-6 col-md-6">Exterior</label>
+											    	<input type="number" class="form-control col-md-6" name="extNum" id="extNum" placeholder="Número exterior">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+						             		<div class="col-sm-6 col-md-6">
+						             			<div class="form-group">
 											    	<label class="col-sm-6 col-md-6">Interior</label>
 											    	<input type="number" class="form-control col-md-6" name="intNum" id="intNum" placeholder="Número interior">
 											    </div>
-												<div class="form-group">
+											</div>
+											<div class="col-sm-6 col-md-6">	
+											  	<div class="form-group">
+													<label class="col-sm-6 col-md-6">Colonia</label>
+												    <input type="text" class="form-control col-md-6" name="suburb" id="suburb" placeholder="Colonia">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+						             		<div class="col-sm-6 col-md-6">
+											  	<div class="form-group">
 													<label class="col-sm-6 col-md-6">Delegación/Municipio</label>
 												    <input type="text" class="form-control col-md-6" name="city" id="city" placeholder="Delegación / Municipio">
 												</div>
+											</div>
+						             		<div class="col-sm-6 col-md-6">
+											  <div class="form-group">
+													<label class="col-sm-6 col-md-6">Estado</label>
+												    <input type="text" class="form-control col-md-6" name="state" id="state" placeholder="Estado">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+						             		<div class="col-sm-6 col-md-6">
 												<div class="form-group">
 												    <label class="col-sm-6 col-md-6">Código postal</label>
 												    <input type="number" class="form-control col-md-6" name="zipCode" id="zipCode" placeholder="Código postal">
 												</div>
 											</div>
 						             		<div class="col-sm-6 col-md-6">
-												<div class="form-group">
-											    	<label class="col-sm-6 col-md-6">Exterior</label>
-											    	<input type="number" class="form-control col-md-6" name="extNum" id="extNum" placeholder="Número exterior">
-												</div>
-												<div class="form-group">
-													<label class="col-sm-6 col-md-6">Colonia</label>
-												    <input type="text" class="form-control col-md-6" name="suburb" id="suburb" placeholder="Colonia">
-												</div>
-												<div class="form-group">
-													<label class="col-sm-6 col-md-6">Estado</label>
-												    <input type="text" class="form-control col-md-6" name="state" id="state" placeholder="Estado">
-												</div>
 												<div class="form-group">
 													<label class="col-sm-6 col-md-6">País</label>
 												    <input type="text" class="form-control col-md-6" name="country" id="country" placeholder="País">
@@ -187,7 +224,7 @@
 		</form>
 	</div>
 	<div id="secondaryPanel">
-	</div>
+	</div>                                     
 </div>
 
 <script type="text/javascript" src="js/script.js"></script>

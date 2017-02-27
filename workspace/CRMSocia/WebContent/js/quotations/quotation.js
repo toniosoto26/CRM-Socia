@@ -127,6 +127,11 @@ function addQuotation(){
 		alertify.alert("Por favor, selecciona fecha de cierre");
 		return false;
 	}
+
+	if($("#dtp_input2").val() == ""){
+		alertify.alert("Por favor, selecciona la vigencia");
+		return false;
+	}
 	
 	for(var i = 1; i < itemNum; i ++){
 		if($("#itemId"+i).val()==""){
