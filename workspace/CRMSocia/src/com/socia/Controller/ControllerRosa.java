@@ -275,14 +275,16 @@ public class ControllerRosa extends HttpServlet {
 					transaction.commit();
 					
 					insert = true;
-					body = objQuotation.generateMail(client, contact, address, quotation, arrQuotationDetail);
+					body = objQuotation.generateMail(client, contact, address, quotation, arrQuotationDetail, 
+							((LoginDTO)session.getAttribute("sessionLogin")).getFirstName()+" "+((LoginDTO)session.getAttribute("sessionLogin")).getLastName(), ((LoginDTO)session.getAttribute("sessionLogin")).getEmail());
 					cc[0] =  ((LoginDTO)session.getAttribute("sessionLogin")).getEmail();
 					
 					if(option == 2){
 						objMail.sendFromGMail("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, cc, "Cotización", body.toString());
 					}
 					else if(option == 6){
-						objQuotation.generateExcelFile(client, contact, address, quotation, arrQuotationDetail);
+						objQuotation.generateExcelFile(client, contact, address, quotation, arrQuotationDetail, 
+								((LoginDTO)session.getAttribute("sessionLogin")).getFirstName()+" "+((LoginDTO)session.getAttribute("sessionLogin")).getLastName(), ((LoginDTO)session.getAttribute("sessionLogin")).getEmail());
 						objMail.sendFromGMailAttachment("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, cc, "Cotización", body.toString(),"cotizacion.xls","cotizacion.xls");
 					}
 					

@@ -47,7 +47,8 @@ public class QuotationDAO {
         return queries;
     }
 	
-	public void generateExcelFile(ClientDTO client, ContactDTO contact, AddressDTO address, QuotationDTO quotation, ArrayList<QuotationDetailDTO> arrQuotationDetail) throws Exception{
+	public void generateExcelFile(ClientDTO client, ContactDTO contact, AddressDTO address, QuotationDTO quotation, 
+			ArrayList<QuotationDetailDTO> arrQuotationDetail, String executiveName, String executiveEmail) throws Exception{
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		HSSFSheet sheet = workbook.createSheet("Cotización");
 		
@@ -133,7 +134,7 @@ public class QuotationDAO {
 		cell = row.createCell(cellnum++);
 		cell.setCellValue("Contacto");
 		cell = row.createCell(cellnum++);
-		cell.setCellValue("EMMA CRISTINA LÓPEZ MEDINA");
+		cell.setCellValue(executiveName);
 		
 		cellnum = 0;
 		row = sheet.createRow(rownum++);
@@ -148,7 +149,7 @@ public class QuotationDAO {
 		cell = row.createCell(cellnum++);
 		cell.setCellValue("email");
 		cell = row.createCell(cellnum++);
-		cell.setCellValue("elopez@socia.com.mx");
+		cell.setCellValue(executiveEmail);
 		
 		cellnum = 0;
 		row = sheet.createRow(rownum++);
@@ -288,7 +289,8 @@ public class QuotationDAO {
 		}
 	}
 	
-	public StringBuilder generateMail(ClientDTO client, ContactDTO contact, AddressDTO address, QuotationDTO quotation, ArrayList<QuotationDetailDTO> arrQuotationDetail)  throws Exception{
+	public StringBuilder generateMail(ClientDTO client, ContactDTO contact, AddressDTO address, QuotationDTO quotation, 
+			ArrayList<QuotationDetailDTO> arrQuotationDetail, String executiveName, String executiveEmail)  throws Exception{
 		StringBuilder		sqlQuery	=	null;
 		SimpleDateFormat	sdf			=	new SimpleDateFormat("dd 'de' MMMM 'de' yyyy");
 		String				today		=	sdf.format(new Date());
@@ -653,7 +655,7 @@ public class QuotationDAO {
 																				sqlQuery.append("<td style='padding: 0 0 10px 0;'>");
 																					sqlQuery.append("<table cellpadding='0' cellspacing='0' border='0' width='100%'>");
 																						sqlQuery.append("<tr>");
-																							sqlQuery.append("<td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>EMMA CRISTINA LÓPEZ MEDINA </td>");
+																							sqlQuery.append("<td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>"+executiveName+"</td>");
 																						sqlQuery.append("</tr>");
 																					sqlQuery.append("</table>");
 																				sqlQuery.append("</td>");
@@ -688,7 +690,7 @@ public class QuotationDAO {
 																				sqlQuery.append("<td style='padding: 0 0 10px 0;'>");
 																					sqlQuery.append("<table cellpadding='0' cellspacing='0' border='0' width='100%'>");
 																						sqlQuery.append("<tr>");
-																							sqlQuery.append("<td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>elopez@socia.com.mx</td>");
+																							sqlQuery.append("<td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>"+executiveEmail+"</td>");
 																						sqlQuery.append("</tr>");
 																					sqlQuery.append("</table>");
 																				sqlQuery.append("</td>");
