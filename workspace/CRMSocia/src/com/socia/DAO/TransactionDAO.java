@@ -22,7 +22,7 @@ public class TransactionDAO {
 		
 		for(int index=0; index < queries.size(); index++){
 			//System.out.println(queries.get(index).toString());
-			statement.execute(queries.get(index).toString());
+			statement.execute(queries.get(index).toString().toUpperCase());
 		}
 
 	}
@@ -43,7 +43,7 @@ public class TransactionDAO {
 		try{
 			this.connection.close();
 		}catch(Exception e){
-			e.printStackTrace();
+			e.printStackTrace();	
 		}
 	}
 }

@@ -506,7 +506,7 @@
 				                                            <td style="padding: 0 0 10px 0;">
 				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
 				                                                    <tr>
-				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">EMMA CRISTINA LÓPEZ MEDINA </td>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><c:out value="${sessionLogin.firstName}"></c:out> <c:out value="${sessionLogin.lastName}"></c:out></td>
 				                                                    </tr>
 				                                                </table>
 				                                            </td>
@@ -541,7 +541,7 @@
 				                                            <td style="padding: 0 0 10px 0;">
 				                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
 				                                                    <tr>
-				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;">elopez@socia.com.mx</td>
+				                                                        <td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 12px;"><c:out value="${sessionLogin.email}"></c:out></td>
 				                                                    </tr>
 				                                                </table>
 				                                            </td>
