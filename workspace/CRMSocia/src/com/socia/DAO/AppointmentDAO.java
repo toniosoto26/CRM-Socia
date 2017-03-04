@@ -471,6 +471,8 @@ public class AppointmentDAO {
 			
 			rs	=	ps.executeQuery();
 			
+			sql.delete(0, sql.length());
+			
 			if(rs.next()){
 				rz			=	rs.getString("razon").trim();
 				nameCon		=	rs.getString("nombre").trim();
