@@ -467,7 +467,7 @@ public class AppointmentDAO {
 			ps	=	con.prepareStatement(sql.toString());
 			ps.setInt(1, appointment.getCrmUserId());
 			ps.setInt(2, appointment.getCrmUserId());
-			ps.setInt(3, crmUserId);
+			ps.setInt(3, appointment.getCrmClientId());
 			
 			rs	=	ps.executeQuery();
 			
