@@ -759,7 +759,7 @@ public class AppointmentDAO {
 				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
 				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
 				sql.append("				                                                    <tbody><tr>");
-				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>.....</td>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>"+appointment.getDate()+"</td>");
 				sql.append("				                                                    </tr>");
 				sql.append("				                                                </tbody></table>");
 				sql.append("				                                            </td>");
