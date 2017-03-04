@@ -16,6 +16,7 @@ import com.socia.DAO.AppointmentDAO;
 import com.socia.DAO.ClientDAO;
 import com.socia.DAO.ConsecutiveDAO;
 import com.socia.DAO.ContactDAO;
+import com.socia.DAO.MailDAO;
 import com.socia.DAO.TenderDAO;
 import com.socia.DAO.TransactionDAO;
 import com.socia.DTO.AddressDTO;
@@ -77,7 +78,8 @@ public class ControllerAppointment extends HttpServlet {
 		/**DAO**/
 		ConsecutiveDAO	objConsecutive		=	new ConsecutiveDAO();
 		AddressDAO		objAddress 			= 	new AddressDAO();
-		
+		MailDAO			objMail				=	new MailDAO();		
+		AppointmentDAO	objAppointment		=	new	AppointmentDAO();
 		/**DTO**/
 		AddressDTO						address				=	null;
 		
@@ -108,7 +110,10 @@ public class ControllerAppointment extends HttpServlet {
 					String	email	=	request.getParameter("emailI");
 					String	nameI	=	request.getParameter("idNameI");
 					String	comment	=	request.getParameter("observationA");
+					String	body	=	"";
+					String[]	toc	=	null;
 					boolean	statIn	=	false;
+					activeTab = request.getParameter("activeTab");
 					
 					int		newClientType;
 					ClientDTO	client;
@@ -146,8 +151,8 @@ public class ControllerAppointment extends HttpServlet {
 					c.setCrmContactId(contId);
 					c.setcrmBdmId(bdmI);
 					c.setComments(comment);
-
 					ArrayList<StringBuilder>	arrQuerys	=	new	ArrayList<StringBuilder>();
+					
 					
 					/** Client type */
 					newClientType = Integer.parseInt(request.getParameter("clientType"));
@@ -165,6 +170,9 @@ public class ControllerAppointment extends HttpServlet {
 						transaction.openConnection();
 						transaction.insertAll(arrQuerys);
 						transaction.commit();
+						body	=	objAppointment.sendMailAppointment(c, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
+						toc		=	objAppointment.getCorreo(((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
+						objMail.sendFromGMail("rosa.mendiola.i", "swaqloi8t5o9nh.,", toc, toc, "Cita con cliente", body.toString());
 						stat=true;
 					}catch(Exception exception){
 						statIn	=	false;

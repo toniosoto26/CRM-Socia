@@ -420,4 +420,446 @@ public class AppointmentDAO {
 		return appointment;
 	}
 	
+	public String sendMailAppointment(AppointmentDTO appointment, int crmUserId){
+		
+		/**Conexiones**/
+		Connection			con			=	null;
+		ResultSet			rs			=	null;
+		PreparedStatement	ps			=	null;
+		Conexion			c			=	new	Conexion();
+		
+		
+		/**Variables**/
+		String	rz			=	"";
+		String	nameCon		=	"";
+		String	addressCon	=	"";
+		String	phoneCon	=	"";
+		String	emailCon	=	"";
+		String	bdm			= 	"";
+		String	emailBdm	=	"";
+		
+		
+		StringBuilder	sql	=	new	StringBuilder();
+		
+		sql.append("");
+		try{
+			
+			sql.delete(0, sql.length());
+			sql.append(" select c.company_name as razon ");
+			sql.append(" ,CONCAT(ccon.first_name,' ',ccon.last_name) as nombre ");
+			sql.append(" ,CONCAT(ca.street,', Num ext: ',ca.ext_num) as direcc ");
+			sql.append(" ,ccon.phone as phoneContac ");
+			sql.append(" ,ccon.email as emailContac ");
+			sql.append(" ,(select CONCAT(cu.first_name,'',cu.last_name)   ");
+			sql.append(" 		from crm_user cu ");
+			sql.append(" 		where crm_user_id = ? ) as BDM ");
+			sql.append(" ,(select cu.email  ");
+			sql.append(" 		from crm_user cu ");
+			sql.append(" 		where crm_user_id = ? ) as emailDBM ");
+			sql.append(" from	crm_client c ");
+			sql.append(" join	crm_client_contact ccc on ccc.crm_client_id = c.crm_client_id ");
+			sql.append(" join	crm_contact ccon	on	ccon.crm_contact_id = ccc.crm_contact_id ");
+			sql.append(" join 	crm_client_address cca on cca.crm_client_id = c.crm_client_id ");
+			sql.append(" join	crm_address	ca	on	cca.crm_address_id = ca.crm_address_id ");
+			sql.append(" where 	c.crm_client_id = ? ");
+			
+			con	=	c.getConnection1();
+			ps	=	con.prepareStatement(sql.toString());
+			ps.setInt(1, appointment.getCrmUserId());
+			ps.setInt(2, appointment.getCrmUserId());
+			ps.setInt(3, crmUserId);
+			
+			rs	=	ps.executeQuery();
+			
+			if(rs.next()){
+				rz			=	rs.getString("razon").trim();
+				nameCon		=	rs.getString("nombre").trim();
+				addressCon	=	rs.getString("direcc").trim();
+				phoneCon	=	rs.getString("phoneContac").trim();
+				emailCon	=	rs.getString("emailContac").trim();
+				bdm			= 	rs.getString("BDM").trim();
+				emailBdm	=	rs.getString("emailDBM").trim();
+				
+				sql.delete(0, sql.length());
+				sql.append("<!DOCTYPE html>");
+				sql.append("<html>");
+				sql.append("	<head>");
+				sql.append("	</head>");
+				sql.append("	<body>");
+				sql.append("		<table border='0' cellpadding='0' cellspacing='0' width='100%'>");
+				sql.append("		    <tbody><tr>");
+				sql.append("		        <td bgcolor='#ffffff' align='center'>");
+				sql.append("		            <table border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width: 800px;' class='wrapper'>");
+				sql.append("		                <tbody><tr>	");
+				sql.append("		                    <td valign='top' style='padding: 15px 0;' class='logo'>");
+				sql.append("		                        <a href='http://gruposocia.com' target='_blank'>");
+				sql.append("		                            <img alt='Logo' src='http://gruposocia.com/wp-content/uploads/2016/06/grupo-socia-logo-jp-hz-01-1.png' width='250' height='60' style='display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;' border='0'>");
+				sql.append("		                        </a>");
+				sql.append("		                    </td>");
+				sql.append("		                    <td align='right'>");
+				sql.append("		                    	<p style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>Referencia: </p>");
+				sql.append("		                    	<p style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>25 de febrero de 2017   </p>");
+				sql.append("		                    </td>");
+				sql.append("		                </tr>	");
+				sql.append("		            </tbody></table>");
+				sql.append("		        </td>");
+				sql.append("		    </tr>");
+				sql.append("		    <tr>");
+				sql.append("		        <td bgcolor='#ffffff' align='center' style='padding: 15px;'>");
+				sql.append("		            <table border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width: 800px;' class='responsive-table'>");
+				sql.append("		            	<tbody><tr>");
+				sql.append("		            	<td>");
+				sql.append("				            <table border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width: 100%;' class='responsive-table'>");
+				sql.append("				                <tbody><tr>");
+				sql.append("				                    <td>");
+				sql.append("				                        <table cellspacing='0' cellpadding='0' border='0' width='100%'>");
+				sql.append("				                            <tbody><tr>");
+				sql.append("				                                <td valign='top' class='mobile-wrapper'>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='37%' style='width: 37%;' align='left'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'><b>Razón Social</b></td>");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='57%' style='width: 57%;' align='right'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;' id='previewCompanyName'>"+rz+"</td>");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                </td>");
+				sql.append("				                </tr>");
+				sql.append("				                <tr>");
+				sql.append("				                    <td>");
+				sql.append("				                        <table cellspacing='0' cellpadding='0' border='0' width='100%'>");
+				sql.append("				                            <tbody><tr>");
+				sql.append("				                                <td valign='top' style='padding: 0;' class='mobile-wrapper'>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='37%' style='width: 37%;' align='left'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'><b>Contacto</b></td>");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='57%' style='width: 57%;' align='right'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>"+nameCon+"</td>");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                </td>");
+				sql.append("				                            </tr>");
+				sql.append("				                        </tbody></table>");
+				sql.append("				                    </td>");
+				sql.append("				                </tr>");
+				sql.append("				                <tr>");
+				sql.append("				                    <td>");
+				sql.append("				                        <table cellspacing='0' cellpadding='0' border='0' width='100%'>");
+				sql.append("				                            <tbody><tr>");
+				sql.append("				                                <td valign='top' style='padding: 0;' class='mobile-wrapper'>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='37%' style='width: 37%;' align='left'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'><b>Dirección</b></td>");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='57%' style='width: 57%;' align='right'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;' id='previewCompanyAddress'>"+addressCon+"</td>");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                </td>");
+				sql.append("				                            </tr>");
+				sql.append("				                        </tbody></table>");
+				sql.append("				                    </td>");
+				sql.append("				                </tr>");
+				sql.append("				                <tr>");
+				sql.append("				                    <td>");
+				sql.append("				                        <table cellspacing='0' cellpadding='0' border='0' width='100%'>");
+				sql.append("				                            <tbody><tr>");
+				sql.append("				                                <td valign='top' style='padding: 0;' class='mobile-wrapper'>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='37%' style='width: 37%;' align='left'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'><b>Teléfono</b></td>");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='57%' style='width: 57%;' align='right'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>"+phoneCon+"</td>");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                </td>");
+				sql.append("				                            </tr>");
+				sql.append("				                        </tbody></table>");
+				sql.append("				                    </td>");
+				sql.append("				                </tr>");
+				sql.append("				                <tr>");
+				sql.append("				                    <td style='border-bottom: border-top: 1px solid #eaeaea;'>");
+				sql.append("				                        <table cellspacing='0' cellpadding='0' border='0' width='100%'>");
+				sql.append("				                            <tbody><tr>");
+				sql.append("				                                <td valign='top' style='padding: 0;' class='mobile-wrapper'>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='37%' style='width: 37%;' align='left'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'><b>email</b></td>");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='57%' style='width: 57%;' align='right'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>"+emailCon+"</td>");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                </td>");
+				sql.append("				                            </tr>");
+				sql.append("				                        </tbody></table>");
+				sql.append("				                    </td>");
+				sql.append("				                </tr>");
+				sql.append("				            </tbody></table>");
+				sql.append("			            </td>");
+				sql.append("			            <td width='10%' style='max-width: 10%;'></td>");
+				sql.append("			            <td>");
+				sql.append("				            <table border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width: 100%;' class='responsive-table'>");
+				sql.append("				                <tbody><tr>");
+				sql.append("				                    <td>");
+				sql.append("				                        <table cellspacing='0' cellpadding='0' border='0' width='100%'>");
+				sql.append("				                            <tbody><tr>");
+				sql.append("				                                <td valign='top' class='mobile-wrapper'>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='27%' style='width: 27%;' align='left'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'><b>BDM</b></td>");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='67%' style='width: 67%;' align='right'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;' id='previewCompanyName'>"+bdm+"</td>");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                </td>");
+				sql.append("				                            </tr>");
+				sql.append("				                        </tbody></table>");
+				sql.append("				                    </td>");
+				sql.append("				                </tr>");
+				sql.append("				                <tr>");
+				sql.append("				                    <td>");
+				sql.append("				                        <table cellspacing='0' cellpadding='0' border='0' width='100%'>");
+				sql.append("				                            <tbody><tr>");
+				sql.append("				                                <td valign='top' style='padding: 0;' class='mobile-wrapper'>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='27%' style='width: 27%;' align='left'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'><b>Email</b></td>");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='67%' style='width: 67%;' align='right'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;' id='previewCompanyAddress'>"+emailBdm+"</td>	");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                </td>");
+				sql.append("				                            </tr>");
+				sql.append("				                        </tbody></table>");
+				sql.append("				                    </td>");
+				sql.append("				                </tr>");
+				sql.append("				                <tr>");
+				sql.append("				                    <td>");
+				sql.append("				                        <table cellspacing='0' cellpadding='0' border='0' width='100%'>");
+				sql.append("				                            <tbody><tr>");
+				sql.append("				                                <td valign='top' style='padding: 0;' class='mobile-wrapper'>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='27%' style='width: 27%;' align='left'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'><b>Fecha:</b></td>");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                    <table cellpadding='0' cellspacing='0' border='0' width='67%' style='width: 67%;' align='right'>");
+				sql.append("				                                        <tbody><tr>");
+				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
+				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+				sql.append("				                                                    <tbody><tr>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>.....</td>");
+				sql.append("				                                                    </tr>");
+				sql.append("				                                                </tbody></table>");
+				sql.append("				                                            </td>");
+				sql.append("				                                        </tr>");
+				sql.append("				                                    </tbody></table>");
+				sql.append("				                                </td>");
+				sql.append("				                            </tr>");
+				sql.append("				                        </tbody></table>");
+				sql.append("				                    </td>");
+				sql.append("				                </tr>");
+				sql.append("				            </tbody></table>");
+				sql.append("			            </td>");
+				sql.append("			            </tr>");
+				sql.append("		            </tbody></table>");
+				sql.append("		        </td>");
+				sql.append("		    </tr>");
+				sql.append("		    <tr>");
+				sql.append("		        <td bgcolor='#ffffff' align='center' style='padding: 20px 0px;'>");
+				sql.append("		            <table width='100%' border='0' cellspacing='0' cellpadding='0' align='center' style='max-width: 800px;' class='responsive-table'>");
+				sql.append("		                <tbody><tr>");
+				sql.append("		                    <td align='center' style='font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color:#666666;'>");
+				sql.append("		                        Av. Constituyentes 653, 16 de Septiembre, Miguel Hidalgo, D.F.");
+				sql.append("		                        <br>");
+				sql.append("		                        Tel. 67216096");
+				sql.append("		                    </td>");
+				sql.append("		                </tr>");
+				sql.append("		            </tbody></table>");
+				sql.append("		        </td>");
+				sql.append("		    </tr>");
+				sql.append("		</tbody></table>");
+				sql.append("	</body>");
+				sql.append("</html>	");
+				
+				
+			}
+			
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				if(ps != null) ps.close();
+				if(rs != null) rs.close();
+				if(con != null) con.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		return sql.toString();
+	}
+	
+	
+	public String[] getCorreo(int userId){
+		String correo="";
+		
+		/**Conexiones**/
+		Connection			con	=	null;
+		PreparedStatement	ps	=	null;
+		ResultSet			rs	=	null;
+		Conexion			c	=	new	Conexion();
+		
+		StringBuilder	sql	=	new	StringBuilder();
+		String[]		to	=	new	String[2];
+		
+		try{
+			
+			sql.delete(0, sql.length());
+			sql.append(" select email ");
+			sql.append(" from crm_user ");
+			sql.append(" where crm_user_id = ? ");
+			
+			con	=	c.getConnection1();
+			ps	=	con.prepareStatement(sql.toString());
+			ps.setInt(1, userId);
+			
+			rs	=	ps.executeQuery();
+			int x	=	0;
+			
+			while(rs.next()){
+				correo	=	rs.getString("email");
+				if(x<2){
+					to[x] = correo;
+				}
+				x ++;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				if(ps != null) ps.close();
+				if(rs != null) rs.close();
+				if(con != null) con.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}	
+		to[0] = "rosa.mendiola.i@gmail.com";
+		to[1] = "jossoto14@gmail.com";
+		return to;
+	}
 }
+
+
