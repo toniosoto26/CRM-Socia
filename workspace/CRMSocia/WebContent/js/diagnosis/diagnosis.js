@@ -1,25 +1,48 @@
 /**
+ * 
+ */
+
+/**
  * AS
  */
 $( document ).ready(function() {
-	getInfo("P");
-	getInfo("A");
+	
+	getInfoCliente("A");
+	getInfoProspecto1("P");
 });
 
-function getInfo(type){
-	$.ajax({
+function getInfoProspecto1(type){
+	$.ajax({ 
 		type:"post",
 		url:"ControllerDiagnosis",
-		data: {"option":1, "type": type},
+		data: {"option":2, "type": "P"},
 		success: function(response){
-			if(type=="P"){
-				$("#selectProspD").html(response);		
-			}else{
-				$("#selectClientD").html(response);		
-			}
+			$("#selectProspD").html(response);		
 			$(".chosen-select").chosen();		
 			
-		},
+		}, 
+		error: function(){
+			alertify.alert("no funciona");
+			
+		}
+	})
+	
+}
+
+/*
+ * $("#selectProspD").html(response);		
+			$(".chosen-select").chosen();		
+ * */
+function getInfoCliente(type){
+	$.ajax({ 
+		type:"post",
+		url:"ControllerDiagnosis",
+		data: {"option":1, "type": "A"},
+		success: function(response){
+			$("#selectClientD").html(response);		
+			$(".chosen-select").chosen();		
+			
+		}, 
 		error: function(){
 			alertify.alert("no funciona");
 			
@@ -32,13 +55,13 @@ function getDiagnosis(value, type){
 	$.ajax({
 		type:"post",
 		url:"ControllerDiagnosis",
-		data: {"option":2, "type": type, "clientId":value},
+		data: {"option":3, "type": type, "clientId":value},
 		success: function(response){
 			$("#response").html(response);
 			if(type == "P"){
-				getInfo("A");
+				getInfoCliente('A');
 			}else{
-				getInfo("P");
+				getInfoProspecto1("P");
 			}
 			getBLDetails(value);
 		},
@@ -54,7 +77,7 @@ function getBLDetails(value){
 	$.ajax({
 		type:"post",
 		url:"ControllerDiagnosis",
-		data: {"option":3, "clientId":value},
+		data: {"option":4, "clientId":value},
 		success: function(response){
 			$("#blTable").html(response);
 		},

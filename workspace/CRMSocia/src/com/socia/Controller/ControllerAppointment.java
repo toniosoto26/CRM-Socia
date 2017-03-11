@@ -59,7 +59,7 @@ public class ControllerAppointment extends HttpServlet {
 
 	public void  procesar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		HttpSession	session	=	request.getSession();
-		
+		//System.out.println("sesion "+ session.getAttribute("sessionLogin"));
 		int				opc			=	Integer.parseInt(request.getParameter("opc"));
 		String			url			=	"";
 		TransactionDAO	transaction	= new TransactionDAO();
@@ -82,6 +82,11 @@ public class ControllerAppointment extends HttpServlet {
 		AppointmentDAO	objAppointment		=	new	AppointmentDAO();
 		/**DTO**/
 		AddressDTO						address				=	null;
+		
+		if( session.getAttribute("sessionLogin") == null){			
+			opc = 0;
+			url	=	"/views/finishedSession.jsp";
+		}
 		
 		try{
 			switch (opc){
