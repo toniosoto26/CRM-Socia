@@ -5,8 +5,8 @@
 
 <div class="box-header" style="width:100%">
 	<div class="form-group">
-		<select style="width:80%" data-placeholder="--Selecciona el artículo--" class="chosen-select" id="itemId<c:out value="${sessionScope.itemIndex}"></c:out>" name="itemNum<c:out value='${sessionScope.itemIndex }'></c:out>" tabindex="-1" onchange="loadDescription(this,<c:out value='${sessionScope.itemIndex }'></c:out> );">
-			<option value=""></option>
+		<select style="width:80%" data-placeholder="--Selecciona un artículo--" class="chosen-select" id="itemId<c:out value="${sessionScope.itemIndex}"></c:out>" name="itemNum<c:out value='${sessionScope.itemIndex }'></c:out>" tabindex="-1" onchange="loadDescription(this,<c:out value='${sessionScope.itemIndex }'></c:out> );">
+			<option value="">--Selecciona un artículo--</option>
 			<c:forEach items="${sessionScope.arrItems}" var="varItem">
 				<option value='<c:out value="${varItem.itemId}"></c:out>'><c:out value="${varItem.itemId}"></c:out></option>
 			</c:forEach>

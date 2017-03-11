@@ -519,7 +519,7 @@
           		<button type="button" class="close" data-dismiss="modal">&times;</button>
           		<h4 class="modal-title">Detalle</h4>
         	</div>
-        	<div class="modal-body" id="modalContent"></div>
+        	<div class="modal-body" id="modalContent" style="overflow:auto;"></div>
       	</div>
     </div>
 </div>

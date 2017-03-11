@@ -152,7 +152,14 @@ function addQuotation(){
 		success: function(response){
 			if(trim(response)=="correcto"){
 				alertify.alert("Correo enviado correctamente");
+				
 				$('#addQuotation').find("input[type=text], textarea, select, input[type=number]").val("");
+				$('#chosenClient').val("0");
+				$('#chosenContact').val("0");
+				$('.chosen-select').trigger("chosen:updated");
+				$('#deliveryTimes').val('DE 24 A 48 HORAS HÁBILES');
+				loadClientInfo(document.getElementById('chosenClient'));
+				loadAddressInfo(document.getElementById('chosenClient'));
 			}
 			else{
 				alertify.alert("Incorrecto");			
