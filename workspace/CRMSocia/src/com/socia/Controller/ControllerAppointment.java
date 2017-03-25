@@ -83,13 +83,15 @@ public class ControllerAppointment extends HttpServlet {
 		/**DTO**/
 		AddressDTO						address				=	null;
 		
-		if( session.getAttribute("sessionLogin") == null){			
+		if( session.getAttribute("sessionLogin") == null)			
 			opc = 0;
-			url	=	"/views/finishedSession.jsp";
-		}
+		
 		
 		try{
 			switch (opc){
+				case 0:
+					url	=	"/views/finishedSession.jsp";
+					break;
 				case 1:
 					AppointmentDAO 			appoint	=	new	AppointmentDAO();
 					List<AppointmentDTO>	arrBDM	=	appoint.getBdm();
@@ -270,6 +272,7 @@ public class ControllerAppointment extends HttpServlet {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		
 		request.getRequestDispatcher(url).forward(request, response);	
 	}
 	
