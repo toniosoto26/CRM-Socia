@@ -86,5 +86,39 @@ function getBLDetails(value){
 			
 		}
 	})
+}
 	
+function validaDatos(){
+	var acta=document.getElementById("acta").value;
+	var nameArchivo=acta.split(".");
+	if(acta.length > 0){
+		var tam=nameArchivo.length;
+		if(nameArchivo[tam-1]=="pdf" || nameArchivo[tam-1]=="PDF"){
+			
+			var formdata = new FormData();
+			if(document.getElementById("rfc").files.length>0)
+				formdata.append("acta", document.getElementById("acta").files[0]);
+			
+			var xhr = new XMLHttpRequest();
+	         xhr.open("POST","/CRMSocia/ControllerDiagnosis?option=5", true);
+	         xhr.send(formdata);
+	         xhr.onload = function(e) {
+	            if (this.status == 200) {
+	                if(this.responseText.indexOf("ERROR") != -1)
+	                    alertify.alert(this.responseText);
+	                else {
+	                    alertify.alert(this.responseText);
+	                }
+	            }
+	         };
+
+			return false;
+		}
+		else{
+			alertify.alert("Solo puede Cargar Archivos en Formato PDF");
+			return false;
+		}
+		
+	}
+	return false;
 }

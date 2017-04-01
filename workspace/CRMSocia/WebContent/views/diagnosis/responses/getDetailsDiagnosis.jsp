@@ -130,44 +130,48 @@
 
 </c:choose>
 
-<form>
 		<div class="requisitos">
 	       	<h5>Requisitos de alta como proveedor</h5>
 	           <div class="row alta">
 	           	<div class="col-sm-6 col-md-4">
 	                   <label class="checkbox">
-	                     Acta constitutiva / poderes <input type="file">
+	                     Acta constitutiva / poderes <input type="file" id="acta"  name="acta" data-schema-key="acta">
 	                   </label>
 	                   <label class="checkbox">
-	                     RFC<input type="file">
+	                     RFC<input type="file" id="rfc" name="rfc">
 	                   </label>
 	                   <label class="checkbox">
-	                    R1<input type="file"> R1
+	                    R1<input type="file" id="r1" name="r1"> R1
 	                   </label>
 	                   <label class="checkbox">
-	                     Comprobante de domicilio<input type="file"> 
+	                     Comprobante de domicilio<input type="file" id="domicilio" name="domicilio"> 
 	                   </label>
 	                </div>
 	               <div class="col-sm-6 col-md-4">
 	               	<label class="checkbox">
-	                      Estados financieros<input type="file">
+	                      Estados financieros<input type="file" id="EdoFinanciero" name="EdoFinanciero">
 	                   </label>
 	                   <label class="checkbox">
-	                      Formato especial (cliente)<input type="file">
+	                      Formato especial (cliente)<input type="file" id="formatoEspecial" name="formatoEspecial">
 	                   </label>
 	                   <label class="checkbox">
-	                    ID representante legal<input type="file"> 
+	                    ID representante legal<input type="file" id="IdLegal" name="IdLegal"> 
 	                   </label>
 	                   <label class="checkbox">
-	                    Carátula cuenta (banco)<input type="file"> 
+	                    Carátula cuenta (banco)<input type="file" id="cuenta" name="cuenta"> 
 	                   </label>
 	               </div>
 	               <div class="col-sm-6 col-md-4">
 	                 <label>Otros  </label>
 	               	<input type="text" class="form-control">
+	               	<br><br><br><br><br>
+	               	<center><input type="button" id="btnLoadFiles" class="btn btn-primary" name="btnLoadFiles" value="Cargar Archivos" onclick="return validaDatos();"></center>
+	               
 	               </div>
 	           </div>
 	       </div>
+
+<form>	       
     <div class="contactos">
 	 	<h5>Contactos clave</h5>
 	 	<div class="table-responsive">
