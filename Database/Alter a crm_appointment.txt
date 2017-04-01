@@ -1,0 +1,1 @@
+alter table crm_appointment add date_created DATETIME not null;
