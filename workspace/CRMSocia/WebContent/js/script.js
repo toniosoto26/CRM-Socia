@@ -44,11 +44,13 @@ function activeSession(){
 		url : "ControllerLogin",
 		data: datos,
 		success: function(response){
-			if(trim(response) === "correcto")
+			if(trim(response) === "correcto"){
 				return true;
-			else
+			}
+			else{
 				alertify.alert("Sesion terminada.")
 				document.location.href	=	"index.jsp";
+			}
 			$("#mostrar").show();
 		},
 		error: function(){

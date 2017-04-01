@@ -5,7 +5,7 @@
 $( document ).ready(function() {
 	selectClient('appointment');
 	selectBDM();
-	
+	activeSession();
 	
 	$("#modified").hide();
 	 $('.form_datetime').datetimepicker({
@@ -167,24 +167,27 @@ function reviewAppo(){
 			"hrs"		:	hrs,
 			"opc"		:	5
 			};
-	$.ajax({
-		type: "post",
-		url : "ControllerAppointment",
-		data: datos,
-		success: function(response){
-			
-			if(response == ""){
-				alertify.alert("vacio");
-				return true;
-			}else{
-				alertify.alert("lleno");
-				return confirm(trim(response));
+	if(activeSession()){
+		$.ajax({
+			type: "post",
+			url : "ControllerAppointment",
+			data: datos,
+			success: function(response){
+				
+				if(response == ""){
+					alertify.alert("vacio");
+					return true;
+				}else{
+					alertify.alert("lleno");
+					return confirm(trim(response));
+				}
+			},
+			error: function(){
+				alertify.alert("Error");
 			}
-		},
-		error: function(){
-			alertify.alert("Error");
-		}
-	});
+		});
+	}
+	
 	
 }
 
@@ -357,25 +360,28 @@ function reviewAppo(){
 			"hrs"		:	hrs,
 			"opc"		:	5
 			};
-	$.ajax({
-		type: "post",
-		url : "ControllerAppointment",
-		data: datos,
-		success: function(response){
-			
-			if(response == ""){
-				alertify.alert("vacio");
-				return true;
-			}else{
-				alertify.alert("lleno");
-				return confirm(trim(response));
+	if(activeSession()){
+		$.ajax({
+			type: "post",
+			url : "ControllerAppointment",
+			data: datos,
+			success: function(response){
+				
+				if(response == ""){
+					alertify.alert("vacio");
+					return true;
+				}else{
+					alertify.alert("lleno");
+					return confirm(trim(response));
+				}
+			},
+			error: function(){
+				alertify.alert("Error");
 			}
-		},
-		error: function(){
-			alertify.alert("Error");
-		}
-	});
-	
+		});
+
+	}
+		
 }
 
 function saveInfo(){
@@ -409,23 +415,25 @@ function saveInfo(){
 						"nameI"		:	nameI,
 						"opc"		:	3
 						}
+			if(activeSession()){
+				$.ajax({
+					type: "post",
+					url : "ControllerAppointment",
+					data: $("#addAppointment").serialize()+"&opc=3&activeTab="+activeTab,
+					success: function(response){
+						alertify.alert(trim(response));
+						//alert("------------> "+response);
+						//alertify.alert("Cita guardada correctamente");
+						$("#pageContent").load("/CRMSocia/views/appointments/generateAppointments.jsp");
+						return false;
+					},
+					error: function(){
+						alertify.alert("Error");
+						return false;
+					}
+				});
+			}
 			
-			$.ajax({
-				type: "post",
-				url : "ControllerAppointment",
-				data: $("#addAppointment").serialize()+"&opc=3&activeTab="+activeTab,
-				success: function(response){
-					alertify.alert(trim(response));
-					//alert("------------> "+response);
-					//alertify.alert("Cita guardada correctamente");
-					$("#pageContent").load("/CRMSocia/views/appointments/generateAppointments.jsp");
-					return false;
-				},
-				error: function(){
-					alertify.alert("Error");
-					return false;
-				}
-			});
 		//}
 		
 	}
@@ -494,40 +502,45 @@ function SaveModifiedInformation(){
 					"contact":	contactId,
 					"opc"	:	4
 					};
-		
-		$.ajax({
-			type: "post",
-			url : "ControllerAppointment",
-			data: datos,
-			success: function(response){
-				alertify.alert(trim(response));
-			},
-			error: function(){
-				alertify.alert("Error");
-			}
-		});
-		
+		if(activeSession()){
+			$.ajax({
+				type: "post",
+				url : "ControllerAppointment",
+				data: datos,
+				success: function(response){
+					alertify.alert(trim(response));
+				},
+				error: function(){
+					alertify.alert("Error");
+				}
+			});
+
+		}	
+				
 	}
 }
 
 function loadAddressInfo(selected){
 	var clientId = selected.value;
-	$.ajax({
-		type: "post",
-		url : "ControllerTemp",
-		data: {
-			option: 1, 
-			clientId: clientId
-		},
-		success: function(response){
-			$("#addressInfo").html(response);
-			$(".chosen-select").chosen();
-		},
-		error: function(){
-			alert("Error");
-		}
-	});
+	if(activeSession()){
+		$.ajax({
+			type: "post",
+			url : "ControllerTemp",
+			data: {
+				option: 1, 
+				clientId: clientId
+			},
+			success: function(response){
+				$("#addressInfo").html(response);
+				$(".chosen-select").chosen();
+			},
+			error: function(){
+				alert("Error");
+			}
+		});
+	}
 }
+	
 
 
 function validateMod(){
@@ -592,37 +605,43 @@ function SaveModifiedInformation(){
 					"contact":	contactId,
 					"opc"	:	4
 					};
-		
-		$.ajax({
-			type: "post",
-			url : "ControllerAppointment",
-			data: datos,
-			success: function(response){
-				alertify.alert(trim(response));
-			},
-			error: function(){
-				alertify.alert("Error");
-			}
-		});
+		if(activeSession()){
+			$.ajax({
+				type: "post",
+				url : "ControllerAppointment",
+				data: datos,
+				success: function(response){
+					alertify.alert(trim(response));
+				},
+				error: function(){
+					alertify.alert("Error");
+				}
+			});
+			
+		}
 		
 	}
 }
 
 function loadAddressInfo(selected){
 	var clientId = selected.value;
-	$.ajax({
-		type: "post",
-		url : "ControllerTemp",
-		data: {
-			option: 1, 
-			clientId: clientId
-		},
-		success: function(response){
-			$("#addressInfo").html(response);
-			$(".chosen-select").chosen();
-		},
-		error: function(){
-			alert("Error");
-		}
-	});
+	if(activeSession()){
+		$.ajax({
+			type: "post",
+			url : "ControllerTemp",
+			data: {
+				option: 1, 
+				clientId: clientId
+			},
+			success: function(response){
+				$("#addressInfo").html(response);
+				$(".chosen-select").chosen();
+			},
+			error: function(){
+				alert("Error");
+			}
+		});
+
+		
+	}
 }
