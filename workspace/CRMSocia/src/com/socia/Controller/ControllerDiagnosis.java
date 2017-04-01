@@ -75,22 +75,41 @@ public class ControllerDiagnosis extends HttpServlet {
 		
 		Connection	con			=	null;
 		Conexion	conexion	=	new	Conexion();	
+		
+		
 		switch(opc){
 			case 1:
 				typeD		=	request.getParameter("type").trim();
 				objClient	=	new ClientDAO();
 				
+				
+				ArrayList<ClientDTO> arrClientP = new ArrayList<ClientDTO>(); 
+				arrClientP=objClient.getClientsDiag(typeD);
+				
+				session.removeAttribute("arrClientA");
+				session.setAttribute("arrClientA", arrClientP);
+				
+				session.removeAttribute("clientTypeA");
+				session.setAttribute("clientTypeA", typeD);
 				url		=	"/views/diagnosis/responses/getClientS.jsp";
+				break;
+			case 2:
+				typeD		=	request.getParameter("type").trim();
+				objClient	=	new ClientDAO();
+				
+				
 				ArrayList<ClientDTO> arrClient = new ArrayList<ClientDTO>(); 
 				arrClient=objClient.getClientsDiag(typeD);
 				
-				session.removeAttribute("arrClient");
-				session.setAttribute("arrClient", arrClient);
+				session.removeAttribute("arrClientP");
+				session.setAttribute("arrClientP", arrClient);
 				
-				session.removeAttribute("clientType");
-				session.setAttribute("clientType", typeD);
+				session.removeAttribute("clientTypeP");
+				session.setAttribute("clientTypeP", typeD);
+				
+				url		=	"/views/diagnosis/responses/getClientePros.jsp";
 				break;
-			case 2:
+			case 3:
 				List<DiagnosisDTO>		lst				= 	null;
 				List<ClientDTO>			lstC			=	null;
 				List<ContactDTO>		lstCo			=	null;
@@ -129,7 +148,7 @@ public class ControllerDiagnosis extends HttpServlet {
 				
 				url		=	"/views/diagnosis/responses/getDetailsDiagnosis.jsp";
 				break;	
-			case 3:
+			case 4:
 				BusinessLineDTO				businessLine	= null;
 				BusinessLineDAO				objBusinessLine	= new BusinessLineDAO();
 				BrandDAO					objBrand		= new BrandDAO();

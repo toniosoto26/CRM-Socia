@@ -10,7 +10,8 @@ function validar(){
 	var	validar		=	validarCampos(userLogin,passwdLogin);
 	var datos		=	{
 						"user" : userLogin,
-						"passwd": passwdLogin  
+						"passwd": passwdLogin,
+						"opc"	: 1
 						}
 	if(validar){
 		$.ajax({
@@ -31,6 +32,33 @@ function validar(){
 		});
 	}
 }
+
+
+function activeSession(){
+	var datos		=	{
+			
+			"opc"	: 2
+			}
+	$.ajax({
+		type: "post",
+		url : "ControllerLogin",
+		data: datos,
+		success: function(response){
+			if(trim(response) === "correcto")
+				return true;
+			else
+				alertify.alert("Sesion terminada.")
+				document.location.href	=	"index.jsp";
+			$("#mostrar").show();
+		},
+		error: function(){
+			//$("#result").html("Datos incorrectos.");
+			alertify.alert("Error");
+		}
+	});
+	
+}
+
 
 function validarCampos(user,passwd){
 	if(user == "" || passwd == ""){
