@@ -58,8 +58,8 @@ public class Controller extends HttpServlet {
 		int						clientId	= 	0;
 		int						contactId	= 	0;
 		String					view		=	"";
-		String[]	to= {"rmmi_ros@hotmail.com", "jossoto14@gmail.com", "vidal.sistemas@hotmail.com"};
-		//String[]	to= {"vidal.sistemas@hotmail.com"};
+		String[]	to= {"","rmmi_ros@hotmail.com", "jossoto14@gmail.com", "vidal.sistemas@hotmail.com"};
+		
 		
 		///////**********  DAO ***************
 		
@@ -295,11 +295,12 @@ public class Controller extends HttpServlet {
 		}
 		//correo  de carta 
 		if(option == 9){
+			String mailContact=request.getParameter("mailContact");
 			boolean sendMail=true;
 			StringBuilder body;
 			String[] cc	= {""};
 			cc[0] =  ((LoginDTO)session.getAttribute("sessionLogin")).getEmail();
-			
+			to[0] = mailContact;
 			body = objCall.generateMailLetter();
 			try{
 				objMail.sendFromGMailAttachment("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, cc, "Envio de Carta - Grupo Socia ", body.toString(),"C:\\Users\\Vidal\\Documents\\DoocumentsMail\\Carta Corporativa GRUPO SOCIA.pdf","Carta Corporativa GRUPO SOCIA.pdf");
@@ -317,11 +318,12 @@ public class Controller extends HttpServlet {
 		
 		//correo  de envio de presentacion 
 		if(option == 10){
+			String mailContact=request.getParameter("mailContact");
 			boolean sendMail=true;
 			StringBuilder body;
 			String[] cc	= {""};
 			cc[0] =  ((LoginDTO)session.getAttribute("sessionLogin")).getEmail();
-			
+			to[0] = mailContact;
 			body = objCall.generateMailPresentation();
 			try{
 				objMail.sendFromGMailAttachment("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, cc, "Envio de Presentación - Grupo Socia", body.toString(),"C:\\Users\\Vidal\\Documents\\DoocumentsMail\\Presentacion Corporativa GRUPO SOCIA.pdf","Presentacion Corporativa GRUPO SOCIA.pdf");

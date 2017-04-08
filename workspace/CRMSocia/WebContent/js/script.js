@@ -44,11 +44,13 @@ function activeSession(){
 		url : "ControllerLogin",
 		data: datos,
 		success: function(response){
-			if(trim(response) === "correcto")
+			if(trim(response) === "correcto"){
 				return true;
-			else
+			}
+			else{
 				alertify.alert("Sesion terminada.")
 				document.location.href	=	"index.jsp";
+			}
 			$("#mostrar").show();
 		},
 		error: function(){
@@ -239,6 +241,10 @@ function pintar(variable){
 	}
 }
 
+function loadContactButtons(variable){
+	$("#form2").load("views/calls/contactButtons.jsp");
+}
+
 function registreCall(variable){
 	var validacion=validateCalls();
 	
@@ -344,11 +350,19 @@ function loadContactAppointment(selected){
 
 
 function sendMailCall(opcion){
+	var mailContact=$("#companyEmail").val();
+	
+	if(mailContact==''){
+		alertify.alert("El correo del contacto no debe de estar vacio");
+	}
+	else{
+		alertify.alert("Voy a mandar un correo papaloy ");
 	$.ajax({
 		type: "post",
 		url : "Controller",
 		data: {
-			option:opcion
+			option:opcion,
+			mailContact:mailContact
 		},
 		beforeSend: function(){
 			alertify.set({ delay: 3000 });
@@ -368,8 +382,8 @@ function sendMailCall(opcion){
 		error: function(){
 			alert("Error");
 		}
-	});
-	
+	}); 
+	}
 	return false;
 }
 

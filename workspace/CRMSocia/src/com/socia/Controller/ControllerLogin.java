@@ -47,23 +47,39 @@ public class ControllerLogin extends HttpServlet {
 		String		user	=	request.getParameter("user");
 		String		pass	=	request.getParameter("passwd");
 		String		url		=	"/views/validateUser.jsp";
-		
+		int			opc		=	Integer.valueOf(request.getParameter("opc"));
 		try{
+			
+			
 			LoginDAO	loginDao	=	new	LoginDAO();
-			LoginDTO	loginDto	=	loginDao.validateUser(user, pass);
-
-			if(loginDto != null){
-				
-				session.removeAttribute("user");
-				session.setAttribute("user", user);
-				
-				session.removeAttribute("sessionLogin");
-				session.setAttribute("sessionLogin", loginDto);
-			}else{
-				
-				session.removeAttribute("sessionLogin");
-				session.setAttribute("sessionLogin", loginDto);
+			switch(opc){
+				case 1:
+					LoginDTO	loginDto	=	loginDao.validateUser(user, pass);		
+					if(loginDto != null){
+						
+						session.removeAttribute("user");
+						session.setAttribute("user", user);
+						
+						session.removeAttribute("sessionLogin");
+						session.setAttribute("sessionLogin", loginDto);
+						System.out.println("sesion "+ session.getAttribute("sessionLogin"));
+						//System.out.println("----------> "+((LoginDTO)session.getAttribute("sessionLogin")).getEmail());
+					}else{
+						
+						session.removeAttribute("sessionLogin");
+						session.setAttribute("sessionLogin", loginDto);
+					}	
+					break;
+				case 2:
+					if( session.getAttribute("sessionLogin") == null)	{		
+						url	=	"/views/finishedSession.jsp";
+					}
+					break;
 			}
+			
+			
+			
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
