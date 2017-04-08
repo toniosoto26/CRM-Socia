@@ -62,6 +62,7 @@
 				        <li onClick="loadMenu('quotation', this);"><a href="#">COTIZACIONES</a></li>
 				        <li onClick="loadMenu('calendar', this);"><a href="#">CALENDARIO</a></li>
 				        <li onClick="loadMenu('indicators', this);"><a href="#">INDICADORES</a></li>
+				        <li onClick="loadMenu('file', this);"><a href="#">FILE</a></li>
 				        <li><a href="ControllerLogin?cerrarSesion=T"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>  CERRAR SESIÓN</a></li>
 				      </ul>
 				    </div><!-- /.navbar-collapse -->

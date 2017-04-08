@@ -49,7 +49,7 @@ public class TransactionDAO {
 					.replaceAll("CRM_OPPORTUNITIES", "crm_opportunities")
 					.replaceAll("CRM_POSITION", "crm_position")
 					.replaceAll("CRM_QUOTATION", "crm_quotation")
-					.replaceAll("CRM_QUOTATION_DETAILS", "crm_quotation_detail")
+					.replaceAll("CRM_QUOTATION_DETAIL", "crm_quotation_detail")
 					.replaceAll("CRM_REGISTRATION_REQUIREMENT", "crm_registration_requirement")
 					.replaceAll("CRM_REG_REQ", "crm_reg_req")
 					.replaceAll("CRM_REQUIREMENT", "crm_requirement")

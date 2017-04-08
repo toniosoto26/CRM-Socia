@@ -6805,11 +6805,19 @@ button.close {
 .alta {
 	padding-left:20px;
 }
+.alta2 {
+	margin-bottom: 30px;
+	padding-left:30px;
+}
 .amarillo {
 	background-color: #f5e354;
 }
 .azul {
 	background-color: #abd2e4;
+}
+.blanco {
+	margin-top:20px;
+	padding:15px;
 }
 .campo-tabla {
 	height: auto;
@@ -6833,6 +6841,9 @@ button.close {
 	display: block;
 	margin: 0 auto;
 	max-width: 70%;
+}
+.cien {
+	width: 96%;
 }
 .circulo-amarillo {
 	display: inline-block;
@@ -6864,6 +6875,10 @@ button.close {
     background: #ff0026;
     vertical-align: middle;
 }
+.comentarios {
+	margin-top: 20px;
+	text-align: center;
+}
 .contactos {
 	margin-top: 30px;
 }
@@ -6881,9 +6896,15 @@ button.close {
 .destacado {
 	font-family: 'Montserrat-bold';
 }
+.division {
+	border-bottom: solid 2pt #ccc;
+}
 .fecha {
 	color: #4D4D4D;
 	padding-bottom: 10px;
+}
+.gris {
+	color: #808080;
 }
 .indicadores {
 	margin: 15px; auto;
@@ -6912,6 +6933,9 @@ button.close {
 	width: 100%;
 	/*z-index:1;*/
 }
+.margen {
+	margin-top: 40px;
+}
 .negro {
 color: black;
 }
@@ -6919,6 +6943,9 @@ color: black;
 	margin-right: 15px;
 	padding-bottom: 15px;
 	text-align: right;
+}
+.parrafos {
+	margin-left: 15px;
 }
 .puntos {
 	color:#4d4d4d;
@@ -6933,8 +6960,15 @@ color: black;
 	background-color: #ff0026;
 	color: white;
 }
+.subtabla {
+	margin-bottom: 10px;
+}
 .tabla-grande {
 	font-size: 13px;
+}
+.tema {
+	color:#333333;
+	text-transform: uppercase;
 }
 .titulo {
 	border-bottom: solid 1px #666;

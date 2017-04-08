@@ -62,5 +62,12 @@ function loadMenu(menuName, option){
 				  '<li><a href="#">Inicio</a></li>'+
 				  '<li class="active">Indicadores</li>'+
 				'</ol>');
+	} else if(menuName === "file"){
+		$("#pageContent").removeClass("welcome");
+		$("#pageContent").load("/CRMSocia/views/file/file.jsp");
+		$("#pageHeader").html('<ol class="breadcrumb">'+
+								  '<li><a href="#">Inicio</a></li>'+
+								  '<li class="active">File</li>'+
+								'</ol>');
 	}
 }

@@ -294,7 +294,7 @@ public class QuotationDAO {
 		StringBuilder		sqlQuery	=	null;
 		SimpleDateFormat	sdf			=	new SimpleDateFormat("dd 'de' MMMM 'de' yyyy");
 		String				today		=	sdf.format(new Date());
-		DecimalFormat		df			= 	new DecimalFormat("'$' ###,###,###.##");
+		DecimalFormat		df			= 	new DecimalFormat("'$'###,###,###.##");
 		double				totalItem	= 	0;
 		double				subtotal	=	0;
 		double				iva			= 	0;
