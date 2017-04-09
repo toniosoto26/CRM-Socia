@@ -1,0 +1,30 @@
+CREATE TABLE `socia`.`crm_charge` (
+  `crm_charge_id` INT NOT NULL,
+  `responsible` VARCHAR(45) NULL,
+  `company_division_id` INT NULL,
+  `crm_position_id` INT NULL,
+  `phone` VARCHAR(45) NULL,
+  `email` VARCHAR(45) NULL,
+  `review_process` VARCHAR(255) NULL,
+  `review_date` VARCHAR(45) NULL,
+  `payment_date` VARCHAR(45) NULL,
+  `timetable` VARCHAR(45) NULL,
+  `payment_method` VARCHAR(45) NULL,
+  `invoice` DECIMAL(12,2) NULL,
+  `30_days` DECIMAL(12,2) NULL,
+  `25_days` DECIMAL(12,2) NULL,
+  `15_days` DECIMAL(12,2) NULL,
+  `10_days` DECIMAL(12,2) NULL,
+  `current` DECIMAL(12,2) NULL,
+  `overdue_amount` DECIMAL(12,2) NULL,
+  `next_overdue_amount` DECIMAL(12,2) NULL,
+  `comments` VARCHAR(255) NULL,
+  PRIMARY KEY (`crm_charge_id`));
+
+CREATE TABLE `socia`.`crm_logistics` (
+  `crm_logistics_id` INT NOT NULL,
+  `crm_addres_id` VARCHAR(45) NULL,
+  `contact_name` VARCHAR(45) NULL,
+  `documentation` VARCHAR(255) NULL,
+  `timetable` VARCHAR(45) NULL,
+  PRIMARY KEY (`crm_logistics_id`));
