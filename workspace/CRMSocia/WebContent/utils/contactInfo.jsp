@@ -119,7 +119,7 @@
 	
  <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width:80%">
     
       <!-- Modal content-->
       <div class="modal-content">
