@@ -86,6 +86,7 @@ public class ControllerDiagnosis extends HttpServlet {
 		
 		String		url			=	"";
 		String		typeD		=	"";
+		boolean		isDiagnosis	=	false;
 		int			clientId	=	0;	
 		
 		Connection	con			=	null;
@@ -94,7 +95,9 @@ public class ControllerDiagnosis extends HttpServlet {
 			case 1:
 				typeD		=	request.getParameter("type").trim();
 				objClient	=	new ClientDAO();
-				
+				isDiagnosis =	request.getParameter("diagnosis").trim().equals("true");
+				System.out.println(request.getParameter("diagnosis"));
+				System.out.println(isDiagnosis);
 				
 				ArrayList<ClientDTO> arrClientP = new ArrayList<ClientDTO>(); 
 				arrClientP=objClient.getClientsDiag(typeD);
@@ -104,12 +107,16 @@ public class ControllerDiagnosis extends HttpServlet {
 				
 				session.removeAttribute("clientTypeA");
 				session.setAttribute("clientTypeA", typeD);
+				
+				session.removeAttribute("isDiagnosis");
+				session.setAttribute("isDiagnosis", isDiagnosis);
+				
 				url		=	"/views/diagnosis/responses/getClientS.jsp";
 				break;
 			case 2:
 				typeD		=	request.getParameter("type").trim();
 				objClient	=	new ClientDAO();
-				
+				isDiagnosis =	request.getParameter("diagnosis").trim().equals("true");
 				
 				ArrayList<ClientDTO> arrClient = new ArrayList<ClientDTO>(); 
 				arrClient=objClient.getClientsDiag(typeD);
@@ -119,6 +126,9 @@ public class ControllerDiagnosis extends HttpServlet {
 				
 				session.removeAttribute("clientTypeP");
 				session.setAttribute("clientTypeP", typeD);
+				
+				session.removeAttribute("isDiagnosis");
+				session.setAttribute("isDiagnosis", isDiagnosis);
 				
 				url		=	"/views/diagnosis/responses/getClientePros.jsp";
 				break;

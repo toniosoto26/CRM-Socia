@@ -55,7 +55,7 @@ function getDiagnosis(value, type){
 	$.ajax({
 		type:"post",
 		url:"ControllerDiagnosis",
-		data: {"option":3, "type": type, "clientId":value},
+		data: {"option":3, "type": type, "clientId":value, diagnosis: true},
 		success: function(response){
 			$("#response").html(response);
 			if(type == "P"){
@@ -77,7 +77,7 @@ function getBLDetails(value){
 	$.ajax({
 		type:"post",
 		url:"ControllerDiagnosis",
-		data: {"option":4, "clientId":value},
+		data: {"option":4, "clientId":value, diagnosis: true},
 		success: function(response){
 			$("#blTable").html(response);
 		},

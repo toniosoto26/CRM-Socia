@@ -450,7 +450,7 @@ public class AppointmentDAO {
 			sql.append(" ,CONCAT(ca.street,', Num ext: ',ca.ext_num) as direcc ");
 			sql.append(" ,ccon.phone as phoneContac ");
 			sql.append(" ,ccon.email as emailContac ");
-			sql.append(" ,(select CONCAT(cu.first_name,'',cu.last_name)   ");
+			sql.append(" ,(select CONCAT(cu.first_name,' ',cu.last_name)   ");
 			sql.append(" 		from crm_user cu ");
 			sql.append(" 		where crm_user_id = ? ) as BDM ");
 			sql.append(" ,(select cu.email  ");
@@ -465,8 +465,8 @@ public class AppointmentDAO {
 			
 			con	=	c.getConnection1();
 			ps	=	con.prepareStatement(sql.toString());
-			ps.setInt(1, appointment.getCrmUserId());
-			ps.setInt(2, appointment.getCrmUserId());
+			ps.setInt(1, appointment.getCrmBdmId());
+			ps.setInt(2, appointment.getCrmBdmId());
 			ps.setInt(3, appointment.getCrmClientId());
 			
 			rs	=	ps.executeQuery();
@@ -522,7 +522,7 @@ public class AppointmentDAO {
 				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
 				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
 				sql.append("				                                                    <tbody><tr>");
-				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'><b>RazÃ³n Social</b></td>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'><b>Razón Social</b></td>");
 				sql.append("				                                                    </tr>");
 				sql.append("				                                                </tbody></table>");
 				sql.append("				                                            </td>");
@@ -583,7 +583,7 @@ public class AppointmentDAO {
 				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
 				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
 				sql.append("				                                                    <tbody><tr>");
-				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'><b>DirecciÃ³n</b></td>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'><b>Dirección</b></td>");
 				sql.append("				                                                    </tr>");
 				sql.append("				                                                </tbody></table>");
 				sql.append("				                                            </td>");
@@ -615,7 +615,7 @@ public class AppointmentDAO {
 				sql.append("				                                            <td style='padding: 0 0 10px 0;'>");
 				sql.append("				                                                <table cellpadding='0' cellspacing='0' border='0' width='100%'>");
 				sql.append("				                                                    <tbody><tr>");
-				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'><b>TelÃ©fono</b></td>");
+				sql.append("				                                                        <td align='left' style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'><b>Teléfono</b></td>");
 				sql.append("				                                                    </tr>");
 				sql.append("				                                                </tbody></table>");
 				sql.append("				                                            </td>");
