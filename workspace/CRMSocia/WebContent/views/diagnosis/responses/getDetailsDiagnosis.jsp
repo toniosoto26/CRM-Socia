@@ -138,27 +138,27 @@
 	                     Acta constitutiva / poderes <input type="file" id="acta"  name="acta" data-schema-key="acta">
 	                   </label>
 	                   <label class="checkbox">
-	                     RFC<input type="file" id="rfc" name="rfc">
+	                     RFC<input type="file" id="rfc" name="rfc"  data-schema-key="rfc">
 	                   </label>
 	                   <label class="checkbox">
-	                    R1<input type="file" id="r1" name="r1"> R1
+	                    R1<input type="file" id="r1" name="r1"  data-schema-key="r1"> R1
 	                   </label>
 	                   <label class="checkbox">
-	                     Comprobante de domicilio<input type="file" id="domicilio" name="domicilio"> 
+	                     Comprobante de domicilio<input type="file" id="domicilio" name="domicilio" data-schema-key="domicilio"> 
 	                   </label>
 	                </div>
 	               <div class="col-sm-6 col-md-4">
 	               	<label class="checkbox">
-	                      Estados financieros<input type="file" id="EdoFinanciero" name="EdoFinanciero">
+	                      Estados financieros<input type="file" id="EdoFinanciero" name="EdoFinanciero" data-schema-key="EdoFinanciero">
 	                   </label>
 	                   <label class="checkbox">
-	                      Formato especial (cliente)<input type="file" id="formatoEspecial" name="formatoEspecial">
+	                      Formato especial (cliente)<input type="file" id="formatoEspecial" name="formatoEspecial" data-schema-key="formatoEspecial">
 	                   </label>
 	                   <label class="checkbox">
-	                    ID representante legal<input type="file" id="IdLegal" name="IdLegal"> 
+	                    ID representante legal<input type="file" id="IdLegal" name="IdLegal" data-schema-key="IdLegal"> 
 	                   </label>
 	                   <label class="checkbox">
-	                    Carátula cuenta (banco)<input type="file" id="cuenta" name="cuenta"> 
+	                    Carátula cuenta (banco)<input type="file" id="cuenta" name="cuenta" data-schema-key="cuenta"> 
 	                   </label>
 	               </div>
 	               <div class="col-sm-6 col-md-4">

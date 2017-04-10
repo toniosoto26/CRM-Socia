@@ -18,6 +18,9 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
  
 
+
+
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -36,6 +39,7 @@ import com.socia.DAO.EquipmentTypeDAO;
 import com.socia.DAO.OpportunitiesDAO;
 import com.socia.DAO.RunRateDAO;
 import com.socia.DAO.RunRateTypeDAO;
+import com.socia.DAO.TransactionDAO;
 import com.socia.DTO.BlDetailsDTO;
 import com.socia.DTO.BrandDTO;
 import com.socia.DTO.BusinessLineDTO;
@@ -43,6 +47,7 @@ import com.socia.DTO.CallDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
 import com.socia.DTO.DiagnosisDTO;
+import com.socia.DTO.DiagnosisRequirement;
 import com.socia.DTO.EquipmentTypeDTO;
 import com.socia.DTO.LoginDTO;
 import com.socia.DTO.OpportunitiesDTO;
@@ -86,7 +91,6 @@ public class ControllerDiagnosis extends HttpServlet {
 		
 		String		url			=	"";
 		String		typeD		=	"";
-		boolean		isDiagnosis	=	false;
 		int			clientId	=	0;	
 		
 		Connection	con			=	null;
@@ -95,9 +99,7 @@ public class ControllerDiagnosis extends HttpServlet {
 			case 1:
 				typeD		=	request.getParameter("type").trim();
 				objClient	=	new ClientDAO();
-				isDiagnosis =	request.getParameter("diagnosis").trim().equals("true");
-				System.out.println(request.getParameter("diagnosis"));
-				System.out.println(isDiagnosis);
+				
 				
 				ArrayList<ClientDTO> arrClientP = new ArrayList<ClientDTO>(); 
 				arrClientP=objClient.getClientsDiag(typeD);
@@ -107,16 +109,12 @@ public class ControllerDiagnosis extends HttpServlet {
 				
 				session.removeAttribute("clientTypeA");
 				session.setAttribute("clientTypeA", typeD);
-				
-				session.removeAttribute("isDiagnosis");
-				session.setAttribute("isDiagnosis", isDiagnosis);
-				
 				url		=	"/views/diagnosis/responses/getClientS.jsp";
 				break;
 			case 2:
 				typeD		=	request.getParameter("type").trim();
 				objClient	=	new ClientDAO();
-				isDiagnosis =	request.getParameter("diagnosis").trim().equals("true");
+				
 				
 				ArrayList<ClientDTO> arrClient = new ArrayList<ClientDTO>(); 
 				arrClient=objClient.getClientsDiag(typeD);
@@ -126,9 +124,6 @@ public class ControllerDiagnosis extends HttpServlet {
 				
 				session.removeAttribute("clientTypeP");
 				session.setAttribute("clientTypeP", typeD);
-				
-				session.removeAttribute("isDiagnosis");
-				session.setAttribute("isDiagnosis", isDiagnosis);
 				
 				url		=	"/views/diagnosis/responses/getClientePros.jsp";
 				break;
@@ -218,13 +213,16 @@ public class ControllerDiagnosis extends HttpServlet {
 				
 			case 5:
 				diagDao	= new DiagnosisDAO();
-				//String path = "//C://Users//Vidal//Desktop//Docs//prueba1.pdf";
-				
-				String lstrVendor="1234";
+				DiagnosisRequirement lobReqDiagnosis =new  DiagnosisRequirement();
+				String lstrCustomer="1234";
 				String pathRoot = "C://Users//Vidal//Desktop//Docs";
-				String path = pathRoot+"/"+lstrVendor.trim(); //+ "Pdf/";
+				String path = pathRoot+"/"+lstrCustomer.trim(); //+ "Pdf/";
 				String mstrRuta="";
-
+				
+				/** Transaction */
+				TransactionDAO					transaction			= new TransactionDAO();
+				ArrayList<StringBuilder>		queries				= new ArrayList<StringBuilder>();
+				boolean							insert					= 	false;
 				
 				try{ //inicia try1
 										
@@ -251,8 +249,6 @@ public class ControllerDiagnosis extends HttpServlet {
 						 List items = null;
 						 try
 						 {//inicia try2
-							 System.out.println("Entre a la opcion 5 "+path);
-							 System.out.println("REQUES "+request);
 							 items = fu.parseRequest(request);
 							 Iterator itr = items.iterator();
 												 
@@ -264,35 +260,45 @@ public class ControllerDiagnosis extends HttpServlet {
 								 {		  
 									 if(item.getFieldName().equals("campo1"))
 									 {
-										 //System.out.println("Comentario:"+item.getString().trim());
-										 //item.getString().trim(); //texto
+										 	
 									 }
 									
 								 } //termina if (item.isFormField())
 								 else{
-									 System.out.println("Entre al while "+item.getFieldName());
+									
 									 String fileName="";  
 									 String fileName1="";  
 									 File path1;
 									 File uploadedFile;
 									 String itemName="";
-									 if(item.getFieldName().equals("acta")){
+									 //if(item.getFieldName().equals("acta")|| item.getFieldName().equals("rfc")){
+									 if(item.getFieldName().length()>0){
 										 try										
 										 {	//inicia try3
 											 itemName = item.getName();
 											 itemName = Cadena.filtroCadena(itemName);
 											 if(itemName != null)
 												 if(!itemName.equals("")){
-													 fileName = item.getName();
-											   		 path1 = new File(pathRoot+"/"+lstrVendor.trim());
+													 fileName = item.getName();															
+													 fileName = item.getFieldName()+"-"+lstrCustomer+".pdf";
+													
+											   		 path1 = new File(pathRoot+"/"+lstrCustomer.trim());
 											   		 if (!path1.exists()) {
 											   			 boolean status = path1.mkdirs();
 											   		 }
 											   		 mstrRuta=path1 + "/" + fileName;
-											   		 uploadedFile = new File(path1 + "/"+ fileName);
-											   		 item.write(uploadedFile);
-											   		 
-
+											   		
+											   			lobReqDiagnosis.setClient_id(1234);
+											   			int idReque=diagDao.getIdRequirement(item.getFieldName().toString());
+											   			lobReqDiagnosis.setId_requirement(idReque);
+											   			lobReqDiagnosis.setId_user(2333);
+											   			lobReqDiagnosis.setStatus("A");
+											   			
+											   		    uploadedFile = new File(path1 + "/"+ fileName);
+											   		    item.write(uploadedFile);
+											   		    lobReqDiagnosis.setPath(uploadedFile.getAbsolutePath());
+											   		    queries = diagDao.insertFiles(lobReqDiagnosis, queries);
+											   		 //System.out.println("ruta "+mstrRuta);
 											   		 
 												 }
 										 }	//termina try3 
@@ -305,9 +311,23 @@ public class ControllerDiagnosis extends HttpServlet {
 								   }//else 
 
 							 }//while 
-							 //lobMod.envioInformacion(lstrFolio, lstrVendor, mstrRuta, mstrComentario);
+						 try{
+							 transaction.openConnection();
+								transaction.insertAll(queries);
+								
+								transaction.commit();
+								insert = true;
+						 	}
+						 	catch(Exception exception){
+								insert = false;
+								transaction.rollback();
+								exception.printStackTrace();
+							}finally{
+								transaction.closeConnection();
+							}	
+							 //lobMod.envioInformacion(lstrFolio, lstrCustomer, mstrRuta, mstrComentario);
 							 //response.sendRedirect("/dcmInt/finanzas/EnvioEdoCuentaProveedores/EnviaEdoCuenta.jsp?alert=1");
-							 System.out.println("Cargados correctamente");
+							 //System.out.println("Cargados correctamente");
 						 }//try 2 
 						 catch(Exception a ){
 							 a.printStackTrace();

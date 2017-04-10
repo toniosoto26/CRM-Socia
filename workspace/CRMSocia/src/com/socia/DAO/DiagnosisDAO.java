@@ -12,7 +12,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.socia.DTO.AddressDTO;
 import com.socia.DTO.DiagnosisDTO;
+import com.socia.DTO.DiagnosisRequirement;
 
 public class DiagnosisDAO {
 	
@@ -81,37 +83,54 @@ public class DiagnosisDAO {
 	}
 	
 	
-	 public boolean copiaArchivo(String lstrRutaOrigen,String lstrRutaDestino){
-	     System.out.println("Entre al copiado");  
-		 try {
-	    	  // lstrRutaOrigen="\\C:\\Users\\Vidal\\Desktop\\evidencias dici\\aviso a proveedores NA.pdf";
-	    	   //lstrRutaDestino="\\C:\\Users\\Vidal\\Desktop\\Docs\\1234\\prueba.pdf";
-	    	   
-	    	   
-                File origen = new File(lstrRutaOrigen);
-                File destino = new File(lstrRutaDestino);
-                InputStream in = new FileInputStream(origen);
-                OutputStream out = new FileOutputStream(destino);
-
-                byte[] buf = new byte[1024];
-                int len;
-
-                while ((len = in.read(buf)) > 0) {
-                    out.write(buf, 0, len);
-                }
-
-                in.close();
-
-                out.close();
-
-
-	         } 
-	         catch (IOException ioe){
-	            ioe.printStackTrace();
-	            return false;
-	         }
-	       return true;
-	    }
+	public ArrayList<StringBuilder> insertFiles(DiagnosisRequirement diagnosis, ArrayList<StringBuilder> queries){
+		StringBuilder		sqlQuery	=	null;
+		
+    	sqlQuery	=	new	StringBuilder();
+		sqlQuery.append(" INSERT INTO crm_reg_req (client_id, id_requirement, path, load_date, id_user,status) ");
+		sqlQuery.append(" VALUES ("+diagnosis.getClient_id());
+		sqlQuery.append(","+diagnosis.getId_requirement());
+		sqlQuery.append(",'"+diagnosis.getPath()+"'");
+		sqlQuery.append(",Now()");
+		sqlQuery.append(","+diagnosis.getId_user());
+		sqlQuery.append(",'"+diagnosis.getStatus()+"')");
+		
+		queries.add(sqlQuery);
+        return queries;
+    }
+	
+	public int getIdRequirement(String requirement){
+		int req=0;
+		if(requirement.trim().equals("acta")){
+			req=1;
+		}
+		else if(requirement.trim().equals("rfc")){
+			req=2;
+		}
+		else if(requirement.trim().equals("r1")){
+			req=3;
+		}
+		else if(requirement.trim().equals("domicilio")){
+			req=4;
+		}
+		else if(requirement.trim().equals("EdoFinanciero")){
+			req=5;
+		}
+		else if(requirement.trim().equals("formatoEspecial")){
+			req=6;
+		}
+		else if(requirement.trim().equals("IdLegal")){
+			req=7;
+		}
+		else if(requirement.trim().equals("cuenta")){
+			req=8;
+		}
+		else{
+			req=0;
+		}
+		
+		return req;
+	}
 	 
 	 public static void main(String args[]){
 		 new DiagnosisDAO();
