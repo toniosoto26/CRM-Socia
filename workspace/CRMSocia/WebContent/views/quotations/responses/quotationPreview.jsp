@@ -657,7 +657,7 @@
 		                                            <td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy">LAS EXISTENCIAS SOLICITADAS EN LA COTIZACIÓN ESTÁN SUJETAS A CAMBIOS SIN PREVIO AVISO.</td>
 		                                        </tr>
 		                                        <tr>
-		                                        	<td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy">LOS TIEMPOS DE ENTREGA SON <c:out value="${sessionScope.quotation.deliveryTimes }"></c:out> (EN CASO DE ZONA EXTENDIDA REQUIERE DÍAS ADICIONALES).</td>
+		                                        	<td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy">LOS TIEMPOS DE ENTREGA SON <c:out value="${sessionScope.quotation.deliveryTimes }"></c:out> (EN CASO DE ZONA EXTENDIDA REQUIERE DÍAS ADICIONALES) O DEPENDIENDO DE LA DISPONIBILIDAD DEL PRODUCTO.</td>
 			                                    </tr>
 		                                        <tr>
 			                                        <td align="left" style="padding: 0 0 0 0; font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color: #f51616; font-weight:bold; font-style: italic;" class="padding-copy">LOS PRECIOS SON SUJETOS A CAMBIOS SIN PREVIO AVISO.</td>
