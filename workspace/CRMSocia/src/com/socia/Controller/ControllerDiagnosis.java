@@ -221,7 +221,8 @@ public class ControllerDiagnosis extends HttpServlet {
 			case 5:
 				diagDao	= new DiagnosisDAO();
 				DiagnosisRequirement lobReqDiagnosis =new  DiagnosisRequirement();
-				String lstrCustomer="1234";
+				String lstrCustomer=request.getParameter("cliente");
+				int lstrUsuario=((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId();
 				String pathRoot = "C://Users//Vidal//Desktop//Docs";
 				String path = pathRoot+"/"+lstrCustomer.trim(); //+ "Pdf/";
 				String mstrRuta="";
@@ -295,10 +296,10 @@ public class ControllerDiagnosis extends HttpServlet {
 											   		 }
 											   		 mstrRuta=path1 + "/" + fileName;
 											   		
-											   			lobReqDiagnosis.setClient_id(1234);
+											   			lobReqDiagnosis.setClient_id(Integer.parseInt(lstrCustomer));
 											   			int idReque=diagDao.getIdRequirement(item.getFieldName().toString());
 											   			lobReqDiagnosis.setId_requirement(idReque);
-											   			lobReqDiagnosis.setId_user(2333);
+											   			lobReqDiagnosis.setId_user(lstrUsuario);
 											   			lobReqDiagnosis.setStatus("A");
 											   			
 											   		    uploadedFile = new File(path1 + "/"+ fileName);
