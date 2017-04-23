@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import com.socia.DTO.ClientDTO;
-import com.socia.DTO.ContactDTO;
 import com.socia.DTO.ItemDTO;
 import com.socia.conexion.Conexion;
 
