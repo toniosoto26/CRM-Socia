@@ -89,8 +89,6 @@ function getBLDetails(value){
 }
 	
 function validaDatos(){
-	
-	
 	var cliente=document.getElementById("selectClientD_").value;
 	var prospecto=document.getElementById("selectProspD_").value;
 	var clienteIn=0;
@@ -106,6 +104,7 @@ function validaDatos(){
 	else{
 		clienteIn=prospecto;
 	}
+
 	
 
 	var acta=document.getElementById("acta").value;
@@ -219,6 +218,8 @@ function validaDatos(){
 		return false;
 	}
 	
+
+	
 	
 	if(noSonPdf>0){
 		alertify.confirm("Los archivos que no son PDF no se cargarán", function (e) {
@@ -240,6 +241,19 @@ function validaDatos(){
 	        	return false;
 	        }
 	    });
+	}else{
+		var xhr = new XMLHttpRequest();
+        xhr.open("POST","/CRMSocia/ControllerDiagnosis?option=5&cliente="+clienteIn, true);
+        xhr.send(formdata);
+        xhr.onload = function(e) {
+           if (this.status == 200) {
+               if(this.responseText.indexOf("ERROR") != -1)
+                   alertify.alert(this.responseText);
+               else {
+                   alertify.alert(this.responseText);
+               }
+           }
+        };
 	}
 
 	return false;
