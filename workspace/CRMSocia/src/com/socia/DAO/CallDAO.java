@@ -161,12 +161,12 @@ public class CallDAO {
 				
 				Date date_call;
 				String crm_user_name;
-				String crm_user_last_name;
+				//String crm_user_last_name;
 				String client_name;
 				String phone;
 				String mail;
 				String contact_name;
-				String contact_last_name;
+				//String contact_last_name;
 				String  position;
 				String comments;
 				int letter;
@@ -180,14 +180,14 @@ public class CallDAO {
 				while(resultSet.next()){
 					crm_user_id=resultSet.getInt(1);
 					crm_user_name = resultSet.getString(2);
-					crm_user_last_name = resultSet.getString(3);
+					//crm_user_last_name = resultSet.getString(3);
 					date_call = resultSet.getDate(4);
 					status = resultSet.getInt(5);
 					client_name = resultSet.getString(6);
 					mail = resultSet.getString(7);
 					phone = resultSet.getString(8);
 					contact_name = resultSet.getString(9);
-					contact_last_name = resultSet.getString(10);
+					//contact_last_name = resultSet.getString(10);
 					position = resultSet.getString(11);
 					comments = resultSet.getString(12);
 					letter = resultSet.getInt(13);

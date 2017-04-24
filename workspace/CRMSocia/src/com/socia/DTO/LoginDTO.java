@@ -12,7 +12,7 @@ public class LoginDTO {
 	private	String	status;
 	private String	type;
 	
-	public void LoginDTO(){}
+	public LoginDTO(){}
 
 	public int getCrmUserId() {
 		return crmUserId;

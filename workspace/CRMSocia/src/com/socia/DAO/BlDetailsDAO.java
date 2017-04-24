@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.socia.DTO.BlDetailsDTO;
-import com.socia.DTO.EquipmentTypeDTO;
 import com.socia.conexion.Conexion;
 
 public class BlDetailsDAO {

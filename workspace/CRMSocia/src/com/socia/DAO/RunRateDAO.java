@@ -3,15 +3,8 @@ package com.socia.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-import com.socia.DTO.BlDetailsDTO;
-import com.socia.DTO.BusinessLineDTO;
-import com.socia.DTO.DateDTO;
-import com.socia.DTO.IndicatorDTO;
-import com.socia.DTO.IndicatorDetailDTO;
 import com.socia.DTO.RunRateDTO;
 import com.socia.DTO.RunRateDetailDTO;
 import com.socia.DTO.RunRateTypeDTO;

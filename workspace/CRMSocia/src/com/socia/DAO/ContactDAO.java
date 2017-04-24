@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.socia.DTO.ContactDTO;
-import com.socia.DTO.DivisionDTO;
-import com.socia.DTO.PositionDTO;
 import com.socia.conexion.Conexion;
 
 public class ContactDAO {

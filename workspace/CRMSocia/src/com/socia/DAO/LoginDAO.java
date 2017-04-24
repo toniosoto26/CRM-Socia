@@ -15,9 +15,6 @@ public class LoginDAO {
 		PreparedStatement	ps			=	null;
 		ResultSet			rs			=	null;
 		StringBuilder		sql			=	null;
-		String				user		=	"";
-		String				passwd		=	"";
-		boolean				isTrue		=	false;
 		LoginDTO			objLogin	=	null;
 		
 		try{

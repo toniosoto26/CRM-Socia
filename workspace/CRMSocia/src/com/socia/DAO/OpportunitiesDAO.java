@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.socia.DTO.BlDetailsDTO;
 import com.socia.DTO.OpportunitiesDTO;
 import com.socia.conexion.Conexion;
 
