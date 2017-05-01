@@ -36,16 +36,18 @@ function validar(){
 
 function activeSession(){
 	var datos		=	{
-			
 			"opc"	: 2
-			}
+			};
+	var result = "";
 	$.ajax({
 		type: "post",
+		async:false,
 		url : "ControllerLogin",
 		data: datos,
 		success: function(response){
-			if(trim(response) === "correcto"){
-				return true;
+			
+			if(trim(response) == "correcto"){
+				result = "true"
 			}
 			else{
 				alertify.alert("Sesion terminada.")
@@ -58,7 +60,7 @@ function activeSession(){
 			alertify.alert("Error");
 		}
 	});
-	
+	return result;
 }
 
 
