@@ -52,21 +52,21 @@ function ValidaIndicadorLlamadas(){
 				fechaFin:fech2,
 				option:8};
 		
-		$.ajax({
-			url: "Controller",
-			type :"post",
-			data :datos,
-			beforeSend: function(){$('#tablaLlamadas').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");}, 
-			 success: function(dataResponse){
-	        	
-	        	 setTimeout(function(){
-	        		 $('#tablaLlamadas').html(dataResponse);
-	        	 }, 2000);
-	         },
-	         error: function(XMLHttpRequest, textStatus, errorThrown){showAlert(errorThrown,"danger","alertaFecha");}
-		});
-		
+		if(activeSession()){
+			$.ajax({
+				url: "Controller",
+				type :"post",
+				data :datos,
+				beforeSend: function(){$('#tablaLlamadas').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");}, 
+				 success: function(dataResponse){
+		        	
+		        	 setTimeout(function(){
+		        		 $('#tablaLlamadas').html(dataResponse);
+		        	 }, 2000);
+		         },
+		         error: function(XMLHttpRequest, textStatus, errorThrown){showAlert(errorThrown,"danger","alertaFecha");}
+			});
+		}
 	}
-	
 	
 }

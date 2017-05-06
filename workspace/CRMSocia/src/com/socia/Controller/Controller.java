@@ -10,19 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.socia.DAO.BusinessLineDAO;
 import com.socia.DAO.CallDAO;
 import com.socia.DAO.ClientDAO;
 import com.socia.DAO.ConsecutiveDAO;
 import com.socia.DAO.ContactDAO;
 import com.socia.DAO.DivisionPositionDAO;
 import com.socia.DAO.MailDAO;
+import com.socia.DAO.MailDeliveryDAO;
 import com.socia.DAO.TransactionDAO;
+import com.socia.DTO.BusinessLineDTO;
 import com.socia.DTO.CallDTO;
 import com.socia.DTO.CallLogDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
 import com.socia.DTO.DivisionDTO;
 import com.socia.DTO.LoginDTO;
+import com.socia.DTO.MailDeliveryDTO;
 import com.socia.DTO.PositionDTO;
 
 /**
@@ -60,7 +64,6 @@ public class Controller extends HttpServlet {
 		String					view		=	"";
 		String[]	to= {"","rmmi_ros@hotmail.com", "jossoto14@gmail.com", "vidal.sistemas@hotmail.com"};
 		
-		
 		///////**********  DAO ***************
 		
 		ClientDAO objClient = new ClientDAO();
@@ -69,11 +72,15 @@ public class Controller extends HttpServlet {
 		ConsecutiveDAO	objConsecutive=	new ConsecutiveDAO();
 		CallDAO objCall = new CallDAO();
 		MailDAO		objMail	=	new MailDAO();
+		MailDeliveryDAO		objMailDelivery	=	new MailDeliveryDAO();
+		BusinessLineDAO		objBusinessLine	=	new BusinessLineDAO();
 		
 		///////**********  DTO ****************
 		ContactDTO	infoContact	= new ContactDTO();
 		CallDTO  infoCall = null;
 		ClientDTO infoClient = null;
+		MailDeliveryDTO				mailDelivery	=	null;
+		ArrayList<BusinessLineDTO>	arrBusinessLine	= 	new ArrayList<BusinessLineDTO>();
 		
 		///////********** Transaction **************
 		TransactionDAO					transaction			= new TransactionDAO();
@@ -302,8 +309,10 @@ public class Controller extends HttpServlet {
 			cc[0] =  ((LoginDTO)session.getAttribute("sessionLogin")).getEmail();
 			to[0] = mailContact;
 			body = objCall.generateMailLetter();
+			
+			mailDelivery = objMailDelivery.getMailById(1);
 			try{
-				objMail.sendFromGMailAttachment("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, cc, "Envio de Carta - Grupo Socia ", body.toString(),"C:\\Users\\Vidal\\Documents\\DoocumentsMail\\Carta Corporativa GRUPO SOCIA.pdf","Carta Corporativa GRUPO SOCIA.pdf");
+				objMail.sendFromGMailAttachment(mailDelivery.getEmail(), mailDelivery.getPassword(), to, cc, "Envio de Carta - Grupo Socia ", body.toString(),"/home/crmsocia/data/mail/CV SOCIA .pdf","CV SOCIA.pdf");
 			}
 			catch(Exception e ){
 				sendMail= false;
@@ -325,8 +334,10 @@ public class Controller extends HttpServlet {
 			cc[0] =  ((LoginDTO)session.getAttribute("sessionLogin")).getEmail();
 			to[0] = mailContact;
 			body = objCall.generateMailPresentation();
+			
+			mailDelivery = objMailDelivery.getMailById(1);
 			try{
-				objMail.sendFromGMailAttachment("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, cc, "Envio de Presentación - Grupo Socia", body.toString(),"C:\\Users\\Vidal\\Documents\\DoocumentsMail\\Presentacion Corporativa GRUPO SOCIA.pdf","Presentacion Corporativa GRUPO SOCIA.pdf");
+				objMail.sendFromGMailAttachment(mailDelivery.getEmail(), mailDelivery.getPassword(), to, cc, "Envio de Presentación - Grupo Socia", body.toString(),"/home/crmsocia/data/mail/Presentacion Corporativa GRUPO SOCIA.pdf","Presentacion Corporativa GRUPO SOCIA.pdf");
 			}
 			catch(Exception e ){
 				sendMail= false;
@@ -337,7 +348,18 @@ public class Controller extends HttpServlet {
 			
 			url = "views/calls/responses/sendMailCalls.jsp";
 		}
-
+		
+		if(option == 11){
+			arrBusinessLine = objBusinessLine.getBusinessLines();
+			
+			session.removeAttribute("arrBusinessLine");
+			if(arrBusinessLine.size() > 0)
+				session.setAttribute("arrBusinessLine", arrBusinessLine);
+			else
+				session.setAttribute("arrBusinessLine", null);
+			
+			url = "views/calls/responses/getBusinessLine.jsp";
+		}
 		
 		request.getRequestDispatcher(url).forward(request, response);
 	}

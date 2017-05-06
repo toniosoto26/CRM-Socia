@@ -333,8 +333,55 @@ public class CallDAO {
 							sqlQuery.append("</td>");
 						sqlQuery.append("</tr>");
 						sqlQuery.append("<tr>");
-							sqlQuery.append("<td align='center'>");
-								sqlQuery.append("<font size=4 face='Arial, Helvetica, sans-serif' color='#0000FF'><b>AVISO DE ENVIO DE PRESENTACION PARA CLIENTE</b></font>");
+							sqlQuery.append("<td style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>");
+								sqlQuery.append("Buen día");
+							sqlQuery.append("</td>");
+						sqlQuery.append("</tr>");
+						sqlQuery.append("<tr><td>&nbsp;</td></tr>");
+						sqlQuery.append("<tr>");
+							sqlQuery.append("<td style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>");
+								sqlQuery.append("Le saludo y al mismo tiempo aprovecho para  acompañar presentación de nuestro portafolio de productos y servicios que ponemos a su consideración. A la vez, me permito referir diferenciadores que nos han posicionado en el mercado corporativo:");
+							sqlQuery.append("</td>");
+						sqlQuery.append("</tr>");
+						sqlQuery.append("<tr><td>&nbsp;</td></tr>");
+						sqlQuery.append("<tr>");
+							sqlQuery.append("<td style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>");
+								sqlQuery.append("<ul>");
+									sqlQuery.append("<li>Ahorros</li>");
+									sqlQuery.append("<li>Servicio</li>");
+									sqlQuery.append("<li>Atención personalizada de ejecutivo de servicio</li>");
+									sqlQuery.append("<li>Soporte  para desarrollo de proyectos BDM</li>");
+									sqlQuery.append("<li>Soluciones innovadoras a su medida</li>");
+									sqlQuery.append("<li>Entrega a nivel nacional sin costo extra</li>");
+									sqlQuery.append("<li>Stock de equipos</li>");
+									sqlQuery.append("<li>Precios competitivos  en refacciones, consumibles, cómputo y sistemas de impresión administrada</li>");
+									sqlQuery.append("<li>Servicio y gestión de  garantías</li>");
+									sqlQuery.append("<li>Renta o Compra (segmento cómputo, servidores, redes de comunicación  y servicios de impresión administrada)</li>");
+								sqlQuery.append("</ul>");
+							sqlQuery.append("</td>");
+						sqlQuery.append("</tr>");
+						sqlQuery.append("<tr><td>&nbsp;</td></tr>");
+						sqlQuery.append("<tr>");
+							sqlQuery.append("<td style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>");
+								sqlQuery.append("Le  ofrezco brindar servicio de cotizaciones con la asignación de un Ejecutivo para cubrir sus necesidades  día a día en cualquier tema relacionado con nuestro portafolio de productos y servicios de Grupo Socia.");
+							sqlQuery.append("</td>");
+						sqlQuery.append("</tr>");
+						sqlQuery.append("<tr><td>&nbsp;</td></tr>");
+						sqlQuery.append("<tr>");
+							sqlQuery.append("<td style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>");
+								sqlQuery.append("También le pido de la manera más atenta nos pueda atender en una cita para realizar una presentación mas formal.");
+							sqlQuery.append("</td>");
+						sqlQuery.append("</tr>");
+						sqlQuery.append("<tr><td>&nbsp;</td></tr>");
+						sqlQuery.append("<tr>");
+							sqlQuery.append("<td style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>");
+								sqlQuery.append("Quedo pendiente de sus comentarios para atender lo antes posible");
+							sqlQuery.append("</td>");
+						sqlQuery.append("</tr>");
+						sqlQuery.append("<tr><td>&nbsp;</td></tr>");
+						sqlQuery.append("<tr>");
+							sqlQuery.append("<td style='font-family: Arial, sans-serif; color: #333333; font-size: 12px;'>");
+								sqlQuery.append("Saludos cordiales y en espera e tus comentarios");
 							sqlQuery.append("</td>");
 						sqlQuery.append("</tr>");
 					sqlQuery.append("</table>");
@@ -344,16 +391,9 @@ public class CallDAO {
 	    	
 	    	return sqlQuery;
 		}
-		
-		
-	 
-	 
 	 
 
 		public static void main(String args[]){
 			new CallDAO();
 		}
-	
-	
-	
 }

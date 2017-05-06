@@ -17,6 +17,7 @@ import com.socia.DAO.ClientDAO;
 import com.socia.DAO.ConsecutiveDAO;
 import com.socia.DAO.ContactDAO;
 import com.socia.DAO.MailDAO;
+import com.socia.DAO.MailDeliveryDAO;
 import com.socia.DAO.TenderDAO;
 import com.socia.DAO.TransactionDAO;
 import com.socia.DTO.AddressDTO;
@@ -24,6 +25,7 @@ import com.socia.DTO.AppointmentDTO;
 import com.socia.DTO.ClientDTO;
 import com.socia.DTO.ContactDTO;
 import com.socia.DTO.LoginDTO;
+import com.socia.DTO.MailDeliveryDTO;
 import com.socia.DTO.TenderDTO;
  
 /**
@@ -76,12 +78,14 @@ public class ControllerAppointment extends HttpServlet {
 		String			zipCode		=	"";
 		
 		/**DAO**/
-		ConsecutiveDAO	objConsecutive		=	new ConsecutiveDAO();
-		AddressDAO		objAddress 			= 	new AddressDAO();
-		MailDAO			objMail				=	new MailDAO();		
-		AppointmentDAO	objAppointment		=	new	AppointmentDAO();
+		ConsecutiveDAO	objConsecutive	=	new ConsecutiveDAO();
+		AddressDAO		objAddress 		= 	new AddressDAO();
+		MailDAO			objMail			=	new MailDAO();		
+		AppointmentDAO	objAppointment	=	new	AppointmentDAO();
+		MailDeliveryDAO	objMailDelivery	=	new MailDeliveryDAO();
 		/**DTO**/
-		AddressDTO						address				=	null;
+		AddressDTO		address			=	null;
+		MailDeliveryDTO	mailDelivery	=	null;
 		
 		if( session.getAttribute("sessionLogin") == null)			
 			opc = 0;
@@ -109,12 +113,12 @@ public class ControllerAppointment extends HttpServlet {
 				case 3:
 					int		rz		=	Integer.parseInt(request.getParameter("clientId"));
 					int		contId	=	Integer.parseInt(request.getParameter("contactI").split(",")[0]);
-					int		phone	=	Integer.parseInt(request.getParameter("phoneContact"));
+					//int		phone	=	Integer.parseInt(request.getParameter("phoneContact"));
 					int		bdmI	=	Integer.parseInt(request.getParameter("bdmI"));
 					int		userId	=	((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId();
 					String	days	=	request.getParameter("dtp_input2");
 					String	hrs		=	request.getParameter("dtp_input3");
-					String	email	=	request.getParameter("emailI");
+					//String	email	=	request.getParameter("emailI");
 					String	nameI	=	request.getParameter("idNameI");
 					String	comment	=	request.getParameter("observationA");
 					String	body	=	"";
@@ -179,7 +183,10 @@ public class ControllerAppointment extends HttpServlet {
 						transaction.commit();
 						body	=	objAppointment.sendMailAppointment(c, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
 						toc		=	objAppointment.getCorreo(((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId());
-						objMail.sendFromGMail("rosa.mendiola.i", "swaqloi8t5o9nh.,", toc, toc, "Cita con cliente", body.toString());
+						
+						mailDelivery = objMailDelivery.getMailById(1);
+						
+						objMail.sendFromGMail(mailDelivery.getEmail(), mailDelivery.getPassword(), toc, toc, "Cita con cliente", body.toString());
 						stat=true;
 					}catch(Exception exception){
 						statIn	=	false;
@@ -197,7 +204,7 @@ public class ControllerAppointment extends HttpServlet {
 					url	=	"/views/appointments/responses/confirm.jsp";
 					break;
 				case 4:
-					int		rzM		=	Integer.parseInt(request.getParameter("rz"));
+					//int		rzM		=	Integer.parseInt(request.getParameter("rz"));
 					int		contIdM	=	Integer.parseInt(request.getParameter("contact"));
 					String 	phoneM	=	request.getParameter("phone");
 					String	emailM	=	request.getParameter("email");
@@ -234,7 +241,7 @@ public class ControllerAppointment extends HttpServlet {
 					int		rzV		=	Integer.parseInt(request.getParameter("rz"));
 					int		contIdV	=	Integer.parseInt(request.getParameter("contact"));
 					String	daysV	=	request.getParameter("days");
-					String	hrsV	=	request.getParameter("hrs");
+					//String	hrsV	=	request.getParameter("hrs");
 					
 					AppointmentDTO	appointV	=	new AppointmentDTO();
 					appointV.setCrmClientId(rzV);

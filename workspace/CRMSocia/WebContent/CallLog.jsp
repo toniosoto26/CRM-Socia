@@ -9,7 +9,7 @@
     <div class="row">
 		<div id="primaryPanel" class="col-sm-12 col-md-12">
 			<div class="titulo">
-                  <h3 class="page-header">Historial de llamadas</h3>
+                  <h3>Historial de llamadas</h3>
              </div>
         	<div class="col-lg-4">
         			<div class="form-group">
@@ -40,7 +40,7 @@
         <div class="row">
         	
         </div>
-        <div class="row">
+        <div class="row" style="margin-left:15px;margin-right:15px;">
         	<div class="col-lg-12" id="tablaLlamadas">
 
         		

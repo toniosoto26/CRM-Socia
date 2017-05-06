@@ -158,8 +158,9 @@
 		<script src="js/chosen.jquery.js" type="text/javascript"></script>
 		<script src="js/prism.js" type="text/javascript" charset="utf-8"></script>
 
-		<script src="https://code.highcharts.com/highcharts.js"></script>
-		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script src="js/highcharts/highcharts.js"></script>
+		<script src="js/highcharts/exporting.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script> 
+		<script type="text/javascript" src="js/script.js"></script> 
 	</body>
 </html>

@@ -36,61 +36,67 @@ function displayExchangeRate(selected){
 }
 
 function loadItemsInfo(number){
-	$.ajax({
-		type: "post",
-		url : "ControllerTemp",
-		data: {
-			option: 4,
-			itemIndex: number
-		},
-		async: false,
-		success: function(response){
-			$("#itemNum"+number).html(response);
-
-			$("#itemId"+number).chosen();
-		},
-		error: function(){
-			alert("Error");
-		}
-	});
+	if(activeSession()){
+		$.ajax({
+			type: "post",
+			url : "ControllerTemp",
+			data: {
+				option: 4,
+				itemIndex: number
+			},
+			async: false,
+			success: function(response){
+				$("#itemNum"+number).html(response);
+	
+				$("#itemId"+number).chosen();
+			},
+			error: function(){
+				alert("Error");
+			}
+		});
+	}
 }
 
 function loadDescription(selected, number){
 	var itemId = selected.value;
-	$.ajax({
-		type: "post",
-		url : "ControllerTemp",
-		data: {
-			option: 5, 
-			itemId: itemId,
-			itemIndex: number
-		},
-		success: function(response){
-			$("#description"+number).html(response);
-		},
-		error: function(){
-			alert("Error");
-		}
-	});
+	if(activeSession()){
+		$.ajax({
+			type: "post",
+			url : "ControllerTemp",
+			data: {
+				option: 5, 
+				itemId: itemId,
+				itemIndex: number
+			},
+			success: function(response){
+				$("#description"+number).html(response);
+			},
+			error: function(){
+				alert("Error");
+			}
+		});
+	}
 }
 
 function loadAddressInfo(selected){
 	var clientId = selected.value;
-	$.ajax({
-		type: "post",
-		url : "ControllerTemp",
-		data: {
-			option: 1, 
-			clientId: clientId
-		},
-		success: function(response){
-			$("#addressInfo").html(response);
-			$("#address-select").chosen();
-		},
-		error: function(){
-			alert("Error");
-		}
-	});
+	if(activeSession()){
+		$.ajax({
+			type: "post",
+			url : "ControllerTemp",
+			data: {
+				option: 1, 
+				clientId: clientId
+			},
+			success: function(response){
+				$("#addressInfo").html(response);
+				$("#address-select").chosen();
+			},
+			error: function(){
+				alert("Error");
+			}
+		});
+	}
 }
 
 function sendMail(optionSelected){
@@ -100,76 +106,78 @@ function sendMail(optionSelected){
 function addQuotation(){
 	var activeTab = $('.nav-tabs .active').text();
 	
-	if($("#chosenClient").val()== "0"){ 
-		alertify.alert("Por favor, selecciona un cliente");
-		return false;
-	}
-	
-	if(activeTab == "SELECCIONAR"){
-		if($("#address-select").val() != undefined){
-			if($("#address-select").val()==""){
-				alertify.alert("Por favor, selecciona una dirección");
+	if(activeSession()){
+		if($("#chosenClient").val()== "0"){ 
+			alertify.alert("Por favor, selecciona un cliente");
+			return false;
+		}
+		
+		if(activeTab == "SELECCIONAR"){
+			if($("#address-select").val() != undefined){
+				if($("#address-select").val()==""){
+					alertify.alert("Por favor, selecciona una dirección");
+					return false;
+				}
+			}
+			else{
+				alertify.alert("Por favor, agrega una dirección");
 				return false;
 			}
 		}
-		else{
-			alertify.alert("Por favor, agrega una dirección");
-			return false;
-		}
-	}
-	
-	if($("#chosenContact").val()== "0"){ 
-		alertify.alert("Por favor, selecciona un contacto");
-		return false;
-	}
-	
-	if($("#dtp_input1").val() == ""){
-		alertify.alert("Por favor, selecciona fecha de cierre");
-		return false;
-	}
-
-	if($("#dtp_input2").val() == ""){
-		alertify.alert("Por favor, selecciona la vigencia");
-		return false;
-	}
-	
-	for(var i = 1; i < itemNum; i ++){
-		if($("#itemId"+i).val()==""){
-			alertify.alert("Por favor, selecciona artículos para todas las partidas");
-			return false;
-		}
-	}
-	
-	$.ajax({
-		type: "post",
-		url : "ControllerTemp",
-		data: $("#addQuotation").serialize()+"&option="+option+"&activeTab="+activeTab,
-		beforeSend: function(){
-			alertify.set({ delay: 3000 });
-			alertify.log("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Enviando...</center>");
-		}, 
 		
-		success: function(response){
-			if(trim(response)=="correcto"){
-				alertify.alert("Correo enviado correctamente");
-				
-				$('#addQuotation').find("input[type=text], textarea, select, input[type=number]").val("");
-				$('#chosenClient').val("0");
-				$('#chosenContact').val("0");
-				$('.chosen-select').trigger("chosen:updated");
-				$('#deliveryTimes').val('DE 24 A 48 HORAS HÁBILES');
-				loadClientInfo(document.getElementById('chosenClient'));
-				loadAddressInfo(document.getElementById('chosenClient'));
-			}
-			else{
-				alertify.alert("Incorrecto");			
-			}
-			console.log("success");
-		},
-		error: function(){
-			alert("Error");
+		if($("#chosenContact").val()== "0"){ 
+			alertify.alert("Por favor, selecciona un contacto");
+			return false;
 		}
-	});
+		
+		if($("#dtp_input1").val() == ""){
+			alertify.alert("Por favor, selecciona fecha de cierre");
+			return false;
+		}
+	
+		if($("#dtp_input2").val() == ""){
+			alertify.alert("Por favor, selecciona la vigencia");
+			return false;
+		}
+		
+		for(var i = 1; i < itemNum; i ++){
+			if($("#itemId"+i).val()==""){
+				alertify.alert("Por favor, selecciona artículos para todas las partidas");
+				return false;
+			}
+		}
+		
+		$.ajax({
+			type: "post",
+			url : "ControllerTemp",
+			data: $("#addQuotation").serialize()+"&option="+option+"&activeTab="+activeTab,
+			beforeSend: function(){
+				alertify.set({ delay: 3000 });
+				alertify.log("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Enviando...</center>");
+			}, 
+			
+			success: function(response){
+				if(trim(response)=="correcto"){
+					alertify.alert("Correo enviado correctamente");
+					
+					$('#addQuotation').find("input[type=text], textarea, select, input[type=number]").val("");
+					$('#chosenClient').val("0");
+					$('#chosenContact').val("0");
+					$('.chosen-select').trigger("chosen:updated");
+					$('#deliveryTimes').val('DE 24 A 48 HORAS HÁBILES');
+					loadClientInfo(document.getElementById('chosenClient'));
+					loadAddressInfo(document.getElementById('chosenClient'));
+				}
+				else{
+					alertify.alert("Incorrecto");			
+				}
+				console.log("success");
+			},
+			error: function(){
+				alert("Error");
+			}
+		});
+	}
 	
 	return false;
 }
@@ -190,12 +198,14 @@ $( document ).ready(function() {
 		var url = $(this).attr('href');
 		var activeTab = $('.nav-tabs .active').text();
 		
-		$.ajax({
-			type: "post",
-			url : "ControllerTemp",
-			data: $("#addQuotation").serialize()+"&option=3&activeTab="+activeTab,
-			async: false
-		});
+		if(activeSession()){
+			$.ajax({
+				type: "post",
+				url : "ControllerTemp",
+				data: $("#addQuotation").serialize()+"&option=3&activeTab="+activeTab,
+				async: false
+			});
+		}
 		
 		if (url.indexOf('#') == 0) {
 			$(url).modal('open');

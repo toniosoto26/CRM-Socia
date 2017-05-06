@@ -3497,11 +3497,9 @@ var Grid = FC.Grid = Class.extend(ListenerMixin, MouseIgnorerMixin, {
 						);
 						
 						var date = selectionSpan.start;
-						var tender = date.clone().add(3, 'month');
+						var tender = date.clone().add(4, 'month');
 						
-						console.log(date);
-						
-						$("#chosenClient").val('5');
+						$("#chosenClient").val('0');
 						$("#business-select").val('');
 				        $("#startUpDate").val(date.format('DD MMMM YYYY'));
 				        $("#dtp_input1").val(date.format('YYYY-MM-DD'))
@@ -3511,6 +3509,8 @@ var Grid = FC.Grid = Class.extend(ListenerMixin, MouseIgnorerMixin, {
 						$("#currentBrand").val('');
 						$("#requirements").val('');
 						$("#comments").val('');
+						$("#closingDate").val('');
+						$("#dtp_input3").val('');
 						
 						$('#myModal').modal();
 						

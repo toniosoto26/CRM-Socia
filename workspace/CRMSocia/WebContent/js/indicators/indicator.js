@@ -3,6 +3,7 @@ function loadIndicator(){
 	var endDate = $("#endDate").val();
 	$("#indicators").html('');
 
+	if(activeSession()){
 		$.ajax({
 			type:"post",
 			url:"ControllerTemp",
@@ -17,7 +18,7 @@ function loadIndicator(){
 				alertify.alert("no funciona");
 			}
 		});
-	
+	}
 }
 
 $( document ).ready(function() {
@@ -31,18 +32,20 @@ function loadCallDetail(type, fechaIni, fechaFin){
 				option:8};
 	$(".modal-title").text('Llamadas');
 	
-	$.ajax({
-		url: "Controller",
-		type :"post",
-		data :datos,
-		beforeSend: function(){$('#modalContent').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");},
-         success: function(dataResponse){
-        	 setTimeout(function(){
-        		 $('#modalContent').html(dataResponse);
-        	 }, 2000);
-         },
-         error: function(XMLHttpRequest, textStatus, errorThrown){alertify.alert(errorThrown);}
-	});
+	if(activeSession()){
+		$.ajax({
+			url: "Controller",
+			type :"post",
+			data :datos,
+			beforeSend: function(){$('#modalContent').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");},
+	         success: function(dataResponse){
+	        	 setTimeout(function(){
+	        		 $('#modalContent').html(dataResponse);
+	        	 }, 2000);
+	         },
+	         error: function(XMLHttpRequest, textStatus, errorThrown){alertify.alert(errorThrown);}
+		});
+	}
 }
 
 function loadAppointmentDetail(type, fechaIni, fechaFin){
@@ -54,18 +57,20 @@ function loadAppointmentDetail(type, fechaIni, fechaFin){
 	};
 	
 	$(".modal-title").text('Citas');
-	$.ajax({
-		url: "ControllerTemp",
-		type :"post",
-		data :datos,
-		beforeSend: function(){$('#modalContent').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");},
-         success: function(dataResponse){
-        	 setTimeout(function(){
-        		 $('#modalContent').html(dataResponse);
-        	 }, 2000);
-         },
-         error: function(XMLHttpRequest, textStatus, errorThrown){alertify.alert(errorThrown);}
-	});
+	if(activeSession()){
+		$.ajax({
+			url: "ControllerTemp",
+			type :"post",
+			data :datos,
+			beforeSend: function(){$('#modalContent').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");},
+	         success: function(dataResponse){
+	        	 setTimeout(function(){
+	        		 $('#modalContent').html(dataResponse);
+	        	 }, 2000);
+	         },
+	         error: function(XMLHttpRequest, textStatus, errorThrown){alertify.alert(errorThrown);}
+		});
+	}
 }
 
 function loadTenderDetail(fechaIni, fechaFin){
@@ -76,18 +81,20 @@ function loadTenderDetail(fechaIni, fechaFin){
 	};
 
 	$(".modal-title").text('Concursos');
-	$.ajax({
-		url: "ControllerTemp",
-		type :"post",
-		data :datos,
-		beforeSend: function(){$('#modalContent').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");},
-         success: function(dataResponse){
-        	 setTimeout(function(){
-        		 $('#modalContent').html(dataResponse);
-        	 }, 2000);
-         },
-         error: function(XMLHttpRequest, textStatus, errorThrown){alertify.alert(errorThrown);}
-	});
+	if(activeSession()){
+		$.ajax({
+			url: "ControllerTemp",
+			type :"post",
+			data :datos,
+			beforeSend: function(){$('#modalContent').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");},
+	         success: function(dataResponse){
+	        	 setTimeout(function(){
+	        		 $('#modalContent').html(dataResponse);
+	        	 }, 2000);
+	         },
+	         error: function(XMLHttpRequest, textStatus, errorThrown){alertify.alert(errorThrown);}
+		});
+	}
 }
 
 function loadQuotationDetail(fechaIni, fechaFin){
@@ -98,16 +105,18 @@ function loadQuotationDetail(fechaIni, fechaFin){
 	};
 	$(".modal-title").text('Cotizaciones');
 	
-	$.ajax({
-		url: "ControllerTemp",
-		type :"post",
-		data :datos,
-		beforeSend: function(){$('#modalContent').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");},
-         success: function(dataResponse){
-        	 setTimeout(function(){
-        		 $('#modalContent').html(dataResponse);
-        	 }, 2000);
-         },
-         error: function(XMLHttpRequest, textStatus, errorThrown){alertify.alert(errorThrown);}
-	});
+	if(activeSession()){
+		$.ajax({
+			url: "ControllerTemp",
+			type :"post",
+			data :datos,
+			beforeSend: function(){$('#modalContent').html("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Cargando...</center>");},
+	         success: function(dataResponse){
+	        	 setTimeout(function(){
+	        		 $('#modalContent').html(dataResponse);
+	        	 }, 2000);
+	         },
+	         error: function(XMLHttpRequest, textStatus, errorThrown){alertify.alert(errorThrown);}
+		});
+	}
 }

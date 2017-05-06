@@ -22,7 +22,8 @@ public class TenderDAO {
 		sqlQuery.append(" INSERT INTO crm_tender (crm_tender_id, start_up_date, deadline, ");
 								sqlQuery.append("requirements, comments, crm_client_id, ");
 								sqlQuery.append("crm_user_id, crm_business_line_id, decision_maker, ");
-								sqlQuery.append("date_created, current_brand ) ");
+								sqlQuery.append("date_created, current_brand, closing_date, ");
+								sqlQuery.append("mid_date) ");
 		sqlQuery.append(" VALUES ("+tender.getTenderId());
 		sqlQuery.append(",'"+tender.getStartUpDate()+"'");
 		sqlQuery.append(",'"+tender.getDeadline()+"'");
@@ -33,7 +34,10 @@ public class TenderDAO {
 		sqlQuery.append(","+tender.getBusinessLineId());
 		sqlQuery.append(",'"+tender.getDecisionMaker()+"'");
 		sqlQuery.append(", now()");
-		sqlQuery.append(",'"+tender.getCurrentBrand()+"')");
+		sqlQuery.append(",'"+tender.getCurrentBrand()+"'");
+		sqlQuery.append(",'"+tender.getClosingDate()+"'");
+		sqlQuery.append(",DATE_SUB( '"+tender.getDeadline()+"', INTERVAL 2 month )");
+		sqlQuery.append(")");
 		
 		queries.add(sqlQuery);
     
@@ -54,6 +58,8 @@ public class TenderDAO {
 		String				name		=	"";
 		String				date		=	"";
 		String				type		=	"";
+		String				midDate		=	"";
+		String				closingDate	=	"";
 		int					tenderId	=	0;
 		
 		try{
@@ -64,6 +70,17 @@ public class TenderDAO {
 			query.append(" JOIN crm_business_line bl ON t.crm_business_line_id = bl.crm_business_line_id ");
 			query.append(" UNION ");
 			query.append(" SELECT t.deadline, c.company_name, bl.name, 'Fecha concurso', t.crm_tender_id ");
+			query.append(" FROM crm_tender t  ");
+			query.append(" JOIN crm_client c ON t.crm_client_id = c.crm_client_id ");
+			query.append(" JOIN crm_business_line bl ON t.crm_business_line_id = bl.crm_business_line_id ");
+
+			query.append(" UNION ");
+			query.append(" SELECT t.mid_date, c.company_name, bl.name, 'Preparación para', t.crm_tender_id ");
+			query.append(" FROM crm_tender t  ");
+			query.append(" JOIN crm_client c ON t.crm_client_id = c.crm_client_id ");
+			query.append(" JOIN crm_business_line bl ON t.crm_business_line_id = bl.crm_business_line_id ");
+			query.append(" UNION ");
+			query.append(" SELECT t.closing_date, c.company_name, bl.name, 'Entrega de RFP para', t.crm_tender_id ");
 			query.append(" FROM crm_tender t  ");
 			query.append(" JOIN crm_client c ON t.crm_client_id = c.crm_client_id ");
 			query.append(" JOIN crm_business_line bl ON t.crm_business_line_id = bl.crm_business_line_id ");
@@ -82,12 +99,32 @@ public class TenderDAO {
 				tenderId	=	rs.getInt("crm_tender_id");
 				
 				if(type.equals("Inicio gestión")){
-					startUpDate = date.substring(0,10);
+					startUpDate = (date!=null?date.substring(0,10):null);
 					deadLine = null;
+					midDate = null;
+					closingDate = null;
 				}
 				else{
-					startUpDate = null;
-					deadLine = date.substring(0,10);
+					if(type.equals("Fecha concurso")){
+						startUpDate = null;
+						deadLine = (date!=null?date.substring(0,10):null);
+						midDate = null;
+						closingDate = null;
+					}
+					else{
+						if(type.equals("Preparación para")){
+							startUpDate = null;
+							deadLine = null;
+							midDate = (date!=null?date.substring(0,10):null);
+							closingDate = null;
+						}
+						else{
+							startUpDate = null;
+							deadLine = null;
+							midDate = null;
+							closingDate = (date!=null?date.substring(0,10):null);
+						}
+					}
 				}
 				
 				tender = new TenderDTO();
@@ -96,6 +133,8 @@ public class TenderDAO {
 				tender.setStartUpDate(startUpDate);
 				tender.setDeadline(deadLine);
 				tender.setTenderId(tenderId);
+				tender.setMidDate(midDate);
+				tender.setClosingDate(closingDate);
 				
 				arrTender.add(tender);
 			}
@@ -194,6 +233,8 @@ public class TenderDAO {
 		Date				startUp			=	null;
 		String				deadline		=	"";
 		Date				deadlineDate	=	null;
+		String				closingDate		=	"";
+		Date				closing			=	null;
 		String				requirements	=	"";
 		String				comments		=	"";
 		String				decisionMaker	=	"";
@@ -206,7 +247,7 @@ public class TenderDAO {
 		try{
 			query	=	new	StringBuilder();
 			query.append(" SELECT t.start_up_date, t.deadline, t.requirements, t.comments, bl.name, ");
-			query.append(" t.decision_maker, t.current_brand, client.company_name ");
+			query.append(" t.decision_maker, t.current_brand, client.company_name, t.closing_date ");
 			query.append(" FROM crm_tender t ");
 			query.append(" JOIN crm_client client ON t.crm_client_id = client.crm_client_id ");
 			query.append(" JOIN crm_business_line bl ON t.crm_business_line_id = bl.crm_business_line_id ");
@@ -225,6 +266,8 @@ public class TenderDAO {
 				startUpDate = format.format(startUp);
 				deadlineDate = rs.getDate("deadline");
 				deadline = format.format(deadlineDate);
+				closing = rs.getDate("closing_date");
+				closingDate = format.format(closing);
 				requirements = rs.getString("requirements");
 				comments = rs.getString("comments");
 				businessLineName = rs.getString("name");
@@ -235,6 +278,7 @@ public class TenderDAO {
 				tender = new TenderDTO();
 				tender.setCompanyName(companyName);
 				tender.setStartUpDate(startUpDate);
+				tender.setClosingDate(closingDate);
 				tender.setDeadline(deadline);
 				tender.setRequirements(requirements);
 				tender.setComments(comments);

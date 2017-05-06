@@ -48,6 +48,15 @@
 										<input type="hidden" name="deadline" id="dtp_input2" value="" />
 								  	</div>
 								  	<div class="form-group top">
+									    <label class="col-sm-6 col-md-6" for="inputDeadline">Entrega RFP</label>
+									    <div class="input-group date form_date col-md-6 col-sm-6" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input3" data-link-format="yyyy-mm-dd">
+									    	<input id="deadline" required class="form-control" size="16" type="text" value="" readonly>
+									        <span  class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+											<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+									    </div>
+										<input type="hidden" name="closingDate" id="dtp_input3" value="" />
+								  	</div>
+								  	<div class="form-group top">
 									    <label class="col-sm-6 col-md-6" for="inputBusinessLine">Línea de negocio que se concursa</label>
 									    <div id="selectBusinessLine"></div>
 								  	</div>

@@ -20,7 +20,7 @@ import javax.mail.internet.MimeMultipart;
 public class MailDAO {
 	
 	private static String USER_NAME = "rosa.mendiola.i"; // gmail user name (just the part before "@gmail.com")
-    private static String PASSWORD = "***.,"; // gmail password
+    private static String PASSWORD = "*****"; // gmail password
     
     public static void main(String[] args) {
         String from = USER_NAME;

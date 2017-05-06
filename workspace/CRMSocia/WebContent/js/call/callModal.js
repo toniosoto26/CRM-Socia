@@ -3,7 +3,7 @@ function modalCalls(options){
 	 
 	if(options == 1){
 		 $(".modal-body").html("<p>Me identifico con cortesía a mi y a mi empresa en los primeros 5 segundos.</p>" +
-		 		"<p><i>Hola Buen@s (Dias - Tardes - Noches) mi nombre es _________________________ de la empresa Grupo SOCIA. ¿Con quién tengo el gusto?</i></p>" +
+		 		"<p><i>Hola Buen@s (Días - Tardes - Noches) mi nombre es _________________________ de la empresa Grupo SOCIA. ¿Con quién tengo el gusto?</i></p>" +
 		 		"<br/>" +
 		 		"<p>Es importante que identifiques cual de las próximas 2 respuestas estás recibiendo</p>" +
 		 		"<ul>" +
@@ -103,8 +103,8 @@ function modalCalls(options){
 		 
 	}
 	if(options == 2){
-		$(".modal-title").html("Guia");
-		$(".modal-body").html("Datos de Guia");
+		$(".modal-title").html("Guía");
+		$(".modal-body").html("Datos de guía");
 	}
 	if(options == 3){
 		$(".modal-title").html("Manejo de Objeciones - PRIME");
@@ -222,8 +222,21 @@ function modalCalls(options){
 							"</table>");
 	}
 	if(options == 4){
-		$(".modal-body").html("Datos de Líneas de Negocio");
 		$(".modal-title").html("Líneas de Negocio");
+		
+		if(activeSession()){
+			$.ajax({
+				type: "post",
+				url : "Controller",
+				data: {option:11},
+				success: function(response){
+					$(".modal-body").html(response);
+				},
+				error: function(){
+					alertify.alert("Error");
+				}
+			});
+		}
 	}
    
    

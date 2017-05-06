@@ -33,13 +33,34 @@
 												id: 'ten-<c:out value="${calendar.tenderId}"></c:out>',
 												title: 'Inicio gestión <c:out value="${calendar.companyName}"></c:out> en <c:out value="${calendar.businessLineName}"></c:out>',
 												start: '<c:out value="${calendar.startUpDate}"></c:out>',
-												color: '#57d896'
+												color: '#4395ff'
 											</c:when>
 											<c:otherwise>
-												id: 'ten-<c:out value="${calendar.tenderId}"></c:out>',
-												title: 'Concurso <c:out value="${calendar.companyName}"></c:out> en <c:out value="${calendar.businessLineName}"></c:out>',
-												start: '<c:out value="${calendar.deadline}"></c:out>',
-												color: '#de2c16'
+												<c:choose>
+													<c:when test="${calendar.deadline != null}">
+														id: 'ten-<c:out value="${calendar.tenderId}"></c:out>',
+														title: 'Concurso <c:out value="${calendar.companyName}"></c:out> en <c:out value="${calendar.businessLineName}"></c:out>',
+														start: '<c:out value="${calendar.deadline}"></c:out>',
+														color: '#0ee196'
+													</c:when>
+													<c:otherwise>
+														<c:choose>
+															<c:when test="${calendar.midDate != null}">
+																id: 'ten-<c:out value="${calendar.tenderId}"></c:out>',
+																title: 'Preparación para <c:out value="${calendar.companyName}"></c:out> en <c:out value="${calendar.businessLineName}"></c:out>',
+																start: '<c:out value="${calendar.midDate}"></c:out>',
+																color: '#fbb45e'
+															</c:when>
+															<c:otherwise>
+																id: 'ten-<c:out value="${calendar.tenderId}"></c:out>',
+																title: 'Entrega de RFP para <c:out value="${calendar.companyName}"></c:out> en <c:out value="${calendar.businessLineName}"></c:out>',
+																start: '<c:out value="${calendar.closingDate}"></c:out>',
+																color: '#ff0026'
+																
+															</c:otherwise>
+														</c:choose>
+													</c:otherwise>
+												</c:choose>
 											</c:otherwise>
 										</c:choose>
 									},
@@ -55,7 +76,7 @@
 												id: 'apo-<c:out value="${calendar.crmAppointmentId}"></c:out>',
 												title: 'Cita con <c:out value="${calendar.companyName}"></c:out>',
 												start: '<c:out value="${calendar.date}"></c:out>',
-												color: '#6083e4'
+												color: '#a65bd4'
 											},
 										</c:when>
 										<c:otherwise>
@@ -63,7 +84,7 @@
 												id: 'apo-<c:out value="${calendar.crmAppointmentId}"></c:out>',
 												title: 'Cita con <c:out value="${calendar.companyName}"></c:out>',
 												start: '<c:out value="${calendar.date}"></c:out>',
-												color: '#6083e4'
+												color: '#a65bd4'
 											}
 										</c:otherwise>
 									</c:choose>

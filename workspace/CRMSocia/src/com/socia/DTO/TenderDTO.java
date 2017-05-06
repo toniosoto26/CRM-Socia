@@ -17,6 +17,9 @@ public class TenderDTO {
 	private String	companyName;
 	private	String	businessLineName;
 	
+	private	String	midDate;
+	private	String	closingDate;
+	
 	public TenderDTO() {
 		super();
 		this.tenderId = 0;
@@ -32,12 +35,14 @@ public class TenderDTO {
 		this.currentBrand = "";
 		this.companyName = "";
 		this.businessLineName = "";
+		this.midDate = "";
+		this.closingDate = "";
 	}
 	
 	public TenderDTO(int tenderId, String startUpDate, String deadline,
 			String requirements, String comments, int clientId, int userId,
 			int businessLineId, String decisionMaker, String dateCreated,
-			String currentBrand) {
+			String currentBrand, String closingDate) {
 		super();
 		this.tenderId = tenderId;
 		this.startUpDate = startUpDate;
@@ -52,6 +57,7 @@ public class TenderDTO {
 		this.currentBrand = currentBrand;
 		this.companyName = "";
 		this.businessLineName = "";
+		this.closingDate = closingDate;
 	}
 
 	public int getTenderId() {
@@ -158,6 +164,22 @@ public class TenderDTO {
 		this.businessLineName = businessLineName;
 	}
 
+	public String getMidDate() {
+		return midDate;
+	}
+
+	public void setMidDate(String midDate) {
+		this.midDate = midDate;
+	}
+
+	public String getClosingDate() {
+		return closingDate;
+	}
+
+	public void setClosingDate(String closingDate) {
+		this.closingDate = closingDate;
+	}
+
 	@Override
 	public String toString() {
 		return "TenderDTO [tenderId=" + tenderId + ", startUpDate="
@@ -167,7 +189,8 @@ public class TenderDTO {
 				+ businessLineId + ", decisionMaker=" + decisionMaker
 				+ ", dateCreated=" + dateCreated + ", currentBrand="
 				+ currentBrand + ", companyName=" + companyName
-				+ ", businessLineName=" + businessLineName + "]";
+				+ ", businessLineName=" + businessLineName + ", midDate="
+				+ midDate + ", closingDate=" + closingDate + "]";
 	}
-
+	
 }

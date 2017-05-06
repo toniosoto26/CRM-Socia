@@ -361,11 +361,11 @@ public class AppointmentDAO {
 		String					addressDesc =	"";
 		String					comments	=	"";
 
-		DateFormat 				format 		= new SimpleDateFormat("dd 'de' MMMM 'de' yyyy 'a las' HH:mm 'hrs'");
+		DateFormat 				format 		= new SimpleDateFormat("dd 'de' MMMM 'de' yyyy 'a las' ");
 		
 		try{
 			query	=	new	StringBuilder();
-			query.append(" SELECT a.date, client.company_name,  contact.first_name, contact.last_name, ");
+			query.append(" SELECT a.date, time(a.date) time, client.company_name,  contact.first_name, contact.last_name, ");
 			query.append(" user.first_name bdm_fname, user.last_name bdm_lname, address.street, ");
 			query.append(" address.ext_num, address.int_num,address.suburb, address.city, address.state, ");
 			query.append(" address.country, a.subject ");
@@ -386,7 +386,9 @@ public class AppointmentDAO {
 			
 			while(rs.next()){
 				date		=	rs.getDate("date");
-				strDate		=	format.format(date);
+				System.out.println(date);
+				strDate		=	format.format(date)+rs.getString("time")+" hrs";
+				System.out.println(strDate);
 				companyName	=	rs.getString("company_name");
 				fName		=	rs.getString("first_name");
 				lName		=	rs.getString("last_name");

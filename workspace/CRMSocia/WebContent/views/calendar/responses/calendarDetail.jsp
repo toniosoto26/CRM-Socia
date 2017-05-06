@@ -61,7 +61,11 @@
 		         	</tr>
 		         	<tr>
 		         		<td class="negro">Fecha concurso</td>
-		         		<td><c:out value="${sessionScope.tenderDetail.deadline }"></c:out> <c:out value="${sessionScope.appointmentDetail.lastName }"></c:out></td>
+		         		<td><c:out value="${sessionScope.tenderDetail.deadline }"></c:out></td>
+		         	</tr>
+		         	<tr>
+		         		<td class="negro">Entrega de RPF para concurso</td>
+		         		<td><c:out value="${sessionScope.tenderDetail.closingDate }"></c:out></td>
 		         	</tr>
 		         	<tr>
 		         		<td class="negro">Requerimientos</td>

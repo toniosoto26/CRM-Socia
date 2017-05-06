@@ -38,3 +38,25 @@ ADD CONSTRAINT `fk_crm_contact_id`
   REFERENCES `socia`.`crm_contact` (`crm_contact_id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+
+ALTER TABLE `socia`.`crm_charge` 
+ADD COLUMN `crm_diagnosis_id` INT NULL AFTER `comments`,
+ADD INDEX `fk_diagnosis_id_idx` (`crm_diagnosis_id` ASC);
+ALTER TABLE `socia`.`crm_charge` 
+ADD CONSTRAINT `fk_diagnosis_id`
+  FOREIGN KEY (`crm_diagnosis_id`)
+  REFERENCES `socia`.`crm_diagnosis` (`crm_diagnosis_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+ALTER TABLE `socia`.`crm_logistics` 
+ADD COLUMN `crm_diagnosis_id` INT NULL AFTER `timetable`;
+
+ALTER TABLE `socia`.`crm_logistics` 
+ADD INDEX `fk_crm_logistics_diagnosis_id_idx` (`crm_diagnosis_id` ASC);
+ALTER TABLE `socia`.`crm_logistics` 
+ADD CONSTRAINT `fk_crm_logistics_diagnosis_id`
+  FOREIGN KEY (`crm_diagnosis_id`)
+  REFERENCES `socia`.`crm_diagnosis` (`crm_diagnosis_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;

@@ -23,9 +23,9 @@
 					</c:when>
 				</c:choose>
 				<div class="form-group">
-				    <label class="col-sm-2 col-md-2">Teléfono</label>
-				    <input type="text" class="form-control col-sm-4 col-md-4" id="companyPhone" name="companyPhone" disabled value='<c:out value="${sessionScope.infoContact.phone}"></c:out>' >
-					<label class="col-sm-2 col-md-2" for="inputExt">Ext.</label>
+				    <label class="col-sm-6 col-md-6">Teléfono</label>
+				    <input type="text" class="form-control col-lg-4 col-md-4" style="width:25%" id="companyPhone" name="companyPhone" disabled value='<c:out value="${sessionScope.infoContact.phone}"></c:out>' >
+					<label class="col-sm-1 col-md-1" for="inputExt">Ext.</label>
 		    		<input required type="text" class="col-sm-2 col-md-2" id="ext"  name="ext" disabled value='<c:out value="${sessionScope.infoContact.ext}"></c:out>'>
 				</div>
 				<div class="form-group">
@@ -98,7 +98,7 @@
 		   	<div class="col-sm-2 col-md-2">
 		   		<button type="button" class="btn btn-primary" id="myBtn" onclick="modalCalls(1);" style="width: 180px;">Speech</button>
 				<br><br>
-				<button type="button" class="btn btn-primary" id="myBtn" onclick="modalCalls(2);" style="width: 180px;">Guia</button>
+				<button type="button" class="btn btn-primary" id="myBtn" onclick="modalCalls(2);" style="width: 180px;">Guía</button>
 				<br><br>
 				<button type="button" class="btn btn-primary" id="myBtn" onclick="modalCalls(3);" style="width: 180px;">Manejo de objeciones</button>
 				<br><br>
@@ -106,11 +106,11 @@
 				<br><br>
 				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío presentación" onclick="sendMailCall(10);" style="width: 180px;">
 				<br><br>
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío promociones" onclick="" style="width: 180px;">
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío promociones" onclick="" style="width: 180px;" disabled>
 				<br><br>
-				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío Cartera" onclick="" style="width: 180px;">
+				<input type="button" class="btn btn-primary" id="btnConSelect" name="btnConSelect" value="Envío Cartera" onclick="" style="width: 180px;" disabled>
 				<br><br>
-				<button type="button" class="btn btn-primary" id="myBtn" onclick="modalCalls(4);" style="width: 180px;">Lineas de Negocio</button>
+				<button type="button" class="btn btn-primary" id="myBtn" onclick="modalCalls(4);" style="width: 180px;">Líneas de Negocio</button>
 			</div>
 		</c:when>
 	</c:choose>

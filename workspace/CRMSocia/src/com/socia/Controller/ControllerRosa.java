@@ -22,6 +22,7 @@ import com.socia.DAO.DateDAO;
 import com.socia.DAO.IndicatorDAO;
 import com.socia.DAO.ItemDAO;
 import com.socia.DAO.MailDAO;
+import com.socia.DAO.MailDeliveryDAO;
 import com.socia.DAO.QuotationDAO;
 import com.socia.DAO.QuotationDetailDAO;
 import com.socia.DAO.TenderDAO;
@@ -36,6 +37,7 @@ import com.socia.DTO.DateDTO;
 import com.socia.DTO.IndicatorDTO;
 import com.socia.DTO.ItemDTO;
 import com.socia.DTO.LoginDTO;
+import com.socia.DTO.MailDeliveryDTO;
 import com.socia.DTO.QuotationDTO;
 import com.socia.DTO.QuotationDetailDTO;
 import com.socia.DTO.QuotationLogDTO;
@@ -115,6 +117,7 @@ public class ControllerRosa extends HttpServlet {
 		int								businessLineId			=	0;
 		String							decisionMaker			=	"";
 		String		 					currentBrand			=	"";
+		String							closingDate				=	"";
 		
 		Date							startDate				=	null;
 		Date							endDate					=	null;
@@ -140,6 +143,7 @@ public class ControllerRosa extends HttpServlet {
 		IndicatorDAO					objIndicator			=	new IndicatorDAO();
 		DateDAO							objDate					=	new DateDAO();
 		AppointmentDAO					objAppointment			=	new AppointmentDAO();
+		MailDeliveryDAO					objMailDelivery			=	new MailDeliveryDAO();
 		
 		/** DTO*/
 		ItemDTO							item;
@@ -162,6 +166,7 @@ public class ControllerRosa extends HttpServlet {
 		ArrayList <TenderLogDTO> 		arrTenderLog			=	new ArrayList <TenderLogDTO>();
 		ArrayList <QuotationLogDTO> 	arrQuotationLog			=	new ArrayList <QuotationLogDTO>();
 		AppointmentDTO					appointmentDetail		=	null;
+		MailDeliveryDTO					mailDelivery			=	null;
 		
 		/** URL */
 		String							url					=	"";
@@ -284,13 +289,15 @@ public class ControllerRosa extends HttpServlet {
 							((LoginDTO)session.getAttribute("sessionLogin")).getFirstName()+" "+((LoginDTO)session.getAttribute("sessionLogin")).getLastName(), ((LoginDTO)session.getAttribute("sessionLogin")).getEmail());
 					cc[0] =  ((LoginDTO)session.getAttribute("sessionLogin")).getEmail();
 					
+					mailDelivery = objMailDelivery.getMailById(1);
+					
 					if(option == 2){
-						objMail.sendFromGMail("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, cc, "Cotización", body.toString());
+						objMail.sendFromGMail(mailDelivery.getEmail(), mailDelivery.getPassword(), to, cc, "Cotización", body.toString());
 					}
 					else if(option == 6){
 						objQuotation.generateExcelFile(client, contact, address, quotation, arrQuotationDetail, 
 								((LoginDTO)session.getAttribute("sessionLogin")).getFirstName()+" "+((LoginDTO)session.getAttribute("sessionLogin")).getLastName(), ((LoginDTO)session.getAttribute("sessionLogin")).getEmail());
-						objMail.sendFromGMailAttachment("rosa.mendiola.i", "swaqloi8t5o9nh.,", to, cc, "Cotización", body.toString(),"cotizacion.xls","cotizacion.xls");
+						objMail.sendFromGMailAttachment(mailDelivery.getEmail(), mailDelivery.getPassword(), to, cc, "Cotización", body.toString(),"cotizacion.xls","cotizacion.xls");
 					}
 					
 				}catch(Exception exception){
@@ -371,10 +378,11 @@ public class ControllerRosa extends HttpServlet {
 			businessLineId = Integer.parseInt(request.getParameter("businessLineId"));
 			decisionMaker = request.getParameter("decisionMaker");
 			currentBrand = request.getParameter("currentBrand");
+			closingDate = request.getParameter("closingDate");
 			
 			tenderId = objConsecutive.getConsecutive("tenders");
 			
-			tender = new TenderDTO(tenderId, startUpDate, deadline, requirements, comments, clientId, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId(), businessLineId, decisionMaker, "today", currentBrand);
+			tender = new TenderDTO(tenderId, startUpDate, deadline, requirements, comments, clientId, ((LoginDTO)session.getAttribute("sessionLogin")).getCrmUserId(), businessLineId, decisionMaker, "today", currentBrand, closingDate);
 			
 			try
 			{
