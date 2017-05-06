@@ -11,6 +11,11 @@
 	
 	<link rel="stylesheet" href="css/adminlte.min.css">
 	<link rel="stylesheet" type="text/css" href="./css/bootstrap_new.css">
+
+		<link rel="stylesheet" type="text/css" href="./css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/alerts/alertify.core.css">
+		<link rel="stylesheet" type="text/css" href="./css/alerts/alertify.default.css">
+		<link rel="stylesheet" type="text/css" href="./css/alerts/alertify.bootstrap.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 	
 </head>
@@ -46,6 +51,7 @@
 	<script src="js/login/d3.v3.min.js"></script>
 	<script src="js/login/trianglify.min.js"></script>
 	<script src="js/login/functions.min.js"></script>
-<script type="text/javascript" src="js/validator/validator.js"></script>
+	<script type="text/javascript" src="js/validator/validator.js"></script>
+	<script type="text/javascript" src="js/alerts/alertify.js"></script>
 </body>
 </html>
