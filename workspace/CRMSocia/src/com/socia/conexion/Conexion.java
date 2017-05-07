@@ -13,8 +13,8 @@ public class Conexion {
 	
 	public Conexion(){
 		this.user	=	"root";
-		this.pass	=	"admin";
-		this.db		=	"soto";
+		this.pass	=	"1234.";
+		this.db		=	"crmsocia_socia";
 	}
 
 	public Connection getConnection1()throws Exception, ClassNotFoundException{

@@ -14,7 +14,7 @@ $(document).ready(function() {
 		});
 	}
 	
-	selectClient('call');
+	selectClient('Calendar');
 	selectBusinessLine();
 });
 
@@ -49,7 +49,7 @@ function selectBusinessLine(){
 
 function addTender(){
 	
-	if($("#chosenClient").val()== "0"){
+	if($("#chosenClientCalendar").val()== "0"){
 		alertify.alert("Por favor, selecciona un cliente");
 		return false;
 	}
@@ -77,7 +77,7 @@ function addTender(){
 			        
 					var fourthDate = moment(secondDate).clone().subtract(2, 'month');
 			        
-					var client = $("#chosenClient :selected").text();
+					var client = $("#chosenClientCalendar :selected").text();
 					var businessLine = $("#business-select :selected").text();
 	
 			        var firstEvent = {

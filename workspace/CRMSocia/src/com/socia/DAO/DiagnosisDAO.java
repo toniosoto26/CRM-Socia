@@ -1,18 +1,11 @@
 package com.socia.DAO;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.socia.DTO.AddressDTO;
 import com.socia.DTO.DiagnosisDTO;
 import com.socia.DTO.DiagnosisRequirement;
 
@@ -29,14 +22,7 @@ public class DiagnosisDAO {
 		
 		PreparedStatement	ps	=	null;
 		ResultSet			rs	=	null;
-		
-		String				lastUpd	=	"";
-		String				name	=	"";
-		String				clientT	=	"";
-		
 		StringBuilder		sql		=	new	StringBuilder();
-		
-		
 		DiagnosisDTO		diag	=	null;
 		
 		try{

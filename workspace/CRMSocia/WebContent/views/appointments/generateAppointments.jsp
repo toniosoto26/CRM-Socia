@@ -3,9 +3,7 @@
     
 <link rel="stylesheet" href="css/address.css">
 
-<script type="text/javascript" src="/CRMSocia/js/script.js"></script>
 <script type="text/javascript" src="/CRMSocia/js/appointments/appointment.js"></script>
-
 
 <div class="row">
 	<div id="primaryPanel" class="col-sm-12 col-md-12">
