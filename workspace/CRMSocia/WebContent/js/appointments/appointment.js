@@ -3,8 +3,9 @@
  */
 
 $( document ).ready(function() {
-	selectClient('Appointment');
+	selectClient('appointment');
 	selectBDM();
+	activeSession();
 	
 	$("#modified").hide();
 	 $('.form_datetime').datetimepicker({
@@ -100,7 +101,7 @@ function uploadInfo(selected){
 function validateCon(){
 	
 
-	var	rz			=	$("#chosenClientAppointment").val();
+	var	rz			=	$("#chosenClient").val();
 	var	days		=	$("#dtp_input2").val();
 	var	hrs			=	$("#dtp_input3").val();
 	var	contact		=	$("#contactI").val();
@@ -152,7 +153,7 @@ function validateCon(){
 }
 
 function reviewAppo(){
-	var	rz		=	$("#chosenClientAppointment");
+	var	rz		=	$("#chosenClient");
 	var	contact	=	$("#contactI").val();
 	var arr = contact.split(',');
 	var contactId	=	arr[0];
@@ -293,7 +294,7 @@ function uploadInfo(selected){
 function validateCon(){
 	
 
-	var	rz			=	$("#chosenClientAppointment").val();
+	var	rz			=	$("#chosenClient").val();
 	var	days		=	$("#dtp_input2").val();
 	var	hrs			=	$("#dtp_input3").val();
 	var	contact		=	$("#contactI").val();
@@ -345,7 +346,7 @@ function validateCon(){
 }
 
 function reviewAppo(){
-	var	rz		=	$("#chosenClientAppointment");
+	var	rz		=	$("#chosenClient");
 	var	contact	=	$("#contactI").val();
 	var arr = contact.split(',');
 	var contactId	=	arr[0];
@@ -388,7 +389,7 @@ function saveInfo(){
 		//alert("-------------> "+reviewAppo());
 		//if(reviewAppo()){
 			
-			var	rz		=	$("#chosenClientAppointment").val();
+			var	rz		=	$("#chosenClient").val();
 			var	days	=	$("#dtp_input2").val();
 			var	hrs		=	$("#dtp_input3").val();
 			var	contact	=	$("#contactI").val();
@@ -440,7 +441,7 @@ function saveInfo(){
 }
 
 function validateMod(){
-	var	rz		=	$("#chosenClientAppointment");
+	var	rz		=	$("#chosenClient");
 	var phone	=	$("#phoneContact");
 	var	email	=	$("#emailContact");
 	
@@ -487,7 +488,7 @@ function modifiedInfo(){
 
 function SaveModifiedInformation(){
 	if(modifiedInfo()){
-		var	rz		=	$("#chosenClientAppointment");
+		var	rz		=	$("#chosenClient");
 		var phone	=	$("#phoneContact");
 		var	email	=	$("#emailContact");
 		var	contact	=	$("#contactI").val();
@@ -543,7 +544,7 @@ function loadAddressInfo(selected){
 
 
 function validateMod(){
-	var	rz		=	$("#chosenClientAppointment");
+	var	rz		=	$("#chosenClient");
 	var phone	=	$("#phoneContact");
 	var	email	=	$("#emailContact");
 	
@@ -590,7 +591,7 @@ function modifiedInfo(){
 
 function SaveModifiedInformation(){
 	if(modifiedInfo()){
-		var	rz		=	$("#chosenClientAppointment");
+		var	rz		=	$("#chosenClient");
 		var phone	=	$("#phoneContact");
 		var	email	=	$("#emailContact");
 		var	contact	=	$("#contactI").val();

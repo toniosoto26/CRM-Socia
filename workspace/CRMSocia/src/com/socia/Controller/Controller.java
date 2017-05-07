@@ -97,10 +97,7 @@ public class Controller extends HttpServlet {
 			session.setAttribute("arrClient", arrClient);
 
 			session.removeAttribute("view");
-			session.setAttribute("view", (view.trim().equals("Call")||view.trim().equals("Calendar")?true:false));
-			
-			session.removeAttribute("viewName");
-			session.setAttribute("viewName", view);
+			session.setAttribute("view", (view.trim().equals("call")?true:false));
 		}
 		
 		

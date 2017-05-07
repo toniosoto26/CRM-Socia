@@ -67,7 +67,7 @@ public class BlDetailsDAO {
 			sqlQuery.append(" FROM crm_bl_details bl ");
 			sqlQuery.append(" JOIN crm_diagnosis d on bl.crm_diagnosis_id = d.crm_diagnosis_id ");
 			sqlQuery.append(" WHERE bl.crm_client_id = ? ");
-			sqlQuery.append(" AND d.crm_business_line_id = ? ");
+			sqlQuery.append(" AND bl.crm_business_line_id = ? ");
 			sqlQuery.append(" ORDER BY d.date_updated ASC ");
 			sqlQuery.append(" LIMIT 1 ");
 			

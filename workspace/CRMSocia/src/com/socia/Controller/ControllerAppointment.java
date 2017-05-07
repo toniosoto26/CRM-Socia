@@ -87,10 +87,15 @@ public class ControllerAppointment extends HttpServlet {
 		AddressDTO		address			=	null;
 		MailDeliveryDTO	mailDelivery	=	null;
 		
+		if( session.getAttribute("sessionLogin") == null)			
+			opc = 0;
 		
 		
 		try{
 			switch (opc){
+				case 0:
+					url	=	"/views/finishedSession.jsp";
+					break;
 				case 1:
 					AppointmentDAO 			appoint	=	new	AppointmentDAO();
 					List<AppointmentDTO>	arrBDM	=	appoint.getBdm();

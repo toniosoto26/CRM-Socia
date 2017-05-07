@@ -107,7 +107,7 @@ function addQuotation(){
 	var activeTab = $('.nav-tabs .active').text();
 	
 	if(activeSession()){
-		if($("#chosenClientQuotation").val()== "0"){ 
+		if($("#chosenClient").val()== "0"){ 
 			alertify.alert("Por favor, selecciona un cliente");
 			return false;
 		}
@@ -161,12 +161,12 @@ function addQuotation(){
 					alertify.alert("Correo enviado correctamente");
 					
 					$('#addQuotation').find("input[type=text], textarea, select, input[type=number]").val("");
-					$('#chosenClientQuotation').val("0");
+					$('#chosenClient').val("0");
 					$('#chosenContact').val("0");
 					$('.chosen-select').trigger("chosen:updated");
 					$('#deliveryTimes').val('DE 24 A 48 HORAS HÁBILES');
-					loadClientInfo(document.getElementById('chosenClientQuotation'));
-					loadAddressInfo(document.getElementById('chosenClientQuotation'));
+					loadClientInfo(document.getElementById('chosenClient'));
+					loadAddressInfo(document.getElementById('chosenClient'));
 				}
 				else{
 					alertify.alert("Incorrecto");			
@@ -188,8 +188,7 @@ function changeInput(index){
 }
 
 $( document ).ready(function() {
-	activeSession();
-	selectClient('Quotation');
+	selectClient('quotation');
     addProduct();
     
 	// Support for AJAX loaded modal window.
@@ -198,13 +197,15 @@ $( document ).ready(function() {
 		e.preventDefault();
 		var url = $(this).attr('href');
 		var activeTab = $('.nav-tabs .active').text();
-	
-		$.ajax({
-			type: "post",
-			url : "ControllerTemp",
-			data: $("#addQuotation").serialize()+"&option=3&activeTab="+activeTab,
-			async: false
-		});
+		
+		if(activeSession()){
+			$.ajax({
+				type: "post",
+				url : "ControllerTemp",
+				data: $("#addQuotation").serialize()+"&option=3&activeTab="+activeTab,
+				async: false
+			});
+		}
 		
 		if (url.indexOf('#') == 0) {
 			$(url).modal('open');

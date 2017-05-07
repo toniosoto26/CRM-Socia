@@ -3499,7 +3499,7 @@ var Grid = FC.Grid = Class.extend(ListenerMixin, MouseIgnorerMixin, {
 						var date = selectionSpan.start;
 						var tender = date.clone().add(4, 'month');
 						
-						$("#chosenClientCalendar").val('0');
+						$("#chosenClient").val('0');
 						$("#business-select").val('');
 				        $("#startUpDate").val(date.format('DD MMMM YYYY'));
 				        $("#dtp_input1").val(date.format('YYYY-MM-DD'))

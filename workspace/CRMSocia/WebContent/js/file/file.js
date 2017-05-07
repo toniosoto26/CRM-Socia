@@ -7,75 +7,70 @@ $( document ).ready(function() {
 });
 
 function getInfoProspecto1(type){
-	if(activeSession()){
-		$.ajax({ 
-			type:"post",
-			url:"ControllerDiagnosis",
-			data: {"option":2, "type": "P", diagnosis: false},
-			success: function(response){
-				$("#selectProspD").html(response);		
-				$(".chosen-select").chosen();
-			}, 
-			error: function(){
-				alertify.alert("no funciona");
-				
-			}
-		});
-	}
+	$.ajax({ 
+		type:"post",
+		url:"ControllerDiagnosis",
+		data: {"option":2, "type": "P", diagnosis: false},
+		success: function(response){
+			$("#selectProspD").html(response);		
+			$(".chosen-select").chosen();
+		}, 
+		error: function(){
+			alertify.alert("no funciona");
+			
+		}
+	});
 }
 
 function getInfoCliente(type){
-	if(activeSession()){
-		$.ajax({ 
-			type:"post",
-			url:"ControllerDiagnosis",
-			data: {"option":1, "type": "A", diagnosis: false},
-			success: function(response){
-				$("#selectClientD").html(response);		
-				$(".chosen-select").chosen();	
-			}, 
-			error: function(){
-				alertify.alert("no funciona");
-				
-			}
-		});
-	}
+	$.ajax({ 
+		type:"post",
+		url:"ControllerDiagnosis",
+		data: {"option":1, "type": "A", diagnosis: false},
+		success: function(response){
+			$("#selectClientD").html(response);		
+			$(".chosen-select").chosen();	
+		}, 
+		error: function(){
+			alertify.alert("no funciona");
+			
+		}
+	});
 }
 
 function getFile(value, type){
-	if(activeSession()){
-		$.ajax({
-			type:"post",
-			url:"ControllerDiagnosis",
-			data: {"option":3, "type": type, "clientId":value},
-			success: function(response){
-				$("#response").html(response);
-				if(type == "P"){
-					getInfoCliente('A');
-				}else{
-					getInfoProspecto1("P");
-				}
-				getBLDetails(value);
-			},
-			error: function(){
-				alertify.alert("no funciona");
+	$.ajax({
+		type:"post",
+		url:"ControllerFile",
+		data: {"option":1, "type": type, "clientId":value},
+		success: function(response){
+			$("#response").html(response);
+			if(type == "P"){
+				getInfoCliente('A');
+			}else{
+				getInfoProspecto1("P");
 			}
-		});
-	}
+			//getBLDetails(value);
+		},
+		error: function(){
+			alertify.alert("no funciona");
+			
+		}
+	});
 }
 
 function getBLDetails(value){
-	if(activeSession()){
-		$.ajax({
-			type:"post",
-			url:"ControllerDiagnosis",
-			data: {"option":4, "clientId":value},
-			success: function(response){
-				$("#blTable").html(response);
-			},
-			error: function(){
-				alertify.alert("no funciona");
-			}
-		});
-	}
+	$.ajax({
+		type:"post",
+		url:"ControllerDiagnosis",
+		data: {"option":4, "clientId":value},
+		success: function(response){
+			$("#blTable").html(response);
+		},
+		error: function(){
+			alertify.alert("no funciona");
+			
+		}
+	})
+	
 }

@@ -175,6 +175,11 @@ public class ControllerRosa extends HttpServlet {
 		TransactionDAO					transaction			= new TransactionDAO();
 		ArrayList<StringBuilder>		queries				= new ArrayList<StringBuilder>();
 		
+		if( session.getAttribute("sessionLogin") == null)	{		
+			option = 0;
+			url	=	"/views/finishedSession.jsp";
+		}
+		
 		if(option == 1){
 			clientId = Integer.parseInt(request.getParameter("clientId"));
 			arrAddress = objAddress.getAddressByClient(clientId);

@@ -6,7 +6,7 @@
 		<div class="row top">
 	    	<div class="col-sm-6 col-md-6">
 				<div class="form-group">
-			 		<label class="col-sm-6 col-md-6">Razón social:</label>
+			 		<label class="col-sm-7 col-md-7">Razón social:</label>
 					<input required type="text" class="form-control" id="companyName" placeholder="Razon social" name="selectClient">
 					<input type="hidden" name="AddClient" value="1">
 				</div>

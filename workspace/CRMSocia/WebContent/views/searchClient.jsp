@@ -6,7 +6,7 @@
 		<div class="row top">
 	    	<div class="col-sm-6 col-md-6">
 				<div class="form-group">
-			 		<label class="col-sm-6 col-md-6">Razón social:</label>
+			 		<label class="col-sm-7 col-md-7">Razón social:</label>
 					<div id="selectClient" name="selectClient"> </div>
 					<input type="hidden" name="AddClient" value="0">
 				</div>
@@ -38,8 +38,11 @@
 	</form>
 </div>
 
+<script src="js/chosen.jquery.js" type="text/javascript"></script>
+<script src="js/prism.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript"> 
 	$(document).ready(function(){
-		selectClient('Call');
+		selectClient('call');
 	});
 </script>

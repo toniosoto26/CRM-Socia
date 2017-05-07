@@ -137,6 +137,10 @@
     </div>
   </div>
   
+
+	<script src="js/chosen.jquery.js" type="text/javascript"></script>
+	<script src="js/prism.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="js/script.js"></script>
 	<script type="text/javascript" src="js/call/callModal.js"></script>
 	<script type="text/javascript"> 
 		$(document).ready(function(){

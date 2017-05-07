@@ -2,524 +2,486 @@
  * 
  */
 
-function validar() {
+function validar(){
 	$("#mostrar").hide();
 	$("#result").html("");
-	var userLogin = $("#user").val();
-	var passwdLogin = $("#passwd").val();
-	var validar = validarCampos(userLogin, passwdLogin);
-	var datos = {
-		"user" : userLogin,
-		"passwd" : passwdLogin,
-		"opc" : 1
-	}
-	if (validar) {
-		$.ajax({
-			type : "post",
-			url : "ControllerLogin",
-			data : datos,
-			success : function(response) {
-				if (trim(response) === "correcto")
-					document.location.href = "home.jsp";
-				else
-					alertify.alert("Acceso incorrecto.")
-				$("#mostrar").show();
-			},
-			error : function() {
-				// $("#result").html("Datos incorrectos.");
-				alertify.alert("Error");
-			}
-		});
+	var userLogin	=	$("#user").val();
+	var	passwdLogin	=	$("#passwd").val();
+	var	validar		=	validarCampos(userLogin,passwdLogin);
+	var datos		=	{
+						"user" : userLogin,
+						"passwd": passwdLogin,
+						"opc"	: 1
+						}
+	if(validar){
+			$.ajax({
+				type: "post",
+				url : "ControllerLogin",
+				data: datos,
+				success: function(response){
+					if(trim(response) === "correcto")
+						document.location.href	=	"home.jsp";
+					else
+						alertify.alert("Acceso incorrecto.")
+					$("#mostrar").show();
+				},
+				error: function(){
+					//$("#result").html("Datos incorrectos.");
+					alertify.alert("Error");
+				}
+			});
 	}
 }
 
-function activeSession() {
-	var datos = {
-		"opc" : 2
-	};
+
+function activeSession(){
+	var datos		=	{
+			"opc"	: 2
+			};
 	var result = "";
 	$.ajax({
-		type : "post",
-		async : false,
+		type: "post",
+		async:false,
 		url : "ControllerLogin",
-		data : datos,
-		success : function(response) {
-
-			if (trim(response) == "correcto") {
+		data: datos,
+		success: function(response){
+			
+			if(trim(response) == "correcto"){
 				result = "true"
-			} else {
+			}
+			else{
 				alertify.alert("Sesion terminada.")
-				document.location.href = "index.jsp";
+				document.location.href	=	"index.jsp";
 			}
 			$("#mostrar").show();
 		},
-		error : function() {
-			// $("#result").html("Datos incorrectos.");
+		error: function(){
+			//$("#result").html("Datos incorrectos.");
 			alertify.alert("Error");
 		}
 	});
 	return result;
 }
 
-function validarCampos(user, passwd) {
-	if (user == "" || passwd == "") {
+
+function validarCampos(user,passwd){
+	if(user == "" || passwd == ""){
 		alertify.alert("No debe haber campos vacios.")
 		return false;
-	} else {
+	}else{
 		return true;
 	}
 }
 
-function loadClientInfo(selected) {
+function loadClientInfo(selected){
 	var clientId = selected.value;
-	if (activeSession()) {
+	if(activeSession()){
 		$.ajax({
-			type : "post",
+			type: "post",
 			url : "Controller",
-			data : {
-				option : 2,
-				clientId : clientId
+			data: {
+				option: 2, 
+				clientId: clientId
 			},
-			success : function(response) {
+			success: function(response){
 				$("#clientInfo").html(response);
-				$("#chosenContactQuotation").chosen();
+				$("#chosenContact").chosen();
 			},
-			error : function() {
+			error: function(){
 				alertify.alert("Error");
 			}
 		});
 	}
 }
 
-function LoadCountCall(selected) {
+
+function LoadCountCall(selected){
 	var clientId = selected.value;
-	if (activeSession()) {
+	if(activeSession()){
 		$.ajax({
-			type : "post",
+			type: "post",
 			url : "Controller",
-			data : {
-				option : 7,
-				clientId : clientId
+			data: {
+				option: 7, 
+				clientId: clientId
 			},
-			success : function(response) {
+			success: function(response){
 				$("#countCalls").html(response);
 			},
-			error : function() {
+			error: function(){
 				alertify.alert("Error");
 			}
 		});
 	}
 }
-function loadContactInfo(selected) {
+function loadContactInfo(selected){
 	var contactId = selected.value;
-	if (activeSession()) {
+	if(activeSession()){
 		$.ajax({
-			type : "post",
+			type: "post",
 			url : "Controller",
-			data : {
-				option : 3,
-				contactId : contactId
+			data: {
+				option: 3, 
+				contactId: contactId
 			},
-			success : function(response) {
+			success: function(response){
 				$("#contactInfo").html(response);
 			},
-			error : function() {
+			error: function(){
 				alertify.alert("Error");
 			}
 		});
 	}
 }
 
-function selectClient(view) {
-	if (activeSession()) {
+function selectClient(view){
+	if(activeSession()){
 		$.ajax({
-			type : "post",
-			url : "Controller",
-			data : {
-				"option" : 1,
-				view : view
-			},
-			success : function(response) {
+			type:"post",
+			url:"Controller",
+			data: {"option":1, view: view},
+			success: function(response){
 				$("#selectClient").html(response);
-				$("#chosenClient" + view).chosen();
+				$("#chosenClient").chosen();
 			},
-			error : function() {
+			error: function(){
 				alertify.alert("no funciona");
+				
 			}
 		});
 	}
 }
 
-function loadClientType(selected) {
+
+function loadClientType(selected){
 	var clientId = 1;
-	if (selected != undefined)
+	if(selected != undefined)
 		clientId = selected.value;
 
-	if (activeSession()) {
+	if(activeSession()){
 		$.ajax({
-			type : "post",
-			url : "ControllerTemp",
-			data : {
-				"option" : 13,
-				clientId : clientId
+			type:"post",
+			url:"ControllerTemp",
+			data: {
+				"option":13, 
+			    clientId: clientId
 			},
-			success : function(response) {
+			success: function(response){
 				$("#clientTypeContainer").html(response);
 			},
-			error : function() {
+			error: function(){
 				alertify.alert("no funciona");
-
+				
 			}
 		});
 	}
 }
 
-function selectContact(selected) {
+function selectContact(selected){
 	var clientId = 1;
-	if (selected != undefined)
+	if(selected != undefined)
 		clientId = selected.value;
-
-	if (activeSession()) {
+	
+	if(activeSession()){
 		$.ajax({
-			type : "post",
-			url : "Controller",
-			data : {
-				option : 2,
-				clientId : clientId
+			type:"post",
+			url:"Controller",
+			data: {
+				option:2,
+				clientId: clientId
 			},
-			success : function(response) {
+			success: function(response){
 				$("#selectContact").html(response);
-				$("#chosenContactCall").chosen();
+				$("#chosenContact").chosen();
 			},
-			error : function() {
+			error: function(){
 				alertify.alert("no funciona");
-
+				
 			}
 		});
 	}
 }
 
-function selectPosition() {
-	if (activeSession()) {
+function selectPosition(){
+	if(activeSession()){
 		$.ajax({
-			type : "post",
-			url : "Controller",
-			data : {
-				option : 6
+			type:"post",
+			url:"Controller",
+			data: {
+				option:6
 			},
-			success : function(response) {
+			success: function(response){
 				$("#selectPosition").html(response);
-				$("#chosenPositionCall").chosen();
+				$("#chosenPosition").chosen();
 			},
-			error : function() {
+			error: function(){
 				alertify.alert("no funciona");
-
+				
 			}
 		});
 	}
 }
 
-function selectDivision() {
-	if (activeSession()) {
+function selectDivision(){
+	if(activeSession()){
 		$.ajax({
-			type : "post",
-			url : "Controller",
-			data : {
-				option : 5
-
+			type:"post",
+			url:"Controller",
+			data: {
+				option:5
+				
 			},
-			success : function(response) {
+			success: function(response){
 				$("#selectDivision").html(response);
-				$("#chosenDivisionCall").chosen();
+				$("#chosenDivision").chosen();
 			},
-			error : function() {
+			error: function(){
 				alertify.alert("no funciona");
-
+				
 			}
 		});
 	}
 }
 
-function pintar(variable) {
-
-	if (variable == 0) {
+function pintar(variable){
+	
+	if(variable==0){
 		$("#form1").load("views/newClient.jsp");
-	} else if (variable == 1) {
+	}
+	else if(variable==1){
 		$("#form1").load("views/searchClient.jsp");
-	} else if (variable == 2) {
+	}
+	else if(variable==2){
 		$("#form2").load("views/newContact.jsp");
-	} else if (variable == 3) {
+	}
+	else if(variable==3){
 		$("#form2").load("views/searchContact.jsp");
 	}
 }
 
-function loadContactButtons(variable) {
+function loadContactButtons(variable){
 	$("#form2").load("views/calls/contactButtons.jsp");
 }
 
-function registreCall(variable) {
-	var validacion = validateCalls();
-
-	if (validacion != "") {
+function registreCall(variable){
+	var validacion=validateCalls();
+	
+	if(validacion!= ""){
 		alertify.alert(validacion);
-	} else {
-
-		if (activeSession()) {
-			$
-					.ajax({
-						type : "post",
-						url : "Controller",
-						data : $("#formCalls").serialize()
-								+ "&option=4&variable=" + variable,
-						success : function(response) {
-							if (trim(response) == "correcto") {
-								alertify.alert("Insertado Correctamente");
-
-								var today = moment().format('YYYY-MM-DD');
-								var end = moment().subtract(7, "day").format(
-										'YYYY-MM-DD');
-
-								$("#pageContent").removeClass("welcome");
-								$("#pageHeader")
-										.html(
-												'<ol class="breadcrumb">'
-														+ '<li><a href="#">Inicio</a></li>'
-														+ '<li>Llamadas</li>'
-														+ '<li class="active">Historial de llamadas</li>'
-														+ '</ol>');
-								$("#pageContent").load("CallLog.jsp");
-
-								setTimeout(function() {
-									$('#dtp_input1').val(end);
-									$('#dtp_input2').val(today);
-									ValidaIndicadorLlamadas();
-								}, 500);
-							} else {
-								alertify.alert("Incorrecto");
-							}
-						},
-						error : function() {
-							alertify.alert("Error");
-						}
-					});
+	}
+	else{
+		
+		if(activeSession()){
+			$.ajax({
+				type: "post",
+				url : "Controller",
+				data: $("#formCalls").serialize()+"&option=4&variable="+variable,
+				success: function(response){
+					if(trim(response)=="correcto"){
+						alertify.alert("Insertado Correctamente");
+						
+						var today = moment().format('YYYY-MM-DD');
+						var end = moment().subtract(7, "day").format('YYYY-MM-DD');
+						
+						$("#pageContent").removeClass("welcome");
+						$("#pageHeader").html('<ol class="breadcrumb">'+
+								  '<li><a href="#">Inicio</a></li>'+
+								  '<li>Llamadas</li>'+
+								  '<li class="active">Historial de llamadas</li>'+
+								'</ol>');
+						$("#pageContent").load("CallLog.jsp");
+						
+						setTimeout(function(){
+							$('#dtp_input1').val(end);
+							$('#dtp_input2').val(today);
+							ValidaIndicadorLlamadas();
+						}, 500);
+					}
+					else{
+						alertify.alert("Incorrecto");
+					}
+				},
+				error: function(){
+					alertify.alert("Error");
+				}
+			});
 		}
 	}
-
+	
 	return false;
 }
 
-function validateCalls() {
-	// alert("Entre a la maldita validacion");
-	var mensaje = "";
-
-	if ($("#chosenClientCall").val() == 0) {
-		mensaje = "Debe seleccionar un Cliente";
-	}
-	if ($("#chosenDivisionCall").val() == 0) {
-		mensaje = "Debe seleccionar un Área";
-	}
-	if ($("#chosenPositionCall").val() == 0) {
-		mensaje = "Debe seleccionar un puesto";
-	}
-
+function validateCalls(){
+	//alert("Entre a la maldita validacion");
+	var mensaje="";
+	
+		if($("#chosenClient").val() == 0){
+			mensaje= "Debe seleccionar un Cliente";
+		}
+		if($("#chosenDivision").val() == 0){
+			mensaje= "Debe seleccionar un Área";
+		}
+		if($("#chosenPosition").val() == 0){
+			mensaje= "Debe seleccionar un puesto";
+		}
+	
+	
 	return mensaje;
 }
 
-function trim(cadena) {
-	var retorno = cadena.replace(/^\s+/g, '');
-	retorno = retorno.replace(/\s+$/g, '');
+function trim(cadena){
+	var retorno=cadena.replace(/^\s+/g,'');
+	retorno=retorno.replace(/\s+$/g,'');
 	return retorno;
 }
 
-function selectBDM() {
-	if (activeSession()) {
+function selectBDM(){
+	if(activeSession()){
 		$.ajax({
-			type : "post",
-			url : "ControllerAppointment",
-			data : {
-				"opc" : 1
-			},
-			success : function(response) {
+			type:"post",
+			url:"ControllerAppointment",
+			data: {"opc":1},
+			success: function(response){
 				$("#selectBDM").html(response);
 				$("#bdmI").chosen();
 			},
-			error : function() {
+			error: function(){
 				alertify.alert("no funcionó");
 			}
 		});
 	}
 }
 
-function loadContactAppointment(selected) {
+function loadContactAppointment(selected){
 	var contactId = selected.value;
-
-	if (activeSession()) {
+	
+	if(activeSession()){
 		$.ajax({
-			type : "post",
+			type: "post",
 			url : "ControllerAppointment",
-			data : {
-				"opc" : 2,
-				"contactId" : contactId
+			data: {
+				"opc": 2, 
+				"contactId": contactId
 			},
-			success : function(response) {
+			success: function(response){
 				$("#result").html(response);
 			},
-			error : function() {
+			error: function(){
 				alertify.alert("Error");
 			}
 		});
 	}
 }
 
-function sendMailCall(opcion) {
-	var mailContact = $("#companyEmail").val();
 
-	if (mailContact == '') {
+function sendMailCall(opcion){
+	var mailContact=$("#companyEmail").val();
+	
+	if(mailContact==''){
 		alertify.alert("El correo del contacto no debe estar vacío");
-	} else {
-		if (activeSession()) {
-			$
-					.ajax({
-						type : "post",
-						url : "Controller",
-						data : {
-							option : opcion,
-							mailContact : mailContact
-						},
-						beforeSend : function() {
-							alertify.set({
-								delay : 3000
-							});
-							alertify
-									.log("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Enviando...</center>");
-						},
-
-						success : function(response) {
-							if (trim(response) == "correcto") {
-								alertify.alert("Correo enviado correctamente");
-								$('#addQuotation')
-										.find(
-												"input[type=text], textarea, select, input[type=number]")
-										.val("");
-							} else {
-								alertify.alert("Incorrecto");
-							}
-							console.log("success");
-						},
-						error : function() {
-							alert("Error");
-						}
-					});
+	}
+	else{
+		if(activeSession()){
+			$.ajax({
+				type: "post",
+				url : "Controller",
+				data: {
+					option:opcion,
+					mailContact:mailContact
+				},
+				beforeSend: function(){
+					alertify.set({ delay: 3000 });
+					alertify.log("<center><i class='fa fa-cog fa-spin fa-3x fa-fw'></i><br> Enviando...</center>");
+				}, 
+				
+				success: function(response){
+					if(trim(response)=="correcto"){
+						alertify.alert("Correo enviado correctamente");
+						$('#addQuotation').find("input[type=text], textarea, select, input[type=number]").val("");
+					}
+					else{
+						alertify.alert("Incorrecto");			
+					}
+					console.log("success");
+				},
+				error: function(){
+					alert("Error");
+				}
+			}); 
 		}
 	}
 	return false;
 }
 
-function openSecondaryPanel(close, options) {
-	if (options == 0) {
-		$("#openPanel")
-				.html(
-						'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'appointment\', '
-								+ options
-								+ ');">Citas</button>&nbsp;&nbsp;'
-								+ '<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'quotation\', '
-								+ options
-								+ ');">Cotizaciones</button>&nbsp;&nbsp;'
-								+ '<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'calendar\', '
-								+ options + ');">Calendario</button>');
-	}
-	if (options == 1) {
-		$("#openPanel")
-				.html(
-						'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'call\', '
-								+ options
-								+ ');">Llamadas</button>&nbsp;&nbsp;'
-								+ '<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'appointment\', '
-								+ options
-								+ ');">Citas</button>&nbsp;&nbsp;'
-								+ '<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'calendar\', '
-								+ options + ');">Calendario</button>');
-	}
-	if (options == 2) {
-		$("#openPanel")
-				.html(
-						'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'call\', '
-								+ options
-								+ ');">Llamadas</button>&nbsp;&nbsp;'
-								+ '<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'appointment\', '
-								+ options
-								+ ');">Citas</button>&nbsp;&nbsp;'
-								+ '<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'quotation\', '
-								+ options + ');">Cotizaciones</button>');
-	}
-	if (options == 3) {
-		$("#openPanel")
-				.html(
-						'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'call\', '
-								+ options
-								+ ');">Llamadas</button>&nbsp;&nbsp;'
-								+ '<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'quotation\', '
-								+ options
-								+ ');">Cotizaciones</button>&nbsp;&nbsp;'
-								+ '<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'calendar\', '
-								+ options + ');">Calendario</button>');
-	}
 
-	if (close == 1) {
+
+function openSecondaryPanel(close, options){
+	if(options == 0){
+		$("#openPanel").html(
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'appointment\', '+options+');">Citas</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'quotation\', '+options+');">Cotizaciones</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'calendar\', '+options+');">Calendario</button>');
+	}
+	if(options == 1){
+		$("#openPanel").html('<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'call\', '+options+');">Llamadas</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'appointment\', '+options+');">Citas</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'calendar\', '+options+');">Calendario</button>');
+	}
+	if(options == 2){
+		$("#openPanel").html('<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'call\', '+options+');">Llamadas</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'appointment\', '+options+');">Citas</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'quotation\', '+options+');">Cotizaciones</button>');
+	}
+	if(options == 3){
+		$("#openPanel").html('<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'call\', '+options+');">Llamadas</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'quotation\', '+options+');">Cotizaciones</button>&nbsp;&nbsp;'+
+				'<button type="button" class="btn btn-primary" onClick="selectSecondaryPanel(\'calendar\', '+options+');">Calendario</button>');
+	}
+	
+	if(close == 1){
 		$("#secondaryPanel").removeClass('col-md-6');
 		$("#secondaryPanel").removeClass('col-sm-6');
-		$("#primaryPanel").css({
-			"border-right" : ""
-		});
-
+		$("#primaryPanel").css({"border-right": ""});
+		
 		$("#secondaryPanel").html('');
-
+		
 		$("#primaryPanel").removeClass('col-md-6');
 		$("#primaryPanel").removeClass('col-sm-6');
-
-		$("#openPanel")
-				.html(
-						'<small>Haz clic para abrir un panel secundario </small><button type="button" class="btn btn-default btn-sm" onclick="openSecondaryPanel(0,'
-								+ options
-								+ ');" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Segundo Panel</button>');
+		
+		$("#openPanel").html('<small>Haz clic para abrir un panel secundario </small><button type="button" class="btn btn-default btn-sm" onclick="openSecondaryPanel(0,'+options+');" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Segundo Panel</button>');
 	}
 }
 
-function selectSecondaryPanel(optionName, options) {
+function selectSecondaryPanel(optionName, options){
 	$("#secondaryPanel").addClass('col-md-6');
 	$("#secondaryPanel").addClass('col-sm-6');
-	$("#primaryPanel").css({
-		"border-right" : "1px solid rgba(0,0,0,0.05)"
-	});
+	$("#primaryPanel").css({"border-right": "1px solid rgba(0,0,0,0.05)"});
 
 	$("#primaryPanel").addClass('col-md-6');
 	$("#primaryPanel").addClass('col-sm-6');
-
-	$("#openPanel")
-			.html(
-					'<button type="button" class="btn btn-default btn-sm" onclick="openSecondaryPanel(1,'
-							+ options
-							+ ');" >Cerrar <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>');
-
-	if (optionName === "call") {
+	
+	$("#openPanel").html('<button type="button" class="btn btn-default btn-sm" onclick="openSecondaryPanel(1,'+options+');" >Cerrar <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>');
+	
+	if(optionName === "call"){
 		$("#secondaryPanel").load("call.jsp");
-	} else if (optionName === "quotation") {
+	}else if(optionName === "quotation"){
 		$("#secondaryPanel").load("/CRMSocia/views/quotations/quotation.jsp");
-	} else if (optionName === "calendar") {
+	}else if(optionName === "calendar"){
 		$("#secondaryPanel").load("/CRMSocia/views/calendar/calendar.jsp");
-	} else if (optionName === "appointment") {
-		$("#secondaryPanel").load(
-				"/CRMSocia/views/appointments/generateAppointments.jsp");
-	} else if (optionName === "diagnosis") {
+	}else if(optionName === "appointment"){
+		$("#secondaryPanel").load("/CRMSocia/views/appointments/generateAppointments.jsp");
+	}else if(optionName === "diagnosis"){
 		$("#secondaryPanel").load("/CRMSocia/views/diagnosis/diagnosis.jsp");
 	}
 }
 
-function showAlert(message, typeAlert, nameDiv) {
-	var alert = '<div class="alert alert-' + typeAlert
-			+ ' alert-dismissible" role="alert">';
-	alert += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
-	alert += message + '</div>';
 
-	$("#" + nameDiv).html(alert);
+function showAlert(message,typeAlert,nameDiv){
+    var alert= '<div class="alert alert-'+typeAlert+' alert-dismissible" role="alert">';
+    alert += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+    alert += message+'</div>';
+
+    $("#"+nameDiv).html(alert);
 }
+
+
