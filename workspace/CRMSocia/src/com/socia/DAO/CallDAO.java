@@ -28,7 +28,7 @@ public class CallDAO {
 		sqlQuery.append(","+calls.getCrm_client_id());
 		sqlQuery.append(","+calls.getCrm_user_id());
 		sqlQuery.append(","+calls.getCrm_contact_id());
-		sqlQuery.append(",Now(),"+calls.getStatus());
+		sqlQuery.append(",DATE_SUB(NOW(), INTERVAL 7 HOUR),"+calls.getStatus());
 		sqlQuery.append(","+calls.getLetter());
 		sqlQuery.append(","+calls.getCompetition()+")");
 		

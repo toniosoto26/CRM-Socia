@@ -40,7 +40,7 @@ public class QuotationDAO {
 		sqlQuery.append(","+quotation.getExchangeRate());
 		sqlQuery.append(","+quotation.getUserId());
 		sqlQuery.append(",'"+quotation.getClosingDate()+"'");
-		sqlQuery.append(", now())");
+		sqlQuery.append(", DATE_SUB(NOW(), INTERVAL 7 HOUR))");
 		
 		queries.add(sqlQuery);
     

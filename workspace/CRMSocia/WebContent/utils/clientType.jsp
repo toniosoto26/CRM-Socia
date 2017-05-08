@@ -13,6 +13,8 @@
 	<c:when test="${sessionScope.clientType=='P' }">
 		<script>
 			$(document).ready(function(){
+				 activeSession(); 
+				
 				 let clientType = <c:choose><c:when test="${sessionScope.clientType=='A' }">1</c:when><c:otherwise>0</c:otherwise></c:choose>;
 				 
 				 if(clientType == 0){

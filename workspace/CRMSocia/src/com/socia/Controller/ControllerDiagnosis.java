@@ -152,6 +152,8 @@ public class ControllerDiagnosis extends HttpServlet {
 					arrRunRateType	=	new RunRateTypeDAO().getRunRateTypes();
 					arrRunRate		=	new RunRateDAO().getRunRates(arrRunRateType, clientId);
 					
+					isDiagnosis = (Boolean)session.getAttribute("isDiagnosis");
+					
 				}catch(Exception e){
 					e.printStackTrace();
 				}

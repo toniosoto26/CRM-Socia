@@ -19,7 +19,7 @@ public class Conexion {
 
 	public Connection getConnection1()throws Exception, ClassNotFoundException{
 		Connection	con	=	null;
-		String		url	=	"jdbc:mysql://localhost:3306/crmsocia_socia";
+		String		url	=	"jdbc:mysql://localhost:3306/crmsocia_socia?noAccessToProcedureBodies=true";
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			con	=	DriverManager.getConnection(url, user, pass);

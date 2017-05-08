@@ -1,18 +1,11 @@
 package com.socia.DAO;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.socia.DTO.AddressDTO;
 import com.socia.DTO.DiagnosisDTO;
 import com.socia.DTO.DiagnosisRequirement;
 
@@ -30,12 +23,7 @@ public class DiagnosisDAO {
 		PreparedStatement	ps	=	null;
 		ResultSet			rs	=	null;
 		
-		String				lastUpd	=	"";
-		String				name	=	"";
-		String				clientT	=	"";
-		
 		StringBuilder		sql		=	new	StringBuilder();
-		
 		
 		DiagnosisDTO		diag	=	null;
 		
@@ -91,7 +79,7 @@ public class DiagnosisDAO {
 		sqlQuery.append(" VALUES ("+diagnosis.getClient_id());
 		sqlQuery.append(","+diagnosis.getId_requirement());
 		sqlQuery.append(",'"+diagnosis.getPath()+"'");
-		sqlQuery.append(",Now()");
+		sqlQuery.append(",DATE_SUB(NOW(), INTERVAL 7 HOUR)");
 		sqlQuery.append(","+diagnosis.getId_user());
 		sqlQuery.append(",'"+diagnosis.getStatus()+"')");
 		

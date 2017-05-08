@@ -2,9 +2,6 @@
     pageEncoding="ISO-8859-1"%>
 <div class="titulo"><h3>Calendario</h3></div>
 
-<link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
-<link rel="stylesheet" href="css/chosen.css">
-
 <div class="row">
 	<div id="primaryPanel" class="col-sm-12 col-md-12">
 		<div id="resultAppointment">
@@ -91,8 +88,4 @@
 		
 </div>
 
-<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="js/bootstrap-datetimepicker.es.js"></script>
-<script src="js/chosen.jquery.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/calendar/calendar.js"></script>

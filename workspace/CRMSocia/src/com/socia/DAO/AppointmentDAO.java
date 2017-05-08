@@ -119,7 +119,7 @@ public class AppointmentDAO {
 		sqlQuery.append(","+appoint.getCrmContactId());
 		sqlQuery.append(", "+appoint.getcrmBdmId());
 		sqlQuery.append(", "+addressId);
-		sqlQuery.append(", '"+appoint.getComments()+"', now())");
+		sqlQuery.append(", '"+appoint.getComments()+"', DATE_SUB(NOW(), INTERVAL 7 HOUR))");
 		// INSERT INTO crm_appointment VALUES (2,'2016-10-11 05:25',2,2,0)
 		queries.add(sqlQuery);
     

@@ -184,7 +184,7 @@ public class ContactDAO {
 		sqlQuery.append(",'"+contacts.getPhone()+"'");
 		sqlQuery.append(",'"+contacts.getEmail()+"'");
 		sqlQuery.append(",'A'");
-		sqlQuery.append(", Now(),"+contacts.getId_position());
+		sqlQuery.append(", DATE_SUB(NOW(), INTERVAL 7 HOUR),"+contacts.getId_position());
 		sqlQuery.append(","+contacts.getCompany_division_id()+")");
 		
 		

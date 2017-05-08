@@ -33,7 +33,7 @@ public class TenderDAO {
 		sqlQuery.append(","+tender.getUserId());
 		sqlQuery.append(","+tender.getBusinessLineId());
 		sqlQuery.append(",'"+tender.getDecisionMaker()+"'");
-		sqlQuery.append(", now()");
+		sqlQuery.append(", DATE_SUB(NOW(), INTERVAL 7 HOUR)");
 		sqlQuery.append(",'"+tender.getCurrentBrand()+"'");
 		sqlQuery.append(",'"+tender.getClosingDate()+"'");
 		sqlQuery.append(",DATE_SUB( '"+tender.getDeadline()+"', INTERVAL 2 month )");

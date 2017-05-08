@@ -3,9 +3,8 @@
  */
 
 $( document ).ready(function() {
-	selectClient('appointment');
+	selectClient('Appointment');
 	selectBDM();
-	activeSession();
 	
 	$("#modified").hide();
 	 $('.form_datetime').datetimepicker({
@@ -101,7 +100,7 @@ function uploadInfo(selected){
 function validateCon(){
 	
 
-	var	rz			=	$("#chosenClient").val();
+	var	rz			=	$("#chosenClientAppointment").val();
 	var	days		=	$("#dtp_input2").val();
 	var	hrs			=	$("#dtp_input3").val();
 	var	contact		=	$("#contactI").val();
@@ -153,7 +152,7 @@ function validateCon(){
 }
 
 function reviewAppo(){
-	var	rz		=	$("#chosenClient");
+	var	rz		=	$("#chosenClientAppointment");
 	var	contact	=	$("#contactI").val();
 	var arr = contact.split(',');
 	var contactId	=	arr[0];
@@ -294,7 +293,7 @@ function uploadInfo(selected){
 function validateCon(){
 	
 
-	var	rz			=	$("#chosenClient").val();
+	var	rz			=	$("#chosenClientAppointment").val();
 	var	days		=	$("#dtp_input2").val();
 	var	hrs			=	$("#dtp_input3").val();
 	var	contact		=	$("#contactI").val();
@@ -346,7 +345,7 @@ function validateCon(){
 }
 
 function reviewAppo(){
-	var	rz		=	$("#chosenClient");
+	var	rz		=	$("#chosenClientAppointment");
 	var	contact	=	$("#contactI").val();
 	var arr = contact.split(',');
 	var contactId	=	arr[0];
@@ -389,7 +388,7 @@ function saveInfo(){
 		//alert("-------------> "+reviewAppo());
 		//if(reviewAppo()){
 			
-			var	rz		=	$("#chosenClient").val();
+			var	rz		=	$("#chosenClientAppointment").val();
 			var	days	=	$("#dtp_input2").val();
 			var	hrs		=	$("#dtp_input3").val();
 			var	contact	=	$("#contactI").val();
@@ -424,7 +423,7 @@ function saveInfo(){
 						alertify.alert(trim(response));
 						//alert("------------> "+response);
 						//alertify.alert("Cita guardada correctamente");
-						$("#pageContent").load("/CRMSocia/views/appointments/generateAppointments.jsp");
+						//$("#pageContent").load("/CRMSocia/views/appointments/generateAppointments.jsp");
 						return false;
 					},
 					error: function(){
@@ -441,7 +440,7 @@ function saveInfo(){
 }
 
 function validateMod(){
-	var	rz		=	$("#chosenClient");
+	var	rz		=	$("#chosenClientAppointment");
 	var phone	=	$("#phoneContact");
 	var	email	=	$("#emailContact");
 	
@@ -488,7 +487,7 @@ function modifiedInfo(){
 
 function SaveModifiedInformation(){
 	if(modifiedInfo()){
-		var	rz		=	$("#chosenClient");
+		var	rz		=	$("#chosenClientAppointment");
 		var phone	=	$("#phoneContact");
 		var	email	=	$("#emailContact");
 		var	contact	=	$("#contactI").val();
@@ -544,7 +543,7 @@ function loadAddressInfo(selected){
 
 
 function validateMod(){
-	var	rz		=	$("#chosenClient");
+	var	rz		=	$("#chosenClientAppointment");
 	var phone	=	$("#phoneContact");
 	var	email	=	$("#emailContact");
 	
@@ -591,7 +590,7 @@ function modifiedInfo(){
 
 function SaveModifiedInformation(){
 	if(modifiedInfo()){
-		var	rz		=	$("#chosenClient");
+		var	rz		=	$("#chosenClientAppointment");
 		var phone	=	$("#phoneContact");
 		var	email	=	$("#emailContact");
 		var	contact	=	$("#contactI").val();

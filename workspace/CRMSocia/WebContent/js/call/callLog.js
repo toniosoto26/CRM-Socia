@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-	
+	activeSession();
 	 $('.form_datetime').datetimepicker({
 	        language:  'es',
 	        weekStart: 1,
